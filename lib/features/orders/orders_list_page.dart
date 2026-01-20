@@ -9,6 +9,7 @@ import 'models/order_model.dart';
 import 'order_detail_page.dart';
 import 'package:intl/intl.dart';
 import '../auth/login_page.dart';
+import '../reviews/create_review_page.dart';
 
 /// Page de liste des commandes de l'utilisateur
 class OrdersListPage extends StatefulWidget {
@@ -388,6 +389,36 @@ class _OrderCard extends StatelessWidget {
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
+
+          // Bouton avis si COMPLETED
+          if (order.status == OrderStatus.completed) ...[
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateReviewPage(order: order),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.star_outline, color: AppColors.primary),
+                label: const Text('Donner mon avis'),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: AppColors.primary),
+                  foregroundColor: AppColors.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+          ],
 
           // Total
           Row(

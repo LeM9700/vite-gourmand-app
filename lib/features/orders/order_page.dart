@@ -33,6 +33,7 @@ class _OrderPageState extends State<OrderPage> {
   bool _isLoadingUser = true;
   bool _isDeliveryInBordeaux = true;
   bool _isSubmitting = false;
+  bool _needsEquipment = false;
 
   // Constantes de calcul (identiques au backend)
   static const double _deliveryBaseFee = 5.00;
@@ -178,7 +179,7 @@ class _OrderPageState extends State<OrderPage> {
         'event_time': timeStr,
         'delivery_km': _isDeliveryInBordeaux ? 0 : _deliveryKm,
         'people_count': _guestsCount,
-        'has_loaned_equipment': false,
+        'has_loaned_equipment': _needsEquipment,
       };
 
       final response = await dioClient.dio.post('/orders', data: payload);
@@ -699,6 +700,8 @@ class _OrderPageState extends State<OrderPage> {
         _buildDeliverySection(context),
         const SizedBox(height: 24),
         _buildNotesInput(context),
+        const SizedBox(height: 24),
+        _buildEquipmentCheckbox(context),
         const SizedBox(height: 32),
         _buildOrderSummary(context),
       ],
@@ -1115,6 +1118,92 @@ class _OrderPageState extends State<OrderPage> {
         }
         return null;
       },
+    );
+  }
+
+  Widget _buildEquipmentCheckbox(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() => _needsEquipment = !_needsEquipment);
+      },
+      child: Container(
+        padding: EdgeInsets.all(context.isMobile ? 14 : 16),
+        decoration: BoxDecoration(
+          color: _needsEquipment 
+              ? AppColors.primary.withOpacity(0.05)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: _needsEquipment 
+                ? AppColors.primary 
+                : Colors.grey.shade300,
+            width: _needsEquipment ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            // Checkbox personnalisée
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: _needsEquipment ? AppColors.primary : Colors.transparent,
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(
+                  color: _needsEquipment 
+                      ? AppColors.primary 
+                      : Colors.grey.shade400,
+                  width: 2,
+                ),
+              ),
+              child: _needsEquipment
+                  ? const Icon(
+                      Icons.check,
+                      size: 16,
+                      color: Colors.white,
+                    )
+                  : null,
+            ),
+            const SizedBox(width: 12),
+            
+            // Icône et texte
+            Icon(
+              Icons.restaurant,
+              color: _needsEquipment 
+                  ? AppColors.primary 
+                  : AppColors.textSecondary,
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'J\'ai besoin de matériel',
+                    style: AppTextStyles.body.copyWith(
+                      fontWeight: _needsEquipment 
+                          ? FontWeight.w600 
+                          : FontWeight.w500,
+                      color: _needsEquipment 
+                          ? AppColors.primary 
+                          : AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Assiettes, couverts, nappes, etc.',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.textSecondary,
+                      fontSize: context.fluidValue(minValue: 11, maxValue: 13),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

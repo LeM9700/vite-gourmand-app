@@ -7,6 +7,7 @@ import '../../core/utils/responsive.dart';
 import '../../core/api/dio_client.dart';
 import 'models/order_model.dart';
 import '../auth/login_page.dart';
+import '../reviews/create_review_page.dart';
 
 /// Page de détail d'une commande avec historique
 class OrderDetailPage extends StatefulWidget {
@@ -349,6 +350,38 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     return GlassCard(
       child: Column(
         children: [
+          // Bouton avis si commande COMPLETED
+          if (_order!.status == OrderStatus.completed) ...[
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateReviewPage(order: _order!),
+                    ),
+                  ).then((result) {
+                    // Si avis créé avec succès, recharger la commande
+                    if (result == true) {
+                      _loadOrderDetail();
+                    }
+                  });
+                },
+                icon: const Icon(Icons.star, color: Colors.white),
+                label: const Text('Donner mon avis'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
           if (_order!.isEditable) ...[
             SizedBox(
               width: double.infinity,

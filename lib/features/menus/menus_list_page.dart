@@ -4,6 +4,7 @@ import '../../core/api/dio_client.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/typography.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/storage/secure_storage.dart';
 import 'models/menu_model.dart';
 import 'widgets/menu_card.dart';
 import 'widgets/menu_filters_overlay.dart';
@@ -23,6 +24,7 @@ class _MenusListPageState extends State<MenusListPage> {
   String _errorMessage = '';
   DioClient? _dioClient;
   Timer? _searchTimer;
+  bool _isUserConnected = false;
   
   // Filtres
   MenuFilters? _activeFilters;
@@ -32,7 +34,16 @@ class _MenusListPageState extends State<MenusListPage> {
   @override
   void initState() {
     super.initState();
+    _checkUserConnection();
     _initializeAndLoad();
+  }
+
+  Future<void> _checkUserConnection() async {
+    final storage = SecureStorage();
+    final token = await storage.readToken();
+    setState(() {
+      _isUserConnected = token != null && token.isNotEmpty;
+    });
   }
 
   @override
@@ -320,13 +331,15 @@ class _MenusListPageState extends State<MenusListPage> {
                     padding: EdgeInsets.fromLTRB(context.horizontalPadding, 8, context.horizontalPadding, 0),
                     child: Row(
                       children: [
-                        // Bouton retour
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back),
-                          color: Colors.white,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        const SizedBox(width: 8),
+                        // Bouton retour (visible seulement si NON connecté)
+                        if (!_isUserConnected) ...[
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            color: Colors.white,
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
                         Expanded(
                           child: Text(
                             'Nos Menus',
