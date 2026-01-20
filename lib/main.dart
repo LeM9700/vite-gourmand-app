@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:flutter/foundation.dart' ;
 import 'dart:async';
 import 'features/splash/splash_page.dart';
 import 'features/auth/reset_password_page.dart';
@@ -26,7 +27,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _initDeepLinks();
+    if (!kIsWeb){
+      _initDeepLinks();
+    }
+    
   }
 
   @override
