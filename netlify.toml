@@ -1,8 +1,8 @@
 [build]
   command = """
     # Install Flutter
-    git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter && \
-    export PATH="/opt/flutter/bin:$PATH" && \
+    git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/flutter && \
+    export PATH="$HOME/flutter/bin:$PATH" && \
     flutter doctor -v && \
     flutter config --enable-web && \
     flutter pub get && \
