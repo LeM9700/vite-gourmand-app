@@ -39,8 +39,8 @@ class LegalNoticePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              AppColors.primary.withOpacity(0.2),
-                              AppColors.primary.withOpacity(0.1),
+                              AppColors.primary.withValues(alpha: 0.2),
+                              AppColors.primary.withValues(alpha: 0.1),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(12),
@@ -176,7 +176,7 @@ Les présentes mentions légales sont régies par le droit français. En cas de 
             
             // Footer info
             GlassCard(
-              borderColor: AppColors.info.withOpacity(0.3),
+              borderColor: AppColors.info.withValues(alpha: 0.3),
               child: Row(
                 children: [
                   Icon(

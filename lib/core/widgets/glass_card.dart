@@ -72,8 +72,8 @@ class _GlassCardState extends State<GlassCard>
   Widget build(BuildContext context) {
     final effectiveFillColor = widget.fillColor ?? 
         (Theme.of(context).brightness == Brightness.dark 
-            ? AppColors.glassFill.withOpacity(0.1)
-            : AppColors.surface.withOpacity(0.85));
+            ? AppColors.glassFill.withValues(alpha: 0.1)
+            : AppColors.surface.withValues(alpha: 0.85));
     
     final effectiveBorderColor = widget.borderColor ?? 
         AppColors.glassBorder;
@@ -119,7 +119,7 @@ class _GlassCardState extends State<GlassCard>
                           end: Alignment.bottomRight,
                           colors: [
                             effectiveFillColor,
-                            effectiveFillColor.withOpacity(0.7),
+                            effectiveFillColor.withValues(alpha: 0.7),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(widget.radius),
@@ -139,7 +139,7 @@ class _GlassCardState extends State<GlassCard>
                               AppColors.glassHighlight,
                               Colors.transparent,
                               Colors.transparent,
-                              AppColors.champagne.withOpacity(0.05),
+                              AppColors.champagne.withValues(alpha: 0.05),
                             ],
                             stops: const [0.0, 0.3, 0.7, 1.0],
                           ),

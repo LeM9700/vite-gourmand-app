@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
                       Container(
                         height: heroHeight,
                         width: double.infinity,
-                        color: const Color.fromARGB(255, 189, 189, 189).withOpacity(0.25),
+                        color: const Color.fromARGB(255, 189, 189, 189).withValues(alpha: 0.25),
                       ),
                       
                       // Header avec menu (seulement si pas de sidebar)

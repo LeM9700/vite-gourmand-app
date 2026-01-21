@@ -32,8 +32,8 @@ class _MenusTestScreenState extends State<MenusTestScreen> {
     
     try {
       final res = await _dioClient!.dio.get("/menus");
-      print("API Response: ${res.data}");
-      print("Response type: ${res.data.runtimeType}");
+      debugPrint("API Response: ${res.data}");
+      debugPrint("Response type: ${res.data.runtimeType}");
       
       // Gestion de différents formats de réponse
       if (res.data is List) {

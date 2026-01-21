@@ -108,26 +108,26 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
           colors: [
             AppColors.dark,
             AppColors.darkGrey,
-            AppColors.dark.withOpacity(0.95),
+            AppColors.dark.withValues(alpha: 0.95),
           ],
           stops: const [0.0, 0.5, 1.0],
         ),
         borderRadius: BorderRadius.circular(navHeight / 2),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 24,
             offset: const Offset(0, 8),
             spreadRadius: 2,
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
         ],
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.4),
+          color: AppColors.primary.withValues(alpha: 0.4),
           width: 1.5,
         ),
       ),
@@ -218,7 +218,7 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withOpacity(0.95),
+                          AppColors.primary.withValues(alpha: 0.95),
                           AppColors.primary,
                           const Color(0xFFC5A028),
                         ],
@@ -228,26 +228,26 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.glassFill.withOpacity(0.3),
-                          AppColors.glassFill.withOpacity(0.15),
+                          AppColors.glassFill.withValues(alpha: 0.3),
+                          AppColors.glassFill.withValues(alpha: 0.15),
                         ],
                       ),
                 border: Border.all(
                   color: isSelected
-                      ? AppColors.champagne.withOpacity(0.6)
-                      : AppColors.glassBorder.withOpacity(0.3),
+                      ? AppColors.champagne.withValues(alpha: 0.6)
+                      : AppColors.glassBorder.withValues(alpha: 0.3),
                   width: isSelected ? 2.5 : 1.5,
                 ),
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.5),
+                          color: AppColors.primary.withValues(alpha: 0.5),
                           blurRadius: 20,
                           spreadRadius: 2,
                           offset: const Offset(0, 4),
                         ),
                         BoxShadow(
-                          color: AppColors.champagne.withOpacity(0.3),
+                          color: AppColors.champagne.withValues(alpha: 0.3),
                           blurRadius: 12,
                           spreadRadius: 0,
                           offset: const Offset(0, 2),
@@ -255,7 +255,7 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
                       ]
                     : [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
+                          color: Colors.black.withValues(alpha: 0.15),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -266,12 +266,12 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
                   duration: const Duration(milliseconds: 300),
                   style: TextStyle(
                     fontSize: isSelected ? iconSize * 1.1 : iconSize,
-                    color: isSelected ? AppColors.dark : AppColors.textLight.withOpacity(0.7),
+                    color: isSelected ? AppColors.dark : AppColors.textLight.withValues(alpha: 0.7),
                   ),
                   child: Icon(
                     icon,
                     size: isSelected ? iconSize * 1.1 : iconSize,
-                    color: isSelected ? AppColors.dark : AppColors.textLight.withOpacity(0.7),
+                    color: isSelected ? AppColors.dark : AppColors.textLight.withValues(alpha: 0.7),
                   ),
                 ),
               ),
@@ -288,7 +288,7 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 color: isSelected 
                     ? AppColors.primary 
-                    : AppColors.textLight.withOpacity(0.6),
+                    : AppColors.textLight.withValues(alpha: 0.6),
                 letterSpacing: isSelected ? 0.8 : 0.3,
               ),
               child: Text(

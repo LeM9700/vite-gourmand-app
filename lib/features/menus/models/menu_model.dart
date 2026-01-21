@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class MenuModel {
   final int id;
   final String title;
@@ -60,7 +62,7 @@ class MenuModel {
           .map((img) => MenuImage.fromJson(img as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      print('Erreur parsing images: $e');
+      debugPrint('Erreur parsing images: $e');
       return [];
     }
   }
@@ -74,7 +76,7 @@ class MenuModel {
           .map((dish) => Dish.fromJson(dish as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      print('Erreur parsing dishes: $e');
+      debugPrint('Erreur parsing dishes: $e');
       return [];
     }
   }
@@ -154,7 +156,7 @@ class Dish {
           .map((a) => DishAllergen.fromJson(a as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      print('Erreur parsing allergens: $e');
+      debugPrint('Erreur parsing allergens: $e');
       return [];
     }
   }

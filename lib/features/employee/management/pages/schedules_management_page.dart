@@ -56,6 +56,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
         'is_closed': !isClosed,
       });
       
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(isClosed ? 'Établissement ouvert ce jour' : 'Établissement fermé ce jour'),
@@ -90,11 +91,13 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
 
     try {
       await _service.deleteSchedule(scheduleId);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Horaire supprimé'), backgroundColor: Colors.green),
       );
       _loadSchedules();
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
       );
@@ -110,17 +113,20 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
           try {
             if (schedule == null) {
               await _service.createSchedule(data);
+              if (!mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Horaire créé'), backgroundColor: Colors.green),
               );
             } else {
               await _service.updateSchedule(schedule['id'], data);
+              if (!mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Horaire mis à jour'), backgroundColor: Colors.green),
               );
             }
             _loadSchedules();
           } catch (e) {
+            if (!mounted) return;
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
             );
@@ -165,15 +171,15 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.info.withOpacity(0.2),
-                        AppColors.info.withOpacity(0.1),
+                        AppColors.info.withValues(alpha: 0.2),
+                        AppColors.info.withValues(alpha: 0.1),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: AppColors.info.withOpacity(0.3),
+                      color: AppColors.info.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -216,7 +222,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                         Icon(
                           Icons.schedule_outlined,
                           size: 64,
-                          color: AppColors.textMuted.withOpacity(0.5),
+                          color: AppColors.textMuted.withValues(alpha: 0.5),
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -271,7 +277,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
 
     return GlassCard(
       padding: EdgeInsets.zero,
-      borderColor: dayColor.withOpacity(0.3),
+      borderColor: dayColor.withValues(alpha: 0.3),
       borderWidth: 2,
       onTap: () => _showScheduleForm(schedule: schedule),
       child: Column(
@@ -282,15 +288,15 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  dayColor.withOpacity(0.15),
-                  dayColor.withOpacity(0.05),
+                  dayColor.withValues(alpha: 0.15),
+                  dayColor.withValues(alpha: 0.05),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               border: Border(
                 bottom: BorderSide(
-                  color: dayColor.withOpacity(0.2),
+                  color: dayColor.withValues(alpha: 0.2),
                   width: 1,
                 ),
               ),
@@ -300,10 +306,10 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: dayColor.withOpacity(0.2),
+                    color: dayColor.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: dayColor.withOpacity(0.3),
+                      color: dayColor.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -348,13 +354,13 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                     ),
                     decoration: BoxDecoration(
                       color: isClosed
-                          ? AppColors.danger.withOpacity(0.15)
-                          : AppColors.success.withOpacity(0.15),
+                          ? AppColors.danger.withValues(alpha: 0.15)
+                          : AppColors.success.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: isClosed
-                            ? AppColors.danger.withOpacity(0.3)
-                            : AppColors.success.withOpacity(0.3),
+                            ? AppColors.danger.withValues(alpha: 0.3)
+                            : AppColors.success.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
@@ -413,10 +419,10 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: color.withOpacity(0.3),
+            color: color.withValues(alpha: 0.3),
             width: 1,
           ),
         ),

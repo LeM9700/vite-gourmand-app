@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
-import '../../../core/theme/shadows.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/skeleton_box.dart';
 import '../../../core/storage/secure_storage.dart';
 import '../../auth/models/auth_models.dart';
 import '../../auth/services/auth_service.dart';
-import '../../auth/widgets/login_form.dart';
 import '../../home/home_page.dart';
 
 class EmployeeSettingsPage extends StatefulWidget {
@@ -98,7 +96,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                 end: Alignment.bottomRight,
                 colors: [
                   Colors.white,
-                  AppColors.primary.withOpacity(0.05),
+                  AppColors.primary.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -114,12 +112,12 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+                      colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -186,7 +184,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [AppColors.primary.withOpacity(0.2), AppColors.primary.withOpacity(0.1)],
+                    colors: [AppColors.primary.withValues(alpha: 0.2), AppColors.primary.withValues(alpha: 0.1)],
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -238,7 +236,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.badge, color: AppColors.primary, size: 24),
@@ -256,12 +254,12 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.primary.withOpacity(0.1),
-                  AppColors.primary.withOpacity(0.05),
+                  AppColors.primary.withValues(alpha: 0.1),
+                  AppColors.primary.withValues(alpha: 0.05),
                 ],
               ),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [
@@ -302,7 +300,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.info.withOpacity(0.1),
+              color: AppColors.info.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -333,7 +331,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: AppColors.info.withOpacity(0.1),
+                  color: AppColors.info.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.security, color: AppColors.info, size: 24),
@@ -367,7 +365,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: AppColors.primary, size: 18),

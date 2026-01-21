@@ -125,7 +125,7 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                 end: Alignment.bottomRight,
                 colors: [
                   Colors.white,
-                  AppColors.primary.withOpacity(0.05),
+                  AppColors.primary.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -144,12 +144,12 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+                          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
                         ),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),

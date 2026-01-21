@@ -173,9 +173,9 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withValues(alpha:0.1),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: statusColor.withOpacity(0.3)),
+              border: Border.all(color: statusColor.withValues(alpha:0.3)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -311,7 +311,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
                 color: isCurrent
                     ? color
                     : isPast
-                        ? color.withOpacity(0.2)
+                        ? color.withValues(alpha:0.2)
                         : Colors.transparent,
                 border: Border.all(
                   color: color,
@@ -332,7 +332,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               Container(
                 width: 2,
                 height: 40,
-                color: isPast ? color.withOpacity(0.3) : AppColors.textMuted.withOpacity(0.2),
+                color: isPast ? color.withValues(alpha:0.3) : AppColors.textMuted.withValues(alpha:0.2),
               ),
           ],
         ),
@@ -468,7 +468,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
             width: double.infinity,
             child: OutlinedButton.icon(
               onPressed: () {
-                // TODO: Navigation vers contact
+                
               },
               icon: Icon(Icons.mail_outline, color: AppColors.primary),
               label: const Text('Contacter le support'),

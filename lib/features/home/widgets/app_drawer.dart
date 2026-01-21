@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
     // Sur desktop, c'est une sidebar permanente
     if (isDesktopSidebar) {
       return Container(
-        color: Colors.black.withOpacity(0.85),
+        color: Colors.black.withValues(alpha: 0.85),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(padding),
@@ -120,7 +120,7 @@ class AppDrawer extends StatelessWidget {
 
     // Version mobile/tablet : Drawer classique avec tailles fluides
     return Drawer(
-      backgroundColor: Colors.black.withOpacity(0.65),
+      backgroundColor: Colors.black.withValues(alpha: 0.65),
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(padding),
@@ -242,13 +242,13 @@ class _DesktopNavItemState extends State<_DesktopNavItem> {
           ),
           decoration: BoxDecoration(
             color: widget.isSelected
-                ? AppColors.primary.withOpacity(0.2)
+                ? AppColors.primary.withValues(alpha: 0.2)
                 : _isHovered
-                    ? Colors.white.withOpacity(0.1)
+                    ? Colors.white.withValues(alpha: 0.1)
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
             border: widget.isSelected
-                ? Border.all(color: AppColors.primary.withOpacity(0.5))
+                ? Border.all(color: AppColors.primary.withValues(alpha: 0.5))
                 : null,
           ),
           child: Row(

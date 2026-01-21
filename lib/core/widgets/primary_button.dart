@@ -83,8 +83,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
                 gradient: widget.isLoading 
                     ? LinearGradient(
                         colors: [
-                          AppColors.mediumGrey.withOpacity(0.5),
-                          AppColors.lightGrey.withOpacity(0.5),
+                          AppColors.mediumGrey.withValues(alpha: 0.5),
+                          AppColors.lightGrey.withValues(alpha: 0.5),
                         ],
                       )
                     : LinearGradient(
@@ -92,8 +92,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
                         end: Alignment.bottomRight,
                         colors: _isPressed 
                             ? [
-                                AppColors.primary.withOpacity(0.8),
-                                AppColors.saffron.withOpacity(0.8),
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.saffron.withValues(alpha: 0.8),
                               ]
                             : [
                                 AppColors.primary,
@@ -105,7 +105,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
                     ? AppShadows.subtle 
                     : (_isPressed ? AppShadows.subtle : AppShadows.elegant),
                 border: Border.all(
-                  color: AppColors.champagne.withOpacity(0.3),
+                  color: AppColors.champagne.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -126,7 +126,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                AppColors.champagne.withOpacity(0.8),
+                                AppColors.champagne.withValues(alpha: 0.8),
                               ),
                             ),
                           ),

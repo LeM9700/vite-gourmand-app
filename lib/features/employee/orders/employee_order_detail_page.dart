@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
-import '../../../core/theme/shadows.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/widgets/glass_card.dart';
 import 'models/order_employee_model.dart';
@@ -232,7 +231,7 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
                     ),
                     if (_isUpdating)
                       Container(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withValues(alpha: 0.5),
                         child: const Center(
                           child: CircularProgressIndicator(),
                         ),
@@ -247,7 +246,7 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.1),
+        color: statusColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: statusColor, width: 2),
       ),
@@ -411,7 +410,7 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.1),
+        color: Colors.red.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.red, width: 2),
       ),

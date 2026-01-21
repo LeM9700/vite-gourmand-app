@@ -105,7 +105,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.green.withOpacity(0.3),
+                                color: Colors.green.withValues(alpha:0.3),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                               ),
@@ -198,7 +198,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
               vertical: spacing * 0.5,
             ),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha:0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -368,7 +368,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
           height: 24,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.primary.withValues(alpha:0.1),
           ),
           child: Center(
             child: Text(
@@ -435,7 +435,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
           height: buttonHeight,
           child: OutlinedButton.icon(
             onPressed: () {
-              // TODO: Naviguer vers mes commandes
+              
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
             icon: Icon(Icons.receipt_long, color: AppColors.primary),

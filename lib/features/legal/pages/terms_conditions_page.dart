@@ -39,8 +39,8 @@ class TermsConditionsPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              AppColors.success.withOpacity(0.2),
-                              AppColors.success.withOpacity(0.1),
+                              AppColors.success.withValues(alpha: 0.2),
+                              AppColors.success.withValues(alpha: 0.1),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(12),
@@ -256,7 +256,7 @@ www.mediateur-consommation.fr
             
             // Footer info
             GlassCard(
-              borderColor: AppColors.info.withOpacity(0.3),
+              borderColor: AppColors.info.withValues(alpha: 0.3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -282,10 +282,10 @@ www.mediateur-consommation.fr
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.warning.withOpacity(0.1),
+                      color: AppColors.warning.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: AppColors.warning.withOpacity(0.3),
+                        color: AppColors.warning.withValues(alpha: 0.3),
                       ),
                     ),
                     child: Row(

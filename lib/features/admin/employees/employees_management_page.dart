@@ -103,8 +103,8 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
                     end: Alignment.bottomRight,
                     colors: [
                       AppColors.primary,
-                      AppColors.primary.withOpacity(0.8),
-                      AppColors.cardBackground.withOpacity(0.9),
+                      AppColors.primary.withValues(alpha: 0.8),
+                      AppColors.cardBackground.withValues(alpha: 0.9),
                     ],
                   ),
                 ),
@@ -120,7 +120,7 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
+                                color: Colors.white.withValues(alpha: 0.2),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: const Icon(
@@ -264,7 +264,7 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
                     Icon(
                       Icons.error_outline_rounded,
                       size: 64,
-                      color: Colors.red.withOpacity(0.7),
+                      color: Colors.red.withValues(alpha: 0.7),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -302,7 +302,7 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
                     Icon(
                       Icons.person_search_rounded,
                       size: 64,
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha: 0.3),
                     ),
                     const SizedBox(height: 16),
                     Text(

@@ -99,7 +99,7 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.red.withOpacity(0.3),
+                                color: Colors.red.withValues(alpha:0.3),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                               ),
@@ -392,7 +392,7 @@ class _OrderErrorPageState extends State<OrderErrorPage>
         // Lien contact
         TextButton.icon(
           onPressed: () {
-            // TODO: Naviguer vers la page contact
+           
           },
           icon: Icon(
             Icons.mail_outline,

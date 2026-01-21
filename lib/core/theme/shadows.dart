@@ -8,7 +8,7 @@ class AppShadows {
   /// Ombre élégante principale - Boutons importants
   static List<BoxShadow> elegant = [
     BoxShadow(
-      color: AppColors.primary.withOpacity(0.15), // Ombre dorée
+      color: AppColors.primary.withValues(alpha: 0.15), // Ombre dorée
       offset: const Offset(0, 4),
       blurRadius: 12,
       spreadRadius: 0,
@@ -66,7 +66,7 @@ class AppShadows {
   /// Ombre interne pour effets glass sophistiqués
   static List<BoxShadow> innerGlow = [
     BoxShadow(
-      color: AppColors.champagne.withOpacity(0.1), // Lueur interne dorée
+      color: AppColors.champagne.withValues(alpha: 0.1), // Lueur interne dorée
       offset: const Offset(0, 1),
       blurRadius: 2,
       spreadRadius: 0,

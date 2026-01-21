@@ -100,8 +100,8 @@ class MenuDetailPage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                AppColors.primary.withOpacity(0.8),
-                                AppColors.accent.withOpacity(0.6),
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.accent.withValues(alpha: 0.6),
                               ],
                             ),
                           ),
@@ -119,7 +119,7 @@ class MenuDetailPage extends StatelessWidget {
                     left: 24,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
@@ -182,8 +182,8 @@ class MenuDetailPage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                AppColors.primary.withOpacity(0.8),
-                                AppColors.accent.withOpacity(0.6),
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.accent.withValues(alpha: 0.6),
                               ],
                             ),
                           ),
@@ -203,7 +203,7 @@ class MenuDetailPage extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withValues(alpha: 0.7),
                         ],
                       ),
                     ),
@@ -221,7 +221,7 @@ class MenuDetailPage extends StatelessWidget {
             leading: Container(
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.4),
+                color: Colors.black.withValues(alpha: 0.4),
                 shape: BoxShape.circle,
               ),
               child: IconButton(
@@ -447,7 +447,7 @@ class MenuDetailPage extends StatelessWidget {
                 width: iconSize * 1.5,
                 height: iconSize * 1.5,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(iconSize * 0.4),
                 ),
                 child: Icon(icon, color: color, size: iconSize),
@@ -468,7 +468,7 @@ class MenuDetailPage extends StatelessWidget {
                   vertical: context.fluidValue(minValue: 3, maxValue: 4),
                 ),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -484,7 +484,7 @@ class MenuDetailPage extends StatelessWidget {
           ),
           
           SizedBox(height: spacing),
-          Divider(color: color.withOpacity(0.2), height: 1),
+          Divider(color: color.withValues(alpha: 0.2), height: 1),
           SizedBox(height: spacing),
           
           // Liste des plats
@@ -531,7 +531,7 @@ class MenuDetailPage extends StatelessWidget {
                         Icon(
                           Icons.warning_amber_rounded,
                           size: allergenSize + 2,
-                          color: AppColors.danger.withOpacity(0.7),
+                          color: AppColors.danger.withValues(alpha: 0.7),
                         ),
                         ...dish.allergens.map((a) => Container(
                           padding: EdgeInsets.symmetric(
@@ -539,10 +539,10 @@ class MenuDetailPage extends StatelessWidget {
                             vertical: context.fluidValue(minValue: 2, maxValue: 3),
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.danger.withOpacity(0.1),
+                            color: AppColors.danger.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: AppColors.danger.withOpacity(0.2),
+                              color: AppColors.danger.withValues(alpha: 0.2),
                               width: 1,
                             ),
                           ),
@@ -563,7 +563,7 @@ class MenuDetailPage extends StatelessWidget {
                   if (!isLast) ...[
                     SizedBox(height: spacing),
                     Divider(
-                      color: AppColors.glassBorder.withOpacity(0.5),
+                      color: AppColors.glassBorder.withValues(alpha: 0.5),
                       height: 1,
                     ),
                   ],
@@ -590,7 +590,7 @@ class MenuDetailPage extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),
@@ -648,9 +648,9 @@ class MenuDetailPage extends StatelessWidget {
         vertical: context.fluidValue(minValue: 4, maxValue: 6),
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         text,

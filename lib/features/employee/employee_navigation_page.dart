@@ -87,27 +87,27 @@ class _EmployeeNavigationPageState extends State<EmployeeNavigationPage> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.dark.withOpacity(0.95),
-            AppColors.darkGrey.withOpacity(0.98),
+            AppColors.dark.withValues(alpha: 0.95),
+            AppColors.darkGrey.withValues(alpha: 0.98),
           ],
         ),
         borderRadius: BorderRadius.circular(navHeight / 2),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.15),
+            color: AppColors.primary.withValues(alpha: 0.15),
             offset: const Offset(0, 4),
             blurRadius: 20,
             spreadRadius: 0,
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             offset: const Offset(0, 8),
             blurRadius: 24,
             spreadRadius: 0,
           ),
         ],
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -195,7 +195,7 @@ class _EmployeeNavigationPageState extends State<EmployeeNavigationPage> {
                           end: Alignment.bottomRight,
                           colors: [
                             AppColors.primary,
-                            AppColors.primary.withOpacity(0.8),
+                            AppColors.primary.withValues(alpha: 0.8),
                           ],
                         )
                       : null,
@@ -203,7 +203,7 @@ class _EmployeeNavigationPageState extends State<EmployeeNavigationPage> {
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             offset: const Offset(0, 4),
                             blurRadius: 12,
                             spreadRadius: 0,
@@ -213,7 +213,7 @@ class _EmployeeNavigationPageState extends State<EmployeeNavigationPage> {
                 ),
                 child: Icon(
                   isSelected ? activeIcon : icon,
-                  color: isSelected ? AppColors.dark : AppColors.textLight.withOpacity(0.6),
+                  color: isSelected ? AppColors.dark : AppColors.textLight.withValues(alpha: 0.6),
                   size: isSelected ? iconSize : iconSize * 0.85,
                 ),
               ),
@@ -225,7 +225,7 @@ class _EmployeeNavigationPageState extends State<EmployeeNavigationPage> {
                 style: AppTextStyles.caption.copyWith(
                   fontSize: fontSize,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color: isSelected ? AppColors.primary : AppColors.textLight.withOpacity(0.6),
+                  color: isSelected ? AppColors.primary : AppColors.textLight.withValues(alpha: 0.6),
                 ),
                 child: Text(label),
               ),

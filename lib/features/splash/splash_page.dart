@@ -128,7 +128,7 @@ class _SplashPageState extends State<SplashPage>
           );
         } catch (e) {
           // Erreur lors de la récupération du profil -> Token invalide
-          print('❌ Erreur récupération profil: $e');
+          debugPrint('❌ Erreur récupération profil: $e');
           if (mounted) {
             Navigator.pushReplacement(
               context,
@@ -145,7 +145,7 @@ class _SplashPageState extends State<SplashPage>
       }
     } catch (e) {
       // En cas d'erreur, rediriger vers la page d'accueil
-      print('❌ Erreur navigation: $e');
+      debugPrint('❌ Erreur navigation: $e');
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -195,8 +195,8 @@ class _SplashPageState extends State<SplashPage>
                 radius: 1.2,
                 colors: [
                   Colors.transparent,
-                  AppColors.dark.withOpacity(0.3),
-                  AppColors.dark.withOpacity(0.7),
+                  AppColors.dark.withValues(alpha: 0.3),
+                  AppColors.dark.withValues(alpha: 0.7),
                 ],
               ),
             ),
@@ -223,17 +223,17 @@ class _SplashPageState extends State<SplashPage>
                             borderRadius: BorderRadius.circular(24),
                             gradient: LinearGradient(
                               colors: [
-                                AppColors.primary.withOpacity(0.1),
-                                AppColors.saffron.withOpacity(0.05),
+                                AppColors.primary.withValues(alpha: 0.1),
+                                AppColors.saffron.withValues(alpha: 0.05),
                               ],
                             ),
                             border: Border.all(
-                              color: AppColors.primary.withOpacity(0.3),
+                              color: AppColors.primary.withValues(alpha: 0.3),
                               width: 1,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.primary.withOpacity(0.2),
+                                color: AppColors.primary.withValues(alpha: 0.2),
                                 blurRadius: 40,
                                 spreadRadius: 0,
                               ),
@@ -299,7 +299,7 @@ class _SplashPageState extends State<SplashPage>
                               
                               // Sous-titre élégant
                               Text(
-                                'L\'Art de Recevoir depuis 1978',
+                                'L\'Art de Recevoir depuis 2001',
                                 style: AppTextStyles.subtitle.copyWith(
                                   color: AppColors.champagne,
                                   fontSize: 18,
@@ -334,12 +334,12 @@ class _SplashPageState extends State<SplashPage>
                               borderRadius: BorderRadius.circular(30),
                               gradient: LinearGradient(
                                 colors: [
-                                  AppColors.primary.withOpacity(0.2),
-                                  AppColors.saffron.withOpacity(0.1),
+                                  AppColors.primary.withValues(alpha: 0.2),
+                                  AppColors.saffron.withValues(alpha: 0.1),
                                 ],
                               ),
                               border: Border.all(
-                                color: AppColors.primary.withOpacity(0.3),
+                                color: AppColors.primary.withValues(alpha: 0.3),
                                 width: 1,
                               ),
                             ),
@@ -362,7 +362,7 @@ class _SplashPageState extends State<SplashPage>
                           Text(
                             'Préparation de votre expérience...',
                             style: AppTextStyles.caption.copyWith(
-                              color: AppColors.champagne.withOpacity(0.9),
+                              color: AppColors.champagne.withValues(alpha: 0.9),
                               letterSpacing: 0.8,
                             ),
                           ),
@@ -407,13 +407,13 @@ class _SplashPageState extends State<SplashPage>
                 borderRadius: BorderRadius.circular(size / 2),
                 gradient: LinearGradient(
                   colors: [
-                    AppColors.primary.withOpacity(0.8),
-                    AppColors.saffron.withOpacity(0.6),
+                    AppColors.primary.withValues(alpha: 0.8),
+                    AppColors.saffron.withValues(alpha: 0.6),
                   ],
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withValues(alpha: 0.3),
                     blurRadius: size * 2,
                     spreadRadius: 0,
                   ),

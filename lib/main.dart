@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         _handleDeepLink(initialLink);
       }
     } catch (e) {
-      print('Erreur lors de la récupération du lien initial: $e');
+      debugPrint('Erreur lors de la récupération du lien initial: $e');
     }
 
     // Écouter les deep links pendant que l'app est ouverte
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         _handleDeepLink(link);
       }
     }, onError: (err) {
-      print('Erreur lors de l\'écoute des liens: $err');
+      debugPrint('Erreur lors de l\'écoute des liens: $err');
     });
   }
 

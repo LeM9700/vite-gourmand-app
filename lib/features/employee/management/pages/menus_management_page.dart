@@ -65,11 +65,13 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
 
     try {
       await _service.deleteMenu(menuId);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Menu supprimé'), backgroundColor: Colors.green),
       );
       _loadMenus();
     } catch (e) {
+    if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
       );
@@ -127,7 +129,7 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                 end: Alignment.bottomRight,
                 colors: [
                   Colors.white,
-                  AppColors.primary.withOpacity(0.05),
+                  AppColors.primary.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -143,12 +145,12 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+                      colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -225,8 +227,8 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
 
     return GlassCard(
       borderColor: menu.isActive 
-          ? AppColors.primary.withOpacity(0.3)
-          : AppColors.textMuted.withOpacity(0.2),
+          ? AppColors.primary.withValues(alpha: 0.3)
+          : AppColors.textMuted.withValues(alpha: 0.2),
       borderWidth: 2,
       padding: EdgeInsets.zero,
       child: Column(
@@ -257,8 +259,8 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: menu.isActive 
-                            ? AppColors.success.withOpacity(0.9)
-                            : AppColors.danger.withOpacity(0.9),
+                            ? AppColors.success.withValues(alpha: 0.9)
+                            : AppColors.danger.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -306,12 +308,12 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+                          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
                         ),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -347,10 +349,10 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.05),
+                    color: AppColors.primary.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                     ),
                   ),
                   child: Column(
@@ -477,7 +479,7 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
         Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Icon(icon, color: color, size: 16),
@@ -522,7 +524,7 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: AppColors.textMuted.withOpacity(0.2),
+          color: AppColors.textMuted.withValues(alpha: 0.2),
         ),
       ),
       child: Row(

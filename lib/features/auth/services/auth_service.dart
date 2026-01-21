@@ -2,6 +2,7 @@ import '../../../core/api/dio_client.dart';
 import '../models/auth_models.dart';
 import '../../../core/storage/secure_storage.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
   DioClient? _dioClient;
@@ -88,7 +89,7 @@ class AuthService {
       await _dioClient!.dio.post('/auth/logout');
     } catch (e) {
       // Log de l'erreur mais ne pas bloquer la déconnexion
-      print('Erreur lors de la déconnexion: $e');
+      debugPrint('Erreur lors de la déconnexion: $e');
     } finally {
       await _storage.clearAll();
     }

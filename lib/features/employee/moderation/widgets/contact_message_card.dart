@@ -36,7 +36,7 @@ class ContactMessageCard extends StatelessWidget {
     final statusColor = _getStatusColor(message.status);
 
     return GlassCard(
-      borderColor: statusColor.withOpacity(0.5),
+      borderColor: statusColor.withValues(alpha: 0.5),
       borderWidth: 2,
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -47,7 +47,7 @@ class ContactMessageCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.1),
+                    color: statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: statusColor),
                   ),
@@ -89,7 +89,7 @@ class ContactMessageCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.lightGrey.withOpacity(0.5),
+                color: AppColors.lightGrey.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(message.description, style: AppTextStyles.body),

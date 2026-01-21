@@ -96,7 +96,7 @@ class _MenusListPageState extends State<MenusListPage> {
 
       final menus = menusData
           .map((json) {
-            print('Menu data: $json'); // Debug temporaire
+            debugPrint('Menu data: $json'); // Debug temporaire
             return MenuModel.fromJson(json as Map<String, dynamic>);
           })
           .toList();
@@ -158,7 +158,7 @@ class _MenusListPageState extends State<MenusListPage> {
         _filteredMenus = searchResults;
       });
     } catch (e) {
-      print('Erreur de recherche: $e');
+      debugPrint('Erreur de recherche: $e');
       // En cas d'erreur, on fait une recherche locale
       setState(() {
         _filteredMenus = _menus.where((menu) {
@@ -322,7 +322,7 @@ class _MenusListPageState extends State<MenusListPage> {
                 Container(
                   height: heroHeight,
                   width: double.infinity,
-                  color: const Color.fromARGB(255, 189, 189, 189).withOpacity(0.25),
+                  color: const Color.fromARGB(255, 189, 189, 189).withValues(alpha: 0.25),
                 ),
                 
                 // Header avec navigation
@@ -378,7 +378,7 @@ class _MenusListPageState extends State<MenusListPage> {
                           child: Text(
                             'Découvrez l\'ensemble de nos menus\npour vos événements',
                             style: AppTextStyles.body.copyWith(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               fontSize: subtitleFontSize,
                             ),
                             textAlign: TextAlign.center,
@@ -418,7 +418,7 @@ class _MenusListPageState extends State<MenusListPage> {
                                   borderRadius: BorderRadius.circular(24),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withValues(alpha: 0.1),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),
@@ -478,7 +478,7 @@ class _MenusListPageState extends State<MenusListPage> {
                                 borderRadius: BorderRadius.circular(24),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
+                                    color: Colors.black.withValues(alpha: 0.1),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),

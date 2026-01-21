@@ -123,7 +123,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
       child: GestureDetector(
         onTap: _close,
         child: Container(
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.black.withValues(alpha:0.5),
           child: GestureDetector(
             onTap: () {}, // Empêche la fermeture au clic sur le contenu
             child: SlideTransition(
@@ -146,7 +146,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                           color: Colors.transparent,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppColors.surface.withOpacity(0.95),
+                              color: AppColors.surface.withValues(alpha:0.95),
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(
                                 color: AppColors.glassBorder,
@@ -173,7 +173,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                     Container(
                                       padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                        color: AppColors.primary.withOpacity(0.1),
+                                        color: AppColors.primary.withValues(alpha:0.1),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: const Icon(
@@ -227,7 +227,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               activeTrackColor: AppColors.primary,
                                               inactiveTrackColor: AppColors.lightGrey,
                                               thumbColor: AppColors.primary,
-                                              overlayColor: AppColors.primary.withOpacity(0.2),
+                                              overlayColor: AppColors.primary.withValues(alpha:0.2),
                                               trackHeight: 4,
                                             ),
                                             child: Slider(
@@ -275,7 +275,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                                   });
                                                 },
                                                 backgroundColor: AppColors.glassFill,
-                                                selectedColor: AppColors.primary.withOpacity(0.2),
+                                                selectedColor: AppColors.primary.withValues(alpha:0.2),
                                                 labelStyle: AppTextStyles.body.copyWith(
                                                   color: isSelected 
                                                       ? AppColors.primary 
@@ -324,7 +324,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                                   });
                                                 },
                                                 backgroundColor: AppColors.glassFill,
-                                                selectedColor: AppColors.primary.withOpacity(0.2),
+                                                selectedColor: AppColors.primary.withValues(alpha:0.2),
                                                 labelStyle: AppTextStyles.body.copyWith(
                                                   color: isSelected 
                                                       ? AppColors.primary 
@@ -372,7 +372,7 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               activeTrackColor: AppColors.primary,
                                               inactiveTrackColor: AppColors.lightGrey,
                                               thumbColor: AppColors.primary,
-                                              overlayColor: AppColors.primary.withOpacity(0.2),
+                                              overlayColor: AppColors.primary.withValues(alpha:0.2),
                                               trackHeight: 4,
                                             ),
                                             child: Slider(

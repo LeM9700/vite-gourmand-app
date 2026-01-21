@@ -94,8 +94,8 @@ class StatsLineChart extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          color.withOpacity(0.3),
-                          color.withOpacity(0.05),
+                          color.withValues(alpha: 0.3),
+                          color.withValues(alpha: 0.05),
                         ],
                       ),
                     ),
@@ -108,7 +108,7 @@ class StatsLineChart extends StatelessWidget {
                   horizontalInterval: (maxY - minY) / 5,
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withValues(alpha: 0.1),
                       strokeWidth: 1,
                     );
                   },
@@ -165,7 +165,7 @@ class StatsLineChart extends StatelessWidget {
                   touchTooltipData: LineTouchTooltipData(
                     getTooltipColor: (_) => AppColors.cardBackground,
                     tooltipBorder: BorderSide(
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       width: 1,
                     ),
                     tooltipRoundedRadius: 8,

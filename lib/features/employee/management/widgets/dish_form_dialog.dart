@@ -107,6 +107,7 @@ class _DishFormDialogState extends State<DishFormDialog> {
                 'dish_type': _dishType,
                 'allergens': allergensList,
               });
+              
               Navigator.pop(context);
             }
           },

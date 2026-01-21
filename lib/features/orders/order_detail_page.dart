@@ -136,9 +136,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withValues(alpha:0.1),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: statusColor.withOpacity(0.3)),
+              border: Border.all(color: statusColor.withValues(alpha:0.3)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -387,7 +387,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () {
-                  // TODO: Navigation vers édition
+                  
                 },
                 icon: Icon(Icons.edit, color: AppColors.primary),
                 label: const Text('Modifier la commande'),
@@ -437,7 +437,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              // TODO: Appel API d'annulation
+             
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             child: const Text('Confirmer l\'annulation'),

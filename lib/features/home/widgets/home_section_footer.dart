@@ -69,7 +69,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.dark.withOpacity(0.3),
+            color: AppColors.dark.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, -4),
             spreadRadius: 0,
@@ -108,7 +108,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
           Container(
             padding: EdgeInsets.all(padding * 0.85),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -129,7 +129,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
           Text(
             'Traiteur événementiel depuis 2001',
             style: AppTextStyles.caption.copyWith(
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
               fontSize: context.fluidValue(minValue: 10, maxValue: 12),
             ),
             textAlign: TextAlign.center,
@@ -141,7 +141,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
           Text(
             '© 2026 Vite & Gourmand - Tous droits réservés',
             style: AppTextStyles.caption.copyWith(
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withValues(alpha: 0.5),
               fontSize: context.fluidValue(minValue: 9, maxValue: 10),
             ),
             textAlign: TextAlign.center,
@@ -175,10 +175,10 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
     return Container(
       padding: EdgeInsets.all(padding * 0.7),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -214,7 +214,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -248,7 +248,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -277,7 +277,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
             height: 20,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withOpacity(0.7)),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withValues(alpha: 0.7)),
             ),
           ),
         ),
@@ -289,7 +289,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
         Text(
           'Horaires non disponibles',
           style: AppTextStyles.caption.copyWith(
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
             fontSize: fontSize,
           ),
         ),
@@ -330,7 +330,7 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
               child: Text(
                 '${_getDayLabel(dayOfWeek)} ',
                 style: AppTextStyles.caption.copyWith(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                   fontSize: fontSize,
                 ),
               ),

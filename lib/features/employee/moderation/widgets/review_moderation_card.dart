@@ -28,10 +28,10 @@ class ReviewModerationCard extends StatelessWidget {
 
     return GlassCard(
       borderColor: review.status == 'PENDING'
-          ? Colors.orange.withOpacity(0.5)
+          ? Colors.orange.withValues(alpha: 0.5)
           : review.status == 'APPROVED'
-              ? Colors.green.withOpacity(0.5)
-              : Colors.red.withOpacity(0.5),
+              ? Colors.green.withValues(alpha: 0.5)
+              : Colors.red.withValues(alpha: 0.5),
       borderWidth: 2,
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -45,10 +45,10 @@ class ReviewModerationCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: review.status == 'PENDING'
-                        ? Colors.orange.withOpacity(0.15)
+                        ? Colors.orange.withValues(alpha: 0.15)
                         : review.status == 'APPROVED'
-                            ? Colors.green.withOpacity(0.1)
-                            : Colors.red.withOpacity(0.1),
+                            ? Colors.green.withValues(alpha: 0.1)
+                            : Colors.red.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: review.status == 'PENDING'
@@ -96,7 +96,7 @@ class ReviewModerationCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: ratingColor.withOpacity(0.1),
+                    color: ratingColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -117,7 +117,7 @@ class ReviewModerationCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.lightGrey.withOpacity(0.5),
+                color: AppColors.lightGrey.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(

@@ -65,11 +65,13 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
 
     try {
       await _service.deleteDish(dishId);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Plat supprimé'), backgroundColor: Colors.green),
       );
       _loadDishes();
     } catch (e) {
+    if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
       );
@@ -83,8 +85,11 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
         dish: dish,
         onSave: (data) async {
           try {
+          
             if (dish == null) {
+            
               await _service.createDish(data);
+              
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Plat créé'), backgroundColor: Colors.green),
               );
@@ -132,7 +137,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                 end: Alignment.bottomRight,
                 colors: [
                   Colors.white,
-                  AppColors.accent.withOpacity(0.05),
+                  AppColors.accent.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -151,12 +156,12 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [AppColors.accent, AppColors.accent.withOpacity(0.8)],
+                          colors: [AppColors.accent, AppColors.accent.withValues(alpha: 0.8)],
                         ),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.accent.withOpacity(0.3),
+                            color: AppColors.accent.withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),
@@ -260,13 +265,13 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
         decoration: BoxDecoration(
           gradient: isSelected
               ? LinearGradient(
-                  colors: [AppColors.accent, AppColors.accent.withOpacity(0.8)],
+                  colors: [AppColors.accent, AppColors.accent.withValues(alpha: 0.8)],
                 )
               : null,
           color: isSelected ? null : AppColors.surface,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? AppColors.accent : AppColors.textMuted.withOpacity(0.3),
+            color: isSelected ? AppColors.accent : AppColors.textMuted.withValues(alpha: 0.3),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -326,7 +331,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
 
     return GlassCard(
       padding: EdgeInsets.zero,
-      borderColor: color.withOpacity(0.3),
+      borderColor: color.withValues(alpha: 0.3),
       borderWidth: 2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +341,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
+                colors: [color.withValues(alpha: 0.1), color.withValues(alpha: 0.05)],
               ),
               borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
             ),
@@ -345,7 +350,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.15),
+                    color: color.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon, color: color, size: 24),
@@ -395,10 +400,10 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: AppColors.warning.withOpacity(0.1),
+                      color: AppColors.warning.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: AppColors.warning.withOpacity(0.3),
+                        color: AppColors.warning.withValues(alpha: 0.3),
                       ),
                     ),
                     child: Row(
@@ -418,7 +423,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                               return Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: AppColors.warning.withOpacity(0.2),
+                                  color: AppColors.warning.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
@@ -426,7 +431,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                                   style: AppTextStyles.caption.copyWith(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.warning.withOpacity(0.9),
+                                    color: AppColors.warning.withValues(alpha: 0.9),
                                   ),
                                 ),
                               );

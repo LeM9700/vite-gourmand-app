@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vite_gourmand_app/features/admin/admin_navigation_page.dart';
-import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
-import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/storage/secure_storage.dart';
 import '../services/auth_service.dart';
@@ -72,6 +70,7 @@ class _LoginFormState extends State<LoginForm> {
           destination = const MainNavigationPage();
         }
         
+        if (!mounted) return;
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => destination),
@@ -196,10 +195,10 @@ class _LoginFormState extends State<LoginForm> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1,
         ),
       ),

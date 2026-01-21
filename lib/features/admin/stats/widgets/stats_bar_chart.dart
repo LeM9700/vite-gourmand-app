@@ -70,7 +70,7 @@ class StatsBarChart extends StatelessWidget {
                   horizontalInterval: maxY / 5,
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withValues(alpha: 0.1),
                       strokeWidth: 1,
                     );
                   },
@@ -127,7 +127,7 @@ class StatsBarChart extends StatelessWidget {
                   touchTooltipData: BarTouchTooltipData(
                     getTooltipColor: (_) => AppColors.cardBackground,
                     tooltipBorder: BorderSide(
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       width: 1,
                     ),
                     tooltipRoundedRadius: 8,
@@ -177,7 +177,7 @@ class StatsBarChart extends StatelessWidget {
               end: Alignment.topCenter,
               colors: [
                 barColor,
-                barColor.withOpacity(0.7),
+                barColor.withValues(alpha: 0.7),
               ],
             ),
           ),

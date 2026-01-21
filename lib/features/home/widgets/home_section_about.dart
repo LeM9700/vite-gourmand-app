@@ -88,7 +88,7 @@ class HomeSectionAbout extends StatelessWidget {
                     badge: 'Excellence Logistique',
                     icon: Icons.precision_manufacturing_rounded,
                     gradientColors: [AppColors.truffle, AppColors.caviar],
-                    badgeGradient: [AppColors.truffle.withOpacity(0.1), AppColors.caviar.withOpacity(0.05)],
+                    badgeGradient: [AppColors.truffle.withValues(alpha: 0.1), AppColors.caviar.withValues(alpha: 0.05)],
                     badgeColor: AppColors.truffle,
                     padding: padding,
                     avatarSize: avatarSize,
@@ -109,7 +109,7 @@ class HomeSectionAbout extends StatelessWidget {
                     badge: 'Art Culinaire',
                     icon: Icons.restaurant_menu_rounded,
                     gradientColors: [AppColors.primary, AppColors.saffron],
-                    badgeGradient: [AppColors.primary.withOpacity(0.15), AppColors.saffron.withOpacity(0.1)],
+                    badgeGradient: [AppColors.primary.withValues(alpha: 0.15), AppColors.saffron.withValues(alpha: 0.1)],
                     badgeColor: AppColors.primary,
                     padding: padding,
                     avatarSize: avatarSize,
@@ -134,7 +134,7 @@ class HomeSectionAbout extends StatelessWidget {
                       badge: 'Excellence Logistique',
                       icon: Icons.precision_manufacturing_rounded,
                       gradientColors: [AppColors.truffle, AppColors.caviar],
-                      badgeGradient: [AppColors.truffle.withOpacity(0.1), AppColors.caviar.withOpacity(0.05)],
+                      badgeGradient: [AppColors.truffle.withValues(alpha: 0.1), AppColors.caviar.withValues(alpha: 0.05)],
                       badgeColor: AppColors.truffle,
                       padding: padding,
                       avatarSize: avatarSize,
@@ -157,7 +157,7 @@ class HomeSectionAbout extends StatelessWidget {
                       badge: 'Art Culinaire',
                       icon: Icons.restaurant_menu_rounded,
                       gradientColors: [AppColors.primary, AppColors.saffron],
-                      badgeGradient: [AppColors.primary.withOpacity(0.15), AppColors.saffron.withOpacity(0.1)],
+                      badgeGradient: [AppColors.primary.withValues(alpha: 0.15), AppColors.saffron.withValues(alpha: 0.1)],
                       badgeColor: AppColors.primary,
                       padding: padding,
                       avatarSize: avatarSize,
@@ -265,7 +265,7 @@ class HomeSectionAbout extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: gradientColors[0].withOpacity(0.3),
+                      color: gradientColors[0].withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -278,7 +278,7 @@ class HomeSectionAbout extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular((avatarSize - 4) / 2),
                   border: Border.all(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withValues(alpha: 0.3),
                     width: 2,
                   ),
                 ),
@@ -339,7 +339,7 @@ class HomeSectionAbout extends StatelessWidget {
               gradient: LinearGradient(colors: badgeGradient),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: badgeColor.withOpacity(0.2),
+                color: badgeColor.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),

@@ -131,8 +131,8 @@ class MenuCard extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withOpacity(0.3),
-                          AppColors.accent.withOpacity(0.2),
+                          AppColors.primary.withValues(alpha: 0.3),
+                          AppColors.accent.withValues(alpha: 0.2),
                         ],
                       ),
                     ),
@@ -303,9 +303,9 @@ class MenuCard extends StatelessWidget {
         vertical: fontSize * 0.25,
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         text,
@@ -338,10 +338,10 @@ class _ActionButton extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(size / 2),
           border: Border.all(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             width: 1,
           ),
         ),

@@ -161,7 +161,7 @@ class OrderActionButtons extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.lightGrey.withOpacity(0.5),
+          color: AppColors.lightGrey.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(

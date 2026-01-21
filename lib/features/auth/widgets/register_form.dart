@@ -275,7 +275,7 @@ class _RegisterFormState extends State<RegisterForm> {
       height: 12,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive ? AppColors.primary : Colors.white.withOpacity(0.3),
+        color: isActive ? AppColors.primary : Colors.white.withValues(alpha: 0.3),
       ),
     );
   }
@@ -284,7 +284,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return Container(
       width: 40,
       height: 2,
-      color: Colors.white.withOpacity(0.3),
+      color: Colors.white.withValues(alpha: 0.3),
     );
   }
 
@@ -373,10 +373,10 @@ class _RegisterFormState extends State<RegisterForm> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1,
         ),
       ),

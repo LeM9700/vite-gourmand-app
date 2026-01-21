@@ -7,7 +7,6 @@ import '../../core/utils/responsive.dart';
 import '../../core/api/dio_client.dart';
 import 'models/order_model.dart';
 import 'order_detail_page.dart';
-import 'package:intl/intl.dart';
 import '../auth/login_page.dart';
 import '../reviews/create_review_page.dart';
 
@@ -327,9 +326,9 @@ class _OrderCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
+                  color: statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: statusColor.withOpacity(0.3)),
+                  border: Border.all(color: statusColor.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

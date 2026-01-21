@@ -55,7 +55,7 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
         });
       }
     } catch (e) {
-      print('Erreur lors du chargement des avis: $e');
+      debugPrint('Erreur lors du chargement des avis: $e');
       setState(() {
         isLoading = false;
         error = e.toString();
@@ -232,12 +232,12 @@ class _ReviewCard extends StatelessWidget {
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.15),
+          color: AppColors.primary.withValues(alpha: 0.15),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.08),
+            color: AppColors.primary.withValues(alpha: 0.08),
             offset: const Offset(0, 4),
             blurRadius: 16,
             spreadRadius: 0,
@@ -303,7 +303,7 @@ class _ReviewCard extends StatelessWidget {
                   vertical: context.fluidValue(minValue: 3, maxValue: 4),
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.champagne.withOpacity(0.2),
+                  color: AppColors.champagne.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(

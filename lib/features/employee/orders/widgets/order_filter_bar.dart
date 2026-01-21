@@ -81,7 +81,7 @@ class _OrderFilterBarState extends State<OrderFilterBar> {
                     )
                   : null,
               filled: true,
-              fillColor: AppColors.lightGrey.withOpacity(0.5),
+              fillColor: AppColors.lightGrey.withValues(alpha: 0.5),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -122,7 +122,7 @@ class _OrderFilterBarState extends State<OrderFilterBar> {
                   }
                 },
                 backgroundColor: AppColors.glassFill,
-                selectedColor: AppColors.primary.withOpacity(0.2),
+                selectedColor: AppColors.primary.withValues(alpha: 0.2),
                 labelStyle: AppTextStyles.body.copyWith(
                   fontSize: isSmallScreen ? 12 : 14,
                   color: isSelected ? AppColors.primary : AppColors.textPrimary,

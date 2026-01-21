@@ -151,12 +151,12 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.primary,
-                  AppColors.primary.withOpacity(0.7),
+                  AppColors.primary.withValues(alpha:0.7),
                 ],
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
+                  color: AppColors.primary.withValues(alpha:0.3),
                   offset: const Offset(0, 4),
                   blurRadius: 12,
                 ),
@@ -200,9 +200,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.primary.withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+                    border: Border.all(color: AppColors.primary.withValues(alpha:0.3)),
                   ),
                   child: Text(
                     _userInfo!.role == 'ADMIN' ? '👑 Administrateur' : '👤 Client',
@@ -336,7 +336,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             subtitle: 'Recevoir les mises à jour de commandes',
             value: true,
             onChanged: (value) {
-              // TODO: Mise à jour préférence
+              
             },
           ),
           
@@ -348,7 +348,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             subtitle: 'Alertes importantes par SMS',
             value: false,
             onChanged: (value) {
-              // TODO: Mise à jour préférence
+              
             },
           ),
         ],
@@ -456,7 +456,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.textMuted.withOpacity(0.1),
+                  color: AppColors.textMuted.withValues(alpha:0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -491,7 +491,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             icon: Icons.help_outline,
             label: 'Aide & Support',
             onTap: () {
-              // TODO: Navigation vers aide
+              
             },
           ),
           
@@ -501,7 +501,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             icon: Icons.privacy_tip_outlined,
             label: 'Politique de confidentialité',
             onTap: () {
-              // TODO: Navigation vers politique
+              
             },
           ),
           
@@ -511,7 +511,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             icon: Icons.description_outlined,
             label: 'Conditions d\'utilisation',
             onTap: () {
-              // TODO: Navigation vers CGU
+             
             },
           ),
 

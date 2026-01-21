@@ -57,7 +57,7 @@ class _AuthPageState extends State<AuthPage>
           Container(
             height: double.infinity,
             width: double.infinity,
-            color: Colors.black.withOpacity(0.6),
+            color: Colors.black.withValues(alpha: 0.6),
           ),
 
           // Contenu principal
@@ -93,7 +93,7 @@ class _AuthPageState extends State<AuthPage>
                           Container(
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
+                              color: Colors.white.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: TabBar(
@@ -143,9 +143,9 @@ class _AuthPageState extends State<AuthPage>
                     height: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withValues(alpha: 0.1),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         width: 2,
                       ),
                     ),

@@ -496,7 +496,7 @@ class _OrderPageState extends State<OrderPage> {
                   child: Container(
                     padding: EdgeInsets.all(spacing * 0.75),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha:0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -602,7 +602,7 @@ class _OrderPageState extends State<OrderPage> {
           icon,
           color:
               isWarning
-                  ? AppColors.danger.withOpacity(0.7)
+                  ? AppColors.danger.withValues(alpha:0.7)
                   : AppColors.textSecondary,
           size: iconSize,
         ),
@@ -1130,7 +1130,7 @@ class _OrderPageState extends State<OrderPage> {
         padding: EdgeInsets.all(context.isMobile ? 14 : 16),
         decoration: BoxDecoration(
           color: _needsEquipment 
-              ? AppColors.primary.withOpacity(0.05)
+              ? AppColors.primary.withValues(alpha:0.05)
               : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
@@ -1231,7 +1231,7 @@ class _OrderPageState extends State<OrderPage> {
         onPressed: _isSubmitting ? null : _submitOrder,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
+          disabledBackgroundColor: AppColors.primary.withValues(alpha:0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

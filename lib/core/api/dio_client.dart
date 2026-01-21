@@ -48,7 +48,7 @@ class DioClient {
         responseBody: true,
         requestHeader: true,
         responseHeader: true,
-        logPrint: (obj) => print('🌐 API: $obj'),
+        logPrint: (obj) => debugPrint('🌐 API: $obj'),
       ));
     }
 
@@ -62,12 +62,12 @@ class DioClient {
         handler.next(options);
       },
       onError: (DioException error, ErrorInterceptorHandler handler) async {
-        print('❌ Erreur API: ${error.message}');
-        print('❌ URL: ${error.requestOptions.uri}');
+        debugPrint('❌ Erreur API: ${error.message}');
+        debugPrint('❌ URL: ${error.requestOptions.uri}');
         
         // Si 401, déconnexion automatique
         if (error.response?.statusCode == 401) {
-          print('🔑 Token invalide, déconnexion automatique');
+          debugPrint('🔑 Token invalide, déconnexion automatique');
           
           // Effacer le token
           await storage.clearToken();

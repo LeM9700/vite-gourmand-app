@@ -68,7 +68,7 @@ class _AdminStatsPageState extends State<AdminStatsPage>
     final endStr = DateFormat('yyyy-MM-dd').format(_endDate);
 
     try {
-      print('📊 Chargement des stats : $startStr → $endStr');
+      debugPrint('📊 Chargement des stats : $startStr → $endStr');
       
       final results = await Future.wait([
         _adminService.getOrdersByMenu(
@@ -85,10 +85,10 @@ class _AdminStatsPageState extends State<AdminStatsPage>
         ),
       ]);
 
-      print('📊 Données reçues :');
-      print('  - Orders: ${results[0]}');
-      print('  - Revenue: ${results[1]}');
-      print('  - Comparison: ${results[2]}');
+      debugPrint('📊 Données reçues :');
+      debugPrint('  - Orders: ${results[0]}');
+      debugPrint('  - Revenue: ${results[1]}');
+      debugPrint('  - Comparison: ${results[2]}');
 
       if (mounted) {
         setState(() {
@@ -98,13 +98,13 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           _isLoading = false;
         });
         
-        print('📊 Stats parsées :');
-        print('  - Orders menus: ${_ordersByMenuData?.menus.length ?? 0}');
-        print('  - Revenue data: ${_revenueByMenuData?.data.length ?? 0}');
-        print('  - Comparison menus: ${_comparisonData?.menus.length ?? 0}');
+        debugPrint('📊 Stats parsées :');
+        debugPrint('  - Orders menus: ${_ordersByMenuData?.menus.length ?? 0}');
+        debugPrint('  - Revenue data: ${_revenueByMenuData?.data.length ?? 0}');
+        debugPrint('  - Comparison menus: ${_comparisonData?.menus.length ?? 0}');
       }
     } catch (e) {
-      print('❌ Erreur chargement stats: $e');
+      debugPrint('❌ Erreur chargement stats: $e');
       if (mounted) {
         setState(() {
           _errorMessage = e.toString();
@@ -142,8 +142,8 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                     end: Alignment.bottomRight,
                     colors: [
                       AppColors.primary,
-                      AppColors.primary.withOpacity(0.8),
-                      AppColors.cardBackground.withOpacity(0.9),
+                      AppColors.primary.withValues(alpha: 0.8),
+                      AppColors.cardBackground.withValues(alpha: 0.9),
                     ],
                   ),
                 ),
@@ -159,7 +159,7 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
+                                color: Colors.white.withValues(alpha: 0.2),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: const Icon(
@@ -261,13 +261,13 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                                       decoration: BoxDecoration(
                                         color: isSelected
                                             ? AppColors.primary
-                                                .withOpacity(0.2)
-                                            : Colors.white.withOpacity(0.05),
+                                                .withValues(alpha: 0.2)
+                                            : Colors.white.withValues(alpha: 0.05),
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(
                                           color: isSelected
                                               ? AppColors.primary
-                                              : Colors.white.withOpacity(0.2),
+                                              : Colors.white.withValues(alpha: 0.2),
                                           width: 1,
                                         ),
                                       ),
@@ -351,7 +351,7 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                             Icon(
                               Icons.error_outline_rounded,
                               size: 64,
-                              color: Colors.red.withOpacity(0.7),
+                              color: Colors.red.withValues(alpha: 0.7),
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -614,7 +614,7 @@ class _AdminStatsPageState extends State<AdminStatsPage>
             Icon(
               Icons.show_chart_rounded,
               size: 64,
-              color: AppColors.textSecondary.withOpacity(0.5),
+              color: AppColors.textSecondary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 16),
             Text(

@@ -88,7 +88,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                     colors: [
                       AppColors.dark,
                       AppColors.darkGrey,
-                      AppColors.primary.withOpacity(0.3),
+                      AppColors.primary.withValues(alpha: 0.3),
                     ],
                   ),
                 ),
@@ -106,12 +106,12 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [AppColors.primary, AppColors.primary.withOpacity(0.7)],
+                                  colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.7)],
                                 ),
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.primary.withOpacity(0.4),
+                                    color: AppColors.primary.withValues(alpha: 0.4),
                                     blurRadius: 12,
                                     offset: const Offset(0, 4),
                                   ),
@@ -140,7 +140,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                     'Vue d\'ensemble',
                                     style: AppTextStyles.subtitle.copyWith(
                                       fontSize: context.fluidValue(minValue: 14, maxValue: 16),
-                                      color: AppColors.textLight.withOpacity(0.8),
+                                      color: AppColors.textLight.withValues(alpha: 0.8),
                                     ),
                                   ),
                                 ],
@@ -210,8 +210,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   Widget _buildWelcomeCard(BuildContext context) {
     return GlassCard(
       padding: const EdgeInsets.all(24),
-      fillColor: AppColors.primary.withOpacity(0.08),
-      borderColor: AppColors.primary.withOpacity(0.3),
+      fillColor: AppColors.primary.withValues(alpha: 0.08),
+      borderColor: AppColors.primary.withValues(alpha: 0.3),
       borderWidth: 2,
       child: Row(
         children: [
@@ -219,12 +219,12 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.primary.withOpacity(0.7)],
+                colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.7)],
               ),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
+                  color: AppColors.primary.withValues(alpha: 0.3),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -359,19 +359,19 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       onTap: onTap,
       child: GlassCard(
         padding: const EdgeInsets.all(16),
-        borderColor: color.withOpacity(0.3),
+        borderColor: color.withValues(alpha: 0.3),
         borderWidth: 2,
-        fillColor: color.withOpacity(0.05),
+        fillColor: color.withValues(alpha: 0.05),
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withValues(alpha: 0.15),
               shape: BoxShape.circle,
               border: Border.all(
-                color: color.withOpacity(0.4),
+                color: color.withValues(alpha: 0.4),
                 width: 2,
               ),
             ),
