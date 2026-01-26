@@ -42,90 +42,97 @@ class ContactMessageCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: statusColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: statusColor),
-                  ),
-                  child: Text(
-                    ContactMessageStatusLabels.getLabel(message.status),
-                    style: AppTextStyles.caption.copyWith(
-                      color: statusColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
                 ),
-                const Spacer(),
-                Text(
-                  dateFormat.format(message.createdAt),
-                  style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                decoration: BoxDecoration(
+                  color: statusColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: statusColor),
                 ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                const Icon(Icons.email, size: 18, color: AppColors.textSecondary),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    message.email,
-                    style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600),
+                child: Text(
+                  ContactMessageStatusLabels.getLabel(message.status),
+                  style: AppTextStyles.caption.copyWith(
+                    color: statusColor,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              message.title,
-              style: AppTextStyles.cardTitle.copyWith(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.lightGrey.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(message.description, style: AppTextStyles.body),
-            ),
-            if (message.status == 'SENT') ...[
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: () => onUpdateStatus('ARCHIVED'),
-                      icon: const Icon(Icons.archive, color: Colors.grey),
-                      label: const Text('Archiver'),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.grey,
-                        side: const BorderSide(color: Colors.grey, width: 2),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    flex: 2,
-                    child: ElevatedButton.icon(
-                      onPressed: () => onUpdateStatus('TREATED'),
-                      icon: const Icon(Icons.check, color: Colors.white),
-                      label: const Text('Marquer traité'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ),
-                    ),
-                  ),
-                ],
+              const Spacer(),
+              Text(
+                dateFormat.format(message.createdAt),
+                style: AppTextStyles.caption.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(Icons.email, size: 18, color: AppColors.textSecondary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  message.email,
+                  style: AppTextStyles.body.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            message.title,
+            style: AppTextStyles.cardTitle.copyWith(fontSize: 16),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.lightGrey.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(message.description, style: AppTextStyles.body),
+          ),
+          if (message.status == 'SENT') ...[
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => onUpdateStatus('ARCHIVED'),
+                    icon: const Icon(Icons.archive, color: Colors.grey),
+                    label: const Text('Archiver'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.grey,
+                      side: const BorderSide(color: Colors.grey, width: 2),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 2,
+                  child: ElevatedButton.icon(
+                    onPressed: () => onUpdateStatus('TREATED'),
+                    icon: const Icon(Icons.check, color: Colors.white),
+                    label: const Text('Marquer traité'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
-        ),
+        ],
+      ),
     );
   }
 }

@@ -51,21 +51,22 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
   Future<void> _logout() async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Déconnexion'),
-        content: const Text('Voulez-vous vraiment vous déconnecter ?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Annuler'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Déconnexion'),
+            content: const Text('Voulez-vous vraiment vous déconnecter ?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Déconnexion'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Déconnexion'),
-          ),
-        ],
-      ),
     );
 
     if (confirm == true) {
@@ -112,7 +113,10 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
+                      colors: [
+                        AppColors.primary,
+                        AppColors.primary.withValues(alpha: 0.8),
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -123,7 +127,11 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.settings, color: Colors.white, size: 28),
+                  child: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                    size: 28,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Text(
@@ -139,9 +147,10 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
 
           // Contenu
           Expanded(
-            child: _isLoading
-                ? _buildLoadingSkeleton(context, padding)
-                : _error != null
+            child:
+                _isLoading
+                    ? _buildLoadingSkeleton(context, padding)
+                    : _error != null
                     ? _buildErrorState(context, padding)
                     : _buildContent(context, padding),
           ),
@@ -184,11 +193,18 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [AppColors.primary.withValues(alpha: 0.2), AppColors.primary.withValues(alpha: 0.1)],
+                    colors: [
+                      AppColors.primary.withValues(alpha: 0.2),
+                      AppColors.primary.withValues(alpha: 0.1),
+                    ],
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.person, color: AppColors.primary, size: 32),
+                child: const Icon(
+                  Icons.person,
+                  color: AppColors.primary,
+                  size: 32,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -202,7 +218,9 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                     const SizedBox(height: 4),
                     Text(
                       _userData?.email ?? 'Non renseigné',
-                      style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -239,7 +257,11 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.badge, color: AppColors.primary, size: 24),
+                child: const Icon(
+                  Icons.badge,
+                  color: AppColors.primary,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 12),
               Text(
@@ -259,7 +281,9 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                 ],
               ),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+              border: Border.all(
+                color: AppColors.primary.withValues(alpha: 0.3),
+              ),
             ),
             child: Row(
               children: [
@@ -310,7 +334,9 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                 Expanded(
                   child: Text(
                     'Informations en lecture seule. Contactez l\'administrateur pour toute modification.',
-                    style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ),
               ],
@@ -334,7 +360,11 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
                   color: AppColors.info.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.security, color: AppColors.info, size: 24),
+                child: const Icon(
+                  Icons.security,
+                  color: AppColors.info,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 12),
               Text(
@@ -384,9 +414,7 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
               const SizedBox(height: 4),
               Text(
                 value,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -412,12 +440,14 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
-            const Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 20),
+            const Icon(
+              Icons.chevron_right,
+              color: AppColors.textSecondary,
+              size: 20,
+            ),
           ],
         ),
       ),
@@ -472,16 +502,9 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error_outline,
-              size: 64,
-              color: AppColors.danger,
-            ),
+            Icon(Icons.error_outline, size: 64, color: AppColors.danger),
             const SizedBox(height: 16),
-            Text(
-              'Erreur de chargement',
-              style: AppTextStyles.sectionTitle,
-            ),
+            Text('Erreur de chargement', style: AppTextStyles.sectionTitle),
             const SizedBox(height: 8),
             Text(
               _error ?? 'Une erreur est survenue',
@@ -497,7 +520,10 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
               label: const Text('Réessayer'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
               ),
             ),
           ],
@@ -509,16 +535,19 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
   void _showChangePasswordDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Changer le mot de passe'),
-        content: const Text('Fonctionnalité à venir. Contactez l\'administrateur.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Fermer'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Changer le mot de passe'),
+            content: const Text(
+              'Fonctionnalité à venir. Contactez l\'administrateur.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Fermer'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 

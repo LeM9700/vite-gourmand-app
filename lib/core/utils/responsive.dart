@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 /// Breakpoints pour le design responsive
 class Breakpoints {
   static const double mobile = 480;
@@ -16,10 +15,10 @@ enum ScreenType { mobile, tablet, desktop, widescreen }
 extension ResponsiveContext on BuildContext {
   /// Largeur de l'écran
   double get screenWidth => MediaQuery.of(this).size.width;
-  
+
   /// Hauteur de l'écran
   double get screenHeight => MediaQuery.of(this).size.height;
-  
+
   /// Type d'écran actuel
   ScreenType get screenType {
     final width = screenWidth;
@@ -28,25 +27,26 @@ extension ResponsiveContext on BuildContext {
     if (width < Breakpoints.desktop) return ScreenType.desktop;
     return ScreenType.widescreen;
   }
-  
+
   /// Vérifie si c'est un mobile (< 480px)
   bool get isMobile => screenWidth < Breakpoints.mobile;
-  
+
   /// Vérifie si c'est un petit écran mobile/tablette (< 768px)
   bool get isSmallScreen => screenWidth < Breakpoints.tablet;
-  
+
   /// Vérifie si c'est une tablette (480-768px)
-  bool get isTablet => screenWidth >= Breakpoints.mobile && screenWidth < Breakpoints.tablet;
-  
+  bool get isTablet =>
+      screenWidth >= Breakpoints.mobile && screenWidth < Breakpoints.tablet;
+
   /// Vérifie si c'est un desktop (>= 768px)
   bool get isDesktop => screenWidth >= Breakpoints.tablet;
-  
+
   /// Vérifie si c'est un grand desktop (>= 1024px)
   bool get isLargeDesktop => screenWidth >= Breakpoints.desktop;
-  
+
   /// Vérifie si c'est un écran large (>= 1440px)
   bool get isWidescreen => screenWidth >= Breakpoints.widescreen;
-  
+
   /// Facteur de scale basé sur la largeur (fluide)
   double get scaleFactor {
     final width = screenWidth;
@@ -58,7 +58,7 @@ extension ResponsiveContext on BuildContext {
     if (width <= 1440) return 1.2;
     return 1.3;
   }
-  
+
   /// Padding horizontal responsive (fluide)
   double get horizontalPadding {
     final width = screenWidth;
@@ -68,14 +68,14 @@ extension ResponsiveContext on BuildContext {
     if (width < 1200) return 32;
     return 48;
   }
-  
+
   /// Padding vertical responsive
   double get verticalPadding {
     if (screenWidth < 600) return 16;
     if (screenWidth < 900) return 20;
     return 24;
   }
-  
+
   /// Largeur maximale du contenu
   double get maxContentWidth {
     if (screenWidth < 600) return screenWidth;
@@ -83,7 +83,7 @@ extension ResponsiveContext on BuildContext {
     if (screenWidth < 1200) return 960;
     return 1200;
   }
-  
+
   /// Nombre de colonnes pour les grilles (fluide)
   int get gridColumns {
     final width = screenWidth;
@@ -92,24 +92,24 @@ extension ResponsiveContext on BuildContext {
     if (width < 1100) return 3;
     return 4;
   }
-  
+
   /// Espacement entre les éléments de grille
   double get gridSpacing {
     if (screenWidth < 600) return 12;
     if (screenWidth < 900) return 16;
     return 24;
   }
-  
+
   /// Taille de police responsive (fluide)
   double responsiveFontSize(double baseSize) {
     return baseSize * scaleFactor;
   }
-  
+
   /// Taille d'icône responsive
   double responsiveIconSize(double baseSize) {
     return baseSize * scaleFactor;
   }
-  
+
   /// Calcul fluide entre deux valeurs selon la largeur
   double fluidValue({
     required double minValue,
@@ -175,15 +175,12 @@ class ResponsiveContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveMaxWidth = maxWidth ?? context.maxContentWidth;
-    final effectivePadding = padding ?? 
-        EdgeInsets.symmetric(horizontal: context.horizontalPadding);
+    final effectivePadding =
+        padding ?? EdgeInsets.symmetric(horizontal: context.horizontalPadding);
 
     Widget content = ConstrainedBox(
       constraints: BoxConstraints(maxWidth: effectiveMaxWidth),
-      child: Padding(
-        padding: effectivePadding,
-        child: child,
-      ),
+      child: Padding(padding: effectivePadding, child: child),
     );
 
     if (center) {
@@ -251,17 +248,14 @@ class ResponsiveRowColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isRow = forceRow ?? !context.isMobile;
-    
+
     final spacedChildren = <Widget>[];
     for (int i = 0; i < children.length; i++) {
-      spacedChildren.add(isRow 
-          ? Flexible(child: children[i])
-          : children[i]);
+      spacedChildren.add(isRow ? Flexible(child: children[i]) : children[i]);
       if (i < children.length - 1) {
-        spacedChildren.add(SizedBox(
-          width: isRow ? spacing : 0,
-          height: isRow ? 0 : spacing,
-        ));
+        spacedChildren.add(
+          SizedBox(width: isRow ? spacing : 0, height: isRow ? 0 : spacing),
+        );
       }
     }
 
@@ -272,7 +266,7 @@ class ResponsiveRowColumn extends StatelessWidget {
         children: spacedChildren,
       );
     }
-    
+
     return Column(
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,

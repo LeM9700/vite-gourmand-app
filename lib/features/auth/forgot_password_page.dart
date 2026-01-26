@@ -102,9 +102,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   child: Center(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.all(24),
-                      child: _emailSent
-                          ? _buildSuccessView()
-                          : _buildFormView(),
+                      child:
+                          _emailSent ? _buildSuccessView() : _buildFormView(),
                     ),
                   ),
                 ),
@@ -169,9 +168,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           // Titre
           Text(
             'Mot de passe oublié ?',
-            style: AppTextStyles.displayTitle.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTextStyles.displayTitle.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
 
@@ -180,9 +177,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           // Description
           Text(
             'Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.',
-            style: AppTextStyles.body.copyWith(
-              color: Colors.white70,
-            ),
+            style: AppTextStyles.body.copyWith(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
 
@@ -226,8 +221,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       if (value == null || value.trim().isEmpty) {
                         return 'Veuillez saisir votre email';
                       }
-                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                          .hasMatch(value.trim())) {
+                      if (!RegExp(
+                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      ).hasMatch(value.trim())) {
                         return 'Format d\'email invalide';
                       }
                       return null;
@@ -280,9 +276,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           // Titre
           Text(
             'Email envoyé !',
-            style: AppTextStyles.displayTitle.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTextStyles.displayTitle.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
 
@@ -291,9 +285,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           // Description
           Text(
             'Nous avons envoyé un lien de réinitialisation à ${_emailController.text.trim()}.\n\nVérifiez votre boîte de réception et suivez les instructions.',
-            style: AppTextStyles.body.copyWith(
-              color: Colors.white70,
-            ),
+            style: AppTextStyles.body.copyWith(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
 

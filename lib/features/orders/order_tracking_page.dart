@@ -35,7 +35,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
 
     try {
       final dioClient = await DioClient.create();
-      
+
       // Récupérer toutes les commandes actives
       final response = await dioClient.dio.get('/orders/me');
       final data = response.data as Map<String, dynamic>;
@@ -44,11 +44,12 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       if (!mounted) return;
 
       // Filtrer les commandes actives et trouver la plus proche
-      final orders = items
-          .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
-          .where((order) => order.isActive)
-          .toList()
-        ..sort((a, b) => a.eventDate.compareTo(b.eventDate));
+      final orders =
+          items
+              .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
+              .where((order) => order.isActive)
+              .toList()
+            ..sort((a, b) => a.eventDate.compareTo(b.eventDate));
 
       if (orders.isEmpty) {
         setState(() {
@@ -65,12 +66,14 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       if (!mounted) return;
 
       setState(() {
-        _order = OrderDetailModel.fromJson(detailResponse.data as Map<String, dynamic>);
+        _order = OrderDetailModel.fromJson(
+          detailResponse.data as Map<String, dynamic>,
+        );
         _isLoading = false;
       });
     } catch (e) {
       if (!mounted) return;
-      
+
       // Si erreur 401, rediriger vers login
       if (e.toString().contains('401')) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -79,7 +82,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
         );
         return;
       }
-      
+
       setState(() {
         _errorMessage = 'Impossible de charger le suivi';
         _isLoading = false;
@@ -123,13 +126,14 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               constraints: BoxConstraints(
                 maxWidth: context.isDesktop ? 800 : double.infinity,
               ),
-              child: _isLoading
-                  ? _buildLoadingSkeleton(context)
-                  : _errorMessage != null
+              child:
+                  _isLoading
+                      ? _buildLoadingSkeleton(context)
+                      : _errorMessage != null
                       ? _buildErrorState(context)
                       : _order == null
-                          ? _buildEmptyState(context)
-                          : _buildTrackingContent(context),
+                      ? _buildEmptyState(context)
+                      : _buildTrackingContent(context),
             ),
           ),
         ),
@@ -143,7 +147,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       children: [
         // Carte info commande
         _buildOrderInfoCard(context),
-        
+
         SizedBox(height: context.fluidValue(minValue: 20, maxValue: 24)),
 
         // Timeline de statut
@@ -173,14 +177,17 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: statusColor.withValues(alpha:0.1),
+              color: statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: statusColor.withValues(alpha:0.3)),
+              border: Border.all(color: statusColor.withValues(alpha: 0.3)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_order!.status.emoji, style: const TextStyle(fontSize: 20)),
+                Text(
+                  _order!.status.emoji,
+                  style: const TextStyle(fontSize: 20),
+                ),
                 const SizedBox(width: 8),
                 Text(
                   _order!.status.label,
@@ -197,9 +204,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
 
           Text(
             'Commande #${_order!.id}',
-            style: AppTextStyles.caption.copyWith(
-              color: AppColors.textMuted,
-            ),
+            style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
           ),
 
           const SizedBox(height: 16),
@@ -220,10 +225,13 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
                       daysLeft == 0
                           ? 'Aujourd\'hui !'
                           : daysLeft == 1
-                              ? 'Demain'
-                              : 'Dans $daysLeft jours',
+                          ? 'Demain'
+                          : 'Dans $daysLeft jours',
                       style: AppTextStyles.cardTitle.copyWith(
-                        fontSize: context.fluidValue(minValue: 18, maxValue: 22),
+                        fontSize: context.fluidValue(
+                          minValue: 18,
+                          maxValue: 22,
+                        ),
                         color: AppColors.primary,
                       ),
                     ),
@@ -295,7 +303,8 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
     required bool isFuture,
     required bool isLast,
   }) {
-    final color = isCurrent || isPast ? Color(status.colorValue) : AppColors.textMuted;
+    final color =
+        isCurrent || isPast ? Color(status.colorValue) : AppColors.textMuted;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,23 +317,22 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               height: 32,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isCurrent
-                    ? color
-                    : isPast
-                        ? color.withValues(alpha:0.2)
+                color:
+                    isCurrent
+                        ? color
+                        : isPast
+                        ? color.withValues(alpha: 0.2)
                         : Colors.transparent,
-                border: Border.all(
-                  color: color,
-                  width: isCurrent ? 3 : 2,
-                ),
+                border: Border.all(color: color, width: isCurrent ? 3 : 2),
               ),
               child: Center(
-                child: isPast
-                    ? Icon(Icons.check, size: 16, color: color)
-                    : Text(
-                        status.emoji,
-                        style: TextStyle(fontSize: isCurrent ? 14 : 12),
-                      ),
+                child:
+                    isPast
+                        ? Icon(Icons.check, size: 16, color: color)
+                        : Text(
+                          status.emoji,
+                          style: TextStyle(fontSize: isCurrent ? 14 : 12),
+                        ),
               ),
             ),
             // Ligne verticale
@@ -332,7 +340,10 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               Container(
                 width: 2,
                 height: 40,
-                color: isPast ? color.withValues(alpha:0.3) : AppColors.textMuted.withValues(alpha:0.2),
+                color:
+                    isPast
+                        ? color.withValues(alpha: 0.3)
+                        : AppColors.textMuted.withValues(alpha: 0.2),
               ),
           ],
         ),
@@ -383,9 +394,17 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
           const SizedBox(height: 12),
           _buildDetailRow(Icons.access_time, 'Heure', _order!.formattedTime),
           const SizedBox(height: 12),
-          _buildDetailRow(Icons.location_on, 'Lieu', '${_order!.eventAddress}, ${_order!.eventCity}'),
+          _buildDetailRow(
+            Icons.location_on,
+            'Lieu',
+            '${_order!.eventAddress}, ${_order!.eventCity}',
+          ),
           const SizedBox(height: 12),
-          _buildDetailRow(Icons.people, 'Invités', '${_order!.peopleCount} personnes'),
+          _buildDetailRow(
+            Icons.people,
+            'Invités',
+            '${_order!.peopleCount} personnes',
+          ),
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
@@ -432,9 +451,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               const SizedBox(height: 2),
               Text(
                 value,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -458,18 +475,14 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
           const SizedBox(height: 8),
           Text(
             'Notre équipe est à votre disposition pour toute question',
-            style: AppTextStyles.body.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.body.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
-              onPressed: () {
-                
-              },
+              onPressed: () {},
               icon: Icon(Icons.mail_outline, color: AppColors.primary),
               label: const Text('Contacter le support'),
               style: OutlinedButton.styleFrom(
@@ -544,7 +557,11 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       child: Center(
         child: Column(
           children: [
-            Icon(Icons.event_available, size: 64, color: AppColors.textSecondary),
+            Icon(
+              Icons.event_available,
+              size: 64,
+              color: AppColors.textSecondary,
+            ),
             const SizedBox(height: 16),
             Text(
               'Aucune commande en cours',
@@ -554,7 +571,9 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
             const SizedBox(height: 8),
             Text(
               'Vos commandes actives apparaîtront ici',
-              style: AppTextStyles.body.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.textSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
           ],

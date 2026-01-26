@@ -105,7 +105,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.green.withValues(alpha:0.3),
+                                color: Colors.green.withValues(alpha: 0.3),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                               ),
@@ -121,7 +121,9 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     },
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 24, maxValue: 32)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 24, maxValue: 32),
+                  ),
 
                   // Titre
                   FadeTransition(
@@ -129,14 +131,19 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     child: Text(
                       'Commande confirmée !',
                       style: AppTextStyles.sectionTitle.copyWith(
-                        fontSize: context.fluidValue(minValue: 22, maxValue: 28),
+                        fontSize: context.fluidValue(
+                          minValue: 22,
+                          maxValue: 28,
+                        ),
                         color: Colors.green.shade700,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 8, maxValue: 12)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 8, maxValue: 12),
+                  ),
 
                   // Sous-titre
                   FadeTransition(
@@ -144,14 +151,19 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     child: Text(
                       'Merci pour votre confiance ! Notre équipe va étudier votre demande.',
                       style: AppTextStyles.body.copyWith(
-                        fontSize: context.fluidValue(minValue: 14, maxValue: 16),
+                        fontSize: context.fluidValue(
+                          minValue: 14,
+                          maxValue: 16,
+                        ),
                         color: AppColors.textSecondary,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 32, maxValue: 40)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 32, maxValue: 40),
+                  ),
 
                   // Récapitulatif
                   FadeTransition(
@@ -159,7 +171,9 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     child: _buildOrderSummary(context),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 24, maxValue: 32)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 24, maxValue: 32),
+                  ),
 
                   // Info prochaines étapes
                   FadeTransition(
@@ -167,7 +181,9 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     child: _buildNextSteps(context),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 32, maxValue: 40)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 32, maxValue: 40),
+                  ),
 
                   // Boutons d'action
                   FadeTransition(
@@ -198,7 +214,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
               vertical: spacing * 0.5,
             ),
             decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha:0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -227,7 +243,10 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
             context,
             icon: Icons.calendar_today,
             label: 'Date',
-            value: DateFormat('EEEE d MMMM yyyy', 'fr_FR').format(widget.eventDate),
+            value: DateFormat(
+              'EEEE d MMMM yyyy',
+              'fr_FR',
+            ).format(widget.eventDate),
             labelSize: labelSize,
           ),
           SizedBox(height: spacing),
@@ -368,7 +387,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
           height: 24,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.primary.withValues(alpha:0.1),
+            color: AppColors.primary.withValues(alpha: 0.1),
           ),
           child: Center(
             child: Text(
@@ -435,7 +454,6 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
           height: buttonHeight,
           child: OutlinedButton.icon(
             onPressed: () {
-              
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
             icon: Icon(Icons.receipt_long, color: AppColors.primary),

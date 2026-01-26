@@ -20,7 +20,8 @@ class RatingStars extends StatefulWidget {
   State<RatingStars> createState() => _RatingStarsState();
 }
 
-class _RatingStarsState extends State<RatingStars> with TickerProviderStateMixin {
+class _RatingStarsState extends State<RatingStars>
+    with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
   late List<Animation<double>> _scaleAnimations;
   int? _hoveredIndex;
@@ -35,11 +36,14 @@ class _RatingStarsState extends State<RatingStars> with TickerProviderStateMixin
         vsync: this,
       ),
     );
-    _scaleAnimations = _controllers
-        .map((controller) => Tween<double>(begin: 1.0, end: 1.2).animate(
-              CurvedAnimation(parent: controller, curve: Curves.easeOut),
-            ))
-        .toList();
+    _scaleAnimations =
+        _controllers
+            .map(
+              (controller) => Tween<double>(begin: 1.0, end: 1.2).animate(
+                CurvedAnimation(parent: controller, curve: Curves.easeOut),
+              ),
+            )
+            .toList();
   }
 
   @override
@@ -69,11 +73,14 @@ class _RatingStarsState extends State<RatingStars> with TickerProviderStateMixin
       children: List.generate(5, (index) {
         final isFilled = index < widget.rating;
         final isHovered = _hoveredIndex != null && index <= _hoveredIndex!;
-        
+
         return MouseRegion(
           onEnter: (_) => _handleHover(index),
           onExit: (_) => _handleHover(null),
-          cursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+          cursor:
+              widget.enabled
+                  ? SystemMouseCursors.click
+                  : SystemMouseCursors.basic,
           child: GestureDetector(
             onTap: () => _handleTap(index),
             child: AnimatedBuilder(
@@ -88,9 +95,10 @@ class _RatingStarsState extends State<RatingStars> with TickerProviderStateMixin
                       child: Icon(
                         isFilled || isHovered ? Icons.star : Icons.star_border,
                         size: widget.size,
-                        color: isFilled || isHovered 
-                            ? AppColors.primary 
-                            : AppColors.textMuted,
+                        color:
+                            isFilled || isHovered
+                                ? AppColors.primary
+                                : AppColors.textMuted,
                       ),
                     ),
                   ),

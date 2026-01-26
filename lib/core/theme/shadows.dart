@@ -75,6 +75,6 @@ class AppShadows {
 
   // Compatibility avec l'ancien système
   static List<BoxShadow> primary = elegant;
-  static List<BoxShadow> secondary = premium;  
+  static List<BoxShadow> secondary = premium;
   static List<BoxShadow> card = premium;
 }

@@ -7,10 +7,7 @@ import '../models/contact_models.dart';
 class ContactForm extends StatefulWidget {
   final VoidCallback? onMessageSent;
 
-  const ContactForm({
-    super.key,
-    this.onMessageSent,
-  });
+  const ContactForm({super.key, this.onMessageSent});
 
   @override
   State<ContactForm> createState() => _ContactFormState();
@@ -22,7 +19,7 @@ class _ContactFormState extends State<ContactForm> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _contactService = ContactService();
-  
+
   bool _isLoading = false;
 
   @override
@@ -46,7 +43,7 @@ class _ContactFormState extends State<ContactForm> {
       );
 
       final response = await _contactService.sendMessage(request);
-      
+
       if (mounted) {
         _showSuccessMessage(response.message);
         _clearForm();
@@ -129,7 +126,9 @@ class _ContactFormState extends State<ContactForm> {
                   if (value == null || value.trim().isEmpty) {
                     return 'Email requis';
                   }
-                  if (!RegExp(r'^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$').hasMatch(value.trim())) {
+                  if (!RegExp(
+                    r'^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$',
+                  ).hasMatch(value.trim())) {
                     return 'Format invalide';
                   }
                   return null;
@@ -230,13 +229,8 @@ class _ContactFormState extends State<ContactForm> {
             style: AppTextStyles.body.copyWith(color: Colors.white),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: AppTextStyles.body.copyWith(
-                color: Colors.white60,
-              ),
-              prefixIcon: Icon(
-                prefixIcon,
-                color: Colors.white70,
-              ),
+              hintStyle: AppTextStyles.body.copyWith(color: Colors.white60),
+              prefixIcon: Icon(prefixIcon, color: Colors.white70),
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 20,

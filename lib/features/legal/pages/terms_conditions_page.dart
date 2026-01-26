@@ -26,7 +26,7 @@ class TermsConditionsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 24),
-            
+
             // Header
             GlassCard(
               child: Column(
@@ -56,10 +56,7 @@ class TermsConditionsPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'CGV',
-                              style: AppTextStyles.cardTitle,
-                            ),
+                            Text('CGV', style: AppTextStyles.cardTitle),
                             const SizedBox(height: 4),
                             Text(
                               'Conditions générales de vente',
@@ -75,9 +72,9 @@ class TermsConditionsPage extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             _buildSection(
               title: '1. Objet',
               content: '''
@@ -86,9 +83,9 @@ Les présentes Conditions Générales de Vente (CGV) régissent les relations co
 Toute commande implique l'acceptation sans réserve des présentes CGV qui prévalent sur tout autre document.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '2. Services proposés',
               content: '''
@@ -101,9 +98,9 @@ Vite & Gourmand propose des prestations de traiteur événementiel comprenant :
 Tous nos menus sont préparés avec des produits frais et de qualité. Les menus peuvent être adaptés selon les régimes alimentaires et allergies, sous réserve de nous en informer lors de la commande.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '3. Commandes',
               content: '''
@@ -117,9 +114,9 @@ Toute commande doit être passée au minimum 48 heures avant la date de l'évén
 Une confirmation écrite sera envoyée au Client après validation de la commande.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '4. Tarifs et paiement',
               content: '''
@@ -138,9 +135,9 @@ Moyens de paiement acceptés :
 - Chèque (avec présentation de pièce d'identité)
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '5. Livraison',
               content: '''
@@ -151,9 +148,9 @@ Les horaires de livraison sont à définir lors de la commande. Le Client doit �
 Le Prestataire ne saurait être tenu responsable des retards de livraison dus à des cas de force majeure (conditions météorologiques, grèves, accidents, etc.).
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '6. Modifications et annulations',
               content: '''
@@ -168,9 +165,9 @@ Annulations :
 En cas d'annulation pour cause de force majeure justifiée, un avoir sera proposé.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '7. Réclamations',
               content: '''
@@ -183,9 +180,9 @@ Les réclamations doivent être accompagnées de justificatifs (photos, descript
 Le Prestataire s'engage à traiter toute réclamation dans un délai de 48 heures et à proposer une solution adaptée (avoir, geste commercial, etc.).
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '8. Hygiène et sécurité alimentaire',
               content: '''
@@ -199,9 +196,9 @@ Le Client s'engage à :
 Le Prestataire décline toute responsabilité en cas de non-respect de ces consignes.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '9. Allergènes',
               content: '''
@@ -210,9 +207,9 @@ Les informations relatives aux allergènes présents dans nos plats sont disponi
 Le Client doit impérativement signaler toute allergie ou intolérance alimentaire lors de la commande. Le Prestataire fera son maximum pour adapter les menus, mais ne peut garantir l'absence totale de traces d'allergènes.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '10. Données personnelles',
               content: '''
@@ -221,9 +218,9 @@ Les données personnelles collectées sont traitées conformément au RGPD. Elle
 Le Client dispose d'un droit d'accès, de rectification et de suppression de ses données en contactant : rgpd@vite-gourmand.fr
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '11. Responsabilité',
               content: '''
@@ -236,9 +233,9 @@ Le Prestataire ne saurait être tenu responsable :
 - Des cas de force majeure
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '12. Droit applicable et litiges',
               content: '''
@@ -251,9 +248,9 @@ Médiateur de la consommation
 www.mediateur-consommation.fr
 ''',
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // Footer info
             GlassCard(
               borderColor: AppColors.info.withValues(alpha: 0.3),
@@ -311,7 +308,7 @@ www.mediateur-consommation.fr
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 32),
           ],
         ),

@@ -24,15 +24,16 @@ class _NetworkTestScreenState extends State<NetworkTestScreen> {
     });
 
     try {
-      ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
-      
+      ConnectivityResult connectivityResult =
+          await Connectivity().checkConnectivity();
+
       if (connectivityResult == ConnectivityResult.none) {
         setState(() {
           _connectionStatus = 'Aucune connexion réseau détectée';
         });
       } else {
         String connectionType = connectivityResult.toString().split('.').last;
-            
+
         setState(() {
           _connectionStatus = 'Connecté via: $connectionType';
         });
@@ -60,18 +61,11 @@ class _NetworkTestScreenState extends State<NetworkTestScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.network_check,
-              size: 64,
-              color: Colors.blue,
-            ),
+            const Icon(Icons.network_check, size: 64, color: Colors.blue),
             const SizedBox(height: 24),
             const Text(
               'État de la connexion réseau',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             if (_isLoading)
@@ -95,10 +89,7 @@ class _NetworkTestScreenState extends State<NetworkTestScreen> {
             const SizedBox(height: 16),
             const Text(
               'Si vous voyez "Aucune connexion réseau", vérifiez que l\'émulateur a accès à Internet.',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey,
-              ),
+              style: TextStyle(fontSize: 12, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
           ],

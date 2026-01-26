@@ -4,6 +4,7 @@ import '../../core/theme/typography.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/skeleton_box.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/utils/price_formatter.dart';
 import '../../core/api/dio_client.dart';
 import 'models/order_model.dart';
 import 'order_detail_page.dart';
@@ -46,15 +47,20 @@ class _OrdersListPageState extends State<OrdersListPage> {
       final items = data['items'] as List<dynamic>;
 
       setState(() {
-        _orders = items
-            .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
-            .toList()
-          ..sort((a, b) => b.eventDate.compareTo(a.eventDate)); // Plus récent en premier
+        _orders =
+            items
+                .map(
+                  (json) => OrderModel.fromJson(json as Map<String, dynamic>),
+                )
+                .toList()
+              ..sort(
+                (a, b) => b.eventDate.compareTo(a.eventDate),
+              ); // Plus récent en premier
         _isLoading = false;
       });
     } catch (e) {
       if (!mounted) return;
-      
+
       // Si erreur 401, rediriger vers login
       if (e.toString().contains('401')) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -63,7 +69,7 @@ class _OrdersListPageState extends State<OrdersListPage> {
         );
         return;
       }
-      
+
       setState(() {
         _errorMessage = 'Impossible de charger vos commandes';
         _isLoading = false;
@@ -78,9 +84,13 @@ class _OrdersListPageState extends State<OrdersListPage> {
       case 'active':
         return _orders!.where((o) => o.isActive).toList();
       case 'completed':
-        return _orders!.where((o) => o.status == OrderStatus.completed).toList();
+        return _orders!
+            .where((o) => o.status == OrderStatus.completed)
+            .toList();
       case 'cancelled':
-        return _orders!.where((o) => o.status == OrderStatus.cancelled).toList();
+        return _orders!
+            .where((o) => o.status == OrderStatus.cancelled)
+            .toList();
       default:
         return _orders!;
     }
@@ -126,7 +136,9 @@ class _OrdersListPageState extends State<OrdersListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildFilterChips(context),
-                  SizedBox(height: context.fluidValue(minValue: 16, maxValue: 24)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 16, maxValue: 24),
+                  ),
                   if (_isLoading)
                     _buildLoadingSkeleton(context)
                   else if (_errorMessage != null)
@@ -155,53 +167,59 @@ class _OrdersListPageState extends State<OrdersListPage> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: filters.map((filter) {
-          final isSelected = _filterStatus == filter.$1;
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              selected: isSelected,
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    filter.$3,
-                    size: 16,
-                    color: isSelected ? AppColors.dark : AppColors.textSecondary,
+        children:
+            filters.map((filter) {
+              final isSelected = _filterStatus == filter.$1;
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  selected: isSelected,
+                  label: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        filter.$3,
+                        size: 16,
+                        color:
+                            isSelected
+                                ? AppColors.dark
+                                : AppColors.textSecondary,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(filter.$2),
+                    ],
                   ),
-                  const SizedBox(width: 6),
-                  Text(filter.$2),
-                ],
-              ),
-              onSelected: (_) {
-                setState(() => _filterStatus = filter.$1);
-              },
-              selectedColor: AppColors.primary,
-              backgroundColor: AppColors.surface,
-              labelStyle: TextStyle(
-                color: isSelected ? AppColors.dark : AppColors.textSecondary,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
-            ),
-          );
-        }).toList(),
+                  onSelected: (_) {
+                    setState(() => _filterStatus = filter.$1);
+                  },
+                  selectedColor: AppColors.primary,
+                  backgroundColor: AppColors.surface,
+                  labelStyle: TextStyle(
+                    color:
+                        isSelected ? AppColors.dark : AppColors.textSecondary,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                  ),
+                ),
+              );
+            }).toList(),
       ),
     );
   }
 
   Widget _buildOrdersList(BuildContext context) {
     return Column(
-      children: _filteredOrders.map((order) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: context.fluidValue(minValue: 12, maxValue: 16),
-          ),
-          child: _OrderCard(
-            order: order,
-            onTap: () => _navigateToDetail(order.id),
-          ),
-        );
-      }).toList(),
+      children:
+          _filteredOrders.map((order) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: context.fluidValue(minValue: 12, maxValue: 16),
+              ),
+              child: _OrderCard(
+                order: order,
+                onTap: () => _navigateToDetail(order.id),
+              ),
+            );
+          }).toList(),
     );
   }
 
@@ -294,7 +312,9 @@ class _OrdersListPageState extends State<OrdersListPage> {
             const SizedBox(height: 16),
             Text(
               message,
-              style: AppTextStyles.body.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.textSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -324,7 +344,10 @@ class _OrderCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -424,13 +447,11 @@ class _OrderCard extends StatelessWidget {
             children: [
               Text(
                 'Total',
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
               const Spacer(),
               Text(
-                '${order.totalPrice.toStringAsFixed(2)}€',
+                PriceFormatter.formatPrice(order.totalPrice),
                 style: AppTextStyles.cardTitle.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.bold,
@@ -443,7 +464,8 @@ class _OrderCard extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(BuildContext context, {
+  Widget _buildInfoRow(
+    BuildContext context, {
     required IconData icon,
     required String label,
   }) {

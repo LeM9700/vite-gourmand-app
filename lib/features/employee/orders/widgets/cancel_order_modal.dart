@@ -32,9 +32,7 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 500),
         padding: const EdgeInsets.all(24),
@@ -63,9 +61,7 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
                   Expanded(
                     child: Text(
                       'Annuler la commande',
-                      style: AppTextStyles.sectionTitle.copyWith(
-                        fontSize: 20,
-                      ),
+                      style: AppTextStyles.sectionTitle.copyWith(fontSize: 20),
                     ),
                   ),
                   IconButton(
@@ -89,10 +85,7 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.warning_amber,
-                      color: Colors.orange,
-                    ),
+                    const Icon(Icons.warning_amber, color: Colors.orange),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
@@ -131,10 +124,7 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
                         children: [
                           const Icon(Icons.email, size: 20),
                           const SizedBox(width: 8),
-                          Text(
-                            'Email',
-                            style: AppTextStyles.body,
-                          ),
+                          Text('Email', style: AppTextStyles.body),
                         ],
                       ),
                       activeColor: AppColors.primary,
@@ -152,10 +142,7 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
                         children: [
                           const Icon(Icons.phone, size: 20),
                           const SizedBox(width: 8),
-                          Text(
-                            'Téléphone',
-                            style: AppTextStyles.body,
-                          ),
+                          Text('Téléphone', style: AppTextStyles.body),
                         ],
                       ),
                       activeColor: AppColors.primary,

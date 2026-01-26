@@ -8,10 +8,7 @@ import 'login_page.dart';
 class ResetPasswordPage extends StatefulWidget {
   final String token;
 
-  const ResetPasswordPage({
-    super.key,
-    required this.token,
-  });
+  const ResetPasswordPage({super.key, required this.token});
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -40,10 +37,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.resetPassword(
-        widget.token,
-        _passwordController.text,
-      );
+      await _authService.resetPassword(widget.token, _passwordController.text);
 
       if (mounted) {
         setState(() {
@@ -137,9 +131,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   child: Center(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.all(24),
-                      child: _resetSuccess
-                          ? _buildSuccessView()
-                          : _buildFormView(),
+                      child:
+                          _resetSuccess
+                              ? _buildSuccessView()
+                              : _buildFormView(),
                     ),
                   ),
                 ),
@@ -204,9 +199,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Titre
           Text(
             'Nouveau mot de passe',
-            style: AppTextStyles.displayTitle.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTextStyles.displayTitle.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
 
@@ -215,9 +208,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Description
           Text(
             'Choisissez un nouveau mot de passe sécurisé pour votre compte.',
-            style: AppTextStyles.body.copyWith(
-              color: Colors.white70,
-            ),
+            style: AppTextStyles.body.copyWith(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
 
@@ -280,10 +271,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       hintStyle: AppTextStyles.body.copyWith(
                         color: Colors.white60,
                       ),
-                      prefixIcon: const Icon(
-                        Icons.lock,
-                        color: Colors.white70,
-                      ),
+                      prefixIcon: const Icon(Icons.lock, color: Colors.white70),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _isPasswordVisible
@@ -396,9 +384,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           const SizedBox(width: 8),
           Text(
             text,
-            style: AppTextStyles.caption.copyWith(
-              color: Colors.white70,
-            ),
+            style: AppTextStyles.caption.copyWith(color: Colors.white70),
           ),
         ],
       ),
@@ -431,9 +417,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Titre
           Text(
             'Mot de passe réinitialisé !',
-            style: AppTextStyles.displayTitle.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTextStyles.displayTitle.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
 
@@ -442,9 +426,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Description
           Text(
             'Votre mot de passe a été modifié avec succès.\n\nVous pouvez maintenant vous connecter avec votre nouveau mot de passe.',
-            style: AppTextStyles.body.copyWith(
-              color: Colors.white70,
-            ),
+            style: AppTextStyles.body.copyWith(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
 
@@ -458,9 +440,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => const LoginPage(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
                   (route) => false,
                 );
               },

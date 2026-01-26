@@ -48,18 +48,22 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   Future<void> _deleteMenu(int menuId) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirmer la suppression'),
-        content: const Text('Voulez-vous vraiment supprimer ce menu ?'),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Annuler')),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Supprimer'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Confirmer la suppression'),
+            content: const Text('Voulez-vous vraiment supprimer ce menu ?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Supprimer'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
     if (confirm != true) return;
 
@@ -67,13 +71,19 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
       await _service.deleteMenu(menuId);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Menu supprimé'), backgroundColor: Colors.green),
+        const SnackBar(
+          content: Text('Menu supprimé'),
+          backgroundColor: Colors.green,
+        ),
       );
       _loadMenus();
     } catch (e) {
-    if (!mounted) return;
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -81,29 +91,39 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   void _showMenuForm({MenuModel? menu}) {
     showDialog(
       context: context,
-      builder: (context) => MenuFormDialog(
-        menu: menu,
-        onSave: (data) async {
-          try {
-            if (menu == null) {
-              await _service.createMenu(data);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Menu créé'), backgroundColor: Colors.green),
-              );
-            } else {
-              await _service.updateMenu(menu.id, data);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Menu mis à jour'), backgroundColor: Colors.green),
-              );
-            }
-            _loadMenus();
-          } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
-            );
-          }
-        },
-      ),
+      builder:
+          (context) => MenuFormDialog(
+            menu: menu,
+            onSave: (data) async {
+              try {
+                if (menu == null) {
+                  await _service.createMenu(data);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Menu créé'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                } else {
+                  await _service.updateMenu(menu.id, data);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Menu mis à jour'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+                _loadMenus();
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(e.toString().replaceAll('Exception: ', '')),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
     );
   }
 
@@ -114,7 +134,9 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
     }
 
     if (_error != null) {
-      return Center(child: Text(_error!, style: const TextStyle(color: Colors.red)));
+      return Center(
+        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+      );
     }
 
     return Scaffold(
@@ -145,7 +167,10 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
+                      colors: [
+                        AppColors.primary,
+                        AppColors.primary.withValues(alpha: 0.8),
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -156,7 +181,11 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.restaurant_menu, color: Colors.white, size: 28),
+                  child: const Icon(
+                    Icons.restaurant_menu,
+                    color: Colors.white,
+                    size: 28,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Text(
@@ -172,27 +201,28 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
 
           // Contenu
           Expanded(
-            child: _menus.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.restaurant_menu,
-                          size: 64,
-                          color: AppColors.textMuted,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Aucun menu disponible',
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.textSecondary,
+            child:
+                _menus.isEmpty
+                    ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.restaurant_menu,
+                            size: 64,
+                            color: AppColors.textMuted,
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                : _buildMenusGrid(context),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Aucun menu disponible',
+                            style: AppTextStyles.subtitle.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                    : _buildMenusGrid(context),
           ),
         ],
       ),
@@ -219,16 +249,19 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   Widget _buildMenuCard(BuildContext context, MenuModel menu) {
     final hasImage = menu.images.isNotEmpty;
     final imageUrl = hasImage ? menu.images.first.imageUrl : null;
-    
+
     // Récupérer les plats par type
-    final starter = menu.dishes.where((d) => d.dishType == 'STARTER').firstOrNull;
+    final starter =
+        menu.dishes.where((d) => d.dishType == 'STARTER').firstOrNull;
     final main = menu.dishes.where((d) => d.dishType == 'MAIN').firstOrNull;
-    final dessert = menu.dishes.where((d) => d.dishType == 'DESSERT').firstOrNull;
+    final dessert =
+        menu.dishes.where((d) => d.dishType == 'DESSERT').firstOrNull;
 
     return GlassCard(
-      borderColor: menu.isActive 
-          ? AppColors.primary.withValues(alpha: 0.3)
-          : AppColors.textMuted.withValues(alpha: 0.2),
+      borderColor:
+          menu.isActive
+              ? AppColors.primary.withValues(alpha: 0.3)
+              : AppColors.textMuted.withValues(alpha: 0.2),
       borderWidth: 2,
       padding: EdgeInsets.zero,
       child: Column(
@@ -237,7 +270,9 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
           // Image de couverture
           if (hasImage)
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
               child: Stack(
                 children: [
                   Image.network(
@@ -245,22 +280,31 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      height: 200,
-                      color: AppColors.lightGrey,
-                      child: const Icon(Icons.restaurant, size: 64, color: AppColors.textMuted),
-                    ),
+                    errorBuilder:
+                        (context, error, stackTrace) => Container(
+                          height: 200,
+                          color: AppColors.lightGrey,
+                          child: const Icon(
+                            Icons.restaurant,
+                            size: 64,
+                            color: AppColors.textMuted,
+                          ),
+                        ),
                   ),
                   // Badge actif/inactif
                   Positioned(
                     top: 12,
                     right: 12,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
-                        color: menu.isActive 
-                            ? AppColors.success.withValues(alpha: 0.9)
-                            : AppColors.danger.withValues(alpha: 0.9),
+                        color:
+                            menu.isActive
+                                ? AppColors.success.withValues(alpha: 0.9)
+                                : AppColors.danger.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -291,7 +335,9 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                         children: [
                           Text(
                             menu.title,
-                            style: AppTextStyles.cardTitle.copyWith(fontSize: 22),
+                            style: AppTextStyles.cardTitle.copyWith(
+                              fontSize: 22,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
@@ -305,10 +351,16 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
+                          colors: [
+                            AppColors.primary,
+                            AppColors.primary.withValues(alpha: 0.8),
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
@@ -451,7 +503,10 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.danger,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -514,18 +569,13 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
     );
   }
 
-  Widget _buildInfoChip({
-    required IconData icon,
-    required String label,
-  }) {
+  Widget _buildInfoChip({required IconData icon, required String label}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.textMuted.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.textMuted.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

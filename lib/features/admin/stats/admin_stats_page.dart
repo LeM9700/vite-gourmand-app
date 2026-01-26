@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/utils/price_formatter.dart';
+import '../../../core/utils/date_formatter.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../services/admin_service.dart';
 import 'models/stats_models.dart';
@@ -64,25 +65,16 @@ class _AdminStatsPageState extends State<AdminStatsPage>
       _errorMessage = '';
     });
 
-    final startStr = DateFormat('yyyy-MM-dd').format(_startDate);
-    final endStr = DateFormat('yyyy-MM-dd').format(_endDate);
+    final startStr = DateFormatter.formatDateISO(_startDate);
+    final endStr = DateFormatter.formatDateISO(_endDate);
 
     try {
       debugPrint('📊 Chargement des stats : $startStr → $endStr');
-      
+
       final results = await Future.wait([
-        _adminService.getOrdersByMenu(
-          startDate: startStr,
-          endDate: endStr,
-        ),
-        _adminService.getRevenueByMenu(
-          startDate: startStr,
-          endDate: endStr,
-        ),
-        _adminService.getMenuComparison(
-          startDate: startStr,
-          endDate: endStr,
-        ),
+        _adminService.getOrdersByMenu(startDate: startStr, endDate: endStr),
+        _adminService.getRevenueByMenu(startDate: startStr, endDate: endStr),
+        _adminService.getMenuComparison(startDate: startStr, endDate: endStr),
       ]);
 
       debugPrint('📊 Données reçues :');
@@ -97,11 +89,13 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           _comparisonData = MenuComparisonData.fromJson(results[2]);
           _isLoading = false;
         });
-        
+
         debugPrint('📊 Stats parsées :');
         debugPrint('  - Orders menus: ${_ordersByMenuData?.menus.length ?? 0}');
         debugPrint('  - Revenue data: ${_revenueByMenuData?.data.length ?? 0}');
-        debugPrint('  - Comparison menus: ${_comparisonData?.menus.length ?? 0}');
+        debugPrint(
+          '  - Comparison menus: ${_comparisonData?.menus.length ?? 0}',
+        );
       }
     } catch (e) {
       debugPrint('❌ Erreur chargement stats: $e');
@@ -234,7 +228,7 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                              color: AppColors.textPrimary,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -243,61 +237,76 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                children: ChartType.values.map((type) {
-                                final isSelected = _chartType == type;
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _chartType = type;
-                                      });
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
-                                        vertical: 8,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: isSelected
-                                            ? AppColors.primary
-                                                .withValues(alpha: 0.2)
-                                            : Colors.white.withValues(alpha: 0.05),
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: isSelected
-                                              ? AppColors.primary
-                                              : Colors.white.withValues(alpha: 0.2),
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            type.icon,
-                                            size: 16,
-                                            color: isSelected
-                                                ? AppColors.primary
-                                                : AppColors.textSecondary,
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            type.label,
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                              color: isSelected
-                                                  ? AppColors.primary
-                                                  : AppColors.textSecondary,
+                                children:
+                                    ChartType.values.map((type) {
+                                      final isSelected = _chartType == type;
+                                      return Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              _chartType = type;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 12,
+                                              vertical: 8,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  isSelected
+                                                      ? AppColors.primary
+                                                          .withValues(
+                                                            alpha: 0.2,
+                                                          )
+                                                      : Colors.white.withValues(
+                                                        alpha: 0.05,
+                                                      ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color:
+                                                    isSelected
+                                                        ? AppColors.primary
+                                                        : Colors.white
+                                                            .withValues(
+                                                              alpha: 0.2,
+                                                            ),
+                                                width: 1,
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  type.icon,
+                                                  size: 16,
+                                                  color:
+                                                      isSelected
+                                                          ? AppColors.primary
+                                                          : AppColors
+                                                              .textSecondary,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Text(
+                                                  type.label,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    color:
+                                                        isSelected
+                                                            ? AppColors.primary
+                                                            : AppColors
+                                                                .textSecondary,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                                        ),
+                                      );
+                                    }).toList(),
                               ),
                             ),
                           ),
@@ -336,8 +345,9 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                       height: 400,
                       child: Center(
                         child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(AppColors.primary),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primary,
+                          ),
                         ),
                       ),
                     )
@@ -410,19 +420,21 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           child: StatsBarChart(
             title: 'Commandes par menu',
             subtitle:
-                '${_ordersByMenuData!.totalOrders} commandes - ${_ordersByMenuData!.totalRevenue.toStringAsFixed(2)}€',
+                '${_ordersByMenuData!.totalOrders} commandes - ${PriceFormatter.formatPrice(_ordersByMenuData!.totalRevenue)}',
             barGroups: StatsBarChart.createBars(
               values: menus.map((m) => m.ordersCount.toDouble()).toList(),
               color: AppColors.info,
             ),
-            maxY: (menus
-                        .map((m) => m.ordersCount)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (menus
+                            .map((m) => m.ordersCount)
+                            .reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
-              return menus[value.toInt()].menuName ?? 'Menu ${value.toInt() + 1}';
+              return menus[value.toInt()].menuName ??
+                  'Menu ${value.toInt() + 1}';
             },
           ),
         );
@@ -432,15 +444,16 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           child: StatsLineChart(
             title: 'Commandes par menu',
             subtitle:
-                '${_ordersByMenuData!.totalOrders} commandes - ${_ordersByMenuData!.totalRevenue.toStringAsFixed(2)}€',
+                '${_ordersByMenuData!.totalOrders} commandes - ${PriceFormatter.formatPrice(_ordersByMenuData!.totalRevenue)}',
             spots: StatsLineChart.createSpots(
               menus.map((m) => m.ordersCount.toDouble()).toList(),
             ),
-            maxY: (menus
-                        .map((m) => m.ordersCount)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (menus
+                            .map((m) => m.ordersCount)
+                            .reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             lineColor: AppColors.info,
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
@@ -451,7 +464,8 @@ class _AdminStatsPageState extends State<AdminStatsPage>
 
       case ChartType.pie:
         final pieValues = menus.map((m) => m.ordersCount.toDouble()).toList();
-        final pieLabels = menus.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
+        final pieLabels =
+            menus.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
         return GlassCard(
           child: StatsPieChart(
             title: 'Répartition des commandes',
@@ -478,19 +492,21 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           child: StatsBarChart(
             title: 'Chiffre d\'affaires par menu',
             subtitle:
-                '${_revenueByMenuData!.totalRevenue.toStringAsFixed(2)}€ - ${_revenueByMenuData!.totalOrders} commandes',
+                '${PriceFormatter.formatPrice(_revenueByMenuData!.totalRevenue)} - ${_revenueByMenuData!.totalOrders} commandes',
             barGroups: StatsBarChart.createBars(
               values: data.map((m) => m.periodRevenue).toList(),
               color: AppColors.success,
             ),
-            maxY: (data
-                        .map((m) => m.periodRevenue)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (data
+                            .map((m) => m.periodRevenue)
+                            .reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= data.length) return '';
-              return data[value.toInt()].menuName ?? 'Menu ${value.toInt() + 1}';
+              return data[value.toInt()].menuName ??
+                  'Menu ${value.toInt() + 1}';
             },
             getLeftTitles: (value) => '${value.toInt()}€',
           ),
@@ -501,15 +517,16 @@ class _AdminStatsPageState extends State<AdminStatsPage>
           child: StatsLineChart(
             title: 'Chiffre d\'affaires par menu',
             subtitle:
-                '${_revenueByMenuData!.totalRevenue.toStringAsFixed(2)}€ - ${_revenueByMenuData!.totalOrders} commandes',
+                '${PriceFormatter.formatPrice(_revenueByMenuData!.totalRevenue)} - ${_revenueByMenuData!.totalOrders} commandes',
             spots: StatsLineChart.createSpots(
               data.map((m) => m.periodRevenue).toList(),
             ),
-            maxY: (data
-                        .map((m) => m.periodRevenue)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (data
+                            .map((m) => m.periodRevenue)
+                            .reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             lineColor: AppColors.success,
             getBottomTitles: (value) {
               if (value.toInt() >= data.length) return '';
@@ -521,12 +538,13 @@ class _AdminStatsPageState extends State<AdminStatsPage>
 
       case ChartType.pie:
         final pieValues = data.map((m) => m.periodRevenue).toList();
-        final pieLabels = data.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
+        final pieLabels =
+            data.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
         return GlassCard(
           child: StatsPieChart(
             title: 'Répartition du CA',
             subtitle:
-                '${_revenueByMenuData!.totalRevenue.toStringAsFixed(2)}€ au total',
+                '${PriceFormatter.formatPrice(_revenueByMenuData!.totalRevenue)} au total',
             sections: StatsPieChart.createSections(
               values: pieValues,
               labels: pieLabels,
@@ -554,14 +572,14 @@ class _AdminStatsPageState extends State<AdminStatsPage>
               values: menus.map((m) => m.revenue).toList(),
               color: AppColors.warning,
             ),
-            maxY: (menus
-                        .map((m) => m.revenue)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
-              return menus[value.toInt()].menuName ?? 'Menu ${value.toInt() + 1}';
+              return menus[value.toInt()].menuName ??
+                  'Menu ${value.toInt() + 1}';
             },
             getLeftTitles: (value) => '${value.toInt()}€',
           ),
@@ -575,11 +593,10 @@ class _AdminStatsPageState extends State<AdminStatsPage>
             spots: StatsLineChart.createSpots(
               menus.map((m) => m.revenue).toList(),
             ),
-            maxY: (menus
-                        .map((m) => m.revenue)
-                        .reduce((a, b) => a > b ? a : b) *
-                    1.2)
-                .toDouble(),
+            maxY:
+                (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
+                        1.2)
+                    .toDouble(),
             lineColor: AppColors.warning,
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
@@ -591,7 +608,8 @@ class _AdminStatsPageState extends State<AdminStatsPage>
 
       case ChartType.pie:
         final pieValues = menus.map((m) => m.revenue).toList();
-        final pieLabels = menus.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
+        final pieLabels =
+            menus.map((m) => m.menuName ?? 'Menu ${m.menuId}').toList();
         return GlassCard(
           child: StatsPieChart(
             title: 'Répartition globale',

@@ -29,12 +29,12 @@ class _MenusTestScreenState extends State<MenusTestScreen> {
 
   Future<void> _load() async {
     if (_dioClient == null) return;
-    
+
     try {
       final res = await _dioClient!.dio.get("/menus");
       debugPrint("API Response: ${res.data}");
       debugPrint("Response type: ${res.data.runtimeType}");
-      
+
       // Gestion de différents formats de réponse
       if (res.data is List) {
         final list = res.data as List;
@@ -52,10 +52,16 @@ class _MenusTestScreenState extends State<MenusTestScreen> {
           final list = map['items'] as List;
           setState(() => _status = "OK ✅ ${list.length} menus (from items)");
         } else {
-          setState(() => _status = "API returns object with keys: ${map.keys.join(', ')}");
+          setState(
+            () =>
+                _status =
+                    "API returns object with keys: ${map.keys.join(', ')}",
+          );
         }
       } else {
-        setState(() => _status = "Unexpected data type: ${res.data.runtimeType}");
+        setState(
+          () => _status = "Unexpected data type: ${res.data.runtimeType}",
+        );
       }
     } catch (e) {
       setState(() => _status = "ERROR ❌ $e");

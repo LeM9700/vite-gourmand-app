@@ -83,7 +83,10 @@ class ModerationService {
       }
 
       return messagesData
-          .map((json) => ContactMessageModel.fromJson(json as Map<String, dynamic>))
+          .map(
+            (json) =>
+                ContactMessageModel.fromJson(json as Map<String, dynamic>),
+          )
           .toList();
     } catch (e) {
       throw Exception('Erreur lors du chargement des messages: $e');
@@ -103,7 +106,9 @@ class ModerationService {
         data: {'status': status},
       );
 
-      return ContactMessageModel.fromJson(response.data as Map<String, dynamic>);
+      return ContactMessageModel.fromJson(
+        response.data as Map<String, dynamic>,
+      );
     } catch (e) {
       throw Exception('Erreur lors de la mise à jour: $e');
     }

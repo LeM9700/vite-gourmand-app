@@ -6,9 +6,10 @@ class AppTextStyles {
   AppTextStyles._();
 
   // Font families - Élégance et lisibilité
-  static const String primaryFont = 'Playfair Display'; // Pour les titres élégants
+  static const String primaryFont =
+      'Playfair Display'; // Pour les titres élégants
   static const String secondaryFont = 'Inter'; // Pour le corps de texte
-  
+
   // Hierarchy - Titres avec élégance
   static TextStyle heroTitle = const TextStyle(
     fontFamily: primaryFont,

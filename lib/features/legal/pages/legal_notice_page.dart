@@ -26,7 +26,7 @@ class LegalNoticePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 24),
-            
+
             // Header
             GlassCard(
               child: Column(
@@ -75,9 +75,9 @@ class LegalNoticePage extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             _buildSection(
               title: '1. Identification de l\'entreprise',
               content: '''
@@ -93,9 +93,9 @@ Forme juridique : Société à Responsabilité Limitée (SARL)
 Directeur de la publication : M. Jean Dupont
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '2. Hébergement',
               content: '''
@@ -105,9 +105,9 @@ Adresse : 2 rue Kellermann, 59100 Roubaix, France
 Téléphone : 1007
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '3. Propriété intellectuelle',
               content: '''
@@ -116,9 +116,9 @@ L'ensemble de ce site relève de la législation française et internationale su
 La reproduction de tout ou partie de ce site sur un support électronique quel qu'il soit est formellement interdite sauf autorisation expresse du directeur de la publication.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '4. Données personnelles',
               content: '''
@@ -131,9 +131,9 @@ Pour exercer ces droits, vous pouvez nous contacter :
 Les données collectées sont uniquement destinées à la gestion de votre commande et ne seront en aucun cas cédées à des tiers.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '5. Cookies',
               content: '''
@@ -142,18 +142,18 @@ Ce site utilise des cookies nécessaires au bon fonctionnement du site et à l'a
 Vous pouvez à tout moment vous opposer à l'utilisation de ces cookies en configurant votre navigateur. Toutefois, certaines fonctionnalités du site pourraient ne plus être accessibles.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '6. Liens hypertextes',
               content: '''
 Les liens hypertextes mis en place dans le cadre du présent site en direction d'autres ressources présentes sur le réseau Internet ne sauraient engager la responsabilité de Vite & Gourmand.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '7. Limitation de responsabilité',
               content: '''
@@ -162,28 +162,24 @@ Vite & Gourmand ne pourra être tenu responsable des dommages directs et indirec
 Vite & Gourmand ne pourra également être tenu responsable des dommages indirects (tels par exemple qu'une perte de marché ou perte d'une chance) consécutifs à l'utilisation du site.
 ''',
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             _buildSection(
               title: '8. Droit applicable',
               content: '''
 Les présentes mentions légales sont régies par le droit français. En cas de litige, les tribunaux français seront seuls compétents.
 ''',
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // Footer info
             GlassCard(
               borderColor: AppColors.info.withValues(alpha: 0.3),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.update_rounded,
-                    color: AppColors.info,
-                    size: 20,
-                  ),
+                  Icon(Icons.update_rounded, color: AppColors.info, size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -196,7 +192,7 @@ Les présentes mentions légales sont régies par le droit français. En cas de 
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 32),
           ],
         ),

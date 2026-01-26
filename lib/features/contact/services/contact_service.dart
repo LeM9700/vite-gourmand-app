@@ -11,7 +11,7 @@ class ContactService {
 
   Future<ContactResponse> sendMessage(ContactRequest request) async {
     await _initializeClient();
-    
+
     try {
       final response = await _dioClient!.dio.post(
         '/contact',
@@ -23,7 +23,7 @@ class ContactService {
           },
         ),
       );
-      
+
       return ContactResponse.fromJson(response.data ?? {});
     } catch (e) {
       if (e.toString().contains('400') || e.toString().contains('validation')) {

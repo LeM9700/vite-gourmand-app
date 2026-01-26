@@ -25,7 +25,7 @@ class _MenusListPageState extends State<MenusListPage> {
   DioClient? _dioClient;
   Timer? _searchTimer;
   bool _isUserConnected = false;
-  
+
   // Filtres
   MenuFilters? _activeFilters;
   List<String> _availableThemes = [];
@@ -83,7 +83,7 @@ class _MenusListPageState extends State<MenusListPage> {
           'limit': 100, // Limite élevée pour récupérer tous les menus
         },
       );
-      
+
       List<dynamic> menusData;
       if (response.data is List) {
         menusData = response.data;
@@ -94,13 +94,12 @@ class _MenusListPageState extends State<MenusListPage> {
         throw Exception('Format de réponse inattendu');
       }
 
-      final menus = menusData
-          .map((json) {
+      final menus =
+          menusData.map((json) {
             debugPrint('Menu data: $json'); // Debug temporaire
             return MenuModel.fromJson(json as Map<String, dynamic>);
-          })
-          .toList();
-      
+          }).toList();
+
       // Extraire dynamiquement les thèmes et régimes uniques
       final themes = menus.map((m) => m.theme).toSet().toList()..sort();
       final regimes = menus.map((m) => m.regime).toSet().toList()..sort();
@@ -133,13 +132,9 @@ class _MenusListPageState extends State<MenusListPage> {
     try {
       final response = await _dioClient!.dio.get(
         "/menus/search",
-        queryParameters: {
-          'q': query,
-          'active_only': true,
-          'limit': 20,
-        },
+        queryParameters: {'q': query, 'active_only': true, 'limit': 20},
       );
-      
+
       List<dynamic> menusData;
       if (response.data is List) {
         menusData = response.data;
@@ -150,9 +145,10 @@ class _MenusListPageState extends State<MenusListPage> {
         menusData = [];
       }
 
-      final searchResults = menusData
-          .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
-          .toList();
+      final searchResults =
+          menusData
+              .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
+              .toList();
 
       setState(() {
         _filteredMenus = searchResults;
@@ -161,13 +157,14 @@ class _MenusListPageState extends State<MenusListPage> {
       debugPrint('Erreur de recherche: $e');
       // En cas d'erreur, on fait une recherche locale
       setState(() {
-        _filteredMenus = _menus.where((menu) {
-          final searchLower = query.toLowerCase();
-          return menu.title.toLowerCase().contains(searchLower) ||
-                 menu.theme.toLowerCase().contains(searchLower) ||
-                 menu.regime.toLowerCase().contains(searchLower) ||
-                 menu.description.toLowerCase().contains(searchLower);
-        }).toList();
+        _filteredMenus =
+            _menus.where((menu) {
+              final searchLower = query.toLowerCase();
+              return menu.title.toLowerCase().contains(searchLower) ||
+                  menu.theme.toLowerCase().contains(searchLower) ||
+                  menu.regime.toLowerCase().contains(searchLower) ||
+                  menu.description.toLowerCase().contains(searchLower);
+            }).toList();
       });
     }
   }
@@ -176,22 +173,23 @@ class _MenusListPageState extends State<MenusListPage> {
     showDialog(
       context: context,
       barrierColor: Colors.transparent,
-      builder: (context) => MenuFiltersOverlay(
-        maxPrice: _activeFilters?.maxPrice,
-        theme: _activeFilters?.theme,
-        regime: _activeFilters?.regime,
-        minPeopleMax: _activeFilters?.minPeopleMax,
-        availableThemes: _availableThemes,
-        availableRegimes: _availableRegimes,
-        onApply: (filters) {
-          setState(() => _activeFilters = filters);
-          _applyFilters(filters);
-        },
-        onReset: () {
-          setState(() => _activeFilters = null);
-          _loadMenus();
-        },
-      ),
+      builder:
+          (context) => MenuFiltersOverlay(
+            maxPrice: _activeFilters?.maxPrice,
+            theme: _activeFilters?.theme,
+            regime: _activeFilters?.regime,
+            minPeopleMax: _activeFilters?.minPeopleMax,
+            availableThemes: _availableThemes,
+            availableRegimes: _availableRegimes,
+            onApply: (filters) {
+              setState(() => _activeFilters = filters);
+              _applyFilters(filters);
+            },
+            onReset: () {
+              setState(() => _activeFilters = null);
+              _loadMenus();
+            },
+          ),
     );
   }
 
@@ -209,7 +207,8 @@ class _MenusListPageState extends State<MenusListPage> {
       final response = await _dioClient!.dio.get(
         "/menus/search",
         queryParameters: {
-          'q': '', // Recherche vide pour récupérer tous les menus avec images/plats
+          'q':
+              '', // Recherche vide pour récupérer tous les menus avec images/plats
           'active_only': 'true',
           'limit': 100,
         },
@@ -225,38 +224,40 @@ class _MenusListPageState extends State<MenusListPage> {
         menusData = [];
       }
 
-      final allMenus = menusData
-          .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
-          .toList();
+      final allMenus =
+          menusData
+              .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
+              .toList();
 
       // Filtrer les menus côté client selon les critères
-      final filteredMenus = allMenus.where((menu) {
-        // Filtre prix maximum
-        if (menu.basePrice > filters.maxPrice) {
-          return false;
-        }
+      final filteredMenus =
+          allMenus.where((menu) {
+            // Filtre prix maximum
+            if (menu.basePrice > filters.maxPrice) {
+              return false;
+            }
 
-        // Filtre thème
-        if (filters.theme != null && 
-            filters.theme!.isNotEmpty && 
-            menu.theme != filters.theme) {
-          return false;
-        }
+            // Filtre thème
+            if (filters.theme != null &&
+                filters.theme!.isNotEmpty &&
+                menu.theme != filters.theme) {
+              return false;
+            }
 
-        // Filtre régime
-        if (filters.regime != null && 
-            filters.regime!.isNotEmpty && 
-            menu.regime != filters.regime) {
-          return false;
-        }
+            // Filtre régime
+            if (filters.regime != null &&
+                filters.regime!.isNotEmpty &&
+                menu.regime != filters.regime) {
+              return false;
+            }
 
-        // Filtre nombre minimum de personnes
-        if (menu.minPeople > filters.minPeopleMax) {
-          return false;
-        }
+            // Filtre nombre minimum de personnes
+            if (menu.minPeople > filters.minPeopleMax) {
+              return false;
+            }
 
-        return true;
-      }).toList();
+            return true;
+          }).toList();
 
       setState(() {
         _menus = allMenus;
@@ -277,12 +278,12 @@ class _MenusListPageState extends State<MenusListPage> {
     final heroHeight = context.fluidValue(minValue: 180, maxValue: 320);
     final titleFontSize = context.fluidValue(minValue: 24, maxValue: 42);
     final subtitleFontSize = context.fluidValue(minValue: 12, maxValue: 16);
-    
+
     // Colonnes selon la largeur
     final screenWidth = context.screenWidth;
     int gridColumns;
     double cardAspectRatio;
-    
+
     if (screenWidth < 500) {
       gridColumns = 1;
       cardAspectRatio = 1.1; // Plus large sur mobile une colonne
@@ -317,18 +318,28 @@ class _MenusListPageState extends State<MenusListPage> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                
+
                 // Overlay
                 Container(
                   height: heroHeight,
                   width: double.infinity,
-                  color: const Color.fromARGB(255, 189, 189, 189).withValues(alpha: 0.25),
+                  color: const Color.fromARGB(
+                    255,
+                    189,
+                    189,
+                    189,
+                  ).withValues(alpha: 0.25),
                 ),
-                
+
                 // Header avec navigation
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(context.horizontalPadding, 8, context.horizontalPadding, 0),
+                    padding: EdgeInsets.fromLTRB(
+                      context.horizontalPadding,
+                      8,
+                      context.horizontalPadding,
+                      0,
+                    ),
                     child: Row(
                       children: [
                         // Bouton retour (visible seulement si NON connecté)
@@ -354,14 +365,19 @@ class _MenusListPageState extends State<MenusListPage> {
                     ),
                   ),
                 ),
-                
+
                 // Contenu centré du hero
                 Positioned.fill(
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: context.fluidValue(minValue: 20, maxValue: 40)),
+                        SizedBox(
+                          height: context.fluidValue(
+                            minValue: 20,
+                            maxValue: 40,
+                          ),
+                        ),
                         Text(
                           'NOS MENUS',
                           style: AppTextStyles.heroTitle.copyWith(
@@ -372,9 +388,13 @@ class _MenusListPageState extends State<MenusListPage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: context.fluidValue(minValue: 8, maxValue: 16)),
+                        SizedBox(
+                          height: context.fluidValue(minValue: 8, maxValue: 16),
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: context.horizontalPadding),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: context.horizontalPadding,
+                          ),
                           child: Text(
                             'Découvrez l\'ensemble de nos menus\npour vos événements',
                             style: AppTextStyles.body.copyWith(
@@ -391,14 +411,16 @@ class _MenusListPageState extends State<MenusListPage> {
               ],
             ),
           ),
-          
+
           // Contenu principal
           SliverToBoxAdapter(
             child: Container(
               color: AppColors.background,
               child: ResponsiveContainer(
                 maxWidth: 1400,
-                padding: EdgeInsets.symmetric(horizontal: context.horizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.horizontalPadding,
+                ),
                 child: Column(
                   children: [
                     // Barre de recherche et filtre
@@ -407,7 +429,9 @@ class _MenusListPageState extends State<MenusListPage> {
                         vertical: context.isMobile ? 16 : 24,
                       ),
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: context.isDesktop ? 600 : double.infinity),
+                        constraints: BoxConstraints(
+                          maxWidth: context.isDesktop ? 600 : double.infinity,
+                        ),
                         child: Row(
                           children: [
                             Expanded(
@@ -418,7 +442,9 @@ class _MenusListPageState extends State<MenusListPage> {
                                   borderRadius: BorderRadius.circular(24),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.1),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.1,
+                                      ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),
@@ -428,10 +454,15 @@ class _MenusListPageState extends State<MenusListPage> {
                                   controller: _searchController,
                                   onChanged: (value) {
                                     _searchTimer?.cancel();
-                                    _searchTimer = Timer(const Duration(milliseconds: 500), () {
-                                      _filterMenus(value);
-                                    });
-                                    setState(() {}); // Pour mettre à jour le suffixIcon
+                                    _searchTimer = Timer(
+                                      const Duration(milliseconds: 500),
+                                      () {
+                                        _filterMenus(value);
+                                      },
+                                    );
+                                    setState(
+                                      () {},
+                                    ); // Pour mettre à jour le suffixIcon
                                   },
                                   decoration: InputDecoration(
                                     hintText: 'Recherche menus',
@@ -442,19 +473,22 @@ class _MenusListPageState extends State<MenusListPage> {
                                       Icons.search,
                                       color: AppColors.textSecondary,
                                     ),
-                                    suffixIcon: _searchController.text.isNotEmpty
-                                        ? IconButton(
-                                            icon: Icon(
-                                              Icons.clear,
-                                              color: AppColors.textSecondary,
-                                            ),
-                                            onPressed: () {
-                                              _searchController.clear();
-                                              _filterMenus('');
-                                              setState(() {}); // Pour cacher le bouton clear
-                                            },
-                                          )
-                                        : null,
+                                    suffixIcon:
+                                        _searchController.text.isNotEmpty
+                                            ? IconButton(
+                                              icon: Icon(
+                                                Icons.clear,
+                                                color: AppColors.textSecondary,
+                                              ),
+                                              onPressed: () {
+                                                _searchController.clear();
+                                                _filterMenus('');
+                                                setState(
+                                                  () {},
+                                                ); // Pour cacher le bouton clear
+                                              },
+                                            )
+                                            : null,
                                     border: InputBorder.none,
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 20,
@@ -467,57 +501,62 @@ class _MenusListPageState extends State<MenusListPage> {
                             const SizedBox(width: 12),
                             // Bouton filtre avec indicateur
                             Stack(
-                          children: [
-                            Container(
-                              height: 48,
-                              width: 48,
-                              decoration: BoxDecoration(
-                                color: _activeFilters?.hasActiveFilters == true 
-                                    ? AppColors.primary 
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.1),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.tune,
-                                  color: _activeFilters?.hasActiveFilters == true
-                                      ? Colors.white
-                                      : AppColors.textPrimary,
-                                ),
-                                onPressed: _showFiltersOverlay,
-                              ),
-                            ),
-                            if (_activeFilters?.hasActiveFilters == true)
-                              Positioned(
-                                right: 6,
-                                top: 6,
-                                child: Container(
-                                  width: 12,
-                                  height: 12,
+                              children: [
+                                Container(
+                                  height: 48,
+                                  width: 48,
                                   decoration: BoxDecoration(
-                                    color: AppColors.danger,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 2,
+                                    color:
+                                        _activeFilters?.hasActiveFilters == true
+                                            ? AppColors.primary
+                                            : Colors.white,
+                                    borderRadius: BorderRadius.circular(24),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.tune,
+                                      color:
+                                          _activeFilters?.hasActiveFilters ==
+                                                  true
+                                              ? Colors.white
+                                              : AppColors.textPrimary,
+                                    ),
+                                    onPressed: _showFiltersOverlay,
+                                  ),
+                                ),
+                                if (_activeFilters?.hasActiveFilters == true)
+                                  Positioned(
+                                    right: 6,
+                                    top: 6,
+                                    child: Container(
+                                      width: 12,
+                                      height: 12,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.danger,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 2,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    
+
                     // Compteur de menus
                     if (!_isLoading && _errorMessage.isEmpty)
                       Align(
@@ -530,14 +569,14 @@ class _MenusListPageState extends State<MenusListPage> {
                           ),
                         ),
                       ),
-              
+
                     SizedBox(height: context.isMobile ? 12 : 16),
                   ],
                 ),
               ),
             ),
           ),
-          
+
           // Liste des menus - état loading
           if (_isLoading)
             const SliverToBoxAdapter(
@@ -548,7 +587,7 @@ class _MenusListPageState extends State<MenusListPage> {
                 ),
               ),
             ),
-        
+
           // Liste des menus - état erreur
           if (_errorMessage.isNotEmpty)
             SliverToBoxAdapter(
@@ -580,7 +619,7 @@ class _MenusListPageState extends State<MenusListPage> {
                 ),
               ),
             ),
-        
+
           // Liste des menus - état vide
           if (!_isLoading && _errorMessage.isEmpty && _filteredMenus.isEmpty)
             SliverToBoxAdapter(
@@ -609,11 +648,13 @@ class _MenusListPageState extends State<MenusListPage> {
                 ),
               ),
             ),
-        
+
           // Liste des menus - grille
           if (!_isLoading && _errorMessage.isEmpty && _filteredMenus.isNotEmpty)
             SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: context.horizontalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.horizontalPadding,
+              ),
               sliver: SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: gridColumns,
@@ -621,15 +662,12 @@ class _MenusListPageState extends State<MenusListPage> {
                   crossAxisSpacing: context.gridSpacing,
                   mainAxisSpacing: context.gridSpacing,
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return MenuCard(menu: _filteredMenus[index]);
-                  },
-                  childCount: _filteredMenus.length,
-                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return MenuCard(menu: _filteredMenus[index]);
+                }, childCount: _filteredMenus.length),
               ),
             ),
-          
+
           // Espacement en bas
           SliverToBoxAdapter(
             child: SizedBox(height: context.isMobile ? 24 : 40),
@@ -638,5 +676,4 @@ class _MenusListPageState extends State<MenusListPage> {
       ),
     );
   }
-
 }

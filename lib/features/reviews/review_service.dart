@@ -14,10 +14,7 @@ class ReviewService {
   }) async {
     final response = await _dioClient.dio.post(
       '/orders/$orderId/review',
-      data: {
-        'rating': rating,
-        'comment': comment,
-      },
+      data: {'rating': rating, 'comment': comment},
     );
 
     return ReviewModel.fromJson(response.data as Map<String, dynamic>);
@@ -39,6 +36,8 @@ class ReviewService {
     );
 
     final List<dynamic> data = response.data as List<dynamic>;
-    return data.map((json) => ReviewModel.fromJson(json as Map<String, dynamic>)).toList();
+    return data
+        .map((json) => ReviewModel.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
 }

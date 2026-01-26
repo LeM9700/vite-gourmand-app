@@ -167,20 +167,26 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Email *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.email_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.email_rounded,
+                              color: AppColors.primary,
+                            ),
                             filled: true,
                             fillColor: AppColors.surface,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -191,8 +197,9 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                             if (value == null || value.isEmpty) {
                               return 'Veuillez entrer un email';
                             }
-                            if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                .hasMatch(value)) {
+                            if (!RegExp(
+                              r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                            ).hasMatch(value)) {
                               return 'Email invalide';
                             }
                             return null;
@@ -207,9 +214,13 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Mot de passe *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.lock_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_rounded,
+                              color: AppColors.primary,
+                            ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _passwordVisible
@@ -228,12 +239,14 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -256,7 +269,9 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                             if (!RegExp(r'[0-9]').hasMatch(value)) {
                               return 'Au moins 1 chiffre requis';
                             }
-                            if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+                            if (!RegExp(
+                              r'[!@#$%^&*(),.?":{}|<>]',
+                            ).hasMatch(value)) {
                               return 'Au moins 1 caractère spécial requis';
                             }
                             return null;
@@ -270,20 +285,26 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Prénom *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.person_outline_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.person_outline_rounded,
+                              color: AppColors.primary,
+                            ),
                             filled: true,
                             fillColor: AppColors.surface,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -305,20 +326,26 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Nom *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.person_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.person_rounded,
+                              color: AppColors.primary,
+                            ),
                             filled: true,
                             fillColor: AppColors.surface,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -341,20 +368,26 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Téléphone *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.phone_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.phone_rounded,
+                              color: AppColors.primary,
+                            ),
                             filled: true,
                             fillColor: AppColors.surface,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -366,7 +399,10 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                               return 'Veuillez entrer un téléphone';
                             }
                             // Format français : 10 chiffres commençant par 0
-                            final cleaned = value.replaceAll(RegExp(r'[\s\-\.]'), '');
+                            final cleaned = value.replaceAll(
+                              RegExp(r'[\s\-\.]'),
+                              '',
+                            );
                             if (!RegExp(r'^0[1-9]\d{8}$').hasMatch(cleaned)) {
                               return 'Format invalide (ex: 0612345678)';
                             }
@@ -382,20 +418,26 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           maxLines: 2,
                           decoration: InputDecoration(
                             labelText: 'Adresse *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            prefixIcon: Icon(Icons.location_on_rounded,
-                                color: AppColors.primary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.location_on_rounded,
+                              color: AppColors.primary,
+                            ),
                             filled: true,
                             fillColor: AppColors.surface,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -436,10 +478,7 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                       const Expanded(
                         child: Text(
                           'Mot de passe : 8+ caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial. Téléphone : format français (10 chiffres). Un email de bienvenue sera envoyé.',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white70,
-                          ),
+                          style: TextStyle(fontSize: 12, color: Colors.white70),
                         ),
                       ),
                     ],
@@ -452,9 +491,8 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: _isLoading
-                          ? null
-                          : () => Navigator.of(context).pop(),
+                      onPressed:
+                          _isLoading ? null : () => Navigator.of(context).pop(),
                       child: const Text(
                         'Annuler',
                         style: TextStyle(color: Colors.white70),
@@ -474,17 +512,19 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: _isLoading
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.black),
-                              ),
-                            )
-                          : const Icon(Icons.check_rounded),
+                      icon:
+                          _isLoading
+                              ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.black,
+                                  ),
+                                ),
+                              )
+                              : const Icon(Icons.check_rounded),
                       label: Text(_isLoading ? 'Création...' : 'Créer'),
                     ),
                   ],

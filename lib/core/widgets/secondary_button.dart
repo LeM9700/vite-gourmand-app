@@ -27,16 +27,17 @@ class SecondaryButton extends StatelessWidget {
           side: BorderSide(color: AppColors.glassBorder, width: 1),
           backgroundColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // TODO si ton Figma diffère
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
-        child: isLoading
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : Text(label),
+        child:
+            isLoading
+                ? const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+                : Text(label),
       ),
     );
   }

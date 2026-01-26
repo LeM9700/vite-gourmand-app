@@ -6,10 +6,7 @@ import '../services/auth_service.dart';
 import '../models/auth_models.dart';
 import '../../navigation/main_navigation_page.dart';
 
-enum RegisterStep { 
-  personal, 
-  credentials 
-}
+enum RegisterStep { personal, credentials }
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -35,7 +32,6 @@ class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final _authService = AuthService();
   bool _isPasswordVisible = false;
-  bool _isConfirmPasswordVisible = false;
   bool _isLoading = false;
 
   @override
@@ -93,7 +89,9 @@ class _RegisterFormState extends State<RegisterForm> {
           _showErrorMessage('Le téléphone est requis');
           return false;
         }
-        if (!RegExp(r'^[+]?[0-9]{10,}$').hasMatch(_phoneController.text.replaceAll(' ', ''))) {
+        if (!RegExp(
+          r'^[+]?[0-9]{10,}$',
+        ).hasMatch(_phoneController.text.replaceAll(' ', ''))) {
           _showErrorMessage('Format de téléphone invalide');
           return false;
         }
@@ -107,7 +105,9 @@ class _RegisterFormState extends State<RegisterForm> {
           _showErrorMessage('L\'email est requis');
           return false;
         }
-        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(_emailController.text)) {
+        if (!RegExp(
+          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+        ).hasMatch(_emailController.text)) {
           _showErrorMessage('Format d\'email invalide');
           return false;
         }
@@ -116,7 +116,9 @@ class _RegisterFormState extends State<RegisterForm> {
           return false;
         }
         if (_passwordController.text.length < 6) {
-          _showErrorMessage('Le mot de passe doit contenir au moins 6 caractères');
+          _showErrorMessage(
+            'Le mot de passe doit contenir au moins 6 caractères',
+          );
           return false;
         }
         return true;
@@ -137,9 +139,11 @@ class _RegisterFormState extends State<RegisterForm> {
       );
 
       final response = await _authService.register(request);
-      
+
       if (mounted) {
-        _showSuccessMessage('Inscription réussie ! Bienvenue ${response.user.fullName}');
+        _showSuccessMessage(
+          'Inscription réussie ! Bienvenue ${response.user.fullName}',
+        );
         await Future.delayed(const Duration(seconds: 1));
         // Rediriger vers la navigation principale
         Navigator.pushAndRemoveUntil(
@@ -207,10 +211,7 @@ class _RegisterFormState extends State<RegisterForm> {
             child: PageView(
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _buildPersonalStep(),
-                _buildCredentialsStep(),
-              ],
+              children: [_buildPersonalStep(), _buildCredentialsStep()],
             ),
           ),
 
@@ -243,9 +244,10 @@ class _RegisterFormState extends State<RegisterForm> {
 
               Expanded(
                 child: PrimaryButton(
-                  label: _currentStep == RegisterStep.credentials
-                      ? 'Créer mon compte'
-                      : 'Suivant',
+                  label:
+                      _currentStep == RegisterStep.credentials
+                          ? 'Créer mon compte'
+                          : 'Suivant',
                   onPressed: _isLoading ? null : _nextStep,
                   isLoading: _isLoading,
                 ),
@@ -275,7 +277,8 @@ class _RegisterFormState extends State<RegisterForm> {
       height: 12,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive ? AppColors.primary : Colors.white.withValues(alpha: 0.3),
+        color:
+            isActive ? AppColors.primary : Colors.white.withValues(alpha: 0.3),
       ),
     );
   }
@@ -300,15 +303,9 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget _buildPersonalStep() {
     return Column(
       children: [
-        _buildTextField(
-          controller: _nameController,
-          hintText: 'Nom',
-        ),
+        _buildTextField(controller: _nameController, hintText: 'Nom'),
         const SizedBox(height: 16),
-        _buildTextField(
-          controller: _surnameController,
-          hintText: 'Prénom',
-        ),
+        _buildTextField(controller: _surnameController, hintText: 'Prénom'),
         const SizedBox(height: 16),
         _buildTextField(
           controller: _phoneController,
@@ -387,13 +384,9 @@ class _RegisterFormState extends State<RegisterForm> {
         style: AppTextStyles.body.copyWith(color: Colors.white),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextStyles.body.copyWith(
-            color: Colors.white60,
-          ),
+          hintStyle: AppTextStyles.body.copyWith(color: Colors.white60),
           prefixText: prefixText,
-          prefixStyle: AppTextStyles.body.copyWith(
-            color: Colors.white,
-          ),
+          prefixStyle: AppTextStyles.body.copyWith(color: Colors.white),
           suffixIcon: suffixIcon,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(

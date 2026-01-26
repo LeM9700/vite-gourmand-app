@@ -4,6 +4,7 @@ import '../../core/theme/typography.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/skeleton_box.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/utils/price_formatter.dart';
 import '../../core/api/dio_client.dart';
 import 'models/order_model.dart';
 import '../auth/login_page.dart';
@@ -43,12 +44,14 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       if (!mounted) return;
 
       setState(() {
-        _order = OrderDetailModel.fromJson(response.data as Map<String, dynamic>);
+        _order = OrderDetailModel.fromJson(
+          response.data as Map<String, dynamic>,
+        );
         _isLoading = false;
       });
     } catch (e) {
       if (!mounted) return;
-      
+
       // Si erreur 401, rediriger vers login
       if (e.toString().contains('401')) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -57,7 +60,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         );
         return;
       }
-      
+
       setState(() {
         _errorMessage = 'Impossible de charger les détails';
         _isLoading = false;
@@ -82,9 +85,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         ),
         centerTitle: context.isMobile,
       ),
-      body: _isLoading
-          ? _buildLoadingSkeleton(context, padding)
-          : _errorMessage != null
+      body:
+          _isLoading
+              ? _buildLoadingSkeleton(context, padding)
+              : _errorMessage != null
               ? _buildErrorState(context, padding)
               : _buildContent(context, padding),
     );
@@ -103,7 +107,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             children: [
               // Statut actuel
               _buildStatusCard(context),
-              
+
               SizedBox(height: context.fluidValue(minValue: 16, maxValue: 24)),
 
               // Détails événement
@@ -114,7 +118,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               // Historique
               if (_order!.history.isNotEmpty) ...[
                 _buildHistoryCard(context),
-                SizedBox(height: context.fluidValue(minValue: 16, maxValue: 24)),
+                SizedBox(
+                  height: context.fluidValue(minValue: 16, maxValue: 24),
+                ),
               ],
 
               // Actions
@@ -136,14 +142,17 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: statusColor.withValues(alpha:0.1),
+              color: statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: statusColor.withValues(alpha:0.3)),
+              border: Border.all(color: statusColor.withValues(alpha: 0.3)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_order!.status.emoji, style: const TextStyle(fontSize: 24)),
+                Text(
+                  _order!.status.emoji,
+                  style: const TextStyle(fontSize: 24),
+                ),
                 const SizedBox(width: 10),
                 Text(
                   _order!.status.label,
@@ -172,7 +181,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           _buildInfoRow(Icons.calendar_today, 'Date', _order!.formattedDate),
           const SizedBox(height: 12),
           _buildInfoRow(Icons.access_time, 'Heure', _order!.formattedTime),
@@ -181,11 +190,19 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           const SizedBox(height: 12),
           _buildInfoRow(Icons.location_city, 'Ville', _order!.eventCity),
           const SizedBox(height: 12),
-          _buildInfoRow(Icons.people, 'Nombre d\'invités', '${_order!.peopleCount}'),
-          
+          _buildInfoRow(
+            Icons.people,
+            'Nombre d\'invités',
+            '${_order!.peopleCount}',
+          ),
+
           if (_order!.deliveryKm > 0) ...[
             const SizedBox(height: 12),
-            _buildInfoRow(Icons.straighten, 'Distance', '${_order!.deliveryKm.toStringAsFixed(0)} km'),
+            _buildInfoRow(
+              Icons.straighten,
+              'Distance',
+              '${_order!.deliveryKm.toStringAsFixed(0)} km',
+            ),
           ],
 
           const SizedBox(height: 16),
@@ -193,9 +210,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           const SizedBox(height: 16),
 
           // Récapitulatif prix
-          _buildPriceRow('Menu (${_order!.peopleCount} × ${_order!.menuPrice.toStringAsFixed(2)}€)', 
-              _order!.menuPrice * _order!.peopleCount),
-          
+          _buildPriceRow(
+            'Menu (${_order!.peopleCount} × ${PriceFormatter.formatPrice(_order!.menuPrice)})',
+            _order!.menuPrice * _order!.peopleCount,
+          ),
+
           if (_order!.deliveryFee > 0) ...[
             const SizedBox(height: 8),
             _buildPriceRow('Livraison', _order!.deliveryFee),
@@ -221,7 +240,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 ),
               ),
               Text(
-                '${_order!.totalPrice.toStringAsFixed(2)}€',
+                PriceFormatter.formatPrice(_order!.totalPrice),
                 style: AppTextStyles.cardTitle.copyWith(
                   fontSize: context.fluidValue(minValue: 20, maxValue: 24),
                   color: AppColors.primary,
@@ -254,9 +273,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               const SizedBox(height: 2),
               Text(
                 value,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -265,7 +282,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  Widget _buildPriceRow(String label, double amount, {bool isDiscount = false}) {
+  Widget _buildPriceRow(
+    String label,
+    double amount, {
+    bool isDiscount = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -276,7 +297,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           ),
         ),
         Text(
-          '${amount.toStringAsFixed(2)}€',
+          PriceFormatter.formatPrice(amount),
           style: AppTextStyles.body.copyWith(
             fontWeight: FontWeight.w600,
             color: isDiscount ? Colors.green.shade700 : AppColors.textPrimary,
@@ -386,9 +407,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 icon: Icon(Icons.edit, color: AppColors.primary),
                 label: const Text('Modifier la commande'),
                 style: OutlinedButton.styleFrom(
@@ -424,26 +443,26 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   void _showCancelDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Annuler la commande'),
-        content: const Text(
-          'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Retour'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Annuler la commande'),
+            content: const Text(
+              'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Retour'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Confirmer l\'annulation'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-             
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Confirmer l\'annulation'),
-          ),
-        ],
-      ),
     );
   }
 

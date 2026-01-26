@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/typography.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/utils/price_formatter.dart';
 import '../../core/widgets/glass_card.dart';
 import 'models/menu_model.dart';
 import '../auth/auth_page.dart';
 import '../orders/order_page.dart';
 import '../../core/storage/secure_storage.dart';
-
 
 class MenuDetailPage extends StatelessWidget {
   final MenuModel menu;
@@ -24,9 +24,7 @@ class MenuDetailPage extends StatelessWidget {
       // User is logged in, go to Order Page
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => OrderPage(selectedMenu: menu),
-        ),
+        MaterialPageRoute(builder: (context) => OrderPage(selectedMenu: menu)),
       );
     } else {
       // User is not logged in
@@ -36,7 +34,7 @@ class MenuDetailPage extends StatelessWidget {
           duration: Duration(seconds: 2),
         ),
       );
-      
+
       // Navigate to Auth Page and wait for result
       await Navigator.push(
         context,
@@ -50,7 +48,7 @@ class MenuDetailPage extends StatelessWidget {
       token = await storage.readToken();
 
       if (token != null && token.isNotEmpty) {
-         Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => OrderPage(selectedMenu: menu),
@@ -69,7 +67,7 @@ class MenuDetailPage extends StatelessWidget {
       tablet: 350,
       desktop: 400,
     );
-    
+
     final contentPadding = responsiveValue<double>(
       context,
       mobile: 20,
@@ -90,29 +88,26 @@ class MenuDetailPage extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   menu.imageUrl != null
-                      ? Image.network(
-                          menu.imageUrl!,
-                          fit: BoxFit.cover,
-                        )
+                      ? Image.network(menu.imageUrl!, fit: BoxFit.cover)
                       : Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                AppColors.primary.withValues(alpha: 0.8),
-                                AppColors.accent.withValues(alpha: 0.6),
-                              ],
-                            ),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.restaurant_menu,
-                              size: 120,
-                              color: Colors.white,
-                            ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              AppColors.primary.withValues(alpha: 0.8),
+                              AppColors.accent.withValues(alpha: 0.6),
+                            ],
                           ),
                         ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.restaurant_menu,
+                            size: 120,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                   // Bouton retour
                   Positioned(
                     top: 24,
@@ -171,30 +166,27 @@ class MenuDetailPage extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                   menu.imageUrl != null
-                      ? Image.network(
-                          menu.imageUrl!,
-                          fit: BoxFit.cover,
-                        )
+                  menu.imageUrl != null
+                      ? Image.network(menu.imageUrl!, fit: BoxFit.cover)
                       : Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                AppColors.primary.withValues(alpha: 0.8),
-                                AppColors.accent.withValues(alpha: 0.6),
-                              ],
-                            ),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.restaurant_menu,
-                              size: 80,
-                              color: Colors.white,
-                            ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              AppColors.primary.withValues(alpha: 0.8),
+                              AppColors.accent.withValues(alpha: 0.6),
+                            ],
                           ),
                         ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.restaurant_menu,
+                            size: 80,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                   // Gradient Overlay for text readability
                   Container(
                     decoration: BoxDecoration(
@@ -212,9 +204,7 @@ class MenuDetailPage extends StatelessWidget {
               ),
               title: Text(
                 menu.title,
-                style: AppTextStyles.sectionTitle.copyWith(
-                  color: Colors.white,
-                ),
+                style: AppTextStyles.sectionTitle.copyWith(color: Colors.white),
               ),
               centerTitle: true,
             ),
@@ -248,12 +238,12 @@ class MenuDetailPage extends StatelessWidget {
   Widget _buildContent(BuildContext context) {
     final spacing = context.fluidValue(minValue: 16, maxValue: 24);
     final titleSize = context.fluidValue(minValue: 16, maxValue: 18);
-    
+
     // Grouper les plats par type
     final starters = menu.dishes.where((d) => d.dishType == 'STARTER').toList();
     final mains = menu.dishes.where((d) => d.dishType == 'MAIN').toList();
     final desserts = menu.dishes.where((d) => d.dishType == 'DESSERT').toList();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -268,7 +258,7 @@ class MenuDetailPage extends StatelessWidget {
           ),
           SizedBox(height: spacing),
         ],
-        
+
         // Meta Tags (Theme, Regime, People)
         Wrap(
           spacing: 12,
@@ -288,7 +278,11 @@ class MenuDetailPage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.people, size: context.fluidValue(minValue: 14, maxValue: 16), color: AppColors.textSecondary),
+                Icon(
+                  Icons.people,
+                  size: context.fluidValue(minValue: 14, maxValue: 16),
+                  color: AppColors.textSecondary,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Min ${menu.minPeople} pers.',
@@ -307,9 +301,7 @@ class MenuDetailPage extends StatelessWidget {
         // Description
         Text(
           'À propos',
-          style: AppTextStyles.sectionTitle.copyWith(
-            fontSize: titleSize,
-          ),
+          style: AppTextStyles.sectionTitle.copyWith(fontSize: titleSize),
         ),
         SizedBox(height: spacing * 0.5),
         Text(
@@ -326,12 +318,10 @@ class MenuDetailPage extends StatelessWidget {
         // Composition du Menu - Titre
         Text(
           'Composition du Menu',
-          style: AppTextStyles.sectionTitle.copyWith(
-            fontSize: titleSize,
-          ),
+          style: AppTextStyles.sectionTitle.copyWith(fontSize: titleSize),
         ),
         SizedBox(height: spacing),
-        
+
         if (menu.dishes.isEmpty)
           Text(
             'Aucun plat spécifié pour ce menu.',
@@ -352,7 +342,7 @@ class MenuDetailPage extends StatelessWidget {
             ),
             SizedBox(height: spacing * 0.75),
           ],
-          
+
           // Plats
           if (mains.isNotEmpty) ...[
             _buildDishCategory(
@@ -364,7 +354,7 @@ class MenuDetailPage extends StatelessWidget {
             ),
             SizedBox(height: spacing * 0.75),
           ],
-          
+
           // Desserts
           if (desserts.isNotEmpty) ...[
             _buildDishCategory(
@@ -384,13 +374,13 @@ class MenuDetailPage extends StatelessWidget {
         if (menu.conditionsText.isNotEmpty) ...[
           Text(
             'Conditions',
-            style: AppTextStyles.sectionTitle.copyWith(
-              fontSize: titleSize,
-            ),
+            style: AppTextStyles.sectionTitle.copyWith(fontSize: titleSize),
           ),
           SizedBox(height: spacing * 0.5),
           GlassCard(
-            padding: EdgeInsets.all(context.fluidValue(minValue: 12, maxValue: 16)),
+            padding: EdgeInsets.all(
+              context.fluidValue(minValue: 12, maxValue: 16),
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -434,7 +424,7 @@ class MenuDetailPage extends StatelessWidget {
     final descSize = context.fluidValue(minValue: 11, maxValue: 13);
     final allergenSize = context.fluidValue(minValue: 9, maxValue: 11);
     final spacing = context.fluidValue(minValue: 8, maxValue: 12);
-    
+
     return GlassCard(
       padding: EdgeInsets.all(padding),
       child: Column(
@@ -482,17 +472,17 @@ class MenuDetailPage extends StatelessWidget {
               ),
             ],
           ),
-          
+
           SizedBox(height: spacing),
           Divider(color: color.withValues(alpha: 0.2), height: 1),
           SizedBox(height: spacing),
-          
+
           // Liste des plats
           ...dishes.asMap().entries.map((entry) {
             final index = entry.key;
             final dish = entry.value;
             final isLast = index == dishes.length - 1;
-            
+
             return Padding(
               padding: EdgeInsets.only(bottom: isLast ? 0 : spacing),
               child: Column(
@@ -507,7 +497,7 @@ class MenuDetailPage extends StatelessWidget {
                       color: AppColors.textPrimary,
                     ),
                   ),
-                  
+
                   // Description
                   if (dish.description.isNotEmpty) ...[
                     SizedBox(height: spacing * 0.3),
@@ -520,7 +510,7 @@ class MenuDetailPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                  
+
                   // Allergènes
                   if (dish.allergens.isNotEmpty) ...[
                     SizedBox(height: spacing * 0.4),
@@ -533,32 +523,40 @@ class MenuDetailPage extends StatelessWidget {
                           size: allergenSize + 2,
                           color: AppColors.danger.withValues(alpha: 0.7),
                         ),
-                        ...dish.allergens.map((a) => Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: context.fluidValue(minValue: 5, maxValue: 6),
-                            vertical: context.fluidValue(minValue: 2, maxValue: 3),
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.danger.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: AppColors.danger.withValues(alpha: 0.2),
-                              width: 1,
+                        ...dish.allergens.map(
+                          (a) => Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: context.fluidValue(
+                                minValue: 5,
+                                maxValue: 6,
+                              ),
+                              vertical: context.fluidValue(
+                                minValue: 2,
+                                maxValue: 3,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.danger.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: AppColors.danger.withValues(alpha: 0.2),
+                                width: 1,
+                              ),
+                            ),
+                            child: Text(
+                              a.allergen,
+                              style: AppTextStyles.caption.copyWith(
+                                fontSize: allergenSize,
+                                color: AppColors.danger,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                          child: Text(
-                            a.allergen,
-                            style: AppTextStyles.caption.copyWith(
-                              fontSize: allergenSize,
-                              color: AppColors.danger,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        )),
+                        ),
                       ],
                     ),
                   ],
-                  
+
                   // Séparateur entre les plats (sauf le dernier)
                   if (!isLast) ...[
                     SizedBox(height: spacing),
@@ -605,10 +603,12 @@ class MenuDetailPage extends StatelessWidget {
               children: [
                 Text(
                   'Prix par personne',
-                  style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                  style: AppTextStyles.caption.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
                 ),
                 Text(
-                  '${menu.basePrice.toStringAsFixed(0)}€',
+                  PriceFormatter.formatPriceCompact(menu.basePrice),
                   style: AppTextStyles.sectionTitle.copyWith(
                     color: AppColors.primary,
                     fontSize: context.isMobile ? 22 : 28,

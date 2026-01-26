@@ -82,7 +82,8 @@ class StatsBarChart extends StatelessWidget {
                       showTitles: true,
                       reservedSize: 40,
                       getTitlesWidget: (value, meta) {
-                        final text = getBottomTitles?.call(value) ?? 
+                        final text =
+                            getBottomTitles?.call(value) ??
                             value.toInt().toString();
                         return Padding(
                           padding: const EdgeInsets.only(top: 8),
@@ -103,7 +104,8 @@ class StatsBarChart extends StatelessWidget {
                       showTitles: true,
                       reservedSize: 50,
                       getTitlesWidget: (value, meta) {
-                        final text = getLeftTitles?.call(value) ?? 
+                        final text =
+                            getLeftTitles?.call(value) ??
                             value.toInt().toString();
                         return Text(
                           text,
@@ -159,7 +161,7 @@ class StatsBarChart extends StatelessWidget {
     double width = 24,
   }) {
     final barColor = color ?? AppColors.primary;
-    
+
     return List.generate(values.length, (index) {
       return BarChartGroupData(
         x: index,
@@ -175,10 +177,7 @@ class StatsBarChart extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [
-                barColor,
-                barColor.withValues(alpha: 0.7),
-              ],
+              colors: [barColor, barColor.withValues(alpha: 0.7)],
             ),
           ),
         ],

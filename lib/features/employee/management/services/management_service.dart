@@ -10,16 +10,19 @@ class ManagementService {
   }
 
   // ==================== MENUS ====================
-  
+
   Future<List<MenuModel>> getMenus() async {
     try {
       final dio = await _getDio();
-      final response = await dio.dio.get('/menus', queryParameters: {'active_only': 'false'});
-      
+      final response = await dio.dio.get(
+        '/menus',
+        queryParameters: {'active_only': 'false'},
+      );
+
       // L'API retourne {"items": [...]}
       final data = response.data;
       List<dynamic> menusList;
-      
+
       if (data is Map<String, dynamic> && data.containsKey('items')) {
         menusList = data['items'] as List<dynamic>;
       } else if (data is List) {
@@ -27,8 +30,10 @@ class ManagementService {
       } else {
         menusList = [];
       }
-      
-      return menusList.map((json) => MenuModel.fromJson(json as Map<String, dynamic>)).toList();
+
+      return menusList
+          .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       throw Exception('Erreur lors de la récupération des menus: $e');
     }
@@ -44,7 +49,10 @@ class ManagementService {
     }
   }
 
-  Future<MenuModel> updateMenu(int menuId, Map<String, dynamic> menuData) async {
+  Future<MenuModel> updateMenu(
+    int menuId,
+    Map<String, dynamic> menuData,
+  ) async {
     try {
       final dio = await _getDio();
       final response = await dio.dio.patch('/menus/$menuId', data: menuData);
@@ -64,7 +72,7 @@ class ManagementService {
   }
 
   // ==================== DISHES ====================
-  
+
   Future<List<Map<String, dynamic>>> getDishes() async {
     try {
       final dio = await _getDio();
@@ -85,7 +93,10 @@ class ManagementService {
     }
   }
 
-  Future<Map<String, dynamic>> updateDish(int dishId, Map<String, dynamic> dishData) async {
+  Future<Map<String, dynamic>> updateDish(
+    int dishId,
+    Map<String, dynamic> dishData,
+  ) async {
     try {
       final dio = await _getDio();
       final response = await dio.dio.patch('/dishes/$dishId', data: dishData);
@@ -105,7 +116,7 @@ class ManagementService {
   }
 
   // ==================== SCHEDULES ====================
-  
+
   Future<List<Map<String, dynamic>>> getSchedules() async {
     try {
       final dio = await _getDio();
@@ -116,7 +127,9 @@ class ManagementService {
     }
   }
 
-  Future<Map<String, dynamic>> createSchedule(Map<String, dynamic> scheduleData) async {
+  Future<Map<String, dynamic>> createSchedule(
+    Map<String, dynamic> scheduleData,
+  ) async {
     try {
       final dio = await _getDio();
       final response = await dio.dio.post('/schedules', data: scheduleData);
@@ -126,10 +139,16 @@ class ManagementService {
     }
   }
 
-  Future<Map<String, dynamic>> updateSchedule(int scheduleId, Map<String, dynamic> scheduleData) async {
+  Future<Map<String, dynamic>> updateSchedule(
+    int scheduleId,
+    Map<String, dynamic> scheduleData,
+  ) async {
     try {
       final dio = await _getDio();
-      final response = await dio.dio.put('/schedules/$scheduleId', data: scheduleData);
+      final response = await dio.dio.put(
+        '/schedules/$scheduleId',
+        data: scheduleData,
+      );
       return response.data;
     } catch (e) {
       throw Exception('Erreur lors de la mise à jour de l\'horaire: $e');

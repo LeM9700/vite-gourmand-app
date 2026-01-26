@@ -26,15 +26,15 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
   Future<void> _loadReviews() async {
     try {
       setState(() => isLoading = true);
-      
+
       final dioClient = await DioClient.create();
       final response = await dioClient.dio.get(
         '/reviews/approved?limit=7&sort_by=rating&order=desc',
       );
-      
+
       if (response.data != null) {
         final List<dynamic> reviewsData;
-        
+
         // Gérer différents formats de réponse
         if (response.data is List) {
           reviewsData = response.data;
@@ -45,11 +45,10 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
         } else {
           throw Exception('Format de données inattendu');
         }
-        
+
         setState(() {
-          reviews = reviewsData
-              .map((item) => ReviewModel.fromJson(item))
-              .toList();
+          reviews =
+              reviewsData.map((item) => ReviewModel.fromJson(item)).toList();
           isLoading = false;
           error = null;
         });
@@ -94,7 +93,7 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
     final subtitleSize = context.fluidValue(minValue: 12, maxValue: 14);
     final cardWidth = context.fluidValue(minValue: 220, maxValue: 280);
     final cardHeight = context.fluidValue(minValue: 130, maxValue: 160);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,9 +119,9 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
                       size: iconInnerSize,
                     ),
                   ),
-                  
+
                   SizedBox(width: spacing),
-                  
+
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,14 +145,16 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
                       ],
                     ),
                   ),
-                  
+
                   if (isLoading)
                     SizedBox(
                       width: context.fluidValue(minValue: 18, maxValue: 24),
                       height: context.fluidValue(minValue: 18, maxValue: 24),
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
                       ),
                     ),
                 ],
@@ -161,9 +162,9 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
             ],
           ),
         ),
-        
+
         SizedBox(height: spacing),
-        
+
         // Liste scrollable horizontale
         SizedBox(
           height: cardHeight,
@@ -183,7 +184,7 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
             },
           ),
         ),
-        
+
         // Message d'erreur si nécessaire
         if (error != null && !isLoading)
           Padding(
@@ -191,7 +192,11 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
             child: GlassCard(
               child: Row(
                 children: [
-                  Icon(Icons.info_outline, color: AppColors.secondary, size: iconInnerSize * 0.85),
+                  Icon(
+                    Icons.info_outline,
+                    color: AppColors.secondary,
+                    size: iconInnerSize * 0.85,
+                  ),
                   SizedBox(width: spacing * 0.5),
                   Expanded(
                     child: Text(
@@ -213,9 +218,7 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
 class _ReviewCard extends StatelessWidget {
   final ReviewModel review;
 
-  const _ReviewCard({
-    required this.review,
-  });
+  const _ReviewCard({required this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +228,7 @@ class _ReviewCard extends StatelessWidget {
     final nameSize = context.fluidValue(minValue: 13, maxValue: 16);
     final dateSize = context.fluidValue(minValue: 9, maxValue: 11);
     final spacing = context.fluidValue(minValue: 10, maxValue: 16);
-    
+
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
@@ -253,18 +256,21 @@ class _ReviewCard extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 2),
                 child: Icon(
-                  index < review.rating ? Icons.star_rounded : Icons.star_border_rounded,
-                  color: index < review.rating 
-                      ? AppColors.primary
-                      : AppColors.mediumGrey,
+                  index < review.rating
+                      ? Icons.star_rounded
+                      : Icons.star_border_rounded,
+                  color:
+                      index < review.rating
+                          ? AppColors.primary
+                          : AppColors.mediumGrey,
                   size: starSize,
                 ),
               );
             }),
           ),
-          
+
           SizedBox(height: spacing),
-          
+
           // Commentaire stylisé
           Expanded(
             child: Text(
@@ -279,9 +285,9 @@ class _ReviewCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          
+
           SizedBox(height: spacing * 1.2),
-          
+
           // Signature élégante
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -324,8 +330,8 @@ class _ReviewCard extends StatelessWidget {
 
   String _formatDate(DateTime date) {
     return '${date.day.toString().padLeft(2, '0')}/'
-           '${date.month.toString().padLeft(2, '0')}/'
-           '${date.year}';
+        '${date.month.toString().padLeft(2, '0')}/'
+        '${date.year}';
   }
 }
 
@@ -347,9 +353,10 @@ class ReviewModel {
       name: json['customer_name'] ?? json['name'] ?? 'Client',
       rating: (json['rating'] ?? 5).round(),
       comment: json['comment'] ?? json['review'] ?? '',
-      date: json['created_at'] != null 
-          ? DateTime.parse(json['created_at'])
-          : json['date'] != null
+      date:
+          json['created_at'] != null
+              ? DateTime.parse(json['created_at'])
+              : json['date'] != null
               ? DateTime.parse(json['date'])
               : DateTime.now(),
     );

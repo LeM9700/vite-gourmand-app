@@ -42,7 +42,6 @@ class EmployeeOrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusColor = _getStatusColor(order.status.value);
     final dateFormat = DateFormat('dd/MM/yyyy');
-    final timeFormat = DateFormat('HH:mm');
     final isSmallScreen = context.isSmallScreen;
 
     return GestureDetector(

@@ -103,10 +103,7 @@ class OrderStatusTimeline extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: statusColor.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: statusColor,
-                        width: 2,
-                      ),
+                      border: Border.all(color: statusColor, width: 2),
                     ),
                     child: Icon(
                       _getStatusIcon(item.status),

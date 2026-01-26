@@ -19,7 +19,7 @@ class AdminDashboardPage extends StatefulWidget {
 class _AdminDashboardPageState extends State<AdminDashboardPage> {
   final AdminService _adminService = AdminService();
   bool _isLoading = true;
-  
+
   // KPI chargés depuis l'API
   Map<String, dynamic> _kpiData = {
     'total_orders_today': 0,
@@ -39,7 +39,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
 
   Future<void> _loadKpiData() async {
     setState(() => _isLoading = true);
-    
+
     try {
       final kpiData = await _adminService.getTodayKpi();
       if (mounted) {
@@ -71,137 +71,162 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       body: RefreshIndicator(
         onRefresh: _loadKpiData,
         child: CustomScrollView(
-        slivers: [
-          // App Bar Premium
-          SliverAppBar(
-            expandedHeight: 140,
-            floating: false,
-            pinned: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.dark,
-                      AppColors.darkGrey,
-                      AppColors.primary.withValues(alpha: 0.3),
-                    ],
-                  ),
-                ),
-                child: SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 25),
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.7)],
-                                ),
-                                borderRadius: BorderRadius.circular(16),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.primary.withValues(alpha: 0.4),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Icon(
-                                Icons.dashboard_rounded,
-                                color: AppColors.dark,
-                                size: context.fluidValue(minValue: 28, maxValue: 36),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Dashboard Admin',
-                                    style: AppTextStyles.displayTitle.copyWith(
-                                      fontSize: context.fluidValue(minValue: 24, maxValue: 32),
-                                      color: AppColors.textLight,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Vue d\'ensemble',
-                                    style: AppTextStyles.subtitle.copyWith(
-                                      fontSize: context.fluidValue(minValue: 14, maxValue: 16),
-                                      color: AppColors.textLight.withValues(alpha: 0.8),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+          slivers: [
+            // App Bar Premium
+            SliverAppBar(
+              expandedHeight: 140,
+              floating: false,
+              pinned: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        AppColors.dark,
+                        AppColors.darkGrey,
+                        AppColors.primary.withValues(alpha: 0.3),
                       ],
                     ),
                   ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 25),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      AppColors.primary,
+                                      AppColors.primary.withValues(alpha: 0.7),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.4,
+                                      ),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.dashboard_rounded,
+                                  color: AppColors.dark,
+                                  size: context.fluidValue(
+                                    minValue: 28,
+                                    maxValue: 36,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Dashboard Admin',
+                                      style: AppTextStyles.displayTitle
+                                          .copyWith(
+                                            fontSize: context.fluidValue(
+                                              minValue: 24,
+                                              maxValue: 32,
+                                            ),
+                                            color: AppColors.textLight,
+                                          ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      'Vue d\'ensemble',
+                                      style: AppTextStyles.subtitle.copyWith(
+                                        fontSize: context.fluidValue(
+                                          minValue: 14,
+                                          maxValue: 16,
+                                        ),
+                                        color: AppColors.textLight.withValues(
+                                          alpha: 0.8,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
 
-          // Contenu
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(horizontalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 24),
-                  
-                  // Message de bienvenue
-                  _buildWelcomeCard(context),
-                  
-                  const SizedBox(height: 32),
-                  
-                  // Section KPI aujourd'hui
-                  Text(
-                    '📊 Aujourd\'hui',
-                    style: AppTextStyles.sectionTitle.copyWith(
-                      fontSize: context.fluidValue(minValue: 20, maxValue: 24),
-                      color: AppColors.textPrimary,
+            // Contenu
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(horizontalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 24),
+
+                    // Message de bienvenue
+                    _buildWelcomeCard(context),
+
+                    const SizedBox(height: 32),
+
+                    // Section KPI aujourd'hui
+                    Text(
+                      '📊 Aujourd\'hui',
+                      style: AppTextStyles.sectionTitle.copyWith(
+                        fontSize: context.fluidValue(
+                          minValue: 20,
+                          maxValue: 24,
+                        ),
+                        color: AppColors.textPrimary,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  _buildKpiGrid(context, isSmallScreen),
-                  
-                  const SizedBox(height: 32),
-                  
-                  // Section Actions rapides
-                  Text(
-                    '⚡ Actions rapides',
-                    style: AppTextStyles.sectionTitle.copyWith(
-                      fontSize: context.fluidValue(minValue: 20, maxValue: 24),
-                      color: AppColors.textPrimary,
+                    const SizedBox(height: 16),
+
+                    _buildKpiGrid(context, isSmallScreen),
+
+                    const SizedBox(height: 32),
+
+                    // Section Actions rapides
+                    Text(
+                      '⚡ Actions rapides',
+                      style: AppTextStyles.sectionTitle.copyWith(
+                        fontSize: context.fluidValue(
+                          minValue: 20,
+                          maxValue: 24,
+                        ),
+                        color: AppColors.textPrimary,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  _buildQuickActionsGrid(context, isSmallScreen),
-                  
-                  const SizedBox(height: 32),
-                ],
+                    const SizedBox(height: 16),
+
+                    _buildQuickActionsGrid(context, isSmallScreen),
+
+                    const SizedBox(height: 32),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -219,7 +244,10 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.7)],
+                colors: [
+                  AppColors.primary,
+                  AppColors.primary.withValues(alpha: 0.7),
+                ],
               ),
               shape: BoxShape.circle,
               boxShadow: [
@@ -363,49 +391,49 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         borderWidth: 2,
         fillColor: color.withValues(alpha: 0.05),
         child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.15),
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: color.withValues(alpha: 0.4),
-                width: 2,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: color.withValues(alpha: 0.4),
+                  width: 2,
+                ),
+              ),
+              child: Icon(icon, color: color, size: 28),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              value,
+              style: AppTextStyles.cardTitle.copyWith(
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                color: color,
               ),
             ),
-            child: Icon(icon, color: color, size: 28),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            value,
-            style: AppTextStyles.cardTitle.copyWith(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: color,
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: AppTextStyles.body.copyWith(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: AppTextStyles.body.copyWith(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+            Text(
+              subtitle,
+              style: AppTextStyles.caption.copyWith(
+                fontSize: 11,
+                color: AppColors.textSecondary,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            subtitle,
-            style: AppTextStyles.caption.copyWith(
-              fontSize: 11,
-              color: AppColors.textSecondary,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }
@@ -432,12 +460,20 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         _buildQuickActionCard(
           icon: Icons.restaurant_menu_rounded,
           label: 'Gérer menus',
-          onTap: () => widget.onNavigateToPage?.call(3, tabIndex: 2), // Management > Menus
+          onTap:
+              () => widget.onNavigateToPage?.call(
+                3,
+                tabIndex: 2,
+              ), // Management > Menus
         ),
         _buildQuickActionCard(
           icon: Icons.schedule_rounded,
           label: 'Horaires',
-          onTap: () => widget.onNavigateToPage?.call(3, tabIndex: 4), // Management > Horaires
+          onTap:
+              () => widget.onNavigateToPage?.call(
+                3,
+                tabIndex: 4,
+              ), // Management > Horaires
         ),
       ],
     );
@@ -456,11 +492,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: AppColors.primary,
-              size: 32,
-            ),
+            Icon(icon, color: AppColors.primary, size: 32),
             const SizedBox(height: 12),
             Text(
               label,

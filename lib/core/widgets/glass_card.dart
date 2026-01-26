@@ -49,17 +49,11 @@ class _GlassCardState extends State<GlassCard>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 1.02,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _opacityAnimation = Tween<double>(
       begin: 1.0,
       end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
   @override
@@ -70,13 +64,13 @@ class _GlassCardState extends State<GlassCard>
 
   @override
   Widget build(BuildContext context) {
-    final effectiveFillColor = widget.fillColor ?? 
-        (Theme.of(context).brightness == Brightness.dark 
+    final effectiveFillColor =
+        widget.fillColor ??
+        (Theme.of(context).brightness == Brightness.dark
             ? AppColors.glassFill.withValues(alpha: 0.1)
             : AppColors.surface.withValues(alpha: 0.85));
-    
-    final effectiveBorderColor = widget.borderColor ?? 
-        AppColors.glassBorder;
+
+    final effectiveBorderColor = widget.borderColor ?? AppColors.glassBorder;
 
     return MouseRegion(
       onEnter: (_) {
@@ -101,15 +95,14 @@ class _GlassCardState extends State<GlassCard>
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(widget.radius),
-                  boxShadow: _isHovered 
-                      ? AppShadows.dramatic 
-                      : AppShadows.premium,
+                  boxShadow:
+                      _isHovered ? AppShadows.dramatic : AppShadows.premium,
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(widget.radius),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(
-                      sigmaX: widget.blur, 
+                      sigmaX: widget.blur,
                       sigmaY: widget.blur,
                     ),
                     child: Container(
@@ -131,7 +124,9 @@ class _GlassCardState extends State<GlassCard>
                       child: Container(
                         // Effet de brillance interne
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(widget.radius - 1),
+                          borderRadius: BorderRadius.circular(
+                            widget.radius - 1,
+                          ),
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,

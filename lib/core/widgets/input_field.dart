@@ -39,7 +39,7 @@ class InputField extends StatelessWidget {
             filled: true,
             fillColor: AppColors.glassFill, // cohérent glass
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16), // TODO si Figma diffère
+              borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(color: AppColors.glassBorder),
             ),
             focusedBorder: OutlineInputBorder(

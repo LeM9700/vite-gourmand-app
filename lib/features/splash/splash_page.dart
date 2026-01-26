@@ -16,13 +16,11 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> 
-    with TickerProviderStateMixin {
-  
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late AnimationController _logoController;
   late AnimationController _subtitleController;
   late AnimationController _particleController;
-  
+
   late Animation<double> _logoScale;
   late Animation<double> _logoOpacity;
   late Animation<double> _subtitleOpacity;
@@ -31,45 +29,36 @@ class _SplashPageState extends State<SplashPage>
   @override
   void initState() {
     super.initState();
-    
+
     _logoController = AnimationController(
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-    
+
     _subtitleController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _particleController = AnimationController(
       duration: const Duration(seconds: 20),
       vsync: this,
     )..repeat();
 
-    _logoScale = Tween<double>(
-      begin: 0.5,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _logoController,
-      curve: Curves.elasticOut,
-    ));
+    _logoScale = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
+    );
 
-    _logoOpacity = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _logoController,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
-    ));
+    _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _logoController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
+      ),
+    );
 
-    _subtitleOpacity = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _subtitleController,
-      curve: Curves.easeInOut,
-    ));
+    _subtitleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _subtitleController, curve: Curves.easeInOut),
+    );
 
     _particleRotation = Tween<double>(
       begin: 0.0,
@@ -83,7 +72,7 @@ class _SplashPageState extends State<SplashPage>
   _startAnimations() async {
     await Future.delayed(const Duration(milliseconds: 300));
     _logoController.forward();
-    
+
     await Future.delayed(const Duration(milliseconds: 800));
     _subtitleController.forward();
   }
@@ -104,7 +93,7 @@ class _SplashPageState extends State<SplashPage>
         try {
           final authService = AuthService();
           final userData = await authService.getCurrentUser();
-          
+
           if (!mounted) return;
 
           // Rediriger selon le rôle
@@ -175,11 +164,7 @@ class _SplashPageState extends State<SplashPage>
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  AppColors.dark,
-                  AppColors.truffle,
-                  AppColors.caviar,
-                ],
+                colors: [AppColors.dark, AppColors.truffle, AppColors.caviar],
               ),
             ),
           ),
@@ -276,9 +261,9 @@ class _SplashPageState extends State<SplashPage>
                                   ],
                                 ),
                               ),
-                              
+
                               const SizedBox(height: 16),
-                              
+
                               // Séparateur décoratif
                               Container(
                                 width: 120,
@@ -294,9 +279,9 @@ class _SplashPageState extends State<SplashPage>
                                   ),
                                 ),
                               ),
-                              
+
                               const SizedBox(height: 16),
-                              
+
                               // Sous-titre élégant
                               Text(
                                 'L\'Art de Recevoir depuis 2001',
@@ -356,9 +341,9 @@ class _SplashPageState extends State<SplashPage>
                               ),
                             ),
                           ),
-                          
+
                           const SizedBox(height: 20),
-                          
+
                           Text(
                             'Préparation de votre expérience...',
                             style: AppTextStyles.caption.copyWith(
@@ -387,19 +372,22 @@ class _SplashPageState extends State<SplashPage>
     final startX = random.nextDouble();
     final startY = random.nextDouble();
     final duration = random.nextInt(3000) + 2000;
-    
+
     return AnimatedBuilder(
       animation: _particleController,
       builder: (context, child) {
         final progress = (_particleController.value + (index * 0.1)) % 1.0;
         final x = startX + (math.sin(progress * 2 * math.pi + index) * 0.1);
         final y = startY + (progress * 0.2);
-        
+
         return Positioned(
           left: MediaQuery.of(context).size.width * x,
           top: MediaQuery.of(context).size.height * (y % 1.0),
           child: Opacity(
-            opacity: (0.3 + (math.sin(progress * math.pi * 2) * 0.3)).clamp(0.0, 1.0),
+            opacity: (0.3 + (math.sin(progress * math.pi * 2) * 0.3)).clamp(
+              0.0,
+              1.0,
+            ),
             child: Container(
               width: size,
               height: size,
@@ -426,4 +414,3 @@ class _SplashPageState extends State<SplashPage>
     );
   }
 }
-

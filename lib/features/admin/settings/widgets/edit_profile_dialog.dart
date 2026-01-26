@@ -8,10 +8,7 @@ import '../../../auth/models/auth_models.dart';
 class EditProfileDialog extends StatefulWidget {
   final UserData userData;
 
-  const EditProfileDialog({
-    super.key,
-    required this.userData,
-  });
+  const EditProfileDialog({super.key, required this.userData});
 
   @override
   State<EditProfileDialog> createState() => _EditProfileDialogState();
@@ -31,7 +28,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
   @override
   void initState() {
     super.initState();
-    _firstnameController = TextEditingController(text: widget.userData.firstname);
+    _firstnameController = TextEditingController(
+      text: widget.userData.firstname,
+    );
     _lastnameController = TextEditingController(text: widget.userData.lastname);
     _phoneController = TextEditingController(text: widget.userData.phone);
     _addressController = TextEditingController(text: widget.userData.address);
@@ -170,7 +169,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Prénom *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
                             prefixIcon: Icon(
                               Icons.person_outline_rounded,
                               color: AppColors.primary,
@@ -209,7 +210,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Nom *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
                             prefixIcon: Icon(
                               Icons.person_rounded,
                               color: AppColors.primary,
@@ -249,7 +252,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                           style: const TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Téléphone *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
                             prefixIcon: Icon(
                               Icons.phone_rounded,
                               color: AppColors.primary,
@@ -289,7 +294,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                           maxLines: 2,
                           decoration: InputDecoration(
                             labelText: 'Adresse *',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
+                            labelStyle: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
                             prefixIcon: Icon(
                               Icons.location_on_rounded,
                               color: AppColors.primary,
@@ -331,9 +338,8 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: _isLoading
-                          ? null
-                          : () => Navigator.of(context).pop(),
+                      onPressed:
+                          _isLoading ? null : () => Navigator.of(context).pop(),
                       child: const Text(
                         'Annuler',
                         style: TextStyle(color: Colors.white70),
@@ -353,19 +359,22 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: _isLoading
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.black,
+                      icon:
+                          _isLoading
+                              ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.black,
+                                  ),
                                 ),
-                              ),
-                            )
-                          : const Icon(Icons.check_rounded),
-                      label: Text(_isLoading ? 'Enregistrement...' : 'Enregistrer'),
+                              )
+                              : const Icon(Icons.check_rounded),
+                      label: Text(
+                        _isLoading ? 'Enregistrement...' : 'Enregistrer',
+                      ),
                     ),
                   ],
                 ),

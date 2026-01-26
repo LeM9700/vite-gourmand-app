@@ -11,7 +11,7 @@ class HomeSectionAbout extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 600;
-    
+
     // Valeurs fluides pour le responsive
     final padding = context.fluidValue(minValue: 16, maxValue: 32);
     final spacing = context.fluidValue(minValue: 16, maxValue: 32);
@@ -24,7 +24,7 @@ class HomeSectionAbout extends StatelessWidget {
     final descriptionSize = context.fluidValue(minValue: 11, maxValue: 13);
     final badgePaddingH = context.fluidValue(minValue: 10, maxValue: 16);
     final badgePaddingV = context.fluidValue(minValue: 5, maxValue: 8);
-    
+
     return Column(
       children: [
         // Section principale avec quote élégante
@@ -38,17 +38,14 @@ class HomeSectionAbout extends StatelessWidget {
                 height: context.fluidValue(minValue: 3, maxValue: 4),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      AppColors.primary,
-                      AppColors.saffron,
-                    ],
+                    colors: [AppColors.primary, AppColors.saffron],
                   ),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              
+
               SizedBox(height: spacing * 0.75),
-              
+
               // Citation élégante
               Text(
                 "\"L'excellence culinaire rencontre l'art de recevoir\"",
@@ -58,9 +55,9 @@ class HomeSectionAbout extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               SizedBox(height: spacing * 0.5),
-              
+
               Text(
                 "Julie et José orchestrent vos événements privés et professionnels avec une exigence sans compromis et une passion gourmande.",
                 style: AppTextStyles.body.copyWith(
@@ -79,16 +76,74 @@ class HomeSectionAbout extends StatelessWidget {
         // Section José & Julie - Responsive Column/Row
         isSmallScreen
             ? Column(
-                children: [
-                  _buildProfileCard(
+              children: [
+                _buildProfileCard(
+                  context: context,
+                  name: 'José',
+                  title: 'Maître de la Logistique',
+                  description:
+                      'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
+                  badge: 'Excellence Logistique',
+                  icon: Icons.precision_manufacturing_rounded,
+                  gradientColors: [AppColors.truffle, AppColors.caviar],
+                  badgeGradient: [
+                    AppColors.truffle.withValues(alpha: 0.1),
+                    AppColors.caviar.withValues(alpha: 0.05),
+                  ],
+                  badgeColor: AppColors.truffle,
+                  padding: padding,
+                  avatarSize: avatarSize,
+                  iconSize: iconSize,
+                  titleSize: titleSize,
+                  subtitleSize: subtitleSize,
+                  descriptionSize: descriptionSize,
+                  badgePaddingH: badgePaddingH,
+                  badgePaddingV: badgePaddingV,
+                  spacing: spacing,
+                ),
+                SizedBox(height: spacing * 0.75),
+                _buildProfileCard(
+                  context: context,
+                  name: 'Julie',
+                  title: 'Maître Cuisinier',
+                  description:
+                      'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
+                  badge: 'Art Culinaire',
+                  icon: Icons.restaurant_menu_rounded,
+                  gradientColors: [AppColors.primary, AppColors.saffron],
+                  badgeGradient: [
+                    AppColors.primary.withValues(alpha: 0.15),
+                    AppColors.saffron.withValues(alpha: 0.1),
+                  ],
+                  badgeColor: AppColors.primary,
+                  padding: padding,
+                  avatarSize: avatarSize,
+                  iconSize: iconSize,
+                  titleSize: titleSize,
+                  subtitleSize: subtitleSize,
+                  descriptionSize: descriptionSize,
+                  badgePaddingH: badgePaddingH,
+                  badgePaddingV: badgePaddingV,
+                  spacing: spacing,
+                ),
+              ],
+            )
+            : Row(
+              children: [
+                Expanded(
+                  child: _buildProfileCard(
                     context: context,
                     name: 'José',
                     title: 'Maître de la Logistique',
-                    description: 'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
+                    description:
+                        'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
                     badge: 'Excellence Logistique',
                     icon: Icons.precision_manufacturing_rounded,
                     gradientColors: [AppColors.truffle, AppColors.caviar],
-                    badgeGradient: [AppColors.truffle.withValues(alpha: 0.1), AppColors.caviar.withValues(alpha: 0.05)],
+                    badgeGradient: [
+                      AppColors.truffle.withValues(alpha: 0.1),
+                      AppColors.caviar.withValues(alpha: 0.05),
+                    ],
                     badgeColor: AppColors.truffle,
                     padding: padding,
                     avatarSize: avatarSize,
@@ -100,16 +155,22 @@ class HomeSectionAbout extends StatelessWidget {
                     badgePaddingV: badgePaddingV,
                     spacing: spacing,
                   ),
-                  SizedBox(height: spacing * 0.75),
-                  _buildProfileCard(
+                ),
+                SizedBox(width: spacing * 0.75),
+                Expanded(
+                  child: _buildProfileCard(
                     context: context,
                     name: 'Julie',
                     title: 'Maître Cuisinier',
-                    description: 'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
+                    description:
+                        'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
                     badge: 'Art Culinaire',
                     icon: Icons.restaurant_menu_rounded,
                     gradientColors: [AppColors.primary, AppColors.saffron],
-                    badgeGradient: [AppColors.primary.withValues(alpha: 0.15), AppColors.saffron.withValues(alpha: 0.1)],
+                    badgeGradient: [
+                      AppColors.primary.withValues(alpha: 0.15),
+                      AppColors.saffron.withValues(alpha: 0.1),
+                    ],
                     badgeColor: AppColors.primary,
                     padding: padding,
                     avatarSize: avatarSize,
@@ -121,60 +182,12 @@ class HomeSectionAbout extends StatelessWidget {
                     badgePaddingV: badgePaddingV,
                     spacing: spacing,
                   ),
-                ],
-              )
-            : Row(
-                children: [
-                  Expanded(
-                    child: _buildProfileCard(
-                      context: context,
-                      name: 'José',
-                      title: 'Maître de la Logistique',
-                      description: 'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
-                      badge: 'Excellence Logistique',
-                      icon: Icons.precision_manufacturing_rounded,
-                      gradientColors: [AppColors.truffle, AppColors.caviar],
-                      badgeGradient: [AppColors.truffle.withValues(alpha: 0.1), AppColors.caviar.withValues(alpha: 0.05)],
-                      badgeColor: AppColors.truffle,
-                      padding: padding,
-                      avatarSize: avatarSize,
-                      iconSize: iconSize,
-                      titleSize: titleSize,
-                      subtitleSize: subtitleSize,
-                      descriptionSize: descriptionSize,
-                      badgePaddingH: badgePaddingH,
-                      badgePaddingV: badgePaddingV,
-                      spacing: spacing,
-                    ),
-                  ),
-                  SizedBox(width: spacing * 0.75),
-                  Expanded(
-                    child: _buildProfileCard(
-                      context: context,
-                      name: 'Julie',
-                      title: 'Maître Cuisinier',
-                      description: 'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
-                      badge: 'Art Culinaire',
-                      icon: Icons.restaurant_menu_rounded,
-                      gradientColors: [AppColors.primary, AppColors.saffron],
-                      badgeGradient: [AppColors.primary.withValues(alpha: 0.15), AppColors.saffron.withValues(alpha: 0.1)],
-                      badgeColor: AppColors.primary,
-                      padding: padding,
-                      avatarSize: avatarSize,
-                      iconSize: iconSize,
-                      titleSize: titleSize,
-                      subtitleSize: subtitleSize,
-                      descriptionSize: descriptionSize,
-                      badgePaddingH: badgePaddingH,
-                      badgePaddingV: badgePaddingV,
-                      spacing: spacing,
-                    ),
-                  ),
-                ],
-              ),
-        
+                ),
+              ],
+            ),
+
         SizedBox(height: spacing * 1.25),
-        
+
         // Section engagement - Layout vertical lisible
         GlassCard(
           padding: EdgeInsets.all(padding),
@@ -190,9 +203,9 @@ class HomeSectionAbout extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               SizedBox(height: spacing * 0.75),
-              
+
               // Points en vertical - plus lisible
               _buildSimpleEngagementPoint(
                 context,
@@ -200,18 +213,18 @@ class HomeSectionAbout extends StatelessWidget {
                 'Sur Mesure',
                 'Chaque création reflète votre identité et vos aspirations culinaires.',
               ),
-              
+
               SizedBox(height: spacing * 0.5),
-              
+
               _buildSimpleEngagementPoint(
                 context,
                 Icons.diamond_rounded,
                 'Excellence',
                 'Produits d\'exception, techniques maîtrisées, service impeccable.',
               ),
-              
+
               SizedBox(height: spacing * 0.5),
-              
+
               _buildSimpleEngagementPoint(
                 context,
                 Icons.favorite_rounded,
@@ -282,17 +295,13 @@ class HomeSectionAbout extends StatelessWidget {
                     width: 2,
                   ),
                 ),
-                child: Icon(
-                  icon,
-                  color: AppColors.champagne,
-                  size: iconSize,
-                ),
+                child: Icon(icon, color: AppColors.champagne, size: iconSize),
               ),
             ],
           ),
-          
+
           SizedBox(height: spacing * 0.6),
-          
+
           // Nom
           Text(
             name,
@@ -302,9 +311,9 @@ class HomeSectionAbout extends StatelessWidget {
               letterSpacing: 1.2,
             ),
           ),
-          
+
           SizedBox(height: spacing * 0.25),
-          
+
           Text(
             title,
             style: AppTextStyles.overline.copyWith(
@@ -313,9 +322,9 @@ class HomeSectionAbout extends StatelessWidget {
               letterSpacing: 1.5,
             ),
           ),
-          
+
           SizedBox(height: spacing * 0.5),
-          
+
           // Description
           Text(
             description,
@@ -326,9 +335,9 @@ class HomeSectionAbout extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          
+
           SizedBox(height: spacing * 0.6),
-          
+
           // Badge spécialité - Design premium
           Container(
             padding: EdgeInsets.symmetric(
@@ -359,13 +368,18 @@ class HomeSectionAbout extends StatelessWidget {
   }
 
   // Widget simple et lisible pour les points d'engagement
-  Widget _buildSimpleEngagementPoint(BuildContext context, IconData icon, String title, String description) {
+  Widget _buildSimpleEngagementPoint(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String description,
+  ) {
     final iconContainerSize = context.fluidValue(minValue: 36, maxValue: 50);
     final iconSize = context.fluidValue(minValue: 18, maxValue: 24);
     final titleSize = context.fluidValue(minValue: 13, maxValue: 16);
     final descSize = context.fluidValue(minValue: 12, maxValue: 14);
     final spacing = context.fluidValue(minValue: 10, maxValue: 16);
-    
+
     return Row(
       children: [
         // Icône dans un container doré
@@ -378,15 +392,11 @@ class HomeSectionAbout extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(iconContainerSize / 2),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: iconSize,
-          ),
+          child: Icon(icon, color: Colors.white, size: iconSize),
         ),
-        
+
         SizedBox(width: spacing),
-        
+
         // Texte en full width
         Expanded(
           child: Column(

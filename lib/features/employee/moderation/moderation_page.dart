@@ -15,7 +15,8 @@ class ModerationPage extends StatefulWidget {
   State<ModerationPage> createState() => _ModerationPageState();
 }
 
-class _ModerationPageState extends State<ModerationPage> with SingleTickerProviderStateMixin {
+class _ModerationPageState extends State<ModerationPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ModerationService _service = ModerationService();
 
@@ -88,12 +89,18 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
     try {
       await _service.moderateReview(reviewId: reviewId, status: status);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Avis ${status == "APPROVED" ? "approuvé" : "rejeté"}'), backgroundColor: Colors.green),
+        SnackBar(
+          content: Text('Avis ${status == "APPROVED" ? "approuvé" : "rejeté"}'),
+          backgroundColor: Colors.green,
+        ),
       );
       _loadReviews();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -102,12 +109,18 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
     try {
       await _service.updateMessageStatus(messageId: messageId, status: status);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Statut mis à jour'), backgroundColor: Colors.green),
+        const SnackBar(
+          content: Text('Statut mis à jour'),
+          backgroundColor: Colors.green,
+        ),
       );
       _loadMessages();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -144,7 +157,10 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
+                          colors: [
+                            AppColors.primary,
+                            AppColors.primary.withValues(alpha: 0.8),
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
@@ -155,7 +171,11 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.admin_panel_settings, color: Colors.white, size: 28),
+                      child: const Icon(
+                        Icons.admin_panel_settings,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
                     const SizedBox(width: 16),
                     Text(
@@ -173,7 +193,9 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                   labelColor: AppColors.primary,
                   unselectedLabelColor: AppColors.textSecondary,
                   indicatorColor: AppColors.primary,
-                  labelStyle: AppTextStyles.subtitle.copyWith(fontWeight: FontWeight.w600),
+                  labelStyle: AppTextStyles.subtitle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                   tabs: const [
                     Tab(text: 'Avis clients'),
                     Tab(text: 'Messages contact'),
@@ -185,10 +207,7 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                _buildReviewsTab(),
-                _buildMessagesTab(),
-              ],
+              children: [_buildReviewsTab(), _buildMessagesTab()],
             ),
           ),
         ],
@@ -214,7 +233,9 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                   value: _reviewSortBy,
                   decoration: InputDecoration(
                     labelText: 'Trier par',
-                    labelStyle: AppTextStyles.caption.copyWith(color: AppColors.primary),
+                    labelStyle: AppTextStyles.caption.copyWith(
+                      color: AppColors.primary,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.glassBorder),
@@ -225,7 +246,10 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.primary, width: 2),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
                     ),
                     filled: true,
                     fillColor: AppColors.glassFill,
@@ -246,7 +270,9 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                   value: _reviewOrder,
                   decoration: InputDecoration(
                     labelText: 'Ordre',
-                    labelStyle: AppTextStyles.caption.copyWith(color: AppColors.primary),
+                    labelStyle: AppTextStyles.caption.copyWith(
+                      color: AppColors.primary,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.glassBorder),
@@ -257,7 +283,10 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.primary, width: 2),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
                     ),
                     filled: true,
                     fillColor: AppColors.glassFill,
@@ -276,24 +305,37 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
           ),
         ),
         Expanded(
-          child: _isLoadingReviews
-              ? const Center(child: CircularProgressIndicator())
-              : _errorReviews != null
-                  ? Center(child: Text(_errorReviews!, style: const TextStyle(color: Colors.red)))
+          child:
+              _isLoadingReviews
+                  ? const Center(child: CircularProgressIndicator())
+                  : _errorReviews != null
+                  ? Center(
+                    child: Text(
+                      _errorReviews!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  )
                   : _reviews.isEmpty
-                      ? const Center(child: Text('Aucun avis'))
-                      : ListView.separated(
-                          padding: EdgeInsets.all(context.horizontalPadding),
-                          itemCount: _reviews.length,
-                          separatorBuilder: (context, index) => SizedBox(height: context.fluidValue(minValue: 12, maxValue: 16)),
-                          itemBuilder: (context, index) {
-                            final review = _reviews[index];
-                            return ReviewModerationCard(
-                              review: review,
-                              onModerate: (status) => _moderateReview(review.id, status),
-                            );
-                          },
+                  ? const Center(child: Text('Aucun avis'))
+                  : ListView.separated(
+                    padding: EdgeInsets.all(context.horizontalPadding),
+                    itemCount: _reviews.length,
+                    separatorBuilder:
+                        (context, index) => SizedBox(
+                          height: context.fluidValue(
+                            minValue: 12,
+                            maxValue: 16,
+                          ),
                         ),
+                    itemBuilder: (context, index) {
+                      final review = _reviews[index];
+                      return ReviewModerationCard(
+                        review: review,
+                        onModerate:
+                            (status) => _moderateReview(review.id, status),
+                      );
+                    },
+                  ),
         ),
       ],
     );
@@ -303,20 +345,29 @@ class _ModerationPageState extends State<ModerationPage> with SingleTickerProvid
     return _isLoadingMessages
         ? const Center(child: CircularProgressIndicator())
         : _errorMessages != null
-            ? Center(child: Text(_errorMessages!, style: const TextStyle(color: Colors.red)))
-            : _messages.isEmpty
-                ? const Center(child: Text('Aucun message'))
-                : ListView.separated(
-                    padding: EdgeInsets.all(context.horizontalPadding),
-                    itemCount: _messages.length,
-                    separatorBuilder: (context, index) => SizedBox(height: context.fluidValue(minValue: 12, maxValue: 16)),
-                    itemBuilder: (context, index) {
-                      final message = _messages[index];
-                      return ContactMessageCard(
-                        message: message,
-                        onUpdateStatus: (status) => _updateMessageStatus(message.id, status),
-                      );
-                    },
-                  );
+        ? Center(
+          child: Text(
+            _errorMessages!,
+            style: const TextStyle(color: Colors.red),
+          ),
+        )
+        : _messages.isEmpty
+        ? const Center(child: Text('Aucun message'))
+        : ListView.separated(
+          padding: EdgeInsets.all(context.horizontalPadding),
+          itemCount: _messages.length,
+          separatorBuilder:
+              (context, index) => SizedBox(
+                height: context.fluidValue(minValue: 12, maxValue: 16),
+              ),
+          itemBuilder: (context, index) {
+            final message = _messages[index];
+            return ContactMessageCard(
+              message: message,
+              onUpdateStatus:
+                  (status) => _updateMessageStatus(message.id, status),
+            );
+          },
+        );
   }
 }

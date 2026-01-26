@@ -43,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
       );
 
       final response = await _authService.login(request);
-      
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -53,23 +53,21 @@ class _LoginFormState extends State<LoginForm> {
           ),
         );
         await Future.delayed(const Duration(seconds: 1));
-        
+
         // Récupérer le rôle pour redirection conditionnelle
         final storage = SecureStorage();
         final role = await storage.readRole();
-        
+
         // Rediriger selon le rôle
         Widget destination;
         if (role == 'ADMIN') {
           destination = const AdminNavigationPage();
         } else if (role == 'EMPLOYEE') {
           destination = const EmployeeNavigationPage();
-        }
-
-        else {
+        } else {
           destination = const MainNavigationPage();
         }
-        
+
         if (!mounted) return;
         Navigator.pushAndRemoveUntil(
           context,
@@ -109,7 +107,9 @@ class _LoginFormState extends State<LoginForm> {
               if (value == null || value.trim().isEmpty) {
                 return 'Veuillez saisir votre email';
               }
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
+              if (!RegExp(
+                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+              ).hasMatch(value.trim())) {
                 return 'Format d\'email invalide';
               }
               return null;
@@ -154,9 +154,7 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => const ForgotPasswordPage(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const ForgotPasswordPage()),
                 );
               },
               child: Text(
@@ -210,9 +208,7 @@ class _LoginFormState extends State<LoginForm> {
         style: AppTextStyles.body.copyWith(color: Colors.white),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextStyles.body.copyWith(
-            color: Colors.white60,
-          ),
+          hintStyle: AppTextStyles.body.copyWith(color: Colors.white60),
           suffixIcon: suffixIcon,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(

@@ -42,12 +42,14 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
       if (!mounted) return;
 
       setState(() {
-        _userInfo = UserInfoModel.fromJson(response.data as Map<String, dynamic>);
+        _userInfo = UserInfoModel.fromJson(
+          response.data as Map<String, dynamic>,
+        );
         _isLoading = false;
       });
     } catch (e) {
       if (!mounted) return;
-      
+
       // Si erreur 401, rediriger vers login
       if (e.toString().contains('401')) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -56,7 +58,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
         );
         return;
       }
-      
+
       setState(() {
         _errorMessage = 'Impossible de charger vos informations';
         _isLoading = false;
@@ -81,9 +83,10 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
         ),
         centerTitle: context.isMobile,
       ),
-      body: _isLoading
-          ? _buildLoadingSkeleton(context, padding)
-          : _errorMessage != null
+      body:
+          _isLoading
+              ? _buildLoadingSkeleton(context, padding)
+              : _errorMessage != null
               ? _buildErrorState(context, padding)
               : _buildContent(context, padding),
     );
@@ -151,12 +154,12 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.primary,
-                  AppColors.primary.withValues(alpha:0.7),
+                  AppColors.primary.withValues(alpha: 0.7),
                 ],
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withValues(alpha:0.3),
+                  color: AppColors.primary.withValues(alpha: 0.3),
                   offset: const Offset(0, 4),
                   blurRadius: 12,
                 ),
@@ -164,7 +167,8 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
             child: Center(
               child: Text(
-                _userInfo!.firstname[0].toUpperCase() + _userInfo!.lastname[0].toUpperCase(),
+                _userInfo!.firstname[0].toUpperCase() +
+                    _userInfo!.lastname[0].toUpperCase(),
                 style: AppTextStyles.cardTitle.copyWith(
                   fontSize: context.fluidValue(minValue: 24, maxValue: 32),
                   color: AppColors.dark,
@@ -198,14 +202,21 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                 const SizedBox(height: 8),
                 // Badge rôle
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha:0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.primary.withValues(alpha:0.3)),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                    ),
                   ),
                   child: Text(
-                    _userInfo!.role == 'ADMIN' ? '👑 Administrateur' : '👤 Client',
+                    _userInfo!.role == 'ADMIN'
+                        ? '👑 Administrateur'
+                        : '👤 Client',
                     style: AppTextStyles.caption.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,
@@ -329,27 +340,23 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           _buildSwitchItem(
             icon: Icons.notifications,
             label: 'Notifications par email',
             subtitle: 'Recevoir les mises à jour de commandes',
             value: true,
-            onChanged: (value) {
-              
-            },
+            onChanged: (value) {},
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           _buildSwitchItem(
             icon: Icons.sms,
             label: 'Notifications SMS',
             subtitle: 'Alertes importantes par SMS',
             value: false,
-            onChanged: (value) {
-              
-            },
+            onChanged: (value) {},
           ),
         ],
       ),
@@ -373,9 +380,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             children: [
               Text(
                 label,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
               Text(
                 subtitle,
@@ -407,7 +412,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           _buildActionItem(
             icon: Icons.lock,
             label: 'Changer le mot de passe',
@@ -415,9 +420,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
               _showChangePasswordDialog(context);
             },
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           _buildActionItem(
             icon: Icons.security,
             label: 'Authentification à deux facteurs',
@@ -447,16 +452,14 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.body.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             if (badge != null)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.textMuted.withValues(alpha:0.1),
+                  color: AppColors.textMuted.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -486,33 +489,27 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           _buildActionItem(
             icon: Icons.help_outline,
             label: 'Aide & Support',
-            onTap: () {
-              
-            },
+            onTap: () {},
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           _buildActionItem(
             icon: Icons.privacy_tip_outlined,
             label: 'Politique de confidentialité',
-            onTap: () {
-              
-            },
+            onTap: () {},
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           _buildActionItem(
             icon: Icons.description_outlined,
             label: 'Conditions d\'utilisation',
-            onTap: () {
-             
-            },
+            onTap: () {},
           ),
 
           const SizedBox(height: 16),
@@ -522,9 +519,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
           Center(
             child: Text(
               'Version 1.0.0',
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.textMuted,
-              ),
+              style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
             ),
           ),
         ],
@@ -566,39 +561,41 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
   void _showChangePasswordDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Changer le mot de passe'),
-        content: const Text(
-          'Cette fonctionnalité sera bientôt disponible. Vous recevrez un email pour réinitialiser votre mot de passe.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Fermer'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Changer le mot de passe'),
+            content: const Text(
+              'Cette fonctionnalité sera bientôt disponible. Vous recevrez un email pour réinitialiser votre mot de passe.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Fermer'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   Future<void> _logout(BuildContext context) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Déconnexion'),
-        content: const Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Annuler'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Déconnexion'),
+            content: const Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Déconnexion'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Déconnexion'),
-          ),
-        ],
-      ),
     );
 
     if (confirm == true && mounted) {

@@ -4,6 +4,8 @@ import '../../core/theme/typography.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/api/dio_client.dart';
+import '../../core/utils/price_formatter.dart';
+import '../../core/utils/validators.dart';
 import '../menus/models/menu_model.dart';
 import 'models/user_info_model.dart';
 import 'edit_delivery_info_page.dart';
@@ -174,7 +176,10 @@ class _OrderPageState extends State<OrderPage> {
       final payload = {
         'menu_id': widget.selectedMenu!.id,
         'event_address': deliveryAddress,
-        'event_city': _isDeliveryInBordeaux ? 'Bordeaux' : _eventCityController.text.trim(),
+        'event_city':
+            _isDeliveryInBordeaux
+                ? 'Bordeaux'
+                : _eventCityController.text.trim(),
         'event_date': DateFormat('yyyy-MM-dd').format(_selectedDate!),
         'event_time': timeStr,
         'delivery_km': _isDeliveryInBordeaux ? 0 : _deliveryKm,
@@ -193,15 +198,19 @@ class _OrderPageState extends State<OrderPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => OrderConfirmationPage(
-            orderId: orderId,
-            menuTitle: widget.selectedMenu!.title,
-            eventDate: _selectedDate!,
-            eventTime: _selectedTime!,
-            guestsCount: _guestsCount,
-            deliveryCity: _isDeliveryInBordeaux ? 'Bordeaux' : _eventCityController.text.trim(),
-            totalPrice: _totalPrice,
-          ),
+          builder:
+              (context) => OrderConfirmationPage(
+                orderId: orderId,
+                menuTitle: widget.selectedMenu!.title,
+                eventDate: _selectedDate!,
+                eventTime: _selectedTime!,
+                guestsCount: _guestsCount,
+                deliveryCity:
+                    _isDeliveryInBordeaux
+                        ? 'Bordeaux'
+                        : _eventCityController.text.trim(),
+                totalPrice: _totalPrice,
+              ),
         ),
       );
     } catch (e) {
@@ -212,14 +221,18 @@ class _OrderPageState extends State<OrderPage> {
 
       // Extraire le message d'erreur et le code du backend si disponible
       if (e.toString().contains('detail')) {
-        final match = RegExp(r'detail["\s:]+([^"}\]]+)').firstMatch(e.toString());
+        final match = RegExp(
+          r'detail["\s:]+([^"}\]]+)',
+        ).firstMatch(e.toString());
         if (match != null) {
           errorMessage = match.group(1) ?? errorMessage;
         }
       }
 
       // Extraire le code d'erreur HTTP si disponible
-      final statusMatch = RegExp(r'status(?:Code)?["\s:]+(\d+)').firstMatch(e.toString());
+      final statusMatch = RegExp(
+        r'status(?:Code)?["\s:]+(\d+)',
+      ).firstMatch(e.toString());
       if (statusMatch != null) {
         errorCode = statusMatch.group(1);
       }
@@ -228,13 +241,14 @@ class _OrderPageState extends State<OrderPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OrderErrorPage(
-            errorMessage: errorMessage,
-            errorCode: errorCode,
-            onRetry: () {
-              Navigator.pop(context); // Retour à la page de commande
-            },
-          ),
+          builder:
+              (context) => OrderErrorPage(
+                errorMessage: errorMessage,
+                errorCode: errorCode,
+                onRetry: () {
+                  Navigator.pop(context); // Retour à la page de commande
+                },
+              ),
         ),
       );
     } finally {
@@ -496,7 +510,7 @@ class _OrderPageState extends State<OrderPage> {
                   child: Container(
                     padding: EdgeInsets.all(spacing * 0.75),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha:0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -602,7 +616,7 @@ class _OrderPageState extends State<OrderPage> {
           icon,
           color:
               isWarning
-                  ? AppColors.danger.withValues(alpha:0.7)
+                  ? AppColors.danger.withValues(alpha: 0.7)
                   : AppColors.textSecondary,
           size: iconSize,
         ),
@@ -664,7 +678,7 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${widget.selectedMenu!.basePrice.toStringAsFixed(0)}€ / pers',
+                    '${PriceFormatter.formatPriceCompact(widget.selectedMenu!.basePrice)} / pers',
                     style: AppTextStyles.caption.copyWith(
                       fontSize: context.isMobile ? 14 : 16,
                     ),
@@ -879,9 +893,8 @@ class _OrderPageState extends State<OrderPage> {
               fillColor: Colors.white,
             ),
             validator: (value) {
-              if (!_isDeliveryInBordeaux &&
-                  (value == null || value.trim().isEmpty)) {
-                return 'Veuillez entrer la ville';
+              if (!_isDeliveryInBordeaux) {
+                return Validators.validateRequired(value, fieldName: 'Ville');
               }
               return null;
             },
@@ -899,7 +912,7 @@ class _OrderPageState extends State<OrderPage> {
               ),
               filled: true,
               fillColor: Colors.white,
-              helperText: 'Frais: ${_deliveryFee.toStringAsFixed(2)}€',
+              helperText: 'Frais: ${PriceFormatter.formatPrice(_deliveryFee)}',
               helperStyle: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
@@ -907,15 +920,17 @@ class _OrderPageState extends State<OrderPage> {
             ),
             validator: (value) {
               if (!_isDeliveryInBordeaux) {
-                if (value == null || value.isEmpty) {
-                  return 'Veuillez entrer la distance';
-                }
-                final km = double.tryParse(value);
-                if (km == null || km < 0) {
-                  return 'Distance invalide';
-                }
-                if (km > 100) {
-                  return 'Livraison limitée à 100km';
+                final error = Validators.validateNumber(
+                  value,
+                  fieldName: 'Distance',
+                  min: 0,
+                  max: 100,
+                );
+                if (error != null) {
+                  return error.replaceFirst(
+                    'inférieur ou égal à 100',
+                    'limitée à 100km',
+                  );
                 }
               }
               return null;
@@ -962,7 +977,8 @@ class _OrderPageState extends State<OrderPage> {
             _buildSummaryRow(
               context,
               label: widget.selectedMenu!.title,
-              detail: '$_guestsCount × ${_menuPrice.toStringAsFixed(2)}€',
+              detail:
+                  '$_guestsCount × ${PriceFormatter.formatPrice(_menuPrice)}',
               value: _menuTotal,
               labelSize: labelSize,
               priceSize: priceSize,
@@ -1014,7 +1030,7 @@ class _OrderPageState extends State<OrderPage> {
                 ),
               ),
               Text(
-                '${_totalPrice.toStringAsFixed(2)}€',
+                PriceFormatter.formatPrice(_totalPrice),
                 style: AppTextStyles.cardTitle.copyWith(
                   fontSize: context.fluidValue(minValue: 18, maxValue: 22),
                   fontWeight: FontWeight.bold,
@@ -1078,7 +1094,7 @@ class _OrderPageState extends State<OrderPage> {
         Text(
           isFree
               ? 'Gratuit'
-              : '${isDiscount ? '' : '+'}${value.toStringAsFixed(2)}€',
+              : '${isDiscount ? '' : '+'}${PriceFormatter.formatPrice(value)}',
           style: AppTextStyles.body.copyWith(
             fontSize: priceSize,
             fontWeight: FontWeight.w600,
@@ -1106,15 +1122,13 @@ class _OrderPageState extends State<OrderPage> {
         fillColor: Colors.white,
       ),
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Veuillez entrer le nombre d\'invités';
-        }
-        if (int.tryParse(value) == null) {
-          return 'Nombre invalide';
-        }
-        if (widget.selectedMenu != null &&
-            int.parse(value) < widget.selectedMenu!.minPeople) {
-          return 'Minimum ${widget.selectedMenu!.minPeople} personnes';
+        final error = Validators.validateNumber(
+          value,
+          fieldName: 'Nombre d\'invités',
+          min: widget.selectedMenu?.minPeople.toDouble() ?? 1,
+        );
+        if (error != null) {
+          return error;
         }
         return null;
       },
@@ -1129,14 +1143,13 @@ class _OrderPageState extends State<OrderPage> {
       child: Container(
         padding: EdgeInsets.all(context.isMobile ? 14 : 16),
         decoration: BoxDecoration(
-          color: _needsEquipment 
-              ? AppColors.primary.withValues(alpha:0.05)
-              : Colors.white,
+          color:
+              _needsEquipment
+                  ? AppColors.primary.withValues(alpha: 0.05)
+                  : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: _needsEquipment 
-                ? AppColors.primary 
-                : Colors.grey.shade300,
+            color: _needsEquipment ? AppColors.primary : Colors.grey.shade300,
             width: _needsEquipment ? 2 : 1,
           ),
         ),
@@ -1150,28 +1163,25 @@ class _OrderPageState extends State<OrderPage> {
                 color: _needsEquipment ? AppColors.primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: _needsEquipment 
-                      ? AppColors.primary 
-                      : Colors.grey.shade400,
+                  color:
+                      _needsEquipment
+                          ? AppColors.primary
+                          : Colors.grey.shade400,
                   width: 2,
                 ),
               ),
-              child: _needsEquipment
-                  ? const Icon(
-                      Icons.check,
-                      size: 16,
-                      color: Colors.white,
-                    )
-                  : null,
+              child:
+                  _needsEquipment
+                      ? const Icon(Icons.check, size: 16, color: Colors.white)
+                      : null,
             ),
             const SizedBox(width: 12),
-            
+
             // Icône et texte
             Icon(
               Icons.restaurant,
-              color: _needsEquipment 
-                  ? AppColors.primary 
-                  : AppColors.textSecondary,
+              color:
+                  _needsEquipment ? AppColors.primary : AppColors.textSecondary,
               size: 20,
             ),
             const SizedBox(width: 8),
@@ -1182,12 +1192,12 @@ class _OrderPageState extends State<OrderPage> {
                   Text(
                     'J\'ai besoin de matériel',
                     style: AppTextStyles.body.copyWith(
-                      fontWeight: _needsEquipment 
-                          ? FontWeight.w600 
-                          : FontWeight.w500,
-                      color: _needsEquipment 
-                          ? AppColors.primary 
-                          : AppColors.textPrimary,
+                      fontWeight:
+                          _needsEquipment ? FontWeight.w600 : FontWeight.w500,
+                      color:
+                          _needsEquipment
+                              ? AppColors.primary
+                              : AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -1231,28 +1241,29 @@ class _OrderPageState extends State<OrderPage> {
         onPressed: _isSubmitting ? null : _submitOrder,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          disabledBackgroundColor: AppColors.primary.withValues(alpha:0.6),
+          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child: _isSubmitting
-            ? const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        child:
+            _isSubmitting
+                ? const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+                : Text(
+                  'Valider la demande de devis',
+                  style: TextStyle(
+                    fontSize: context.isMobile ? 16 : 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-              )
-            : Text(
-                'Valider la demande de devis',
-                style: TextStyle(
-                  fontSize: context.isMobile ? 16 : 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
       ),
     );
   }

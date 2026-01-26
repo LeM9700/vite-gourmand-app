@@ -18,7 +18,7 @@ class _ContactPageState extends State<ContactPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _contactService = ContactService();
-  
+
   bool _isLoading = false;
 
   @override
@@ -42,7 +42,7 @@ class _ContactPageState extends State<ContactPage> {
       );
 
       final response = await _contactService.sendMessage(request);
-      
+
       if (mounted) {
         _showSuccessMessage(response.message);
         _clearForm();
@@ -193,10 +193,13 @@ class _ContactPageState extends State<ContactPage> {
                                       keyboardType: TextInputType.emailAddress,
                                       prefixIcon: Icons.email_outlined,
                                       validator: (value) {
-                                        if (value == null || value.trim().isEmpty) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
                                           return 'Veuillez saisir votre email';
                                         }
-                                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
+                                        if (!RegExp(
+                                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                        ).hasMatch(value.trim())) {
                                           return 'Format d\'email invalide';
                                         }
                                         return null;
@@ -211,7 +214,8 @@ class _ContactPageState extends State<ContactPage> {
                                       hintText: 'Sujet de votre message',
                                       prefixIcon: Icons.subject_outlined,
                                       validator: (value) {
-                                        if (value == null || value.trim().isEmpty) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
                                           return 'Veuillez saisir un sujet';
                                         }
                                         if (value.trim().length < 5) {
@@ -230,7 +234,8 @@ class _ContactPageState extends State<ContactPage> {
                                       prefixIcon: Icons.message_outlined,
                                       maxLines: 5,
                                       validator: (value) {
-                                        if (value == null || value.trim().isEmpty) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
                                           return 'Veuillez saisir votre message';
                                         }
                                         if (value.trim().length < 10) {
@@ -247,7 +252,10 @@ class _ContactPageState extends State<ContactPage> {
                                       width: double.infinity,
                                       child: PrimaryButton(
                                         label: 'Envoyer le message',
-                                        onPressed: _isLoading ? null : _handleSendMessage,
+                                        onPressed:
+                                            _isLoading
+                                                ? null
+                                                : _handleSendMessage,
                                         isLoading: _isLoading,
                                       ),
                                     ),
@@ -313,13 +321,8 @@ class _ContactPageState extends State<ContactPage> {
         style: AppTextStyles.body.copyWith(color: Colors.white),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextStyles.body.copyWith(
-            color: Colors.white60,
-          ),
-          prefixIcon: Icon(
-            prefixIcon,
-            color: Colors.white70,
-          ),
+          hintStyle: AppTextStyles.body.copyWith(color: Colors.white60),
+          prefixIcon: Icon(prefixIcon, color: Colors.white70),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 20,
@@ -335,10 +338,7 @@ class _ContactInfo extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const _ContactInfo({
-    required this.icon,
-    required this.text,
-  });
+  const _ContactInfo({required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -355,11 +355,7 @@ class _ContactInfo extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: AppColors.primary,
-            size: 16,
-          ),
+          Icon(icon, color: AppColors.primary, size: 16),
           const SizedBox(width: 8),
           Text(
             text,

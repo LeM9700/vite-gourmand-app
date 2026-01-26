@@ -22,8 +22,12 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
   void initState() {
     super.initState();
     _dayOfWeek = widget.schedule?['day_of_week'] ?? 0;
-    _startTimeController = TextEditingController(text: widget.schedule?['open_time'] ?? '09:00');
-    _endTimeController = TextEditingController(text: widget.schedule?['close_time'] ?? '18:00');
+    _startTimeController = TextEditingController(
+      text: widget.schedule?['open_time'] ?? '09:00',
+    );
+    _endTimeController = TextEditingController(
+      text: widget.schedule?['close_time'] ?? '18:00',
+    );
   }
 
   @override
@@ -36,7 +40,9 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.schedule == null ? 'Créer un horaire' : 'Modifier l\'horaire'),
+      title: Text(
+        widget.schedule == null ? 'Créer un horaire' : 'Modifier l\'horaire',
+      ),
       content: Form(
         key: _formKey,
         child: Column(
@@ -44,7 +50,10 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
           children: [
             DropdownButtonFormField<int>(
               value: _dayOfWeek,
-              decoration: const InputDecoration(labelText: 'Jour', border: OutlineInputBorder()),
+              decoration: const InputDecoration(
+                labelText: 'Jour',
+                border: OutlineInputBorder(),
+              ),
               items: const [
                 DropdownMenuItem(value: 0, child: Text('Lundi')),
                 DropdownMenuItem(value: 1, child: Text('Mardi')),
@@ -59,22 +68,34 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
             const SizedBox(height: 12),
             TextFormField(
               controller: _startTimeController,
-              decoration: const InputDecoration(labelText: 'Heure début (HH:MM)', border: OutlineInputBorder()),
-              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9:]'))],
+              decoration: const InputDecoration(
+                labelText: 'Heure début (HH:MM)',
+                border: OutlineInputBorder(),
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9:]')),
+              ],
               validator: (v) {
                 if (v?.isEmpty ?? true) return 'Requis';
-                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!)) return 'Format invalide';
+                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!))
+                  return 'Format invalide';
                 return null;
               },
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _endTimeController,
-              decoration: const InputDecoration(labelText: 'Heure fin (HH:MM)', border: OutlineInputBorder()),
-              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9:]'))],
+              decoration: const InputDecoration(
+                labelText: 'Heure fin (HH:MM)',
+                border: OutlineInputBorder(),
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9:]')),
+              ],
               validator: (v) {
                 if (v?.isEmpty ?? true) return 'Requis';
-                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!)) return 'Format invalide';
+                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!))
+                  return 'Format invalide';
                 return null;
               },
             ),
@@ -82,7 +103,10 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Annuler')),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Annuler'),
+        ),
         ElevatedButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {

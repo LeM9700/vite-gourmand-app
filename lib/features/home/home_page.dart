@@ -15,10 +15,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Hauteur hero responsive fluide
     final heroHeight = context.fluidValue(minValue: 300, maxValue: 500);
-    
+
     // Taille du logo responsive fluide
     final logoSize = context.fluidValue(minValue: 140, maxValue: 280);
-    
+
     // Afficher sidebar seulement sur grands écrans (>= 1024px)
     final showSidebar = context.isLargeDesktop;
 
@@ -30,10 +30,15 @@ class HomePage extends StatelessWidget {
           // Sidebar pour desktop uniquement
           if (showSidebar)
             SizedBox(
-              width: context.fluidValue(minValue: 240, maxValue: 300, minWidth: 1024, maxWidth: 1600),
+              width: context.fluidValue(
+                minValue: 240,
+                maxValue: 300,
+                minWidth: 1024,
+                maxWidth: 1600,
+              ),
               child: const AppDrawer(),
             ),
-          
+
           // Contenu principal
           Expanded(
             child: CustomScrollView(
@@ -51,20 +56,22 @@ class HomePage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      
+
                       // Overlay noir 25%
                       Container(
                         height: heroHeight,
                         width: double.infinity,
-                        color: const Color.fromARGB(255, 189, 189, 189).withValues(alpha: 0.25),
+                        color: const Color.fromARGB(
+                          255,
+                          189,
+                          189,
+                          189,
+                        ).withValues(alpha: 0.25),
                       ),
-                      
+
                       // Header avec menu (seulement si pas de sidebar)
-                      if (!showSidebar)
-                        SafeArea(
-                          child: _Header(),
-                        ),
-                      
+                      if (!showSidebar) SafeArea(child: _Header()),
+
                       // Logo centré
                       Positioned.fill(
                         child: Center(
@@ -79,7 +86,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 // Contenu principal avec fond #EDE4E4
                 SliverToBoxAdapter(
                   child: Container(
@@ -91,15 +98,40 @@ class HomePage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(height: context.fluidValue(minValue: 20, maxValue: 40)),
+                          SizedBox(
+                            height: context.fluidValue(
+                              minValue: 20,
+                              maxValue: 40,
+                            ),
+                          ),
                           const HomeSectionAbout(),
-                          SizedBox(height: context.fluidValue(minValue: 16, maxValue: 32)),
+                          SizedBox(
+                            height: context.fluidValue(
+                              minValue: 16,
+                              maxValue: 32,
+                            ),
+                          ),
                           const HomeSectionTeam(),
-                          SizedBox(height: context.fluidValue(minValue: 16, maxValue: 32)),
+                          SizedBox(
+                            height: context.fluidValue(
+                              minValue: 16,
+                              maxValue: 32,
+                            ),
+                          ),
                           const HomeSectionReviews(),
-                          SizedBox(height: context.fluidValue(minValue: 16, maxValue: 32)),
+                          SizedBox(
+                            height: context.fluidValue(
+                              minValue: 16,
+                              maxValue: 32,
+                            ),
+                          ),
                           const HomeSectionFooter(),
-                          SizedBox(height: context.fluidValue(minValue: 20, maxValue: 40)),
+                          SizedBox(
+                            height: context.fluidValue(
+                              minValue: 20,
+                              maxValue: 40,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -119,9 +151,14 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final titleSize = context.fluidValue(minValue: 18, maxValue: 26);
     final iconSize = context.fluidValue(minValue: 22, maxValue: 28);
-    
+
     return Padding(
-      padding: EdgeInsets.fromLTRB(context.horizontalPadding, 8, context.horizontalPadding, 0),
+      padding: EdgeInsets.fromLTRB(
+        context.horizontalPadding,
+        8,
+        context.horizontalPadding,
+        0,
+      ),
       child: Row(
         children: [
           // Burger
@@ -132,11 +169,14 @@ class _Header extends StatelessWidget {
           ),
           SizedBox(width: context.fluidValue(minValue: 4, maxValue: 12)),
           Expanded(
-            child: Text('Accueil', style: AppTextStyles.sectionTitle.copyWith(
-              color: Colors.white,
-              fontSize: titleSize,
-              fontWeight: FontWeight.w400,
-            )),
+            child: Text(
+              'Accueil',
+              style: AppTextStyles.sectionTitle.copyWith(
+                color: Colors.white,
+                fontSize: titleSize,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
           SizedBox(width: context.fluidValue(minValue: 4, maxValue: 12)),
           // Petit badge "Avis validés"

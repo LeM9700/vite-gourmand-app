@@ -58,12 +58,16 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
       if (employee.isAdmin) return false;
 
       // Filtre de recherche
-      final matchesSearch = _searchQuery.isEmpty ||
-          employee.fullName.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+      final matchesSearch =
+          _searchQuery.isEmpty ||
+          employee.fullName.toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          ) ||
           employee.email.toLowerCase().contains(_searchQuery.toLowerCase());
 
       // Filtre de statut
-      final matchesStatus = _statusFilter == 'all' ||
+      final matchesStatus =
+          _statusFilter == 'all' ||
           (_statusFilter == 'active' && employee.isActive) ||
           (_statusFilter == 'inactive' && !employee.isActive);
 
@@ -181,7 +185,9 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
                       style: const TextStyle(color: AppColors.textPrimary),
                       decoration: InputDecoration(
                         hintText: 'Rechercher un employé...',
-                        hintStyle: const TextStyle(color: AppColors.textSecondary),
+                        hintStyle: const TextStyle(
+                          color: AppColors.textSecondary,
+                        ),
                         prefixIcon: Icon(
                           Icons.search_rounded,
                           color: AppColors.primary,
@@ -198,39 +204,46 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
 
                   // Filtre de statut
                   GlassCard(
-                        child: GlassCard(
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: _statusFilter,
-                              isExpanded: true,
-                              dropdownColor: const Color.fromARGB(255, 230, 228, 228),
-                              icon: Icon(Icons.arrow_drop_down,
-                                  color: AppColors.primary),
-                              style: const TextStyle(color: AppColors.textPrimary),
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'all',
-                                  child: Text('Tous les statuts'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'active',
-                                  child: Text('Actifs'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'inactive',
-                                  child: Text('Inactifs'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _statusFilter = value ?? 'all';
-                                });
-                              },
-                            ),
+                    child: GlassCard(
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _statusFilter,
+                          isExpanded: true,
+                          dropdownColor: const Color.fromARGB(
+                            255,
+                            230,
+                            228,
+                            228,
                           ),
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: AppColors.primary,
+                          ),
+                          style: const TextStyle(color: AppColors.textPrimary),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'all',
+                              child: Text('Tous les statuts'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'active',
+                              child: Text('Actifs'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'inactive',
+                              child: Text('Inactifs'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _statusFilter = value ?? 'all';
+                            });
+                          },
                         ),
                       ),
+                    ),
+                  ),
                   const SizedBox(height: 12),
 
                   // Compteur de résultats
@@ -322,19 +335,16 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
               sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final employee = _filteredEmployees[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: EmployeeCard(
-                        employee: employee,
-                        onToggle: () => _loadEmployees(),
-                      ),
-                    );
-                  },
-                  childCount: _filteredEmployees.length,
-                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final employee = _filteredEmployees[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: EmployeeCard(
+                      employee: employee,
+                      onToggle: () => _loadEmployees(),
+                    ),
+                  );
+                }, childCount: _filteredEmployees.length),
               ),
             ),
         ],
@@ -348,9 +358,7 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
         icon: const Icon(Icons.person_add_rounded),
         label: const Text(
           'Nouvel employé',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

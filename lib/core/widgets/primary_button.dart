@@ -10,6 +10,8 @@ class PrimaryButton extends StatefulWidget {
   final bool isLoading;
   final double height;
   final double borderRadius;
+  final Color? backgroundColor;
+  final Widget? icon;
 
   const PrimaryButton({
     super.key,
@@ -18,6 +20,8 @@ class PrimaryButton extends StatefulWidget {
     this.isLoading = false,
     this.height = 56,
     this.borderRadius = 12,
+    this.backgroundColor,
+    this.icon,
   });
 
   @override
@@ -40,10 +44,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.98,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -80,30 +81,32 @@ class _PrimaryButtonState extends State<PrimaryButton>
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                gradient: widget.isLoading 
-                    ? LinearGradient(
-                        colors: [
-                          AppColors.mediumGrey.withValues(alpha: 0.5),
-                          AppColors.lightGrey.withValues(alpha: 0.5),
-                        ],
-                      )
-                    : LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: _isPressed 
-                            ? [
-                                AppColors.primary.withValues(alpha: 0.8),
-                                AppColors.saffron.withValues(alpha: 0.8),
-                              ]
-                            : [
-                                AppColors.primary,
-                                AppColors.saffron,
-                              ],
-                        stops: const [0.0, 1.0],
-                      ),
-                boxShadow: widget.isLoading 
-                    ? AppShadows.subtle 
-                    : (_isPressed ? AppShadows.subtle : AppShadows.elegant),
+                gradient:
+                    widget.isLoading
+                        ? LinearGradient(
+                          colors: [
+                            widget.backgroundColor ??
+                                AppColors.mediumGrey.withValues(alpha: 0.5),
+                            (widget.backgroundColor ?? AppColors.lightGrey)
+                                .withValues(alpha: 0.8),
+                          ],
+                        )
+                        : LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors:
+                              _isPressed
+                                  ? [
+                                    AppColors.primary.withValues(alpha: 0.8),
+                                    AppColors.saffron.withValues(alpha: 0.8),
+                                  ]
+                                  : [AppColors.primary, AppColors.saffron],
+                          stops: const [0.0, 1.0],
+                        ),
+                boxShadow:
+                    widget.isLoading
+                        ? AppShadows.subtle
+                        : (_isPressed ? AppShadows.subtle : AppShadows.elegant),
                 border: Border.all(
                   color: AppColors.champagne.withValues(alpha: 0.3),
                   width: 1,
@@ -119,6 +122,10 @@ class _PrimaryButtonState extends State<PrimaryButton>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if (widget.icon != null) ...[
+                          widget.icon!, // ✅ Afficher l'icône
+                          const SizedBox(width: 8),
+                        ],
                         if (widget.isLoading) ...[
                           SizedBox(
                             width: 20,
@@ -135,9 +142,10 @@ class _PrimaryButtonState extends State<PrimaryButton>
                         Text(
                           widget.label,
                           style: AppTextStyles.buttonPrimary.copyWith(
-                            color: widget.isLoading 
-                                ? AppColors.textMuted 
-                                : AppColors.dark,
+                            color:
+                                widget.isLoading
+                                    ? AppColors.textMuted
+                                    : AppColors.dark,
                           ),
                         ),
                       ],

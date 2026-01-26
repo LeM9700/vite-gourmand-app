@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:uni_links/uni_links.dart';
-import 'package:flutter/foundation.dart' ;
+import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'features/splash/splash_page.dart';
 import 'features/auth/reset_password_page.dart';
@@ -27,10 +27,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    if (!kIsWeb){
+    if (!kIsWeb) {
       _initDeepLinks();
     }
-    
   }
 
   @override
@@ -51,13 +50,16 @@ class _MyAppState extends State<MyApp> {
     }
 
     // Écouter les deep links pendant que l'app est ouverte
-    _linkSubscription = linkStream.listen((String? link) {
-      if (link != null) {
-        _handleDeepLink(link);
-      }
-    }, onError: (err) {
-      debugPrint('Erreur lors de l\'écoute des liens: $err');
-    });
+    _linkSubscription = linkStream.listen(
+      (String? link) {
+        if (link != null) {
+          _handleDeepLink(link);
+        }
+      },
+      onError: (err) {
+        debugPrint('Erreur lors de l\'écoute des liens: $err');
+      },
+    );
   }
 
   void _handleDeepLink(String link) {
@@ -71,9 +73,7 @@ class _MyAppState extends State<MyApp> {
       if (token != null && token.isNotEmpty) {
         // Naviguer vers la page de réinitialisation
         navigatorKey.currentState?.push(
-          MaterialPageRoute(
-            builder: (_) => ResetPasswordPage(token: token),
-          ),
+          MaterialPageRoute(builder: (_) => ResetPasswordPage(token: token)),
         );
       }
     }

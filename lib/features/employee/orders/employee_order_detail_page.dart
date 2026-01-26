@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/responsive.dart';
+import '../../../core/utils/price_formatter.dart';
+import '../../../core/utils/date_formatter.dart';
 import '../../../core/widgets/glass_card.dart';
 import 'models/order_employee_model.dart';
 import 'services/employee_order_service.dart';
@@ -15,7 +16,8 @@ class EmployeeOrderDetailPage extends StatefulWidget {
   const EmployeeOrderDetailPage({super.key, required this.orderId});
 
   @override
-  State<EmployeeOrderDetailPage> createState() => _EmployeeOrderDetailPageState();
+  State<EmployeeOrderDetailPage> createState() =>
+      _EmployeeOrderDetailPageState();
 }
 
 class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
@@ -160,84 +162,87 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           style: AppTextStyles.sectionTitle,
         ),
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _errorMessage != null
+      body:
+          _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : _errorMessage != null
               ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error_outline, size: 64, color: Colors.red),
-                      const SizedBox(height: 16),
-                      Text('Erreur', style: AppTextStyles.sectionTitle),
-                      const SizedBox(height: 8),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: Text(
-                          _errorMessage!,
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.body.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      ElevatedButton.icon(
-                        onPressed: _loadOrder,
-                        icon: const Icon(Icons.refresh),
-                        label: const Text('Réessayer'),
-                      ),
-                    ],
-                  ),
-                )
-              : Stack(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SingleChildScrollView(
-                      padding: EdgeInsets.all(context.horizontalPadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildStatusCard(),
-                          const SizedBox(height: 16),
-                          _buildCustomerCard(),
-                          const SizedBox(height: 16),
-                          _buildOrderDetailsCard(),
-                          const SizedBox(height: 16),
-                          _buildMenuCard(),
-                          const SizedBox(height: 16),
-                          _buildPricingCard(),
-                          if (_order!.cancellation != null) ...[
-                            const SizedBox(height: 16),
-                            _buildCancellationCard(),
-                          ],
-                          const SizedBox(height: 24),
-                          GlassCard(
-                            child: OrderStatusTimeline(
-                              history: _order!.history ?? [],
-                              currentStatus: _order!.status.value,
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          GlassCard(
-                            child: OrderActionButtons(
-                              order: _order!,
-                              onStatusChange: _handleStatusChange,
-                              onCancel: _handleCancel,
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                        ],
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(height: 16),
+                    Text('Erreur', style: AppTextStyles.sectionTitle),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Text(
+                        _errorMessage!,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
-                    if (_isUpdating)
-                      Container(
-                        color: Colors.black.withValues(alpha: 0.5),
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
+                    const SizedBox(height: 24),
+                    ElevatedButton.icon(
+                      onPressed: _loadOrder,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Réessayer'),
+                    ),
                   ],
                 ),
+              )
+              : Stack(
+                children: [
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(context.horizontalPadding),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildStatusCard(),
+                        const SizedBox(height: 16),
+                        _buildCustomerCard(),
+                        const SizedBox(height: 16),
+                        _buildOrderDetailsCard(),
+                        const SizedBox(height: 16),
+                        _buildMenuCard(),
+                        const SizedBox(height: 16),
+                        _buildPricingCard(),
+                        if (_order!.cancellation != null) ...[
+                          const SizedBox(height: 16),
+                          _buildCancellationCard(),
+                        ],
+                        const SizedBox(height: 24),
+                        GlassCard(
+                          child: OrderStatusTimeline(
+                            history: _order!.history ?? [],
+                            currentStatus: _order!.status.value,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        GlassCard(
+                          child: OrderActionButtons(
+                            order: _order!,
+                            onStatusChange: _handleStatusChange,
+                            onCancel: _handleCancel,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ),
+                  if (_isUpdating)
+                    Container(
+                      color: Colors.black.withValues(alpha: 0.5),
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                ],
+              ),
     );
   }
 
@@ -293,7 +298,10 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Informations client', style: AppTextStyles.sectionTitle.copyWith(fontSize: 18)),
+          Text(
+            'Informations client',
+            style: AppTextStyles.sectionTitle.copyWith(fontSize: 18),
+          ),
           const SizedBox(height: 16),
           _buildInfoRow(Icons.person, 'Nom', customer?.fullName ?? 'Inconnu'),
           const SizedBox(height: 12),
@@ -308,14 +316,20 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
   }
 
   Widget _buildOrderDetailsCard() {
-    final dateFormat = DateFormat('dd MMMM yyyy', 'fr_FR');
     return GlassCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Détails de l\'événement', style: AppTextStyles.sectionTitle.copyWith(fontSize: 18)),
+          Text(
+            'Détails de l\'\u00e9v\u00e9nement',
+            style: AppTextStyles.sectionTitle.copyWith(fontSize: 18),
+          ),
           const SizedBox(height: 16),
-          _buildInfoRow(Icons.event, 'Date', dateFormat.format(_order!.eventDate)),
+          _buildInfoRow(
+            Icons.event,
+            'Date',
+            DateFormatter.formatDateLong(_order!.eventDate),
+          ),
           const SizedBox(height: 12),
           _buildInfoRow(Icons.access_time, 'Heure', _order!.eventTime),
           const SizedBox(height: 12),
@@ -323,9 +337,17 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           const SizedBox(height: 12),
           _buildInfoRow(Icons.home, 'Adresse', _order!.eventAddress),
           const SizedBox(height: 12),
-          _buildInfoRow(Icons.local_shipping, 'Distance', '${_order!.deliveryKm} km'),
+          _buildInfoRow(
+            Icons.local_shipping,
+            'Distance',
+            '${_order!.deliveryKm} km',
+          ),
           const SizedBox(height: 12),
-          _buildInfoRow(Icons.people, 'Nombre de personnes', '${_order!.peopleCount}'),
+          _buildInfoRow(
+            Icons.people,
+            'Nombre de personnes',
+            '${_order!.peopleCount}',
+          ),
           if (_order!.hasLoanedEquipment) ...[
             const SizedBox(height: 12),
             Row(
@@ -353,7 +375,10 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Menu commandé', style: AppTextStyles.sectionTitle.copyWith(fontSize: 18)),
+          Text(
+            'Menu commandé',
+            style: AppTextStyles.sectionTitle.copyWith(fontSize: 18),
+          ),
           const SizedBox(height: 16),
           Text(
             menu?.title ?? 'Menu #${_order!.menuId}',
@@ -363,7 +388,9 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
             const SizedBox(height: 8),
             Text(
               menu!.description,
-              style: AppTextStyles.body.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ],
@@ -376,7 +403,10 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Détails du prix', style: AppTextStyles.sectionTitle.copyWith(fontSize: 18)),
+          Text(
+            'Détails du prix',
+            style: AppTextStyles.sectionTitle.copyWith(fontSize: 18),
+          ),
           const SizedBox(height: 16),
           _buildPriceRow('Prix menu', _order!.menuPrice),
           const SizedBox(height: 8),
@@ -389,9 +419,12 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total', style: AppTextStyles.sectionTitle.copyWith(fontSize: 20)),
               Text(
-                '${_order!.totalPrice.toStringAsFixed(2)}€',
+                'Total',
+                style: AppTextStyles.sectionTitle.copyWith(fontSize: 20),
+              ),
+              Text(
+                PriceFormatter.formatPrice(_order!.totalPrice),
                 style: AppTextStyles.sectionTitle.copyWith(
                   fontSize: 24,
                   color: AppColors.primary,
@@ -406,7 +439,6 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
 
   Widget _buildCancellationCard() {
     final cancellation = _order!.cancellation!;
-    final dateFormat = DateFormat('dd/MM/yyyy à HH:mm');
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -433,16 +465,20 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           const SizedBox(height: 16),
           Text(
             'Date d\'annulation',
-            style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           Text(
-            dateFormat.format(cancellation.createdAt),
+            DateFormatter.formatDateTime(cancellation.createdAt),
             style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 12),
           Text(
             'Mode de contact utilisé',
-            style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           Row(
             children: [
@@ -461,7 +497,9 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           const SizedBox(height: 12),
           Text(
             'Motif',
-            style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           Container(
             width: double.infinity,
@@ -470,10 +508,7 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Text(
-              cancellation.reason,
-              style: AppTextStyles.body,
-            ),
+            child: Text(cancellation.reason, style: AppTextStyles.body),
           ),
         ],
       ),
@@ -492,10 +527,15 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
             children: [
               Text(
                 label,
-                style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.caption.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
               const SizedBox(height: 2),
-              Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600)),
+              Text(
+                value,
+                style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600),
+              ),
             ],
           ),
         ),
@@ -509,7 +549,7 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
       children: [
         Text(label, style: AppTextStyles.body),
         Text(
-          '${amount.toStringAsFixed(2)}€',
+          PriceFormatter.formatPrice(amount),
           style: AppTextStyles.body.copyWith(
             fontWeight: FontWeight.w600,
             color: color,

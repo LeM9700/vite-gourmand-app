@@ -21,7 +21,7 @@ class EmployeeOrderService {
 
     try {
       final queryParams = <String, dynamic>{};
-      
+
       if (status != null && status.isNotEmpty) {
         queryParams['status'] = status;
       }
@@ -54,7 +54,9 @@ class EmployeeOrderService {
       }
 
       return ordersData
-          .map((json) => OrderEmployeeModel.fromJson(json as Map<String, dynamic>))
+          .map(
+            (json) => OrderEmployeeModel.fromJson(json as Map<String, dynamic>),
+          )
           .toList();
     } catch (e) {
       throw Exception('Erreur lors du chargement des commandes: $e');
@@ -93,7 +95,8 @@ class EmployeeOrderService {
       return OrderEmployeeModel.fromJson(response.data as Map<String, dynamic>);
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 400) {
-        final message = e.response?.data?['detail'] ?? 'Transition de statut non autorisée';
+        final message =
+            e.response?.data?['detail'] ?? 'Transition de statut non autorisée';
         throw Exception(message);
       }
       throw Exception('Erreur lors de la mise à jour du statut: $e');
@@ -111,16 +114,15 @@ class EmployeeOrderService {
     try {
       final response = await _dioClient!.dio.post(
         '/orders/$orderId/cancel',
-        data: {
-          'contact_mode': contactMode,
-          'reason': reason,
-        },
+        data: {'contact_mode': contactMode, 'reason': reason},
       );
 
       return OrderEmployeeModel.fromJson(response.data as Map<String, dynamic>);
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 400) {
-        final message = e.response?.data?['detail'] ?? 'Impossible d\'annuler cette commande';
+        final message =
+            e.response?.data?['detail'] ??
+            'Impossible d\'annuler cette commande';
         throw Exception(message);
       }
       throw Exception('Erreur lors de l\'annulation: $e');

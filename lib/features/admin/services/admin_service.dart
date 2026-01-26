@@ -79,10 +79,7 @@ class AdminService {
   }) async {
     try {
       final dio = await _getDio();
-      final queryParams = {
-        'start_date': startDate,
-        'end_date': endDate,
-      };
+      final queryParams = {'start_date': startDate, 'end_date': endDate};
       if (menuId != null) {
         queryParams['menu_id'] = menuId.toString();
       }
@@ -105,10 +102,7 @@ class AdminService {
   }) async {
     try {
       final dio = await _getDio();
-      final queryParams = {
-        'start_date': startDate,
-        'end_date': endDate,
-      };
+      final queryParams = {'start_date': startDate, 'end_date': endDate};
       if (menuIds != null && menuIds.isNotEmpty) {
         queryParams['menu_ids'] = menuIds.join(',');
       }
@@ -132,10 +126,7 @@ class AdminService {
       final dio = await _getDio();
       final response = await dio.dio.get(
         '/admin/stats/comparison',
-        queryParameters: {
-          'start_date': startDate,
-          'end_date': endDate,
-        },
+        queryParameters: {'start_date': startDate, 'end_date': endDate},
       );
       return response.data as Map<String, dynamic>;
     } catch (e) {

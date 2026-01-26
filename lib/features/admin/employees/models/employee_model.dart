@@ -57,7 +57,7 @@ class EmployeeModel {
   String get fullName => '$firstname $lastname';
   bool get isAdmin => role == 'ADMIN';
   bool get isEmployee => role == 'EMPLOYEE';
-  
+
   String get roleLabel {
     switch (role) {
       case 'ADMIN':
@@ -78,7 +78,7 @@ class CreateEmployeeRequest {
   final String lastname;
   final String phone;
   final String address;
-  final String role; 
+  final String role;
 
   CreateEmployeeRequest({
     required this.email,

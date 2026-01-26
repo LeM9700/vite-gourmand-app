@@ -67,12 +67,17 @@ class OrderActionButtons extends StatelessWidget {
     }
   }
 
-  Future<void> _handleStatusChange(BuildContext context, String newStatus) async {
+  Future<void> _handleStatusChange(
+    BuildContext context,
+    String newStatus,
+  ) async {
     // Vérification spéciale pour WAITING_RETURN
     if (newStatus == 'WAITING_RETURN' && !order.hasLoanedEquipment) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Impossible : aucun matériel n\'a été prêté pour cette commande'),
+          content: Text(
+            'Impossible : aucun matériel n\'a été prêté pour cette commande',
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -83,26 +88,24 @@ class OrderActionButtons extends StatelessWidget {
     String? note;
     final shouldAddNote = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Changer le statut',
-          style: AppTextStyles.sectionTitle,
-        ),
-        content: Text(
-          'Voulez-vous ajouter une note pour ce changement de statut ?',
-          style: AppTextStyles.body,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Non'),
+      builder:
+          (context) => AlertDialog(
+            title: Text('Changer le statut', style: AppTextStyles.sectionTitle),
+            content: Text(
+              'Voulez-vous ajouter une note pour ce changement de statut ?',
+              style: AppTextStyles.body,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Non'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('Oui'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Oui'),
-          ),
-        ],
-      ),
     );
 
     if (shouldAddNote == null) return;
@@ -111,27 +114,28 @@ class OrderActionButtons extends StatelessWidget {
       final controller = TextEditingController();
       final result = await showDialog<String>(
         context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Note', style: AppTextStyles.sectionTitle),
-          content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(
-              hintText: 'Ajouter une note...',
-              border: OutlineInputBorder(),
+        builder:
+            (context) => AlertDialog(
+              title: Text('Note', style: AppTextStyles.sectionTitle),
+              content: TextField(
+                controller: controller,
+                decoration: const InputDecoration(
+                  hintText: 'Ajouter une note...',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Annuler'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, controller.text),
+                  child: const Text('Confirmer'),
+                ),
+              ],
             ),
-            maxLines: 3,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Annuler'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text('Confirmer'),
-            ),
-          ],
-        ),
       );
       note = result;
     }
@@ -154,7 +158,9 @@ class OrderActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allowedTransitions = OrderStatusTransitions.getAllowedTransitions(order.status.value);
+    final allowedTransitions = OrderStatusTransitions.getAllowedTransitions(
+      order.status.value,
+    );
     final canCancel = allowedTransitions.contains('CANCELLED');
 
     if (allowedTransitions.isEmpty) {
@@ -181,7 +187,8 @@ class OrderActionButtons extends StatelessWidget {
       );
     }
 
-    final nextTransitions = allowedTransitions.where((s) => s != 'CANCELLED').toList();
+    final nextTransitions =
+        allowedTransitions.where((s) => s != 'CANCELLED').toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -195,11 +202,14 @@ class OrderActionButtons extends StatelessWidget {
         // Boutons de transition de statut
         ...nextTransitions.map((status) {
           final color = _getStatusColor(status);
+          final icon = _getStatusIcon(status);
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: PrimaryButton(
               label: _getStatusLabel(status),
               onPressed: () => _handleStatusChange(context, status),
+              icon: Icon(icon, color: Colors.white),
+              backgroundColor: color,
             ),
           );
         }),

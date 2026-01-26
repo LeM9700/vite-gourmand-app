@@ -3,6 +3,7 @@ import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/utils/responsive.dart';
+import '../../../core/utils/price_formatter.dart';
 import '../models/menu_model.dart';
 import '../menu_detail_page.dart';
 import '../../auth/auth_page.dart';
@@ -12,10 +13,7 @@ import '../../../core/storage/secure_storage.dart';
 class MenuCard extends StatelessWidget {
   final MenuModel menu;
 
-  const MenuCard({
-    super.key,
-    required this.menu,
-  });
+  const MenuCard({super.key, required this.menu});
 
   Future<void> _handleOrderClick(BuildContext context) async {
     final storage = SecureStorage();
@@ -27,9 +25,7 @@ class MenuCard extends StatelessWidget {
       // User is logged in, go to Order Page
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => OrderPage(selectedMenu: menu),
-        ),
+        MaterialPageRoute(builder: (context) => OrderPage(selectedMenu: menu)),
       );
     } else {
       // User is not logged in
@@ -39,7 +35,7 @@ class MenuCard extends StatelessWidget {
           duration: Duration(seconds: 2),
         ),
       );
-      
+
       // Navigate to Auth Page and wait for result
       await Navigator.push(
         context,
@@ -53,7 +49,7 @@ class MenuCard extends StatelessWidget {
       token = await storage.readToken();
 
       if (token != null && token.isNotEmpty) {
-         Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => OrderPage(selectedMenu: menu),
@@ -68,22 +64,22 @@ class MenuCard extends StatelessWidget {
     // Calcul fluide des dimensions basé sur la largeur d'écran
     final scale = context.scaleFactor;
     final screenWidth = context.screenWidth;
-    
+
     // Hauteur d'image proportionnelle
     final imageHeight = context.fluidValue(minValue: 120, maxValue: 180);
-    
+
     // Tailles de texte fluides
     final titleSize = context.fluidValue(minValue: 14, maxValue: 18);
     final descriptionSize = context.fluidValue(minValue: 11, maxValue: 14);
     final badgeSize = context.fluidValue(minValue: 10, maxValue: 13);
     final priceSize = context.fluidValue(minValue: 12, maxValue: 15);
     final metaSize = context.fluidValue(minValue: 10, maxValue: 13);
-    
+
     // Padding et espacements fluides
     final cardPadding = context.fluidValue(minValue: 10, maxValue: 16);
     final spacing = context.fluidValue(minValue: 6, maxValue: 12);
     final smallSpacing = context.fluidValue(minValue: 4, maxValue: 8);
-    
+
     // Taille des boutons et icônes
     final buttonSize = context.fluidValue(minValue: 32, maxValue: 44);
     final iconSize = context.fluidValue(minValue: 14, maxValue: 18);
@@ -94,60 +90,65 @@ class MenuCard extends StatelessWidget {
         children: [
           // Image du menu
           GestureDetector(
-             onTap: () async {
-               final result = await Navigator.push(
+            onTap: () async {
+              final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MenuDetailPage(menu: menu),
                 ),
               );
-              
+
               if (result == 'order' && context.mounted) {
                 _handleOrderClick(context);
               }
-             },
-             child: Container(
-            height: imageHeight,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(12),
+            },
+            child: Container(
+              height: imageHeight,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+                color: AppColors.surface,
+                image:
+                    menu.imageUrl != null
+                        ? DecorationImage(
+                          image: NetworkImage(menu.imageUrl!),
+                          fit: BoxFit.cover,
+                        )
+                        : null,
               ),
-              color: AppColors.surface,
-              image: menu.imageUrl != null
-                  ? DecorationImage(
-                      image: NetworkImage(menu.imageUrl!),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
+              child:
+                  menu.imageUrl == null
+                      ? Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              AppColors.primary.withValues(alpha: 0.3),
+                              AppColors.accent.withValues(alpha: 0.2),
+                            ],
+                          ),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.restaurant_menu,
+                            size: context.fluidValue(
+                              minValue: 32,
+                              maxValue: 48,
+                            ),
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      )
+                      : null,
             ),
-            child: menu.imageUrl == null
-                ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(12),
-                      ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          AppColors.primary.withValues(alpha: 0.3),
-                          AppColors.accent.withValues(alpha: 0.2),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.restaurant_menu,
-                        size: context.fluidValue(minValue: 32, maxValue: 48),
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  )
-                : null,
           ),
-          ),
-          
+
           // Contenu de la carte
           Expanded(
             child: Padding(
@@ -165,9 +166,9 @@ class MenuCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  
+
                   SizedBox(height: smallSpacing),
-                  
+
                   // Description
                   Text(
                     menu.description,
@@ -179,9 +180,9 @@ class MenuCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  
+
                   SizedBox(height: spacing),
-                  
+
                   // Thème et régime
                   Wrap(
                     spacing: smallSpacing,
@@ -193,14 +194,17 @@ class MenuCard extends StatelessWidget {
                         _buildBadge(menu.regime, AppColors.success, badgeSize),
                     ],
                   ),
-                  
+
                   SizedBox(height: spacing),
-                  
+
                   // Prix
                   if (menu.basePrice > 0)
                     Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: context.fluidValue(minValue: 8, maxValue: 12),
+                        horizontal: context.fluidValue(
+                          minValue: 8,
+                          maxValue: 12,
+                        ),
                         vertical: context.fluidValue(minValue: 4, maxValue: 6),
                       ),
                       decoration: BoxDecoration(
@@ -208,7 +212,7 @@ class MenuCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '${menu.basePrice.toStringAsFixed(0)}€',
+                        PriceFormatter.formatPriceCompact(menu.basePrice),
                         style: AppTextStyles.caption.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -216,9 +220,9 @@ class MenuCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  
+
                   const Spacer(),
-                  
+
                   // Informations personnes et plats
                   Row(
                     children: [
@@ -240,9 +244,9 @@ class MenuCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
+
                   SizedBox(height: smallSpacing),
-                  
+
                   if (menu.dishes.isNotEmpty)
                     Row(
                       children: [
@@ -261,9 +265,9 @@ class MenuCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                  
+
                   SizedBox(height: spacing),
-                  
+
                   // Actions
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -345,11 +349,7 @@ class _ActionButton extends StatelessWidget {
             width: 1,
           ),
         ),
-        child: Icon(
-          icon,
-          size: size * 0.5,
-          color: AppColors.primary,
-        ),
+        child: Icon(icon, size: size * 0.5, color: AppColors.primary),
       ),
     );
   }

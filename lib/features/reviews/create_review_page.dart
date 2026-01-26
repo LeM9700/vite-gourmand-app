@@ -11,21 +11,19 @@ import 'widgets/rating_stars.dart';
 class CreateReviewPage extends StatefulWidget {
   final OrderModel order;
 
-  const CreateReviewPage({
-    super.key,
-    required this.order,
-  });
+  const CreateReviewPage({super.key, required this.order});
 
   @override
   State<CreateReviewPage> createState() => _CreateReviewPageState();
 }
 
-class _CreateReviewPageState extends State<CreateReviewPage> with TickerProviderStateMixin {
+class _CreateReviewPageState extends State<CreateReviewPage>
+    with TickerProviderStateMixin {
   final TextEditingController _commentController = TextEditingController();
   int _rating = 0;
   bool _isSubmitting = false;
   String? _errorMessage;
-  
+
   late AnimationController _slideController;
   late Animation<Offset> _slideAnimation;
   late AnimationController _fadeController;
@@ -34,7 +32,7 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
   @override
   void initState() {
     super.initState();
-    
+
     // Animation de glissement
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 600),
@@ -43,11 +41,10 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutCubic,
-    ));
-    
+    ).animate(
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+    );
+
     // Animation de fade
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 800),
@@ -56,11 +53,8 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeIn,
-    ));
-    
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeIn));
+
     // Démarrer les animations
     _fadeController.forward();
     _slideController.forward();
@@ -80,9 +74,13 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
       setState(() => _errorMessage = 'Veuillez donner une note');
       return;
     }
-    
+
     if (_commentController.text.trim().length < 5) {
-      setState(() => _errorMessage = 'Le commentaire doit contenir au moins 5 caractères');
+      setState(
+        () =>
+            _errorMessage =
+                'Le commentaire doit contenir au moins 5 caractères',
+      );
       return;
     }
 
@@ -93,13 +91,10 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
 
     try {
       final dioClient = await DioClient.create();
-      
+
       await dioClient.dio.post(
         '/orders/${widget.order.id}/review',
-        data: {
-          'rating': _rating,
-          'comment': _commentController.text.trim(),
-        },
+        data: {'rating': _rating, 'comment': _commentController.text.trim()},
       );
 
       if (!mounted) return;
@@ -107,12 +102,14 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
       // Succès - retour avec résultat
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Merci pour votre avis ! Il sera publié après modération.'),
+          content: Text(
+            'Merci pour votre avis ! Il sera publié après modération.',
+          ),
           backgroundColor: AppColors.success,
           duration: Duration(seconds: 3),
         ),
       );
-      
+
       Navigator.of(context).pop(true);
     } catch (e) {
       setState(() {
@@ -129,7 +126,8 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
     if (error.toString().contains('not found')) {
       return 'Commande introuvable';
     }
-    if (error.toString().contains('DELIVERED') || error.toString().contains('COMPLETED')) {
+    if (error.toString().contains('DELIVERED') ||
+        error.toString().contains('COMPLETED')) {
       return 'Vous ne pouvez laisser un avis que pour les commandes livrées ou terminées';
     }
     return 'Une erreur est survenue. Veuillez réessayer.';
@@ -139,7 +137,7 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
   Widget build(BuildContext context) {
     final horizontalPadding = context.horizontalPadding;
     final maxWidth = context.maxContentWidth;
-    
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -181,8 +179,8 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
                                 colors: [
-                                  AppColors.primary.withValues(alpha:0.2),
-                                  AppColors.primary.withValues(alpha:0.05),
+                                  AppColors.primary.withValues(alpha: 0.2),
+                                  AppColors.primary.withValues(alpha: 0.05),
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -211,9 +209,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                         ],
                       ),
                     ),
-                    
+
                     const SizedBox(height: 24),
-                    
+
                     // Informations commande
                     GlassCard(
                       padding: const EdgeInsets.all(20),
@@ -238,7 +236,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               children: [
                                 Text(
                                   'Commande #${widget.order.id}',
-                                  style: AppTextStyles.cardTitle.copyWith(fontSize: 16),
+                                  style: AppTextStyles.cardTitle.copyWith(
+                                    fontSize: 16,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
@@ -253,9 +253,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                         ],
                       ),
                     ),
-                    
+
                     const SizedBox(height: 32),
-                    
+
                     // Formulaire d'évaluation
                     GlassCard(
                       padding: const EdgeInsets.all(24),
@@ -265,7 +265,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                           // Note
                           Text(
                             'Votre note *',
-                            style: AppTextStyles.subtitle.copyWith(fontSize: 16),
+                            style: AppTextStyles.subtitle.copyWith(
+                              fontSize: 16,
+                            ),
                           ),
                           const SizedBox(height: 16),
                           Center(
@@ -292,13 +294,15 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               ),
                             ),
                           ],
-                          
+
                           const SizedBox(height: 32),
-                          
+
                           // Commentaire
                           Text(
                             'Votre commentaire *',
-                            style: AppTextStyles.subtitle.copyWith(fontSize: 16),
+                            style: AppTextStyles.subtitle.copyWith(
+                              fontSize: 16,
+                            ),
                           ),
                           const SizedBox(height: 12),
                           TextField(
@@ -306,7 +310,8 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                             maxLines: 6,
                             maxLength: 500,
                             decoration: InputDecoration(
-                              hintText: 'Partagez votre expérience en détail...',
+                              hintText:
+                                  'Partagez votre expérience en détail...',
                               hintStyle: AppTextStyles.body.copyWith(
                                 color: AppColors.textMuted,
                               ),
@@ -314,7 +319,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               fillColor: AppColors.glassFill,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
-                                borderSide: const BorderSide(color: AppColors.glassBorder),
+                                borderSide: const BorderSide(
+                                  color: AppColors.glassBorder,
+                                ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -326,16 +333,18 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               contentPadding: const EdgeInsets.all(16),
                             ),
                           ),
-                          
+
                           if (_errorMessage != null) ...[
                             const SizedBox(height: 16),
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: AppColors.danger.withValues(alpha:0.1),
+                                color: AppColors.danger.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: AppColors.danger.withValues(alpha:0.3),
+                                  color: AppColors.danger.withValues(
+                                    alpha: 0.3,
+                                  ),
                                 ),
                               ),
                               child: Row(
@@ -358,18 +367,18 @@ class _CreateReviewPageState extends State<CreateReviewPage> with TickerProvider
                               ),
                             ),
                           ],
-                          
+
                           const SizedBox(height: 24),
-                          
+
                           // Bouton de soumission
                           PrimaryButton(
                             label: 'Publier mon avis',
                             onPressed: _isSubmitting ? null : _submitReview,
                             isLoading: _isSubmitting,
                           ),
-                          
+
                           const SizedBox(height: 12),
-                          
+
                           Text(
                             'Votre avis sera publié après modération par notre équipe.',
                             style: AppTextStyles.caption.copyWith(

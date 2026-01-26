@@ -42,26 +42,37 @@ class OrderEmployeeModel extends OrderModel {
       eventCity: json['event_city'] ?? '',
       eventDate: DateTime.tryParse(json['event_date'] ?? '') ?? DateTime.now(),
       eventTime: json['event_time'] ?? '',
-      deliveryKm: double.tryParse(json['delivery_km']?.toString() ?? '0') ?? 0.0,
-      deliveryFee: double.tryParse(json['delivery_fee']?.toString() ?? '0') ?? 0.0,
+      deliveryKm:
+          double.tryParse(json['delivery_km']?.toString() ?? '0') ?? 0.0,
+      deliveryFee:
+          double.tryParse(json['delivery_fee']?.toString() ?? '0') ?? 0.0,
       peopleCount: json['people_count'] ?? 0,
       menuPrice: double.tryParse(json['menu_price']?.toString() ?? '0') ?? 0.0,
       discount: double.tryParse(json['discount']?.toString() ?? '0') ?? 0.0,
-      totalPrice: double.tryParse(json['total_price']?.toString() ?? '0') ?? 0.0,
+      totalPrice:
+          double.tryParse(json['total_price']?.toString() ?? '0') ?? 0.0,
       status: OrderStatus.fromString(json['status'] ?? 'PLACED'),
       hasLoanedEquipment: json['has_loaned_equipment'] ?? false,
-      history: (json['history'] as List<dynamic>?)
-          ?.map((h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>))
-          .toList(),
-      customer: json['customer'] != null
-          ? UserInfoModel.fromJson(json['customer'] as Map<String, dynamic>)
-          : null,
-      menu: json['menu'] != null
-          ? MenuModel.fromJson(json['menu'] as Map<String, dynamic>)
-          : null,
-      cancellation: json['cancellation'] != null
-          ? OrderCancellationInfo.fromJson(json['cancellation'] as Map<String, dynamic>)
-          : null,
+      history:
+          (json['history'] as List<dynamic>?)
+              ?.map(
+                (h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>),
+              )
+              .toList(),
+      customer:
+          json['customer'] != null
+              ? UserInfoModel.fromJson(json['customer'] as Map<String, dynamic>)
+              : null,
+      menu:
+          json['menu'] != null
+              ? MenuModel.fromJson(json['menu'] as Map<String, dynamic>)
+              : null,
+      cancellation:
+          json['cancellation'] != null
+              ? OrderCancellationInfo.fromJson(
+                json['cancellation'] as Map<String, dynamic>,
+              )
+              : null,
     );
   }
 

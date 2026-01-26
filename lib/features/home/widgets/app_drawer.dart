@@ -14,13 +14,13 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     // Sidebar desktop seulement sur grands écrans (>= 1024px)
     final isDesktopSidebar = context.isLargeDesktop;
-    
+
     // Tailles fluides
     final titleSize = context.fluidValue(minValue: 14, maxValue: 18);
     final labelSize = context.fluidValue(minValue: 13, maxValue: 16);
     final iconSize = context.fluidValue(minValue: 20, maxValue: 24);
     final padding = context.fluidValue(minValue: 12, maxValue: 20);
-    
+
     // Sur desktop, c'est une sidebar permanente
     if (isDesktopSidebar) {
       return Container(
@@ -47,7 +47,7 @@ class AppDrawer extends StatelessWidget {
                 SizedBox(height: padding),
                 const Divider(color: Colors.white24),
                 SizedBox(height: padding * 0.8),
-                
+
                 _DesktopNavItem(
                   icon: Icons.home,
                   label: 'Accueil',
@@ -79,7 +79,8 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AuthPage(initialLoginTab: true),
+                        builder:
+                            (context) => const AuthPage(initialLoginTab: true),
                       ),
                     );
                   },
@@ -168,7 +169,8 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AuthPage(initialLoginTab: true),
+                        builder:
+                            (context) => const AuthPage(initialLoginTab: true),
                       ),
                     );
                   },
@@ -241,15 +243,19 @@ class _DesktopNavItemState extends State<_DesktopNavItem> {
             vertical: widget.padding,
           ),
           decoration: BoxDecoration(
-            color: widget.isSelected
-                ? AppColors.primary.withValues(alpha: 0.2)
-                : _isHovered
+            color:
+                widget.isSelected
+                    ? AppColors.primary.withValues(alpha: 0.2)
+                    : _isHovered
                     ? Colors.white.withValues(alpha: 0.1)
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
-            border: widget.isSelected
-                ? Border.all(color: AppColors.primary.withValues(alpha: 0.5))
-                : null,
+            border:
+                widget.isSelected
+                    ? Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.5),
+                    )
+                    : null,
           ),
           child: Row(
             children: [
@@ -264,7 +270,8 @@ class _DesktopNavItemState extends State<_DesktopNavItem> {
                 style: AppTextStyles.body.copyWith(
                   fontSize: widget.labelSize,
                   color: widget.isSelected ? Colors.white : Colors.white70,
-                  fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.normal,
+                  fontWeight:
+                      widget.isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
             ],

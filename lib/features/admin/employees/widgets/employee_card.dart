@@ -33,10 +33,7 @@ class _EmployeeCardState extends State<EmployeeCard>
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
   }
 
@@ -116,9 +113,16 @@ class _EmployeeCardState extends State<EmployeeCard>
                     height: 48,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: widget.employee.isAdmin
-                            ? [AppColors.primary, AppColors.primary.withValues(alpha: 0.7)]
-                            : [Colors.blue, Colors.blue.withValues(alpha: 0.7)],
+                        colors:
+                            widget.employee.isAdmin
+                                ? [
+                                  AppColors.primary,
+                                  AppColors.primary.withValues(alpha: 0.7),
+                                ]
+                                : [
+                                  Colors.blue,
+                                  Colors.blue.withValues(alpha: 0.7),
+                                ],
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -173,14 +177,16 @@ class _EmployeeCardState extends State<EmployeeCard>
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: widget.employee.isAdmin
-                          ? AppColors.primary.withValues(alpha: 0.2)
-                          : Colors.blue.withValues(alpha: 0.2),
+                      color:
+                          widget.employee.isAdmin
+                              ? AppColors.primary.withValues(alpha: 0.2)
+                              : Colors.blue.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: widget.employee.isAdmin
-                            ? AppColors.primary.withValues(alpha: 0.5)
-                            : Colors.blue.withValues(alpha: 0.5),
+                        color:
+                            widget.employee.isAdmin
+                                ? AppColors.primary.withValues(alpha: 0.5)
+                                : Colors.blue.withValues(alpha: 0.5),
                       ),
                     ),
                     child: Row(
@@ -191,9 +197,10 @@ class _EmployeeCardState extends State<EmployeeCard>
                               ? Icons.admin_panel_settings_rounded
                               : Icons.person_rounded,
                           size: 16,
-                          color: widget.employee.isAdmin
-                              ? AppColors.primary
-                              : Colors.blue,
+                          color:
+                              widget.employee.isAdmin
+                                  ? AppColors.primary
+                                  : Colors.blue,
                         ),
                         const SizedBox(width: 6),
                         Text(
@@ -201,9 +208,10 @@ class _EmployeeCardState extends State<EmployeeCard>
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: widget.employee.isAdmin
-                                ? AppColors.primary
-                                : Colors.blue,
+                            color:
+                                widget.employee.isAdmin
+                                    ? AppColors.primary
+                                    : Colors.blue,
                           ),
                         ),
                       ],
@@ -214,10 +222,7 @@ class _EmployeeCardState extends State<EmployeeCard>
               const SizedBox(height: 16),
 
               // Divider
-              Container(
-                height: 1,
-                color: Colors.white.withValues(alpha: 0.1),
-              ),
+              Container(height: 1, color: Colors.white.withValues(alpha: 0.1)),
               const SizedBox(height: 16),
 
               // Informations
@@ -250,10 +255,7 @@ class _EmployeeCardState extends State<EmployeeCard>
               const SizedBox(height: 16),
 
               // Divider
-              Container(
-                height: 1,
-                color: Colors.white.withValues(alpha: 0.1),
-              ),
+              Container(height: 1, color: Colors.white.withValues(alpha: 0.1)),
               const SizedBox(height: 16),
 
               // Footer avec toggle
@@ -267,14 +269,16 @@ class _EmployeeCardState extends State<EmployeeCard>
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: widget.employee.isActive
-                          ? Colors.green.withValues(alpha: 0.2)
-                          : Colors.red.withValues(alpha: 0.2),
+                      color:
+                          widget.employee.isActive
+                              ? Colors.green.withValues(alpha: 0.2)
+                              : Colors.red.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: widget.employee.isActive
-                            ? Colors.green.withValues(alpha: 0.5)
-                            : Colors.red.withValues(alpha: 0.5),
+                        color:
+                            widget.employee.isActive
+                                ? Colors.green.withValues(alpha: 0.5)
+                                : Colors.red.withValues(alpha: 0.5),
                       ),
                     ),
                     child: Row(
@@ -284,9 +288,10 @@ class _EmployeeCardState extends State<EmployeeCard>
                           width: 8,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: widget.employee.isActive
-                                ? Colors.green
-                                : Colors.red,
+                            color:
+                                widget.employee.isActive
+                                    ? Colors.green
+                                    : Colors.red,
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -296,9 +301,10 @@ class _EmployeeCardState extends State<EmployeeCard>
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: widget.employee.isActive
-                                ? Colors.green
-                                : Colors.red,
+                            color:
+                                widget.employee.isActive
+                                    ? Colors.green
+                                    : Colors.red,
                           ),
                         ),
                       ],
@@ -309,12 +315,12 @@ class _EmployeeCardState extends State<EmployeeCard>
                   ElevatedButton.icon(
                     onPressed: _isToggling ? null : _toggleStatus,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: widget.employee.isActive
-                          ? Colors.red.withValues(alpha: 0.2)
-                          : Colors.green.withValues(alpha: 0.2),
-                      foregroundColor: widget.employee.isActive
-                          ? Colors.red
-                          : Colors.green,
+                      backgroundColor:
+                          widget.employee.isActive
+                              ? Colors.red.withValues(alpha: 0.2)
+                              : Colors.green.withValues(alpha: 0.2),
+                      foregroundColor:
+                          widget.employee.isActive ? Colors.red : Colors.green,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 10,
@@ -322,28 +328,30 @@ class _EmployeeCardState extends State<EmployeeCard>
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: widget.employee.isActive
-                              ? Colors.red.withValues(alpha: 0.5)
-                              : Colors.green.withValues(alpha: 0.5),
+                          color:
+                              widget.employee.isActive
+                                  ? Colors.red.withValues(alpha: 0.5)
+                                  : Colors.green.withValues(alpha: 0.5),
                         ),
                       ),
                     ),
-                    icon: _isToggling
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
+                    icon:
+                        _isToggling
+                            ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
                               ),
+                            )
+                            : Icon(
+                              widget.employee.isActive
+                                  ? Icons.block_rounded
+                                  : Icons.check_circle_rounded,
                             ),
-                          )
-                        : Icon(
-                            widget.employee.isActive
-                                ? Icons.block_rounded
-                                : Icons.check_circle_rounded,
-                          ),
                     label: Text(
                       widget.employee.isActive ? 'Désactiver' : 'Activer',
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -361,11 +369,7 @@ class _EmployeeCardState extends State<EmployeeCard>
   Widget _buildInfoItem(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 16,
-          color: AppColors.primary.withValues(alpha: 0.7),
-        ),
+        Icon(icon, size: 16, color: AppColors.primary.withValues(alpha: 0.7)),
         const SizedBox(width: 8),
         Expanded(
           child: Column(
@@ -409,7 +413,7 @@ class _EmployeeCardState extends State<EmployeeCard>
       'Sep',
       'Oct',
       'Nov',
-      'Déc'
+      'Déc',
     ];
     return '${date.day} ${months[date.month - 1]} ${date.year}';
   }

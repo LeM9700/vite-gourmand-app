@@ -7,11 +7,11 @@ class AppColors {
   // Palette principale - Sophistiquée et gourmande
   static const Color primary = Color(0xFFD4AF37); // Or élégant
   static const Color onPrimary = Color(0xFF1A1A1A); // Noir profond
-  
+
   // Couleurs secondaires raffinées
   static const Color secondary = Color(0xFF2C2C2C); // Charbon élégant
   static const Color accent = Color(0xFF8B4513); // Brun cuivré gourmand
-  
+
   // Teintes neutres sophistiquées
   static const Color dark = Color(0xFF1A1A1A); // Noir profond
   static const Color darkGrey = Color(0xFF2C2C2C); // Gris anthracite

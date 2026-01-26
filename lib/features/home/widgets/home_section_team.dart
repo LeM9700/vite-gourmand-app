@@ -13,7 +13,7 @@ class HomeSectionTeam extends StatelessWidget {
     final spacing = context.fluidValue(minValue: 12, maxValue: 16);
     final titleSize = context.fluidValue(minValue: 18, maxValue: 24);
     final bodySize = context.fluidValue(minValue: 13, maxValue: 15);
-    
+
     return Column(
       children: [
         // Titre principal simple et lisible
@@ -30,9 +30,9 @@ class HomeSectionTeam extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               SizedBox(height: spacing * 0.75),
-              
+
               Text(
                 'Une équipe passionnée, des standards d\'exception et un savoir-faire reconnu depuis plus de 25 ans.',
                 style: AppTextStyles.body.copyWith(
@@ -60,9 +60,9 @@ class HomeSectionTeam extends StatelessWidget {
                 'Produits sélectionnés avec exigence',
                 AppColors.success,
               ),
-              
+
               SizedBox(height: spacing),
-              
+
               _buildSimpleProfessionalismPoint(
                 context,
                 Icons.handshake,
@@ -70,9 +70,9 @@ class HomeSectionTeam extends StatelessWidget {
                 'Une organisation maîtrisée',
                 AppColors.info,
               ),
-              
+
               SizedBox(height: spacing),
-              
+
               _buildSimpleProfessionalismPoint(
                 context,
                 Icons.star_rounded,
@@ -99,22 +99,22 @@ class HomeSectionTeam extends StatelessWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-              
+
               SizedBox(height: spacing),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildStatItem(context, '👥', '12', 'Collaborateurs'),
                   Container(
-                    width: 1, 
-                    height: context.fluidValue(minValue: 30, maxValue: 40), 
+                    width: 1,
+                    height: context.fluidValue(minValue: 30, maxValue: 40),
                     color: AppColors.glassBorder,
                   ),
                   _buildStatItem(context, '🎯', '500+', 'Événements'),
                   Container(
-                    width: 1, 
-                    height: context.fluidValue(minValue: 30, maxValue: 40), 
+                    width: 1,
+                    height: context.fluidValue(minValue: 30, maxValue: 40),
                     color: AppColors.glassBorder,
                   ),
                   _buildStatItem(context, '😊', '98%', 'Satisfaction'),
@@ -128,13 +128,19 @@ class HomeSectionTeam extends StatelessWidget {
   }
 
   // Widget simple et lisible pour les points de professionnalisme
-  Widget _buildSimpleProfessionalismPoint(BuildContext context, IconData icon, String title, String description, Color color) {
+  Widget _buildSimpleProfessionalismPoint(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String description,
+    Color color,
+  ) {
     final iconContainerSize = context.fluidValue(minValue: 36, maxValue: 50);
     final iconSize = context.fluidValue(minValue: 18, maxValue: 24);
     final titleSize = context.fluidValue(minValue: 13, maxValue: 16);
     final descSize = context.fluidValue(minValue: 12, maxValue: 14);
     final spacing = context.fluidValue(minValue: 10, maxValue: 16);
-    
+
     return Row(
       children: [
         // Icône colorée
@@ -144,20 +150,13 @@ class HomeSectionTeam extends StatelessWidget {
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(iconContainerSize / 2),
-            border: Border.all(
-              color: color.withValues(alpha: 0.3),
-              width: 1,
-            ),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
           ),
-          child: Icon(
-            icon,
-            color: color,
-            size: iconSize,
-          ),
+          child: Icon(icon, color: color, size: iconSize),
         ),
-        
+
         SizedBox(width: spacing),
-        
+
         // Texte en full width
         Expanded(
           child: Column(
@@ -187,17 +186,19 @@ class HomeSectionTeam extends StatelessWidget {
     );
   }
 
-  Widget _buildStatItem(BuildContext context, String emoji, String number, String label) {
+  Widget _buildStatItem(
+    BuildContext context,
+    String emoji,
+    String number,
+    String label,
+  ) {
     final emojiSize = context.fluidValue(minValue: 18, maxValue: 24);
     final numberSize = context.fluidValue(minValue: 14, maxValue: 18);
     final labelSize = context.fluidValue(minValue: 9, maxValue: 11);
-    
+
     return Column(
       children: [
-        Text(
-          emoji,
-          style: TextStyle(fontSize: emojiSize),
-        ),
+        Text(emoji, style: TextStyle(fontSize: emojiSize)),
         const SizedBox(height: 4),
         Text(
           number,

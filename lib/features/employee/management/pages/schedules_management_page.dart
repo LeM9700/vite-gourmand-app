@@ -10,7 +10,8 @@ class SchedulesManagementPage extends StatefulWidget {
   const SchedulesManagementPage({super.key});
 
   @override
-  State<SchedulesManagementPage> createState() => _SchedulesManagementPageState();
+  State<SchedulesManagementPage> createState() =>
+      _SchedulesManagementPageState();
 }
 
 class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
@@ -47,7 +48,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
   Future<void> _toggleScheduleStatus(Map<String, dynamic> schedule) async {
     final scheduleId = schedule['id'] as int;
     final isClosed = schedule['is_closed'] as bool? ?? false;
-    
+
     try {
       await _service.updateSchedule(scheduleId, {
         'day_of_week': schedule['day_of_week'],
@@ -55,18 +56,25 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
         'close_time': schedule['close_time'],
         'is_closed': !isClosed,
       });
-      
+
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(isClosed ? 'Établissement ouvert ce jour' : 'Établissement fermé ce jour'),
+          content: Text(
+            isClosed
+                ? 'Établissement ouvert ce jour'
+                : 'Établissement fermé ce jour',
+          ),
           backgroundColor: Colors.green,
         ),
       );
       _loadSchedules();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -74,18 +82,22 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
   Future<void> _deleteSchedule(int scheduleId) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirmer la suppression'),
-        content: const Text('Voulez-vous vraiment supprimer cet horaire ?'),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Annuler')),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Supprimer'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Confirmer la suppression'),
+            content: const Text('Voulez-vous vraiment supprimer cet horaire ?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Supprimer'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
     if (confirm != true) return;
 
@@ -93,13 +105,19 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
       await _service.deleteSchedule(scheduleId);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Horaire supprimé'), backgroundColor: Colors.green),
+        const SnackBar(
+          content: Text('Horaire supprimé'),
+          backgroundColor: Colors.green,
+        ),
       );
       _loadSchedules();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -107,37 +125,55 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
   void _showScheduleForm({Map<String, dynamic>? schedule}) {
     showDialog(
       context: context,
-      builder: (context) => ScheduleFormDialog(
-        schedule: schedule,
-        onSave: (data) async {
-          try {
-            if (schedule == null) {
-              await _service.createSchedule(data);
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Horaire créé'), backgroundColor: Colors.green),
-              );
-            } else {
-              await _service.updateSchedule(schedule['id'], data);
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Horaire mis à jour'), backgroundColor: Colors.green),
-              );
-            }
-            _loadSchedules();
-          } catch (e) {
-            if (!mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(e.toString().replaceAll('Exception: ', '')), backgroundColor: Colors.red),
-            );
-          }
-        },
-      ),
+      builder:
+          (context) => ScheduleFormDialog(
+            schedule: schedule,
+            onSave: (data) async {
+              try {
+                if (schedule == null) {
+                  await _service.createSchedule(data);
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Horaire créé'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                } else {
+                  await _service.updateSchedule(schedule['id'], data);
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Horaire mis à jour'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+                _loadSchedules();
+              } catch (e) {
+                if (!mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(e.toString().replaceAll('Exception: ', '')),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
     );
   }
 
   String _getDayLabel(int day) {
-    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    const days = [
+      'Lundi',
+      'Mardi',
+      'Mercredi',
+      'Jeudi',
+      'Vendredi',
+      'Samedi',
+      'Dimanche',
+    ];
     return days[day];
   }
 
@@ -148,7 +184,9 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
     }
 
     if (_error != null) {
-      return Center(child: Text(_error!, style: const TextStyle(color: Colors.red)));
+      return Center(
+        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+      );
     }
 
     return Scaffold(
@@ -211,50 +249,55 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
               ],
             ),
           ),
-          
+
           // Liste des horaires
           Expanded(
-            child: _schedules.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.schedule_outlined,
-                          size: 64,
-                          color: AppColors.textMuted.withValues(alpha: 0.5),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Aucun horaire',
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.textMuted,
+            child:
+                _schedules.isEmpty
+                    ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.schedule_outlined,
+                            size: 64,
+                            color: AppColors.textMuted.withValues(alpha: 0.5),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 16),
+                          Text(
+                            'Aucun horaire',
+                            style: AppTextStyles.subtitle.copyWith(
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                    : ListView.separated(
+                      padding: EdgeInsets.fromLTRB(
+                        context.horizontalPadding,
+                        0,
+                        context.horizontalPadding,
+                        context.verticalPadding + 80,
+                      ),
+                      itemCount: _schedules.length,
+                      separatorBuilder:
+                          (context, index) => const SizedBox(height: 16),
+                      itemBuilder: (context, index) {
+                        final schedule = _schedules[index];
+                        return _buildScheduleCard(context, schedule);
+                      },
                     ),
-                  )
-                : ListView.separated(
-                    padding: EdgeInsets.fromLTRB(
-                      context.horizontalPadding,
-                      0,
-                      context.horizontalPadding,
-                      context.verticalPadding + 80,
-                    ),
-                    itemCount: _schedules.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 16),
-                    itemBuilder: (context, index) {
-                      final schedule = _schedules[index];
-                      return _buildScheduleCard(context, schedule);
-                    },
-                  ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildScheduleCard(BuildContext context, Map<String, dynamic> schedule) {
+  Widget _buildScheduleCard(
+    BuildContext context,
+    Map<String, dynamic> schedule,
+  ) {
     final dayOfWeek = schedule['day_of_week'] as int;
     final isClosed = schedule['is_closed'] as bool? ?? false;
     final openTime = schedule['open_time'] as String?;
@@ -263,11 +306,12 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
     // Couleurs selon le jour
     Color dayColor;
     IconData dayIcon;
-    
+
     if (isClosed) {
       dayColor = AppColors.danger;
       dayIcon = Icons.cancel_rounded;
-    } else if (dayOfWeek == 5 || dayOfWeek == 6) { // Samedi/Dimanche
+    } else if (dayOfWeek == 5 || dayOfWeek == 6) {
+      // Samedi/Dimanche
       dayColor = AppColors.warning;
       dayIcon = Icons.weekend_rounded;
     } else {
@@ -313,11 +357,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                       width: 1,
                     ),
                   ),
-                  child: Icon(
-                    dayIcon,
-                    color: dayColor,
-                    size: 24,
-                  ),
+                  child: Icon(dayIcon, color: dayColor, size: 24),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -336,9 +376,10 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                                 ? '$openTime - $closeTime'
                                 : 'Horaires non définis'),
                         style: AppTextStyles.caption.copyWith(
-                          color: isClosed 
-                              ? AppColors.danger 
-                              : AppColors.textSecondary,
+                          color:
+                              isClosed
+                                  ? AppColors.danger
+                                  : AppColors.textSecondary,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -353,14 +394,16 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: isClosed
-                          ? AppColors.danger.withValues(alpha: 0.15)
-                          : AppColors.success.withValues(alpha: 0.15),
+                      color:
+                          isClosed
+                              ? AppColors.danger.withValues(alpha: 0.15)
+                              : AppColors.success.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: isClosed
-                            ? AppColors.danger.withValues(alpha: 0.3)
-                            : AppColors.success.withValues(alpha: 0.3),
+                        color:
+                            isClosed
+                                ? AppColors.danger.withValues(alpha: 0.3)
+                                : AppColors.success.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
@@ -370,13 +413,15 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                         Icon(
                           isClosed ? Icons.close : Icons.check,
                           size: 16,
-                          color: isClosed ? AppColors.danger : AppColors.success,
+                          color:
+                              isClosed ? AppColors.danger : AppColors.success,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           isClosed ? 'Fermé' : 'Ouvert',
                           style: AppTextStyles.caption.copyWith(
-                            color: isClosed ? AppColors.danger : AppColors.success,
+                            color:
+                                isClosed ? AppColors.danger : AppColors.success,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -387,7 +432,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
               ],
             ),
           ),
-          
+
           // Actions
           Container(
             padding: const EdgeInsets.all(20),
@@ -421,10 +466,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: color.withValues(alpha: 0.3),
-            width: 1,
-          ),
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

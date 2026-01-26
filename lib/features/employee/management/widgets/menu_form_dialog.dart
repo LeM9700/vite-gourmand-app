@@ -26,18 +26,18 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
   final _conditionsController = TextEditingController();
   final _stockController = TextEditingController();
   final _imageUrlController = TextEditingController();
-  
+
   bool _isActive = true;
   bool _isLoadingDishes = false;
-  
+
   // Plats disponibles
   List<Dish> _availableDishes = [];
-  
+
   // Plats sélectionnés
   Dish? _selectedStarter;
   Dish? _selectedMain;
   Dish? _selectedDessert;
-  
+
   // Images
   List<String> _imageUrls = [];
 
@@ -45,7 +45,7 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
   void initState() {
     super.initState();
     _loadDishes();
-    
+
     if (widget.menu != null) {
       final menu = widget.menu!;
       _titleController.text = menu.title;
@@ -71,41 +71,65 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
     try {
       final service = ManagementService();
       final dishes = await service.getDishes();
-      
+
       setState(() {
         _availableDishes = dishes.map((json) => Dish.fromJson(json)).toList();
         _isLoadingDishes = false;
-        
+
         // Pré-sélectionner les plats du menu si on est en mode édition
         if (widget.menu != null) {
           final menu = widget.menu!;
-          
+
           // Trouver l'entrée
-          final starterFromMenu = menu.dishes.where((d) => d.dishType == 'STARTER').firstOrNull;
+          final starterFromMenu =
+              menu.dishes.where((d) => d.dishType == 'STARTER').firstOrNull;
           if (starterFromMenu != null) {
             _selectedStarter = _availableDishes.firstWhere(
               (d) => d.id == starterFromMenu.id,
-              orElse: () => Dish(id: 0, name: '', dishType: '', description: '', allergens: []),
+              orElse:
+                  () => Dish(
+                    id: 0,
+                    name: '',
+                    dishType: '',
+                    description: '',
+                    allergens: [],
+                  ),
             );
             if (_selectedStarter?.id == 0) _selectedStarter = null;
           }
-          
+
           // Trouver le plat principal
-          final mainFromMenu = menu.dishes.where((d) => d.dishType == 'MAIN').firstOrNull;
+          final mainFromMenu =
+              menu.dishes.where((d) => d.dishType == 'MAIN').firstOrNull;
           if (mainFromMenu != null) {
             _selectedMain = _availableDishes.firstWhere(
               (d) => d.id == mainFromMenu.id,
-              orElse: () => Dish(id: 0, name: '', dishType: '', description: '', allergens: []),
+              orElse:
+                  () => Dish(
+                    id: 0,
+                    name: '',
+                    dishType: '',
+                    description: '',
+                    allergens: [],
+                  ),
             );
             if (_selectedMain?.id == 0) _selectedMain = null;
           }
-          
+
           // Trouver le dessert
-          final dessertFromMenu = menu.dishes.where((d) => d.dishType == 'DESSERT').firstOrNull;
+          final dessertFromMenu =
+              menu.dishes.where((d) => d.dishType == 'DESSERT').firstOrNull;
           if (dessertFromMenu != null) {
             _selectedDessert = _availableDishes.firstWhere(
               (d) => d.id == dessertFromMenu.id,
-              orElse: () => Dish(id: 0, name: '', dishType: '', description: '', allergens: []),
+              orElse:
+                  () => Dish(
+                    id: 0,
+                    name: '',
+                    dishType: '',
+                    description: '',
+                    allergens: [],
+                  ),
             );
             if (_selectedDessert?.id == 0) _selectedDessert = null;
           }
@@ -115,7 +139,10 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
       setState(() => _isLoadingDishes = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erreur chargement plats: $e'), backgroundColor: Colors.red),
+          SnackBar(
+            content: Text('Erreur chargement plats: $e'),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     }
@@ -148,11 +175,17 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.restaurant_menu, color: AppColors.primary, size: 28),
+                  const Icon(
+                    Icons.restaurant_menu,
+                    color: AppColors.primary,
+                    size: 28,
+                  ),
                   const SizedBox(width: 12),
                   Text(
                     widget.menu == null ? 'Créer un menu' : 'Modifier le menu',
@@ -211,7 +244,8 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                                 prefixIcon: Icon(Icons.style),
                                 hintText: 'Ex: Gastronomique',
                               ),
-                              validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                              validator:
+                                  (v) => v?.isEmpty ?? true ? 'Requis' : null,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -224,7 +258,8 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                                 prefixIcon: Icon(Icons.health_and_safety),
                                 hintText: 'Ex: Végétarien',
                               ),
-                              validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                              validator:
+                                  (v) => v?.isEmpty ?? true ? 'Requis' : null,
                             ),
                           ),
                         ],
@@ -246,8 +281,12 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                                 prefixIcon: Icon(Icons.euro),
                                 suffixText: '€',
                               ),
-                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                              validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                    decimal: true,
+                                  ),
+                              validator:
+                                  (v) => v?.isEmpty ?? true ? 'Requis' : null,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -260,8 +299,11 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                                 prefixIcon: Icon(Icons.people),
                               ),
                               keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              validator:
+                                  (v) => v?.isEmpty ?? true ? 'Requis' : null,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -274,8 +316,11 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                                 prefixIcon: Icon(Icons.inventory_2),
                               ),
                               keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              validator:
+                                  (v) => v?.isEmpty ?? true ? 'Requis' : null,
                             ),
                           ),
                         ],
@@ -294,7 +339,8 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                           icon: Icons.restaurant,
                           dishType: 'STARTER',
                           selectedDish: _selectedStarter,
-                          onChanged: (dish) => setState(() => _selectedStarter = dish),
+                          onChanged:
+                              (dish) => setState(() => _selectedStarter = dish),
                         ),
                         const SizedBox(height: 12),
                         _buildDishSelector(
@@ -302,7 +348,8 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                           icon: Icons.lunch_dining,
                           dishType: 'MAIN',
                           selectedDish: _selectedMain,
-                          onChanged: (dish) => setState(() => _selectedMain = dish),
+                          onChanged:
+                              (dish) => setState(() => _selectedMain = dish),
                         ),
                         const SizedBox(height: 12),
                         _buildDishSelector(
@@ -310,14 +357,17 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                           icon: Icons.cake,
                           dishType: 'DESSERT',
                           selectedDish: _selectedDessert,
-                          onChanged: (dish) => setState(() => _selectedDessert = dish),
+                          onChanged:
+                              (dish) => setState(() => _selectedDessert = dish),
                         ),
                       ],
 
                       const SizedBox(height: 24),
 
                       // Images
-                      _buildSectionTitle('Images du menu (recommandé: 1200x800px, format 3:2)'),
+                      _buildSectionTitle(
+                        'Images du menu (recommandé: 1200x800px, format 3:2)',
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         '💡 Format optimal: 1200x800 pixels (ratio 3:2) - Format JPEG ou PNG - Taille max: 2MB',
@@ -354,7 +404,10 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                             label: const Text('Ajouter'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 16,
+                              ),
                             ),
                           ),
                         ],
@@ -364,21 +417,24 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
-                          children: _imageUrls.asMap().entries.map((entry) {
-                            final index = entry.key;
-                            final url = entry.value;
-                            return Chip(
-                              avatar: const Icon(Icons.image, size: 18),
-                              label: Text(
-                                url.length > 30 ? '${url.substring(0, 30)}...' : url,
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                              deleteIcon: const Icon(Icons.close, size: 18),
-                              onDeleted: () {
-                                setState(() => _imageUrls.removeAt(index));
-                              },
-                            );
-                          }).toList(),
+                          children:
+                              _imageUrls.asMap().entries.map((entry) {
+                                final index = entry.key;
+                                final url = entry.value;
+                                return Chip(
+                                  avatar: const Icon(Icons.image, size: 18),
+                                  label: Text(
+                                    url.length > 30
+                                        ? '${url.substring(0, 30)}...'
+                                        : url,
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  deleteIcon: const Icon(Icons.close, size: 18),
+                                  onDeleted: () {
+                                    setState(() => _imageUrls.removeAt(index));
+                                  },
+                                );
+                              }).toList(),
                         ),
 
                       const SizedBox(height: 24),
@@ -400,7 +456,9 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                       const SizedBox(height: 16),
                       SwitchListTile(
                         title: const Text('Menu actif'),
-                        subtitle: const Text('Le menu sera visible par les clients'),
+                        subtitle: const Text(
+                          'Le menu sera visible par les clients',
+                        ),
                         value: _isActive,
                         onChanged: (v) => setState(() => _isActive = v),
                         activeColor: AppColors.primary,
@@ -416,7 +474,9 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: AppColors.lightGrey.withValues(alpha: 0.3),
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(12),
+                ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -432,7 +492,10 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                     label: const Text('Enregistrer'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                   ),
                 ],
@@ -461,8 +524,9 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
     required Dish? selectedDish,
     required Function(Dish?) onChanged,
   }) {
-    final dishes = _availableDishes.where((d) => d.dishType == dishType).toList();
-    
+    final dishes =
+        _availableDishes.where((d) => d.dishType == dishType).toList();
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -491,14 +555,11 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
             ),
             hint: Text('Sélectionner un ${title.toLowerCase()}'),
             items: [
-              const DropdownMenuItem<Dish>(
-                value: null,
-                child: Text('Aucun'),
+              const DropdownMenuItem<Dish>(value: null, child: Text('Aucun')),
+              ...dishes.map(
+                (dish) =>
+                    DropdownMenuItem<Dish>(value: dish, child: Text(dish.name)),
               ),
-              ...dishes.map((dish) => DropdownMenuItem<Dish>(
-                value: dish,
-                child: Text(dish.name),
-              )),
             ],
             onChanged: onChanged,
           ),
@@ -506,7 +567,9 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
             const SizedBox(height: 8),
             Text(
               selectedDish.description,
-              style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.caption.copyWith(
+                color: AppColors.textSecondary,
+              ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -524,7 +587,7 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
     if (_selectedStarter != null) dishIds.add(_selectedStarter!.id);
     if (_selectedMain != null) dishIds.add(_selectedMain!.id);
     if (_selectedDessert != null) dishIds.add(_selectedDessert!.id);
-    
+
     // Vérifier qu'au moins un plat est sélectionné
     if (dishIds.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(

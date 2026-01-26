@@ -2,16 +2,10 @@ class LoginRequest {
   final String email;
   final String password;
 
-  LoginRequest({
-    required this.email,
-    required this.password,
-  });
+  LoginRequest({required this.email, required this.password});
 
   Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-      'password': password,
-    };
+    return {'email': email, 'password': password};
   }
 }
 
@@ -97,14 +91,15 @@ class UserData {
       address: json['address'] ?? '',
       role: json['role'] ?? 'USER',
       isActive: json['is_active'] ?? true,
-      createdAt: json['created_at'] != null 
-          ? DateTime.tryParse(json['created_at']) 
-          : null,
+      createdAt:
+          json['created_at'] != null
+              ? DateTime.tryParse(json['created_at'])
+              : null,
     );
   }
 
   String get fullName => '$firstname $lastname';
-  
+
   bool get isStaff => role == 'EMPLOYEE' || role == 'ADMIN';
   bool get isAdmin => role == 'ADMIN';
   bool get isEmployee => role == 'EMPLOYEE';

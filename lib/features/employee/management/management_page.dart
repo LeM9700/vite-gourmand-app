@@ -13,7 +13,8 @@ class ManagementPage extends StatefulWidget {
   State<ManagementPage> createState() => _ManagementPageState();
 }
 
-class _ManagementPageState extends State<ManagementPage> with SingleTickerProviderStateMixin {
+class _ManagementPageState extends State<ManagementPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -45,14 +46,19 @@ class _ManagementPageState extends State<ManagementPage> with SingleTickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Gestion', style: AppTextStyles.sectionTitle.copyWith(fontSize: 28)),
+                Text(
+                  'Gestion',
+                  style: AppTextStyles.sectionTitle.copyWith(fontSize: 28),
+                ),
                 const SizedBox(height: 16),
                 TabBar(
                   controller: _tabController,
                   labelColor: AppColors.primary,
                   unselectedLabelColor: AppColors.textSecondary,
                   indicatorColor: AppColors.primary,
-                  labelStyle: AppTextStyles.subtitle.copyWith(fontWeight: FontWeight.w600),
+                  labelStyle: AppTextStyles.subtitle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                   tabs: const [
                     Tab(text: 'Menus'),
                     Tab(text: 'Plats'),

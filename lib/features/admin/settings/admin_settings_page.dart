@@ -18,7 +18,7 @@ class AdminSettingsPage extends StatefulWidget {
 class _AdminSettingsPageState extends State<AdminSettingsPage> {
   final AuthService _authService = AuthService();
   final SecureStorage _storage = SecureStorage();
-  
+
   bool _isLoading = true;
   UserData? _userData;
   String? _error;
@@ -34,7 +34,7 @@ class _AdminSettingsPageState extends State<AdminSettingsPage> {
       _isLoading = true;
       _error = null;
     });
-    
+
     try {
       final data = await _authService.getCurrentUser();
       if (mounted) {
@@ -70,63 +70,65 @@ class _AdminSettingsPageState extends State<AdminSettingsPage> {
   Future<void> _showChangePasswordDialog() async {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.cardBackground,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: const Text(
-          'Changer le mot de passe',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
-        content: const Text(
-          'Cette fonctionnalité sera bientôt disponible. Contactez le support technique si vous devez modifier votre mot de passe.',
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Fermer',
-              style: TextStyle(color: AppColors.primary),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.cardBackground,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
+            title: const Text(
+              'Changer le mot de passe',
+              style: TextStyle(color: AppColors.textPrimary),
+            ),
+            content: const Text(
+              'Cette fonctionnalité sera bientôt disponible. Contactez le support technique si vous devez modifier votre mot de passe.',
+              style: TextStyle(color: AppColors.textSecondary),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  'Fermer',
+                  style: TextStyle(color: AppColors.primary),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   Future<void> _logout() async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.cardBackground,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: const Text(
-          'Déconnexion',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: const Text(
-          'Voulez-vous vraiment vous déconnecter ?',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text(
-              'Annuler',
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.cardBackground,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: const Text(
+              'Déconnexion',
+              style: TextStyle(color: Colors.white),
+            ),
+            content: const Text(
+              'Voulez-vous vraiment vous déconnecter ?',
               style: TextStyle(color: Colors.white70),
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text(
+                  'Annuler',
+                  style: TextStyle(color: Colors.white70),
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Déconnexion'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Déconnexion'),
-          ),
-        ],
-      ),
     );
 
     if (confirm == true) {
@@ -325,10 +327,7 @@ class _AdminSettingsPageState extends State<AdminSettingsPage> {
               ),
               IconButton(
                 onPressed: _showEditProfileDialog,
-                icon: Icon(
-                  Icons.edit_rounded,
-                  color: AppColors.primary,
-                ),
+                icon: Icon(Icons.edit_rounded, color: AppColors.primary),
                 tooltip: 'Modifier',
               ),
             ],
@@ -452,11 +451,7 @@ class _AdminSettingsPageState extends State<AdminSettingsPage> {
             ),
             child: Row(
               children: [
-                Icon(
-                  Icons.check_circle_rounded,
-                  color: Colors.green,
-                  size: 20,
-                ),
+                Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
                 const SizedBox(width: 12),
                 Text(
                   'Compte actif',
@@ -539,10 +534,7 @@ class _AdminSettingsPageState extends State<AdminSettingsPage> {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppColors.textPrimary,
-                ),
+                style: TextStyle(fontSize: 12, color: AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
               Text(

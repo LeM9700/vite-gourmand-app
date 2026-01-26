@@ -79,9 +79,10 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                   AnimatedBuilder(
                     animation: _shakeAnimation,
                     builder: (context, child) {
-                      final shake = _shakeAnimation.value < 0.5
-                          ? _shakeAnimation.value * 10
-                          : (1 - _shakeAnimation.value) * 10;
+                      final shake =
+                          _shakeAnimation.value < 0.5
+                              ? _shakeAnimation.value * 10
+                              : (1 - _shakeAnimation.value) * 10;
                       return Transform.translate(
                         offset: Offset(shake * (shake.isFinite ? 1 : 0), 0),
                         child: Container(
@@ -99,7 +100,7 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.red.withValues(alpha:0.3),
+                                color: Colors.red.withValues(alpha: 0.3),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                               ),
@@ -115,7 +116,9 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                     },
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 24, maxValue: 32)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 24, maxValue: 32),
+                  ),
 
                   // Titre
                   FadeTransition(
@@ -123,14 +126,19 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                     child: Text(
                       'Oups, une erreur est survenue',
                       style: AppTextStyles.sectionTitle.copyWith(
-                        fontSize: context.fluidValue(minValue: 20, maxValue: 26),
+                        fontSize: context.fluidValue(
+                          minValue: 20,
+                          maxValue: 26,
+                        ),
                         color: Colors.red.shade700,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 12, maxValue: 16)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 12, maxValue: 16),
+                  ),
 
                   // Message d'erreur
                   FadeTransition(
@@ -138,14 +146,19 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                     child: Text(
                       'Nous n\'avons pas pu traiter votre commande.',
                       style: AppTextStyles.body.copyWith(
-                        fontSize: context.fluidValue(minValue: 14, maxValue: 16),
+                        fontSize: context.fluidValue(
+                          minValue: 14,
+                          maxValue: 16,
+                        ),
                         color: AppColors.textSecondary,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 24, maxValue: 32)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 24, maxValue: 32),
+                  ),
 
                   // Détails de l'erreur
                   FadeTransition(
@@ -153,7 +166,9 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                     child: _buildErrorDetails(context),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 24, maxValue: 32)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 24, maxValue: 32),
+                  ),
 
                   // Suggestions
                   FadeTransition(
@@ -161,7 +176,9 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                     child: _buildSuggestions(context),
                   ),
 
-                  SizedBox(height: context.fluidValue(minValue: 32, maxValue: 40)),
+                  SizedBox(
+                    height: context.fluidValue(minValue: 32, maxValue: 40),
+                  ),
 
                   // Boutons d'action
                   FadeTransition(
@@ -391,9 +408,7 @@ class _OrderErrorPageState extends State<OrderErrorPage>
 
         // Lien contact
         TextButton.icon(
-          onPressed: () {
-           
-          },
+          onPressed: () {},
           icon: Icon(
             Icons.mail_outline,
             color: AppColors.textSecondary,

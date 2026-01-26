@@ -10,11 +10,7 @@ class ContactRequest {
   });
 
   Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-      'title': title,
-      'description': description,
-    };
+    return {'email': email, 'title': title, 'description': description};
   }
 }
 
@@ -23,11 +19,7 @@ class ContactResponse {
   final String message;
   final String? id;
 
-  ContactResponse({
-    required this.success,
-    required this.message,
-    this.id,
-  });
+  ContactResponse({required this.success, required this.message, this.id});
 
   factory ContactResponse.fromJson(Map<String, dynamic> json) {
     return ContactResponse(

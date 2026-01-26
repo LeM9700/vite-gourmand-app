@@ -24,7 +24,8 @@ class OrdersByMenuData {
       endDate: json['end_date'] ?? '',
       totalOrders: json['total_orders'] ?? 0,
       totalRevenue: (json['total_revenue'] ?? 0).toDouble(),
-      menus: (json['menus'] as List?)
+      menus:
+          (json['menus'] as List?)
               ?.map((m) => MenuOrderStats.fromJson(m))
               .toList() ??
           [],
@@ -89,7 +90,8 @@ class RevenueByMenuData {
       menuId: json['menu_id'],
       totalRevenue: (json['total_revenue'] ?? 0).toDouble(),
       totalOrders: json['total_orders'] ?? 0,
-      data: (json['data'] as List?)
+      data:
+          (json['data'] as List?)
               ?.map((m) => MenuRevenueStats.fromJson(m))
               .toList() ??
           [],
@@ -148,7 +150,8 @@ class MenuComparisonData {
       startDate: json['start_date'] ?? '',
       endDate: json['end_date'] ?? '',
       totalMenus: json['total_menus'] ?? 0,
-      menus: (json['menus'] as List?)
+      menus:
+          (json['menus'] as List?)
               ?.map((m) => MenuComparison.fromJson(m))
               .toList() ??
           [],
@@ -179,9 +182,10 @@ class MenuComparison {
       menuName: json['menu_name'],
       ordersCount: json['orders_count'] ?? 0,
       revenue: (json['revenue'] ?? 0).toDouble(),
-      avgRating: json['avg_rating'] != null 
-          ? (json['avg_rating'] as num).toDouble() 
-          : null,
+      avgRating:
+          json['avg_rating'] != null
+              ? (json['avg_rating'] as num).toDouble()
+              : null,
       reviewsCount: json['reviews_count'] ?? 0,
     );
   }

@@ -45,8 +45,14 @@ class MenuModel {
       conditionsText: json['conditions_text'] ?? '',
       stock: json['stock'] ?? 0,
       isActive: json['is_active'] ?? true,
-      createdAt: json['created_at'] != null ? DateTime.tryParse(json['created_at']) : null,
-      updatedAt: json['updated_at'] != null ? DateTime.tryParse(json['updated_at']) : null,
+      createdAt:
+          json['created_at'] != null
+              ? DateTime.tryParse(json['created_at'])
+              : null,
+      updatedAt:
+          json['updated_at'] != null
+              ? DateTime.tryParse(json['updated_at'])
+              : null,
       images: _parseImages(json['images']),
       dishes: _parseDishes(json['dishes']),
     );
@@ -56,7 +62,7 @@ class MenuModel {
   static List<MenuImage> _parseImages(dynamic imagesData) {
     if (imagesData == null) return [];
     if (imagesData is! List) return [];
-    
+
     try {
       return imagesData
           .map((img) => MenuImage.fromJson(img as Map<String, dynamic>))
@@ -70,7 +76,7 @@ class MenuModel {
   static List<Dish> _parseDishes(dynamic dishesData) {
     if (dishesData == null) return [];
     if (dishesData is! List) return [];
-    
+
     try {
       return dishesData
           .map((dish) => Dish.fromJson(dish as Map<String, dynamic>))
@@ -150,7 +156,7 @@ class Dish {
   static List<DishAllergen> _parseAllergens(dynamic allergensData) {
     if (allergensData == null) return [];
     if (allergensData is! List) return [];
-    
+
     try {
       return allergensData
           .map((a) => DishAllergen.fromJson(a as Map<String, dynamic>))
@@ -165,7 +171,7 @@ class Dish {
   String get title => name;
   String get category => dishType;
   bool get isActive => true;
-  
+
   // Getter pour le nom traduit du type
   String get dishTypeName {
     switch (dishType) {
@@ -185,15 +191,9 @@ class DishAllergen {
   final int id;
   final String allergen;
 
-  DishAllergen({
-    required this.id,
-    required this.allergen,
-  });
+  DishAllergen({required this.id, required this.allergen});
 
   factory DishAllergen.fromJson(Map<String, dynamic> json) {
-    return DishAllergen(
-      id: json['id'] ?? 0,
-      allergen: json['allergen'] ?? '',
-    );
+    return DishAllergen(id: json['id'] ?? 0, allergen: json['allergen'] ?? '');
   }
 }

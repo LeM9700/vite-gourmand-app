@@ -83,7 +83,8 @@ class OrderModel {
   }
 
   /// Formatte la date en français
-  String get formattedDate => DateFormat('EEEE d MMMM yyyy', 'fr_FR').format(eventDate);
+  String get formattedDate =>
+      DateFormat('EEEE d MMMM yyyy', 'fr_FR').format(eventDate);
 
   /// Formatte l'heure
   String get formattedTime => eventTime.substring(0, 5);
@@ -92,13 +93,12 @@ class OrderModel {
   bool get isEditable => status == OrderStatus.placed;
 
   /// Vérifie si la commande est annulable
-  bool get isCancellable => 
+  bool get isCancellable =>
       status == OrderStatus.placed || status == OrderStatus.accepted;
 
   /// Vérifie si c'est une commande en cours
-  bool get isActive => 
-      status != OrderStatus.completed && 
-      status != OrderStatus.cancelled;
+  bool get isActive =>
+      status != OrderStatus.completed && status != OrderStatus.cancelled;
 
   /// Calcule les jours restants avant l'événement
   int get daysUntilEvent {
@@ -108,7 +108,7 @@ class OrderModel {
   }
 
   /// Vérifie si la commande peut être évaluée (review)
-  bool get canBeReviewed => 
+  bool get canBeReviewed =>
       status == OrderStatus.delivered || status == OrderStatus.completed;
 }
 
@@ -182,7 +182,8 @@ class OrderHistoryModel {
     );
   }
 
-  String get formattedDate => DateFormat('dd/MM/yyyy à HH:mm', 'fr_FR').format(changedAt);
+  String get formattedDate =>
+      DateFormat('dd/MM/yyyy à HH:mm', 'fr_FR').format(changedAt);
 }
 
 /// Modèle pour le détail d'une commande avec historique
@@ -210,7 +211,7 @@ class OrderDetailModel extends OrderModel {
 
   factory OrderDetailModel.fromJson(Map<String, dynamic> json) {
     final baseOrder = OrderModel.fromJson(json);
-    
+
     return OrderDetailModel(
       id: baseOrder.id,
       userId: baseOrder.userId,
@@ -227,8 +228,11 @@ class OrderDetailModel extends OrderModel {
       totalPrice: baseOrder.totalPrice,
       status: baseOrder.status,
       hasLoanedEquipment: baseOrder.hasLoanedEquipment,
-      history: (json['history'] as List<dynamic>?)
-              ?.map((h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>))
+      history:
+          (json['history'] as List<dynamic>?)
+              ?.map(
+                (h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>),
+              )
               .toList() ??
           [],
     );
