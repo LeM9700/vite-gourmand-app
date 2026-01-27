@@ -77,9 +77,8 @@ class _CreateReviewPageState extends State<CreateReviewPage>
 
     if (_commentController.text.trim().length < 5) {
       setState(
-        () =>
-            _errorMessage =
-                'Le commentaire doit contenir au moins 5 caractères',
+        () => _errorMessage =
+            'Le commentaire doit contenir au moins 5 caractères',
       );
       return;
     }

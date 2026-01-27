@@ -221,74 +221,69 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
               height: isSelected ? bubbleSize * 1.15 : bubbleSize,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient:
-                    isSelected
-                        ? LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            AppColors.primary.withValues(alpha: 0.95),
-                            AppColors.primary,
-                            const Color(0xFFC5A028),
-                          ],
-                          stops: const [0.0, 0.5, 1.0],
-                        )
-                        : LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            AppColors.glassFill.withValues(alpha: 0.3),
-                            AppColors.glassFill.withValues(alpha: 0.15),
-                          ],
-                        ),
+                gradient: isSelected
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          AppColors.primary.withValues(alpha: 0.95),
+                          AppColors.primary,
+                          const Color(0xFFC5A028),
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
+                      )
+                    : LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          AppColors.glassFill.withValues(alpha: 0.3),
+                          AppColors.glassFill.withValues(alpha: 0.15),
+                        ],
+                      ),
                 border: Border.all(
-                  color:
-                      isSelected
-                          ? AppColors.champagne.withValues(alpha: 0.6)
-                          : AppColors.glassBorder.withValues(alpha: 0.3),
+                  color: isSelected
+                      ? AppColors.champagne.withValues(alpha: 0.6)
+                      : AppColors.glassBorder.withValues(alpha: 0.3),
                   width: isSelected ? 2.5 : 1.5,
                 ),
-                boxShadow:
-                    isSelected
-                        ? [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.5),
-                            blurRadius: 20,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 4),
-                          ),
-                          BoxShadow(
-                            color: AppColors.champagne.withValues(alpha: 0.3),
-                            blurRadius: 12,
-                            spreadRadius: 0,
-                            offset: const Offset(0, 2),
-                          ),
-                        ]
-                        : [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.15),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.5),
+                          blurRadius: 20,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 4),
+                        ),
+                        BoxShadow(
+                          color: AppColors.champagne.withValues(alpha: 0.3),
+                          blurRadius: 12,
+                          spreadRadius: 0,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.15),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
               ),
               child: Center(
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 300),
                   style: TextStyle(
                     fontSize: isSelected ? iconSize * 1.1 : iconSize,
-                    color:
-                        isSelected
-                            ? AppColors.dark
-                            : AppColors.textLight.withValues(alpha: 0.7),
+                    color: isSelected
+                        ? AppColors.dark
+                        : AppColors.textLight.withValues(alpha: 0.7),
                   ),
                   child: Icon(
                     icon,
                     size: isSelected ? iconSize * 1.1 : iconSize,
-                    color:
-                        isSelected
-                            ? AppColors.dark
-                            : AppColors.textLight.withValues(alpha: 0.7),
+                    color: isSelected
+                        ? AppColors.dark
+                        : AppColors.textLight.withValues(alpha: 0.7),
                   ),
                 ),
               ),
@@ -303,10 +298,9 @@ class _AdminNavigationPageState extends State<AdminNavigationPage> {
               style: AppTextStyles.caption.copyWith(
                 fontSize: isMobile ? 10 : 11,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                color:
-                    isSelected
-                        ? AppColors.primary
-                        : AppColors.textLight.withValues(alpha: 0.6),
+                color: isSelected
+                    ? AppColors.primary
+                    : AppColors.textLight.withValues(alpha: 0.6),
                 letterSpacing: isSelected ? 0.8 : 0.3,
               ),
               child: Text(

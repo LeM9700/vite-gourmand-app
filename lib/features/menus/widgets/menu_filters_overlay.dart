@@ -221,9 +221,9 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               '${_maxPrice.toInt()}€ par personne',
                                               style: AppTextStyles.cardTitle
                                                   .copyWith(
-                                                    color: AppColors.primary,
-                                                    fontSize: 18,
-                                                  ),
+                                                color: AppColors.primary,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                             const SizedBox(height: 12),
                                             SliderTheme(
@@ -284,64 +284,50 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               runSpacing: 8,
                                               children:
                                                   widget.availableThemes.map((
-                                                    theme,
-                                                  ) {
-                                                    final isSelected =
-                                                        _selectedTheme == theme;
-                                                    return ChoiceChip(
-                                                      label: Text(theme),
-                                                      selected: isSelected,
-                                                      onSelected: (selected) {
-                                                        setState(() {
-                                                          _selectedTheme =
-                                                              selected
-                                                                  ? theme
-                                                                  : null;
-                                                        });
-                                                      },
-                                                      backgroundColor:
-                                                          AppColors.glassFill,
-                                                      selectedColor: AppColors
-                                                          .primary
-                                                          .withValues(
-                                                            alpha: 0.2,
-                                                          ),
-                                                      labelStyle: AppTextStyles
-                                                          .body
-                                                          .copyWith(
-                                                            color:
-                                                                isSelected
-                                                                    ? AppColors
-                                                                        .primary
-                                                                    : AppColors
-                                                                        .textPrimary,
-                                                            fontWeight:
-                                                                isSelected
-                                                                    ? FontWeight
-                                                                        .w600
-                                                                    : FontWeight
-                                                                        .w400,
-                                                          ),
-                                                      side: BorderSide(
-                                                        color:
-                                                            isSelected
-                                                                ? AppColors
-                                                                    .primary
-                                                                : AppColors
-                                                                    .glassBorder,
-                                                        width:
-                                                            isSelected
-                                                                ? 1.5
-                                                                : 1,
-                                                      ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              12,
-                                                            ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
+                                                theme,
+                                              ) {
+                                                final isSelected =
+                                                    _selectedTheme == theme;
+                                                return ChoiceChip(
+                                                  label: Text(theme),
+                                                  selected: isSelected,
+                                                  onSelected: (selected) {
+                                                    setState(() {
+                                                      _selectedTheme = selected
+                                                          ? theme
+                                                          : null;
+                                                    });
+                                                  },
+                                                  backgroundColor:
+                                                      AppColors.glassFill,
+                                                  selectedColor: AppColors
+                                                      .primary
+                                                      .withValues(
+                                                    alpha: 0.2,
+                                                  ),
+                                                  labelStyle: AppTextStyles.body
+                                                      .copyWith(
+                                                    color: isSelected
+                                                        ? AppColors.primary
+                                                        : AppColors.textPrimary,
+                                                    fontWeight: isSelected
+                                                        ? FontWeight.w600
+                                                        : FontWeight.w400,
+                                                  ),
+                                                  side: BorderSide(
+                                                    color: isSelected
+                                                        ? AppColors.primary
+                                                        : AppColors.glassBorder,
+                                                    width: isSelected ? 1.5 : 1,
+                                                  ),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      12,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
                                             ),
                                           ],
                                         ),
@@ -363,65 +349,50 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               runSpacing: 8,
                                               children:
                                                   widget.availableRegimes.map((
-                                                    regime,
-                                                  ) {
-                                                    final isSelected =
-                                                        _selectedRegime ==
-                                                        regime;
-                                                    return ChoiceChip(
-                                                      label: Text(regime),
-                                                      selected: isSelected,
-                                                      onSelected: (selected) {
-                                                        setState(() {
-                                                          _selectedRegime =
-                                                              selected
-                                                                  ? regime
-                                                                  : null;
-                                                        });
-                                                      },
-                                                      backgroundColor:
-                                                          AppColors.glassFill,
-                                                      selectedColor: AppColors
-                                                          .primary
-                                                          .withValues(
-                                                            alpha: 0.2,
-                                                          ),
-                                                      labelStyle: AppTextStyles
-                                                          .body
-                                                          .copyWith(
-                                                            color:
-                                                                isSelected
-                                                                    ? AppColors
-                                                                        .primary
-                                                                    : AppColors
-                                                                        .textPrimary,
-                                                            fontWeight:
-                                                                isSelected
-                                                                    ? FontWeight
-                                                                        .w600
-                                                                    : FontWeight
-                                                                        .w400,
-                                                          ),
-                                                      side: BorderSide(
-                                                        color:
-                                                            isSelected
-                                                                ? AppColors
-                                                                    .primary
-                                                                : AppColors
-                                                                    .glassBorder,
-                                                        width:
-                                                            isSelected
-                                                                ? 1.5
-                                                                : 1,
-                                                      ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              12,
-                                                            ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
+                                                regime,
+                                              ) {
+                                                final isSelected =
+                                                    _selectedRegime == regime;
+                                                return ChoiceChip(
+                                                  label: Text(regime),
+                                                  selected: isSelected,
+                                                  onSelected: (selected) {
+                                                    setState(() {
+                                                      _selectedRegime = selected
+                                                          ? regime
+                                                          : null;
+                                                    });
+                                                  },
+                                                  backgroundColor:
+                                                      AppColors.glassFill,
+                                                  selectedColor: AppColors
+                                                      .primary
+                                                      .withValues(
+                                                    alpha: 0.2,
+                                                  ),
+                                                  labelStyle: AppTextStyles.body
+                                                      .copyWith(
+                                                    color: isSelected
+                                                        ? AppColors.primary
+                                                        : AppColors.textPrimary,
+                                                    fontWeight: isSelected
+                                                        ? FontWeight.w600
+                                                        : FontWeight.w400,
+                                                  ),
+                                                  side: BorderSide(
+                                                    color: isSelected
+                                                        ? AppColors.primary
+                                                        : AppColors.glassBorder,
+                                                    width: isSelected ? 1.5 : 1,
+                                                  ),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      12,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
                                             ),
                                           ],
                                         ),
@@ -442,9 +413,9 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                               '$_minPeopleMax personnes max',
                                               style: AppTextStyles.cardTitle
                                                   .copyWith(
-                                                    color: AppColors.primary,
-                                                    fontSize: 18,
-                                                  ),
+                                                color: AppColors.primary,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                             const SizedBox(height: 12),
                                             SliderTheme(
@@ -465,9 +436,8 @@ class _MenuFiltersOverlayState extends State<MenuFiltersOverlay>
                                                 divisions: 48,
                                                 onChanged: (value) {
                                                   setState(
-                                                    () =>
-                                                        _minPeopleMax =
-                                                            value.toInt(),
+                                                    () => _minPeopleMax =
+                                                        value.toInt(),
                                                   );
                                                 },
                                               ),

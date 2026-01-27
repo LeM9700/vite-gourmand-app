@@ -76,62 +76,8 @@ class HomeSectionAbout extends StatelessWidget {
         // Section José & Julie - Responsive Column/Row
         isSmallScreen
             ? Column(
-              children: [
-                _buildProfileCard(
-                  context: context,
-                  name: 'José',
-                  title: 'Maître de la Logistique',
-                  description:
-                      'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
-                  badge: 'Excellence Logistique',
-                  icon: Icons.precision_manufacturing_rounded,
-                  gradientColors: [AppColors.truffle, AppColors.caviar],
-                  badgeGradient: [
-                    AppColors.truffle.withValues(alpha: 0.1),
-                    AppColors.caviar.withValues(alpha: 0.05),
-                  ],
-                  badgeColor: AppColors.truffle,
-                  padding: padding,
-                  avatarSize: avatarSize,
-                  iconSize: iconSize,
-                  titleSize: titleSize,
-                  subtitleSize: subtitleSize,
-                  descriptionSize: descriptionSize,
-                  badgePaddingH: badgePaddingH,
-                  badgePaddingV: badgePaddingV,
-                  spacing: spacing,
-                ),
-                SizedBox(height: spacing * 0.75),
-                _buildProfileCard(
-                  context: context,
-                  name: 'Julie',
-                  title: 'Maître Cuisinier',
-                  description:
-                      'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
-                  badge: 'Art Culinaire',
-                  icon: Icons.restaurant_menu_rounded,
-                  gradientColors: [AppColors.primary, AppColors.saffron],
-                  badgeGradient: [
-                    AppColors.primary.withValues(alpha: 0.15),
-                    AppColors.saffron.withValues(alpha: 0.1),
-                  ],
-                  badgeColor: AppColors.primary,
-                  padding: padding,
-                  avatarSize: avatarSize,
-                  iconSize: iconSize,
-                  titleSize: titleSize,
-                  subtitleSize: subtitleSize,
-                  descriptionSize: descriptionSize,
-                  badgePaddingH: badgePaddingH,
-                  badgePaddingV: badgePaddingV,
-                  spacing: spacing,
-                ),
-              ],
-            )
-            : Row(
-              children: [
-                Expanded(
-                  child: _buildProfileCard(
+                children: [
+                  _buildProfileCard(
                     context: context,
                     name: 'José',
                     title: 'Maître de la Logistique',
@@ -155,10 +101,8 @@ class HomeSectionAbout extends StatelessWidget {
                     badgePaddingV: badgePaddingV,
                     spacing: spacing,
                   ),
-                ),
-                SizedBox(width: spacing * 0.75),
-                Expanded(
-                  child: _buildProfileCard(
+                  SizedBox(height: spacing * 0.75),
+                  _buildProfileCard(
                     context: context,
                     name: 'Julie',
                     title: 'Maître Cuisinier',
@@ -182,9 +126,65 @@ class HomeSectionAbout extends StatelessWidget {
                     badgePaddingV: badgePaddingV,
                     spacing: spacing,
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    child: _buildProfileCard(
+                      context: context,
+                      name: 'José',
+                      title: 'Maître de la Logistique',
+                      description:
+                          'Orchestrateur méticuleux, José transforme chaque événement en symphonie logistique parfaite.',
+                      badge: 'Excellence Logistique',
+                      icon: Icons.precision_manufacturing_rounded,
+                      gradientColors: [AppColors.truffle, AppColors.caviar],
+                      badgeGradient: [
+                        AppColors.truffle.withValues(alpha: 0.1),
+                        AppColors.caviar.withValues(alpha: 0.05),
+                      ],
+                      badgeColor: AppColors.truffle,
+                      padding: padding,
+                      avatarSize: avatarSize,
+                      iconSize: iconSize,
+                      titleSize: titleSize,
+                      subtitleSize: subtitleSize,
+                      descriptionSize: descriptionSize,
+                      badgePaddingH: badgePaddingH,
+                      badgePaddingV: badgePaddingV,
+                      spacing: spacing,
+                    ),
+                  ),
+                  SizedBox(width: spacing * 0.75),
+                  Expanded(
+                    child: _buildProfileCard(
+                      context: context,
+                      name: 'Julie',
+                      title: 'Maître Cuisinier',
+                      description:
+                          'Artiste culinaire au cœur généreux, Julie sublime chaque recette avec créativité et passion.',
+                      badge: 'Art Culinaire',
+                      icon: Icons.restaurant_menu_rounded,
+                      gradientColors: [AppColors.primary, AppColors.saffron],
+                      badgeGradient: [
+                        AppColors.primary.withValues(alpha: 0.15),
+                        AppColors.saffron.withValues(alpha: 0.1),
+                      ],
+                      badgeColor: AppColors.primary,
+                      padding: padding,
+                      avatarSize: avatarSize,
+                      iconSize: iconSize,
+                      titleSize: titleSize,
+                      subtitleSize: subtitleSize,
+                      descriptionSize: descriptionSize,
+                      badgePaddingH: badgePaddingH,
+                      badgePaddingV: badgePaddingV,
+                      spacing: spacing,
+                    ),
+                  ),
+                ],
+              ),
 
         SizedBox(height: spacing * 1.25),
 

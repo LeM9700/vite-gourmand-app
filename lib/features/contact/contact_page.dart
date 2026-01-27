@@ -252,10 +252,9 @@ class _ContactPageState extends State<ContactPage> {
                                       width: double.infinity,
                                       child: PrimaryButton(
                                         label: 'Envoyer le message',
-                                        onPressed:
-                                            _isLoading
-                                                ? null
-                                                : _handleSendMessage,
+                                        onPressed: _isLoading
+                                            ? null
+                                            : _handleSendMessage,
                                         isLoading: _isLoading,
                                       ),
                                     ),

@@ -43,10 +43,8 @@ class PriceFormatter {
   static double? parsePrice(String priceStr) {
     try {
       // Nettoyer la string (enlever €, espaces)
-      final cleaned = priceStr
-          .replaceAll('€', '')
-          .replaceAll(' ', '')
-          .replaceAll(',', '.');
+      final cleaned =
+          priceStr.replaceAll('€', '').replaceAll(' ', '').replaceAll(',', '.');
 
       return double.tryParse(cleaned);
     } catch (e) {

@@ -149,11 +149,9 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                             label: 'Prénom',
                             icon: Icons.person_outline,
                             labelSize: labelSize,
-                            validator:
-                                (v) =>
-                                    v == null || v.trim().isEmpty
-                                        ? 'Prénom requis'
-                                        : null,
+                            validator: (v) => v == null || v.trim().isEmpty
+                                ? 'Prénom requis'
+                                : null,
                           ),
                         ),
                         SizedBox(width: spacing),
@@ -163,11 +161,9 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                             label: 'Nom',
                             icon: Icons.person,
                             labelSize: labelSize,
-                            validator:
-                                (v) =>
-                                    v == null || v.trim().isEmpty
-                                        ? 'Nom requis'
-                                        : null,
+                            validator: (v) => v == null || v.trim().isEmpty
+                                ? 'Nom requis'
+                                : null,
                           ),
                         ),
                       ],
@@ -178,11 +174,9 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                       label: 'Prénom',
                       icon: Icons.person_outline,
                       labelSize: labelSize,
-                      validator:
-                          (v) =>
-                              v == null || v.trim().isEmpty
-                                  ? 'Prénom requis'
-                                  : null,
+                      validator: (v) => v == null || v.trim().isEmpty
+                          ? 'Prénom requis'
+                          : null,
                     ),
                     SizedBox(height: spacing),
                     _buildTextField(
@@ -190,11 +184,8 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                       label: 'Nom',
                       icon: Icons.person,
                       labelSize: labelSize,
-                      validator:
-                          (v) =>
-                              v == null || v.trim().isEmpty
-                                  ? 'Nom requis'
-                                  : null,
+                      validator: (v) =>
+                          v == null || v.trim().isEmpty ? 'Nom requis' : null,
                     ),
                   ],
 
@@ -228,11 +219,9 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                     icon: Icons.location_on,
                     labelSize: labelSize,
                     maxLines: 3,
-                    validator:
-                        (v) =>
-                            v == null || v.trim().length < 10
-                                ? 'Adresse complète requise (min 10 caractères)'
-                                : null,
+                    validator: (v) => v == null || v.trim().length < 10
+                        ? 'Adresse complète requise (min 10 caractères)'
+                        : null,
                   ),
 
                   SizedBox(height: spacing * 1.5),
@@ -283,29 +272,28 @@ class _EditDeliveryInfoPageState extends State<EditDeliveryInfoPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child:
-                          _isLoading
-                              ? SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
-                                  ),
-                                ),
-                              )
-                              : Text(
-                                'Enregistrer les modifications',
-                                style: TextStyle(
-                                  fontSize: context.fluidValue(
-                                    minValue: 14,
-                                    maxValue: 16,
-                                  ),
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                      child: _isLoading
+                          ? SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
                                 ),
                               ),
+                            )
+                          : Text(
+                              'Enregistrer les modifications',
+                              style: TextStyle(
+                                fontSize: context.fluidValue(
+                                  minValue: 14,
+                                  maxValue: 16,
+                                ),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
 

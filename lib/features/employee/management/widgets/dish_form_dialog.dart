@@ -118,14 +118,13 @@ class _DishFormDialogState extends State<DishFormDialog> {
             if (_formKey.currentState!.validate()) {
               // Parser les allergènes
               final allergensText = _allergensController.text.trim();
-              final allergensList =
-                  allergensText.isEmpty
-                      ? <String>[]
-                      : allergensText
-                          .split(',')
-                          .map((a) => a.trim())
-                          .where((a) => a.isNotEmpty)
-                          .toList();
+              final allergensList = allergensText.isEmpty
+                  ? <String>[]
+                  : allergensText
+                      .split(',')
+                      .map((a) => a.trim())
+                      .where((a) => a.isNotEmpty)
+                      .toList();
 
               await widget.onSave({
                 'name': _nameController.text,

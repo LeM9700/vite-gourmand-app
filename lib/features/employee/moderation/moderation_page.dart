@@ -305,37 +305,35 @@ class _ModerationPageState extends State<ModerationPage>
           ),
         ),
         Expanded(
-          child:
-              _isLoadingReviews
-                  ? const Center(child: CircularProgressIndicator())
-                  : _errorReviews != null
+          child: _isLoadingReviews
+              ? const Center(child: CircularProgressIndicator())
+              : _errorReviews != null
                   ? Center(
-                    child: Text(
-                      _errorReviews!,
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  )
+                      child: Text(
+                        _errorReviews!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    )
                   : _reviews.isEmpty
-                  ? const Center(child: Text('Aucun avis'))
-                  : ListView.separated(
-                    padding: EdgeInsets.all(context.horizontalPadding),
-                    itemCount: _reviews.length,
-                    separatorBuilder:
-                        (context, index) => SizedBox(
-                          height: context.fluidValue(
-                            minValue: 12,
-                            maxValue: 16,
+                      ? const Center(child: Text('Aucun avis'))
+                      : ListView.separated(
+                          padding: EdgeInsets.all(context.horizontalPadding),
+                          itemCount: _reviews.length,
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: context.fluidValue(
+                              minValue: 12,
+                              maxValue: 16,
+                            ),
                           ),
+                          itemBuilder: (context, index) {
+                            final review = _reviews[index];
+                            return ReviewModerationCard(
+                              review: review,
+                              onModerate: (status) =>
+                                  _moderateReview(review.id, status),
+                            );
+                          },
                         ),
-                    itemBuilder: (context, index) {
-                      final review = _reviews[index];
-                      return ReviewModerationCard(
-                        review: review,
-                        onModerate:
-                            (status) => _moderateReview(review.id, status),
-                      );
-                    },
-                  ),
         ),
       ],
     );
@@ -345,29 +343,28 @@ class _ModerationPageState extends State<ModerationPage>
     return _isLoadingMessages
         ? const Center(child: CircularProgressIndicator())
         : _errorMessages != null
-        ? Center(
-          child: Text(
-            _errorMessages!,
-            style: const TextStyle(color: Colors.red),
-          ),
-        )
-        : _messages.isEmpty
-        ? const Center(child: Text('Aucun message'))
-        : ListView.separated(
-          padding: EdgeInsets.all(context.horizontalPadding),
-          itemCount: _messages.length,
-          separatorBuilder:
-              (context, index) => SizedBox(
-                height: context.fluidValue(minValue: 12, maxValue: 16),
-              ),
-          itemBuilder: (context, index) {
-            final message = _messages[index];
-            return ContactMessageCard(
-              message: message,
-              onUpdateStatus:
-                  (status) => _updateMessageStatus(message.id, status),
-            );
-          },
-        );
+            ? Center(
+                child: Text(
+                  _errorMessages!,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              )
+            : _messages.isEmpty
+                ? const Center(child: Text('Aucun message'))
+                : ListView.separated(
+                    padding: EdgeInsets.all(context.horizontalPadding),
+                    itemCount: _messages.length,
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: context.fluidValue(minValue: 12, maxValue: 16),
+                    ),
+                    itemBuilder: (context, index) {
+                      final message = _messages[index];
+                      return ContactMessageCard(
+                        message: message,
+                        onUpdateStatus: (status) =>
+                            _updateMessageStatus(message.id, status),
+                      );
+                    },
+                  );
   }
 }

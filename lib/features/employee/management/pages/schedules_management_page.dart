@@ -129,42 +129,41 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
   void _showScheduleForm({Map<String, dynamic>? schedule}) {
     showDialog(
       context: context,
-      builder:
-          (context) => ScheduleFormDialog(
-            schedule: schedule,
-            onSave: (data) async {
-              try {
-                if (schedule == null) {
-                  await _service.createSchedule(data);
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Horaire créé'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                } else {
-                  await _service.updateSchedule(schedule['id'], data);
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Horaire mis à jour'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-                _loadSchedules();
-              } catch (e) {
-                if (!mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(e.toString().replaceAll('Exception: ', '')),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-          ),
+      builder: (context) => ScheduleFormDialog(
+        schedule: schedule,
+        onSave: (data) async {
+          try {
+            if (schedule == null) {
+              await _service.createSchedule(data);
+              if (!mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Horaire créé'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else {
+              await _service.updateSchedule(schedule['id'], data);
+              if (!mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Horaire mis à jour'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+            _loadSchedules();
+          } catch (e) {
+            if (!mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString().replaceAll('Exception: ', '')),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -256,42 +255,41 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
 
           // Liste des horaires
           Expanded(
-            child:
-                _schedules.isEmpty
-                    ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.schedule_outlined,
-                            size: 64,
-                            color: AppColors.textMuted.withValues(alpha: 0.5),
+            child: _schedules.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.schedule_outlined,
+                          size: 64,
+                          color: AppColors.textMuted.withValues(alpha: 0.5),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Aucun horaire',
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.textMuted,
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Aucun horaire',
-                            style: AppTextStyles.subtitle.copyWith(
-                              color: AppColors.textMuted,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    : ListView.separated(
-                      padding: EdgeInsets.fromLTRB(
-                        context.horizontalPadding,
-                        0,
-                        context.horizontalPadding,
-                        context.verticalPadding + 80,
-                      ),
-                      itemCount: _schedules.length,
-                      separatorBuilder:
-                          (context, index) => const SizedBox(height: 16),
-                      itemBuilder: (context, index) {
-                        final schedule = _schedules[index];
-                        return _buildScheduleCard(context, schedule);
-                      },
+                        ),
+                      ],
                     ),
+                  )
+                : ListView.separated(
+                    padding: EdgeInsets.fromLTRB(
+                      context.horizontalPadding,
+                      0,
+                      context.horizontalPadding,
+                      context.verticalPadding + 80,
+                    ),
+                    itemCount: _schedules.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      final schedule = _schedules[index];
+                      return _buildScheduleCard(context, schedule);
+                    },
+                  ),
           ),
         ],
       ),
@@ -380,10 +378,9 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                                 ? '$openTime - $closeTime'
                                 : 'Horaires non définis'),
                         style: AppTextStyles.caption.copyWith(
-                          color:
-                              isClosed
-                                  ? AppColors.danger
-                                  : AppColors.textSecondary,
+                          color: isClosed
+                              ? AppColors.danger
+                              : AppColors.textSecondary,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -398,16 +395,14 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color:
-                          isClosed
-                              ? AppColors.danger.withValues(alpha: 0.15)
-                              : AppColors.success.withValues(alpha: 0.15),
+                      color: isClosed
+                          ? AppColors.danger.withValues(alpha: 0.15)
+                          : AppColors.success.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color:
-                            isClosed
-                                ? AppColors.danger.withValues(alpha: 0.3)
-                                : AppColors.success.withValues(alpha: 0.3),
+                        color: isClosed
+                            ? AppColors.danger.withValues(alpha: 0.3)
+                            : AppColors.success.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),

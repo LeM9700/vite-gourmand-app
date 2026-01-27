@@ -107,42 +107,40 @@ class MenuCard extends StatelessWidget {
                   top: Radius.circular(12),
                 ),
                 color: AppColors.surface,
-                image:
-                    menu.imageUrl != null
-                        ? DecorationImage(
-                          image: NetworkImage(menu.imageUrl!),
-                          fit: BoxFit.cover,
-                        )
-                        : null,
-              ),
-              child:
-                  menu.imageUrl == null
-                      ? Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(12),
-                          ),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary.withValues(alpha: 0.3),
-                              AppColors.accent.withValues(alpha: 0.2),
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.restaurant_menu,
-                            size: context.fluidValue(
-                              minValue: 32,
-                              maxValue: 48,
-                            ),
-                            color: AppColors.primary,
-                          ),
-                        ),
+                image: menu.imageUrl != null
+                    ? DecorationImage(
+                        image: NetworkImage(menu.imageUrl!),
+                        fit: BoxFit.cover,
                       )
-                      : null,
+                    : null,
+              ),
+              child: menu.imageUrl == null
+                  ? Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(12),
+                        ),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppColors.primary.withValues(alpha: 0.3),
+                            AppColors.accent.withValues(alpha: 0.2),
+                          ],
+                        ),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.restaurant_menu,
+                          size: context.fluidValue(
+                            minValue: 32,
+                            maxValue: 48,
+                          ),
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    )
+                  : null,
             ),
           ),
 

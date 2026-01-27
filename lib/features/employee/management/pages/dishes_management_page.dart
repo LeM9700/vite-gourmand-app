@@ -48,22 +48,21 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
   Future<void> _deleteDish(int dishId) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Confirmer la suppression'),
-            content: const Text('Voulez-vous vraiment supprimer ce plat ?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Annuler'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('Supprimer'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmer la suppression'),
+        content: const Text('Voulez-vous vraiment supprimer ce plat ?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annuler'),
           ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Supprimer'),
+          ),
+        ],
+      ),
     );
     if (confirm != true) return;
 
@@ -91,40 +90,39 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
   void _showDishForm({Map<String, dynamic>? dish}) {
     showDialog(
       context: context,
-      builder:
-          (context) => DishFormDialog(
-            dish: dish,
-            onSave: (data) async {
-              try {
-                if (dish == null) {
-                  await _service.createDish(data);
+      builder: (context) => DishFormDialog(
+        dish: dish,
+        onSave: (data) async {
+          try {
+            if (dish == null) {
+              await _service.createDish(data);
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Plat créé'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                } else {
-                  await _service.updateDish(dish['id'], data);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Plat mis à jour'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-                _loadDishes();
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(e.toString().replaceAll('Exception: ', '')),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-          ),
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Plat créé'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else {
+              await _service.updateDish(dish['id'], data);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Plat mis à jour'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+            _loadDishes();
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString().replaceAll('Exception: ', '')),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -241,39 +239,38 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
 
           // Contenu
           Expanded(
-            child:
-                _filteredDishes.isEmpty
-                    ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.restaurant,
-                            size: 64,
-                            color: AppColors.textMuted,
+            child: _filteredDishes.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.restaurant,
+                          size: 64,
+                          color: AppColors.textMuted,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          _filterType == 'ALL'
+                              ? 'Aucun plat disponible'
+                              : 'Aucun plat dans cette catégorie',
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.textSecondary,
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            _filterType == 'ALL'
-                                ? 'Aucun plat disponible'
-                                : 'Aucun plat dans cette catégorie',
-                            style: AppTextStyles.subtitle.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    : ListView.separated(
-                      padding: EdgeInsets.all(context.horizontalPadding),
-                      itemCount: _filteredDishes.length,
-                      separatorBuilder:
-                          (context, index) => const SizedBox(height: 16),
-                      itemBuilder: (context, index) {
-                        final dish = _filteredDishes[index];
-                        return _buildDishCard(dish);
-                      },
+                        ),
+                      ],
                     ),
+                  )
+                : ListView.separated(
+                    padding: EdgeInsets.all(context.horizontalPadding),
+                    itemCount: _filteredDishes.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      final dish = _filteredDishes[index];
+                      return _buildDishCard(dish);
+                    },
+                  ),
           ),
         ],
       ),
@@ -292,22 +289,20 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          gradient:
-              isSelected
-                  ? LinearGradient(
-                    colors: [
-                      AppColors.accent,
-                      AppColors.accent.withValues(alpha: 0.8),
-                    ],
-                  )
-                  : null,
+          gradient: isSelected
+              ? LinearGradient(
+                  colors: [
+                    AppColors.accent,
+                    AppColors.accent.withValues(alpha: 0.8),
+                  ],
+                )
+              : null,
           color: isSelected ? null : AppColors.surface,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color:
-                isSelected
-                    ? AppColors.accent
-                    : AppColors.textMuted.withValues(alpha: 0.3),
+            color: isSelected
+                ? AppColors.accent
+                : AppColors.textMuted.withValues(alpha: 0.3),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -459,32 +454,31 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
                           child: Wrap(
                             spacing: 6,
                             runSpacing: 6,
-                            children:
-                                allergens.map((a) {
-                                  final allergen = a['allergen'] as String;
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
+                            children: allergens.map((a) {
+                              final allergen = a['allergen'] as String;
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.warning.withValues(
+                                    alpha: 0.2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  allergen,
+                                  style: AppTextStyles.caption.copyWith(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.warning.withValues(
+                                      alpha: 0.9,
                                     ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.warning.withValues(
-                                        alpha: 0.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: Text(
-                                      allergen,
-                                      style: AppTextStyles.caption.copyWith(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.warning.withValues(
-                                          alpha: 0.9,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                       ],

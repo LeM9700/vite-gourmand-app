@@ -90,24 +90,24 @@ class MenuDetailPage extends StatelessWidget {
                   menu.imageUrl != null
                       ? Image.network(menu.imageUrl!, fit: BoxFit.cover)
                       : Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary.withValues(alpha: 0.8),
-                              AppColors.accent.withValues(alpha: 0.6),
-                            ],
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.accent.withValues(alpha: 0.6),
+                              ],
+                            ),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.restaurant_menu,
+                              size: 120,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.restaurant_menu,
-                            size: 120,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
                   // Bouton retour
                   Positioned(
                     top: 24,
@@ -169,24 +169,24 @@ class MenuDetailPage extends StatelessWidget {
                   menu.imageUrl != null
                       ? Image.network(menu.imageUrl!, fit: BoxFit.cover)
                       : Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary.withValues(alpha: 0.8),
-                              AppColors.accent.withValues(alpha: 0.6),
-                            ],
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.accent.withValues(alpha: 0.6),
+                              ],
+                            ),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.restaurant_menu,
+                              size: 80,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.restaurant_menu,
-                            size: 80,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
                   // Gradient Overlay for text readability
                   Container(
                     decoration: BoxDecoration(

@@ -155,82 +155,84 @@ class _EmployeeOrdersListPageState extends State<EmployeeOrdersListPage> {
 
           // Liste des commandes
           Expanded(
-            child:
-                _isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : _errorMessage != null
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _errorMessage != null
                     ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.error_outline,
-                            size: 64,
-                            color: Colors.red,
-                          ),
-                          const SizedBox(height: 16),
-                          Text('Erreur', style: AppTextStyles.sectionTitle),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Text(
-                              _errorMessage!,
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.body.copyWith(
-                                color: AppColors.textSecondary,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.error_outline,
+                              size: 64,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(height: 16),
+                            Text('Erreur', style: AppTextStyles.sectionTitle),
+                            const SizedBox(height: 8),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              child: Text(
+                                _errorMessage!,
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.body.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 24),
-                          ElevatedButton.icon(
-                            onPressed: _loadOrders,
-                            icon: const Icon(Icons.refresh),
-                            label: const Text('Réessayer'),
-                          ),
-                        ],
-                      ),
-                    )
+                            const SizedBox(height: 24),
+                            ElevatedButton.icon(
+                              onPressed: _loadOrders,
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Réessayer'),
+                            ),
+                          ],
+                        ),
+                      )
                     : _orders.isEmpty
-                    ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.inbox_outlined,
-                            size: 64,
-                            color: AppColors.textSecondary,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Aucune commande',
-                            style: AppTextStyles.sectionTitle,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            _selectedStatus != null || _searchQuery.isNotEmpty
-                                ? 'Aucune commande ne correspond aux filtres'
-                                : 'Aucune commande pour le moment',
-                            style: AppTextStyles.body.copyWith(
-                              color: AppColors.textSecondary,
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.inbox_outlined,
+                                  size: 64,
+                                  color: AppColors.textSecondary,
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'Aucune commande',
+                                  style: AppTextStyles.sectionTitle,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  _selectedStatus != null ||
+                                          _searchQuery.isNotEmpty
+                                      ? 'Aucune commande ne correspond aux filtres'
+                                      : 'Aucune commande pour le moment',
+                                  style: AppTextStyles.body.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : RefreshIndicator(
+                            onRefresh: _onRefresh,
+                            child: ListView.builder(
+                              padding:
+                                  const EdgeInsets.only(top: 8, bottom: 16),
+                              itemCount: _orders.length,
+                              itemBuilder: (context, index) {
+                                final order = _orders[index];
+                                return EmployeeOrderCard(
+                                  order: order,
+                                  onTap: () => _navigateToDetail(order),
+                                );
+                              },
                             ),
                           ),
-                        ],
-                      ),
-                    )
-                    : RefreshIndicator(
-                      onRefresh: _onRefresh,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.only(top: 8, bottom: 16),
-                        itemCount: _orders.length,
-                        itemBuilder: (context, index) {
-                          final order = _orders[index];
-                          return EmployeeOrderCard(
-                            order: order,
-                            onTap: () => _navigateToDetail(order),
-                          );
-                        },
-                      ),
-                    ),
           ),
         ],
       ),

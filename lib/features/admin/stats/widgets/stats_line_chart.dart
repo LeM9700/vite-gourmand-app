@@ -120,8 +120,7 @@ class StatsLineChart extends StatelessWidget {
                       showTitles: true,
                       reservedSize: 40,
                       getTitlesWidget: (value, meta) {
-                        final text =
-                            getBottomTitles?.call(value) ??
+                        final text = getBottomTitles?.call(value) ??
                             value.toInt().toString();
                         return Padding(
                           padding: const EdgeInsets.only(top: 8),
@@ -142,8 +141,7 @@ class StatsLineChart extends StatelessWidget {
                       showTitles: true,
                       reservedSize: 50,
                       getTitlesWidget: (value, meta) {
-                        final text =
-                            getLeftTitles?.call(value) ??
+                        final text = getLeftTitles?.call(value) ??
                             value.toInt().toString();
                         return Text(
                           text,

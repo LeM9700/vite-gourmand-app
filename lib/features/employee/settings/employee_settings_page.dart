@@ -51,22 +51,21 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
   Future<void> _logout() async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Déconnexion'),
-            content: const Text('Voulez-vous vraiment vous déconnecter ?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Annuler'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('Déconnexion'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Déconnexion'),
+        content: const Text('Voulez-vous vraiment vous déconnecter ?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annuler'),
           ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Déconnexion'),
+          ),
+        ],
+      ),
     );
 
     if (confirm == true) {
@@ -147,10 +146,9 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
 
           // Contenu
           Expanded(
-            child:
-                _isLoading
-                    ? _buildLoadingSkeleton(context, padding)
-                    : _error != null
+            child: _isLoading
+                ? _buildLoadingSkeleton(context, padding)
+                : _error != null
                     ? _buildErrorState(context, padding)
                     : _buildContent(context, padding),
           ),
@@ -535,19 +533,18 @@ class _EmployeeSettingsPageState extends State<EmployeeSettingsPage> {
   void _showChangePasswordDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Changer le mot de passe'),
-            content: const Text(
-              'Fonctionnalité à venir. Contactez l\'administrateur.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Fermer'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Changer le mot de passe'),
+        content: const Text(
+          'Fonctionnalité à venir. Contactez l\'administrateur.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Fermer'),
           ),
+        ],
+      ),
     );
   }
 

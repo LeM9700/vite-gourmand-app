@@ -48,22 +48,21 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   Future<void> _deleteMenu(int menuId) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Confirmer la suppression'),
-            content: const Text('Voulez-vous vraiment supprimer ce menu ?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Annuler'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('Supprimer'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmer la suppression'),
+        content: const Text('Voulez-vous vraiment supprimer ce menu ?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annuler'),
           ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Supprimer'),
+          ),
+        ],
+      ),
     );
     if (confirm != true) return;
 
@@ -91,39 +90,38 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   void _showMenuForm({MenuModel? menu}) {
     showDialog(
       context: context,
-      builder:
-          (context) => MenuFormDialog(
-            menu: menu,
-            onSave: (data) async {
-              try {
-                if (menu == null) {
-                  await _service.createMenu(data);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Menu créé'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                } else {
-                  await _service.updateMenu(menu.id, data);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Menu mis à jour'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-                _loadMenus();
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(e.toString().replaceAll('Exception: ', '')),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-          ),
+      builder: (context) => MenuFormDialog(
+        menu: menu,
+        onSave: (data) async {
+          try {
+            if (menu == null) {
+              await _service.createMenu(data);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Menu créé'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else {
+              await _service.updateMenu(menu.id, data);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Menu mis à jour'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+            _loadMenus();
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString().replaceAll('Exception: ', '')),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -201,28 +199,27 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
 
           // Contenu
           Expanded(
-            child:
-                _menus.isEmpty
-                    ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.restaurant_menu,
-                            size: 64,
-                            color: AppColors.textMuted,
+            child: _menus.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.restaurant_menu,
+                          size: 64,
+                          color: AppColors.textMuted,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Aucun menu disponible',
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.textSecondary,
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Aucun menu disponible',
-                            style: AppTextStyles.subtitle.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    : _buildMenusGrid(context),
+                        ),
+                      ],
+                    ),
+                  )
+                : _buildMenusGrid(context),
           ),
         ],
       ),
@@ -258,10 +255,9 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
         menu.dishes.where((d) => d.dishType == 'DESSERT').firstOrNull;
 
     return GlassCard(
-      borderColor:
-          menu.isActive
-              ? AppColors.primary.withValues(alpha: 0.3)
-              : AppColors.textMuted.withValues(alpha: 0.2),
+      borderColor: menu.isActive
+          ? AppColors.primary.withValues(alpha: 0.3)
+          : AppColors.textMuted.withValues(alpha: 0.2),
       borderWidth: 2,
       padding: EdgeInsets.zero,
       child: Column(
@@ -280,16 +276,15 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    errorBuilder:
-                        (context, error, stackTrace) => Container(
-                          height: 200,
-                          color: AppColors.lightGrey,
-                          child: const Icon(
-                            Icons.restaurant,
-                            size: 64,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 200,
+                      color: AppColors.lightGrey,
+                      child: const Icon(
+                        Icons.restaurant,
+                        size: 64,
+                        color: AppColors.textMuted,
+                      ),
+                    ),
                   ),
                   // Badge actif/inactif
                   Positioned(
@@ -301,10 +296,9 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color:
-                            menu.isActive
-                                ? AppColors.success.withValues(alpha: 0.9)
-                                : AppColors.danger.withValues(alpha: 0.9),
+                        color: menu.isActive
+                            ? AppColors.success.withValues(alpha: 0.9)
+                            : AppColors.danger.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(

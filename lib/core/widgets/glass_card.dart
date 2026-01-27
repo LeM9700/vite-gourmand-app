@@ -64,8 +64,7 @@ class _GlassCardState extends State<GlassCard>
 
   @override
   Widget build(BuildContext context) {
-    final effectiveFillColor =
-        widget.fillColor ??
+    final effectiveFillColor = widget.fillColor ??
         (Theme.of(context).brightness == Brightness.dark
             ? AppColors.glassFill.withValues(alpha: 0.1)
             : AppColors.surface.withValues(alpha: 0.85));

@@ -58,16 +58,14 @@ class _EmployeesManagementPageState extends State<EmployeesManagementPage> {
       if (employee.isAdmin) return false;
 
       // Filtre de recherche
-      final matchesSearch =
-          _searchQuery.isEmpty ||
+      final matchesSearch = _searchQuery.isEmpty ||
           employee.fullName.toLowerCase().contains(
-            _searchQuery.toLowerCase(),
-          ) ||
+                _searchQuery.toLowerCase(),
+              ) ||
           employee.email.toLowerCase().contains(_searchQuery.toLowerCase());
 
       // Filtre de statut
-      final matchesStatus =
-          _statusFilter == 'all' ||
+      final matchesStatus = _statusFilter == 'all' ||
           (_statusFilter == 'active' && employee.isActive) ||
           (_statusFilter == 'inactive' && !employee.isActive);
 

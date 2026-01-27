@@ -74,19 +74,18 @@ class _OrderFilterBarState extends State<OrderFilterBar> {
                 Icons.search,
                 color: AppColors.textSecondary,
               ),
-              suffixIcon:
-                  _searchController.text.isNotEmpty
-                      ? IconButton(
-                        icon: const Icon(
-                          Icons.clear,
-                          color: AppColors.textSecondary,
-                        ),
-                        onPressed: () {
-                          _searchController.clear();
-                          widget.onSearchChanged('');
-                        },
-                      )
-                      : null,
+              suffixIcon: _searchController.text.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.clear,
+                        color: AppColors.textSecondary,
+                      ),
+                      onPressed: () {
+                        _searchController.clear();
+                        widget.onSearchChanged('');
+                      },
+                    )
+                  : null,
               filled: true,
               fillColor: AppColors.lightGrey.withValues(alpha: 0.5),
               border: OutlineInputBorder(
@@ -114,48 +113,39 @@ class _OrderFilterBarState extends State<OrderFilterBar> {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children:
-                _statuses.map((status) {
-                  final isSelected =
-                      widget.selectedStatus == status['value'] ||
-                      (widget.selectedStatus == null && status['value'] == '');
-                  return ChoiceChip(
-                    label: Text(status['label']!),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      if (selected) {
-                        final newStatus =
-                            status['value']!.isEmpty ? null : status['value'];
-                        widget.onStatusChanged(newStatus);
-                      }
-                    },
-                    backgroundColor: AppColors.glassFill,
-                    selectedColor: AppColors.primary.withValues(alpha: 0.2),
-                    labelStyle: AppTextStyles.body.copyWith(
-                      fontSize: isSmallScreen ? 12 : 14,
-                      color:
-                          isSelected
-                              ? AppColors.primary
-                              : AppColors.textPrimary,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.w400,
-                    ),
-                    side: BorderSide(
-                      color:
-                          isSelected
-                              ? AppColors.primary
-                              : AppColors.glassBorder,
-                      width: isSelected ? 1.5 : 1,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isSmallScreen ? 12 : 16,
-                      vertical: isSmallScreen ? 6 : 8,
-                    ),
-                  );
-                }).toList(),
+            children: _statuses.map((status) {
+              final isSelected = widget.selectedStatus == status['value'] ||
+                  (widget.selectedStatus == null && status['value'] == '');
+              return ChoiceChip(
+                label: Text(status['label']!),
+                selected: isSelected,
+                onSelected: (selected) {
+                  if (selected) {
+                    final newStatus =
+                        status['value']!.isEmpty ? null : status['value'];
+                    widget.onStatusChanged(newStatus);
+                  }
+                },
+                backgroundColor: AppColors.glassFill,
+                selectedColor: AppColors.primary.withValues(alpha: 0.2),
+                labelStyle: AppTextStyles.body.copyWith(
+                  fontSize: isSmallScreen ? 12 : 14,
+                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+                side: BorderSide(
+                  color: isSelected ? AppColors.primary : AppColors.glassBorder,
+                  width: isSelected ? 1.5 : 1,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: isSmallScreen ? 12 : 16,
+                  vertical: isSmallScreen ? 6 : 8,
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),

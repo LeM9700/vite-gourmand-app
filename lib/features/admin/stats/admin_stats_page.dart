@@ -237,76 +237,67 @@ class _AdminStatsPageState extends State<AdminStatsPage>
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                children:
-                                    ChartType.values.map((type) {
-                                      final isSelected = _chartType == type;
-                                      return Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              _chartType = type;
-                                            });
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 12,
-                                              vertical: 8,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  isSelected
-                                                      ? AppColors.primary
-                                                          .withValues(
-                                                            alpha: 0.2,
-                                                          )
-                                                      : Colors.white.withValues(
-                                                        alpha: 0.05,
-                                                      ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                color:
-                                                    isSelected
-                                                        ? AppColors.primary
-                                                        : Colors.white
-                                                            .withValues(
-                                                              alpha: 0.2,
-                                                            ),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  type.icon,
-                                                  size: 16,
-                                                  color:
-                                                      isSelected
-                                                          ? AppColors.primary
-                                                          : AppColors
-                                                              .textSecondary,
+                                children: ChartType.values.map((type) {
+                                  final isSelected = _chartType == type;
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 8),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _chartType = type;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: isSelected
+                                              ? AppColors.primary.withValues(
+                                                  alpha: 0.2,
+                                                )
+                                              : Colors.white.withValues(
+                                                  alpha: 0.05,
                                                 ),
-                                                const SizedBox(width: 6),
-                                                Text(
-                                                  type.label,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w600,
-                                                    color:
-                                                        isSelected
-                                                            ? AppColors.primary
-                                                            : AppColors
-                                                                .textSecondary,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? AppColors.primary
+                                                : Colors.white.withValues(
+                                                    alpha: 0.2,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
+                                            width: 1,
                                           ),
                                         ),
-                                      );
-                                    }).toList(),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              type.icon,
+                                              size: 16,
+                                              color: isSelected
+                                                  ? AppColors.primary
+                                                  : AppColors.textSecondary,
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              type.label,
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: isSelected
+                                                    ? AppColors.primary
+                                                    : AppColors.textSecondary,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           ),
@@ -425,12 +416,11 @@ class _AdminStatsPageState extends State<AdminStatsPage>
               values: menus.map((m) => m.ordersCount.toDouble()).toList(),
               color: AppColors.info,
             ),
-            maxY:
-                (menus
-                            .map((m) => m.ordersCount)
-                            .reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (menus
+                        .map((m) => m.ordersCount)
+                        .reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
               return menus[value.toInt()].menuName ??
@@ -448,12 +438,11 @@ class _AdminStatsPageState extends State<AdminStatsPage>
             spots: StatsLineChart.createSpots(
               menus.map((m) => m.ordersCount.toDouble()).toList(),
             ),
-            maxY:
-                (menus
-                            .map((m) => m.ordersCount)
-                            .reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (menus
+                        .map((m) => m.ordersCount)
+                        .reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             lineColor: AppColors.info,
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
@@ -497,12 +486,11 @@ class _AdminStatsPageState extends State<AdminStatsPage>
               values: data.map((m) => m.periodRevenue).toList(),
               color: AppColors.success,
             ),
-            maxY:
-                (data
-                            .map((m) => m.periodRevenue)
-                            .reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (data
+                        .map((m) => m.periodRevenue)
+                        .reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= data.length) return '';
               return data[value.toInt()].menuName ??
@@ -521,12 +509,11 @@ class _AdminStatsPageState extends State<AdminStatsPage>
             spots: StatsLineChart.createSpots(
               data.map((m) => m.periodRevenue).toList(),
             ),
-            maxY:
-                (data
-                            .map((m) => m.periodRevenue)
-                            .reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (data
+                        .map((m) => m.periodRevenue)
+                        .reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             lineColor: AppColors.success,
             getBottomTitles: (value) {
               if (value.toInt() >= data.length) return '';
@@ -572,10 +559,9 @@ class _AdminStatsPageState extends State<AdminStatsPage>
               values: menus.map((m) => m.revenue).toList(),
               color: AppColors.warning,
             ),
-            maxY:
-                (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';
               return menus[value.toInt()].menuName ??
@@ -593,10 +579,9 @@ class _AdminStatsPageState extends State<AdminStatsPage>
             spots: StatsLineChart.createSpots(
               menus.map((m) => m.revenue).toList(),
             ),
-            maxY:
-                (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
-                        1.2)
-                    .toDouble(),
+            maxY: (menus.map((m) => m.revenue).reduce((a, b) => a > b ? a : b) *
+                    1.2)
+                .toDouble(),
             lineColor: AppColors.warning,
             getBottomTitles: (value) {
               if (value.toInt() >= menus.length) return '';

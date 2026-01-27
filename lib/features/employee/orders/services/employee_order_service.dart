@@ -120,8 +120,7 @@ class EmployeeOrderService {
       return OrderEmployeeModel.fromJson(response.data as Map<String, dynamic>);
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 400) {
-        final message =
-            e.response?.data?['detail'] ??
+        final message = e.response?.data?['detail'] ??
             'Impossible d\'annuler cette commande';
         throw Exception(message);
       }

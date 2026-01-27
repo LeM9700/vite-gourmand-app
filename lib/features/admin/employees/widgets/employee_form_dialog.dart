@@ -512,19 +512,18 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon:
-                          _isLoading
-                              ? const SizedBox(
-                                width: 16,
-                                height: 16,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.black,
-                                  ),
+                      icon: _isLoading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.black,
                                 ),
-                              )
-                              : const Icon(Icons.check_rounded),
+                              ),
+                            )
+                          : const Icon(Icons.check_rounded),
                       label: Text(_isLoading ? 'Création...' : 'Créer'),
                     ),
                   ],

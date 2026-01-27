@@ -238,16 +238,13 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                   ),
                 ),
-
               if (_currentStep != RegisterStep.personal)
                 const SizedBox(width: 16),
-
               Expanded(
                 child: PrimaryButton(
-                  label:
-                      _currentStep == RegisterStep.credentials
-                          ? 'Créer mon compte'
-                          : 'Suivant',
+                  label: _currentStep == RegisterStep.credentials
+                      ? 'Créer mon compte'
+                      : 'Suivant',
                   onPressed: _isLoading ? null : _nextStep,
                   isLoading: _isLoading,
                 ),

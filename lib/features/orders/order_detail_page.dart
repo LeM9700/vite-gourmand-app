@@ -85,10 +85,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         ),
         centerTitle: context.isMobile,
       ),
-      body:
-          _isLoading
-              ? _buildLoadingSkeleton(context, padding)
-              : _errorMessage != null
+      body: _isLoading
+          ? _buildLoadingSkeleton(context, padding)
+          : _errorMessage != null
               ? _buildErrorState(context, padding)
               : _buildContent(context, padding),
     );
@@ -443,26 +442,25 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   void _showCancelDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Annuler la commande'),
-            content: const Text(
-              'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Retour'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('Confirmer l\'annulation'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Annuler la commande'),
+        content: const Text(
+          'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Retour'),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Confirmer l\'annulation'),
+          ),
+        ],
+      ),
     );
   }
 

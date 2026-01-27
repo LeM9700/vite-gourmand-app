@@ -176,10 +176,9 @@ class _OrderPageState extends State<OrderPage> {
       final payload = {
         'menu_id': widget.selectedMenu!.id,
         'event_address': deliveryAddress,
-        'event_city':
-            _isDeliveryInBordeaux
-                ? 'Bordeaux'
-                : _eventCityController.text.trim(),
+        'event_city': _isDeliveryInBordeaux
+            ? 'Bordeaux'
+            : _eventCityController.text.trim(),
         'event_date': DateFormat('yyyy-MM-dd').format(_selectedDate!),
         'event_time': timeStr,
         'delivery_km': _isDeliveryInBordeaux ? 0 : _deliveryKm,
@@ -198,19 +197,17 @@ class _OrderPageState extends State<OrderPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder:
-              (context) => OrderConfirmationPage(
-                orderId: orderId,
-                menuTitle: widget.selectedMenu!.title,
-                eventDate: _selectedDate!,
-                eventTime: _selectedTime!,
-                guestsCount: _guestsCount,
-                deliveryCity:
-                    _isDeliveryInBordeaux
-                        ? 'Bordeaux'
-                        : _eventCityController.text.trim(),
-                totalPrice: _totalPrice,
-              ),
+          builder: (context) => OrderConfirmationPage(
+            orderId: orderId,
+            menuTitle: widget.selectedMenu!.title,
+            eventDate: _selectedDate!,
+            eventTime: _selectedTime!,
+            guestsCount: _guestsCount,
+            deliveryCity: _isDeliveryInBordeaux
+                ? 'Bordeaux'
+                : _eventCityController.text.trim(),
+            totalPrice: _totalPrice,
+          ),
         ),
       );
     } catch (e) {
@@ -241,14 +238,13 @@ class _OrderPageState extends State<OrderPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder:
-              (context) => OrderErrorPage(
-                errorMessage: errorMessage,
-                errorCode: errorCode,
-                onRetry: () {
-                  Navigator.pop(context); // Retour à la page de commande
-                },
-              ),
+          builder: (context) => OrderErrorPage(
+            errorMessage: errorMessage,
+            errorCode: errorCode,
+            onRetry: () {
+              Navigator.pop(context); // Retour à la page de commande
+            },
+          ),
         ),
       );
     } finally {
@@ -340,10 +336,9 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   child: Form(
                     key: _formKey,
-                    child:
-                        context.isDesktop
-                            ? _buildDesktopLayout(context)
-                            : _buildMobileLayout(context),
+                    child: context.isDesktop
+                        ? _buildDesktopLayout(context)
+                        : _buildMobileLayout(context),
                   ),
                 ),
               ),
@@ -614,10 +609,9 @@ class _OrderPageState extends State<OrderPage> {
       children: [
         Icon(
           icon,
-          color:
-              isWarning
-                  ? AppColors.danger.withValues(alpha: 0.7)
-                  : AppColors.textSecondary,
+          color: isWarning
+              ? AppColors.danger.withValues(alpha: 0.7)
+              : AppColors.textSecondary,
           size: iconSize,
         ),
         SizedBox(width: spacing),
@@ -990,10 +984,9 @@ class _OrderPageState extends State<OrderPage> {
           _buildSummaryRow(
             context,
             label: 'Livraison',
-            detail:
-                _isDeliveryInBordeaux
-                    ? 'Bordeaux'
-                    : '${_deliveryKm.toStringAsFixed(0)} km',
+            detail: _isDeliveryInBordeaux
+                ? 'Bordeaux'
+                : '${_deliveryKm.toStringAsFixed(0)} km',
             value: _deliveryFee,
             labelSize: labelSize,
             priceSize: priceSize,
@@ -1075,10 +1068,9 @@ class _OrderPageState extends State<OrderPage> {
                 label,
                 style: AppTextStyles.body.copyWith(
                   fontSize: labelSize,
-                  color:
-                      isDiscount
-                          ? Colors.green.shade700
-                          : AppColors.textPrimary,
+                  color: isDiscount
+                      ? Colors.green.shade700
+                      : AppColors.textPrimary,
                 ),
               ),
               Text(
@@ -1098,12 +1090,9 @@ class _OrderPageState extends State<OrderPage> {
           style: AppTextStyles.body.copyWith(
             fontSize: priceSize,
             fontWeight: FontWeight.w600,
-            color:
-                isFree
-                    ? Colors.green.shade600
-                    : (isDiscount
-                        ? Colors.green.shade700
-                        : AppColors.textPrimary),
+            color: isFree
+                ? Colors.green.shade600
+                : (isDiscount ? Colors.green.shade700 : AppColors.textPrimary),
           ),
         ),
       ],
@@ -1143,10 +1132,9 @@ class _OrderPageState extends State<OrderPage> {
       child: Container(
         padding: EdgeInsets.all(context.isMobile ? 14 : 16),
         decoration: BoxDecoration(
-          color:
-              _needsEquipment
-                  ? AppColors.primary.withValues(alpha: 0.05)
-                  : Colors.white,
+          color: _needsEquipment
+              ? AppColors.primary.withValues(alpha: 0.05)
+              : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: _needsEquipment ? AppColors.primary : Colors.grey.shade300,
@@ -1163,17 +1151,15 @@ class _OrderPageState extends State<OrderPage> {
                 color: _needsEquipment ? AppColors.primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color:
-                      _needsEquipment
-                          ? AppColors.primary
-                          : Colors.grey.shade400,
+                  color: _needsEquipment
+                      ? AppColors.primary
+                      : Colors.grey.shade400,
                   width: 2,
                 ),
               ),
-              child:
-                  _needsEquipment
-                      ? const Icon(Icons.check, size: 16, color: Colors.white)
-                      : null,
+              child: _needsEquipment
+                  ? const Icon(Icons.check, size: 16, color: Colors.white)
+                  : null,
             ),
             const SizedBox(width: 12),
 
@@ -1194,10 +1180,9 @@ class _OrderPageState extends State<OrderPage> {
                     style: AppTextStyles.body.copyWith(
                       fontWeight:
                           _needsEquipment ? FontWeight.w600 : FontWeight.w500,
-                      color:
-                          _needsEquipment
-                              ? AppColors.primary
-                              : AppColors.textPrimary,
+                      color: _needsEquipment
+                          ? AppColors.primary
+                          : AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -1246,24 +1231,23 @@ class _OrderPageState extends State<OrderPage> {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child:
-            _isSubmitting
-                ? const SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
-                : Text(
-                  'Valider la demande de devis',
-                  style: TextStyle(
-                    fontSize: context.isMobile ? 16 : 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        child: _isSubmitting
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
+              )
+            : Text(
+                'Valider la demande de devis',
+                style: TextStyle(
+                  fontSize: context.isMobile ? 16 : 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
       ),
     );
   }

@@ -44,12 +44,11 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       if (!mounted) return;
 
       // Filtrer les commandes actives et trouver la plus proche
-      final orders =
-          items
-              .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
-              .where((order) => order.isActive)
-              .toList()
-            ..sort((a, b) => a.eventDate.compareTo(b.eventDate));
+      final orders = items
+          .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
+          .where((order) => order.isActive)
+          .toList()
+        ..sort((a, b) => a.eventDate.compareTo(b.eventDate));
 
       if (orders.isEmpty) {
         setState(() {
@@ -126,14 +125,13 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               constraints: BoxConstraints(
                 maxWidth: context.isDesktop ? 800 : double.infinity,
               ),
-              child:
-                  _isLoading
-                      ? _buildLoadingSkeleton(context)
-                      : _errorMessage != null
+              child: _isLoading
+                  ? _buildLoadingSkeleton(context)
+                  : _errorMessage != null
                       ? _buildErrorState(context)
                       : _order == null
-                      ? _buildEmptyState(context)
-                      : _buildTrackingContent(context),
+                          ? _buildEmptyState(context)
+                          : _buildTrackingContent(context),
             ),
           ),
         ),
@@ -225,8 +223,8 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
                       daysLeft == 0
                           ? 'Aujourd\'hui !'
                           : daysLeft == 1
-                          ? 'Demain'
-                          : 'Dans $daysLeft jours',
+                              ? 'Demain'
+                              : 'Dans $daysLeft jours',
                       style: AppTextStyles.cardTitle.copyWith(
                         fontSize: context.fluidValue(
                           minValue: 18,
@@ -317,22 +315,20 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               height: 32,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color:
-                    isCurrent
-                        ? color
-                        : isPast
+                color: isCurrent
+                    ? color
+                    : isPast
                         ? color.withValues(alpha: 0.2)
                         : Colors.transparent,
                 border: Border.all(color: color, width: isCurrent ? 3 : 2),
               ),
               child: Center(
-                child:
-                    isPast
-                        ? Icon(Icons.check, size: 16, color: color)
-                        : Text(
-                          status.emoji,
-                          style: TextStyle(fontSize: isCurrent ? 14 : 12),
-                        ),
+                child: isPast
+                    ? Icon(Icons.check, size: 16, color: color)
+                    : Text(
+                        status.emoji,
+                        style: TextStyle(fontSize: isCurrent ? 14 : 12),
+                      ),
               ),
             ),
             // Ligne verticale
@@ -340,10 +336,9 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               Container(
                 width: 2,
                 height: 40,
-                color:
-                    isPast
-                        ? color.withValues(alpha: 0.3)
-                        : AppColors.textMuted.withValues(alpha: 0.2),
+                color: isPast
+                    ? color.withValues(alpha: 0.3)
+                    : AppColors.textMuted.withValues(alpha: 0.2),
               ),
           ],
         ),

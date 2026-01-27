@@ -119,9 +119,7 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
                       size: iconInnerSize,
                     ),
                   ),
-
                   SizedBox(width: spacing),
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +143,6 @@ class _HomeSectionReviewsState extends State<HomeSectionReviews> {
                       ],
                     ),
                   ),
-
                   if (isLoading)
                     SizedBox(
                       width: context.fluidValue(minValue: 18, maxValue: 24),
@@ -259,10 +256,9 @@ class _ReviewCard extends StatelessWidget {
                   index < review.rating
                       ? Icons.star_rounded
                       : Icons.star_border_rounded,
-                  color:
-                      index < review.rating
-                          ? AppColors.primary
-                          : AppColors.mediumGrey,
+                  color: index < review.rating
+                      ? AppColors.primary
+                      : AppColors.mediumGrey,
                   size: starSize,
                 ),
               );
@@ -353,10 +349,9 @@ class ReviewModel {
       name: json['customer_name'] ?? json['name'] ?? 'Client',
       rating: (json['rating'] ?? 5).round(),
       comment: json['comment'] ?? json['review'] ?? '',
-      date:
-          json['created_at'] != null
-              ? DateTime.parse(json['created_at'])
-              : json['date'] != null
+      date: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : json['date'] != null
               ? DateTime.parse(json['date'])
               : DateTime.now(),
     );

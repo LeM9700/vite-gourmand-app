@@ -79,10 +79,9 @@ class _OrderErrorPageState extends State<OrderErrorPage>
                   AnimatedBuilder(
                     animation: _shakeAnimation,
                     builder: (context, child) {
-                      final shake =
-                          _shakeAnimation.value < 0.5
-                              ? _shakeAnimation.value * 10
-                              : (1 - _shakeAnimation.value) * 10;
+                      final shake = _shakeAnimation.value < 0.5
+                          ? _shakeAnimation.value * 10
+                          : (1 - _shakeAnimation.value) * 10;
                       return Transform.translate(
                         offset: Offset(shake * (shake.isFinite ? 1 : 0), 0),
                         child: Container(

@@ -27,10 +27,9 @@ class ReviewModerationCard extends StatelessWidget {
     final ratingColor = _getRatingColor(review.rating);
 
     return GlassCard(
-      borderColor:
-          review.status == 'PENDING'
-              ? Colors.orange.withValues(alpha: 0.5)
-              : review.status == 'APPROVED'
+      borderColor: review.status == 'PENDING'
+          ? Colors.orange.withValues(alpha: 0.5)
+          : review.status == 'APPROVED'
               ? Colors.green.withValues(alpha: 0.5)
               : Colors.red.withValues(alpha: 0.5),
       borderWidth: 2,
@@ -48,18 +47,16 @@ class ReviewModerationCard extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color:
-                      review.status == 'PENDING'
-                          ? Colors.orange.withValues(alpha: 0.15)
-                          : review.status == 'APPROVED'
+                  color: review.status == 'PENDING'
+                      ? Colors.orange.withValues(alpha: 0.15)
+                      : review.status == 'APPROVED'
                           ? Colors.green.withValues(alpha: 0.1)
                           : Colors.red.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color:
-                        review.status == 'PENDING'
-                            ? Colors.orange
-                            : review.status == 'APPROVED'
+                    color: review.status == 'PENDING'
+                        ? Colors.orange
+                        : review.status == 'APPROVED'
                             ? Colors.green
                             : Colors.red,
                   ),
@@ -67,10 +64,9 @@ class ReviewModerationCard extends StatelessWidget {
                 child: Text(
                   review.status,
                   style: AppTextStyles.caption.copyWith(
-                    color:
-                        review.status == 'PENDING'
-                            ? Colors.orange
-                            : review.status == 'APPROVED'
+                    color: review.status == 'PENDING'
+                        ? Colors.orange
+                        : review.status == 'APPROVED'
                             ? Colors.green
                             : Colors.red,
                     fontWeight: FontWeight.w600,

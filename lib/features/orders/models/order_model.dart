@@ -228,8 +228,7 @@ class OrderDetailModel extends OrderModel {
       totalPrice: baseOrder.totalPrice,
       status: baseOrder.status,
       hasLoanedEquipment: baseOrder.hasLoanedEquipment,
-      history:
-          (json['history'] as List<dynamic>?)
+      history: (json['history'] as List<dynamic>?)
               ?.map(
                 (h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>),
               )

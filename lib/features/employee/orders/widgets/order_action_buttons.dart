@@ -88,24 +88,23 @@ class OrderActionButtons extends StatelessWidget {
     String? note;
     final shouldAddNote = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text('Changer le statut', style: AppTextStyles.sectionTitle),
-            content: Text(
-              'Voulez-vous ajouter une note pour ce changement de statut ?',
-              style: AppTextStyles.body,
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Non'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: const Text('Oui'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: Text('Changer le statut', style: AppTextStyles.sectionTitle),
+        content: Text(
+          'Voulez-vous ajouter une note pour ce changement de statut ?',
+          style: AppTextStyles.body,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Non'),
           ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Oui'),
+          ),
+        ],
+      ),
     );
 
     if (shouldAddNote == null) return;
@@ -114,28 +113,27 @@ class OrderActionButtons extends StatelessWidget {
       final controller = TextEditingController();
       final result = await showDialog<String>(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: Text('Note', style: AppTextStyles.sectionTitle),
-              content: TextField(
-                controller: controller,
-                decoration: const InputDecoration(
-                  hintText: 'Ajouter une note...',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Annuler'),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pop(context, controller.text),
-                  child: const Text('Confirmer'),
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: Text('Note', style: AppTextStyles.sectionTitle),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(
+              hintText: 'Ajouter une note...',
+              border: OutlineInputBorder(),
             ),
+            maxLines: 3,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, controller.text),
+              child: const Text('Confirmer'),
+            ),
+          ],
+        ),
       );
       note = result;
     }

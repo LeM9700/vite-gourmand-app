@@ -53,9 +53,8 @@ class _MenusTestScreenState extends State<MenusTestScreen> {
           setState(() => _status = "OK ✅ ${list.length} menus (from items)");
         } else {
           setState(
-            () =>
-                _status =
-                    "API returns object with keys: ${map.keys.join(', ')}",
+            () => _status =
+                "API returns object with keys: ${map.keys.join(', ')}",
           );
         }
       } else {

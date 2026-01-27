@@ -181,36 +181,33 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                 height: isSelected ? bubbleSize : bubbleSize * 0.7,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient:
-                      isSelected
-                          ? LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary,
-                              AppColors.primary.withValues(alpha: 0.8),
-                            ],
-                          )
-                          : null,
+                  gradient: isSelected
+                      ? LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppColors.primary,
+                            AppColors.primary.withValues(alpha: 0.8),
+                          ],
+                        )
+                      : null,
                   color: isSelected ? null : Colors.transparent,
-                  boxShadow:
-                      isSelected
-                          ? [
-                            BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.4),
-                              offset: const Offset(0, 4),
-                              blurRadius: 12,
-                              spreadRadius: 0,
-                            ),
-                          ]
-                          : null,
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: 0.4),
+                            offset: const Offset(0, 4),
+                            blurRadius: 12,
+                            spreadRadius: 0,
+                          ),
+                        ]
+                      : null,
                 ),
                 child: Icon(
                   icon,
-                  color:
-                      isSelected
-                          ? AppColors.dark
-                          : AppColors.textLight.withValues(alpha: 0.6),
+                  color: isSelected
+                      ? AppColors.dark
+                      : AppColors.textLight.withValues(alpha: 0.6),
                   size: isSelected ? iconSize : iconSize * 0.85,
                 ),
               ),
@@ -222,10 +219,9 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                 style: AppTextStyles.caption.copyWith(
                   fontSize: fontSize,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color:
-                      isSelected
-                          ? AppColors.primary
-                          : AppColors.textLight.withValues(alpha: 0.6),
+                  color: isSelected
+                      ? AppColors.primary
+                      : AppColors.textLight.withValues(alpha: 0.6),
                 ),
                 child: Text(label),
               ),

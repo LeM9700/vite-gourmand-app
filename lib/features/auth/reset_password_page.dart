@@ -131,10 +131,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   child: Center(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.all(24),
-                      child:
-                          _resetSuccess
-                              ? _buildSuccessView()
-                              : _buildFormView(),
+                      child: _resetSuccess
+                          ? _buildSuccessView()
+                          : _buildFormView(),
                     ),
                   ),
                 ),

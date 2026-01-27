@@ -45,14 +45,12 @@ class MenuModel {
       conditionsText: json['conditions_text'] ?? '',
       stock: json['stock'] ?? 0,
       isActive: json['is_active'] ?? true,
-      createdAt:
-          json['created_at'] != null
-              ? DateTime.tryParse(json['created_at'])
-              : null,
-      updatedAt:
-          json['updated_at'] != null
-              ? DateTime.tryParse(json['updated_at'])
-              : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
       images: _parseImages(json['images']),
       dishes: _parseDishes(json['dishes']),
     );

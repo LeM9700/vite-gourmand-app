@@ -162,87 +162,86 @@ class _EmployeeOrderDetailPageState extends State<EmployeeOrderDetailPage> {
           style: AppTextStyles.sectionTitle,
         ),
       ),
-      body:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : _errorMessage != null
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _errorMessage != null
               ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      size: 64,
-                      color: Colors.red,
-                    ),
-                    const SizedBox(height: 16),
-                    Text('Erreur', style: AppTextStyles.sectionTitle),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Text(
-                        _errorMessage!,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.body.copyWith(
-                          color: AppColors.textSecondary,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(height: 16),
+                      Text('Erreur', style: AppTextStyles.sectionTitle),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        child: Text(
+                          _errorMessage!,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.body.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: _loadOrder,
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('Réessayer'),
+                      ),
+                    ],
+                  ),
+                )
+              : Stack(
+                  children: [
+                    SingleChildScrollView(
+                      padding: EdgeInsets.all(context.horizontalPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildStatusCard(),
+                          const SizedBox(height: 16),
+                          _buildCustomerCard(),
+                          const SizedBox(height: 16),
+                          _buildOrderDetailsCard(),
+                          const SizedBox(height: 16),
+                          _buildMenuCard(),
+                          const SizedBox(height: 16),
+                          _buildPricingCard(),
+                          if (_order!.cancellation != null) ...[
+                            const SizedBox(height: 16),
+                            _buildCancellationCard(),
+                          ],
+                          const SizedBox(height: 24),
+                          GlassCard(
+                            child: OrderStatusTimeline(
+                              history: _order!.history ?? [],
+                              currentStatus: _order!.status.value,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          GlassCard(
+                            child: OrderActionButtons(
+                              order: _order!,
+                              onStatusChange: _handleStatusChange,
+                              onCancel: _handleCancel,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 24),
-                    ElevatedButton.icon(
-                      onPressed: _loadOrder,
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Réessayer'),
-                    ),
+                    if (_isUpdating)
+                      Container(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
                   ],
                 ),
-              )
-              : Stack(
-                children: [
-                  SingleChildScrollView(
-                    padding: EdgeInsets.all(context.horizontalPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildStatusCard(),
-                        const SizedBox(height: 16),
-                        _buildCustomerCard(),
-                        const SizedBox(height: 16),
-                        _buildOrderDetailsCard(),
-                        const SizedBox(height: 16),
-                        _buildMenuCard(),
-                        const SizedBox(height: 16),
-                        _buildPricingCard(),
-                        if (_order!.cancellation != null) ...[
-                          const SizedBox(height: 16),
-                          _buildCancellationCard(),
-                        ],
-                        const SizedBox(height: 24),
-                        GlassCard(
-                          child: OrderStatusTimeline(
-                            history: _order!.history ?? [],
-                            currentStatus: _order!.status.value,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        GlassCard(
-                          child: OrderActionButtons(
-                            order: _order!,
-                            onStatusChange: _handleStatusChange,
-                            onCancel: _handleCancel,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                      ],
-                    ),
-                  ),
-                  if (_isUpdating)
-                    Container(
-                      color: Colors.black.withValues(alpha: 0.5),
-                      child: const Center(child: CircularProgressIndicator()),
-                    ),
-                ],
-              ),
     );
   }
 

@@ -83,10 +83,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
         ),
         centerTitle: context.isMobile,
       ),
-      body:
-          _isLoading
-              ? _buildLoadingSkeleton(context, padding)
-              : _errorMessage != null
+      body: _isLoading
+          ? _buildLoadingSkeleton(context, padding)
+          : _errorMessage != null
               ? _buildErrorState(context, padding)
               : _buildContent(context, padding),
     );
@@ -252,11 +251,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
               ),
             ],
           ),
-
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
-
           _buildInfoItem(
             icon: Icons.person,
             label: 'Nom complet',
@@ -340,7 +337,6 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-
           _buildSwitchItem(
             icon: Icons.notifications,
             label: 'Notifications par email',
@@ -348,9 +344,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             value: true,
             onChanged: (value) {},
           ),
-
           const SizedBox(height: 12),
-
           _buildSwitchItem(
             icon: Icons.sms,
             label: 'Notifications SMS',
@@ -394,7 +388,12 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
         Switch(
           value: value,
           onChanged: onChanged,
-          activeThumbColor: AppColors.primary,
+          thumbColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primary;
+            }
+            return null;
+          }),
         ),
       ],
     );
@@ -412,7 +411,6 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-
           _buildActionItem(
             icon: Icons.lock,
             label: 'Changer le mot de passe',
@@ -420,9 +418,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
               _showChangePasswordDialog(context);
             },
           ),
-
           const SizedBox(height: 12),
-
           _buildActionItem(
             icon: Icons.security,
             label: 'Authentification à deux facteurs',
@@ -489,33 +485,26 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             ),
           ),
           const SizedBox(height: 16),
-
           _buildActionItem(
             icon: Icons.help_outline,
             label: 'Aide & Support',
             onTap: () {},
           ),
-
           const SizedBox(height: 12),
-
           _buildActionItem(
             icon: Icons.privacy_tip_outlined,
             label: 'Politique de confidentialité',
             onTap: () {},
           ),
-
           const SizedBox(height: 12),
-
           _buildActionItem(
             icon: Icons.description_outlined,
             label: 'Conditions d\'utilisation',
             onTap: () {},
           ),
-
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 12),
-
           Center(
             child: Text(
               'Version 1.0.0',
@@ -561,41 +550,39 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
   void _showChangePasswordDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Changer le mot de passe'),
-            content: const Text(
-              'Cette fonctionnalité sera bientôt disponible. Vous recevrez un email pour réinitialiser votre mot de passe.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Fermer'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Changer le mot de passe'),
+        content: const Text(
+          'Cette fonctionnalité sera bientôt disponible. Vous recevrez un email pour réinitialiser votre mot de passe.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Fermer'),
           ),
+        ],
+      ),
     );
   }
 
   Future<void> _logout(BuildContext context) async {
     final confirm = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Déconnexion'),
-            content: const Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Annuler'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('Déconnexion'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Déconnexion'),
+        content: const Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annuler'),
           ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Déconnexion'),
+          ),
+        ],
+      ),
     );
 
     if (confirm == true && mounted) {

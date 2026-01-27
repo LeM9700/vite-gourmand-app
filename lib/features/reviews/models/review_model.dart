@@ -34,16 +34,13 @@ class ReviewModel {
       rating: json['rating'] ?? 0,
       comment: json['comment'] ?? '',
       status: json['status'] ?? 'PENDING',
-      createdAt:
-          json['created_at'] != null
-              ? DateTime.tryParse(json['created_at'] as String) ??
-                  DateTime.now()
-              : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'] as String) ?? DateTime.now()
+          : DateTime.now(),
       moderatedByUserId: json['moderated_by_user_id'],
-      moderatedAt:
-          json['moderated_at'] != null
-              ? DateTime.tryParse(json['moderated_at'] as String)
-              : null,
+      moderatedAt: json['moderated_at'] != null
+          ? DateTime.tryParse(json['moderated_at'] as String)
+          : null,
       customerFirstname: customer?['firstname'] as String?,
       customerLastname: customer?['lastname'] as String?,
     );

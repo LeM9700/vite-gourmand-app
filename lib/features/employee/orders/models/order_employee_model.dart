@@ -53,26 +53,22 @@ class OrderEmployeeModel extends OrderModel {
           double.tryParse(json['total_price']?.toString() ?? '0') ?? 0.0,
       status: OrderStatus.fromString(json['status'] ?? 'PLACED'),
       hasLoanedEquipment: json['has_loaned_equipment'] ?? false,
-      history:
-          (json['history'] as List<dynamic>?)
-              ?.map(
-                (h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>),
-              )
-              .toList(),
-      customer:
-          json['customer'] != null
-              ? UserInfoModel.fromJson(json['customer'] as Map<String, dynamic>)
-              : null,
-      menu:
-          json['menu'] != null
-              ? MenuModel.fromJson(json['menu'] as Map<String, dynamic>)
-              : null,
-      cancellation:
-          json['cancellation'] != null
-              ? OrderCancellationInfo.fromJson(
-                json['cancellation'] as Map<String, dynamic>,
-              )
-              : null,
+      history: (json['history'] as List<dynamic>?)
+          ?.map(
+            (h) => OrderHistoryModel.fromJson(h as Map<String, dynamic>),
+          )
+          .toList(),
+      customer: json['customer'] != null
+          ? UserInfoModel.fromJson(json['customer'] as Map<String, dynamic>)
+          : null,
+      menu: json['menu'] != null
+          ? MenuModel.fromJson(json['menu'] as Map<String, dynamic>)
+          : null,
+      cancellation: json['cancellation'] != null
+          ? OrderCancellationInfo.fromJson(
+              json['cancellation'] as Map<String, dynamic>,
+            )
+          : null,
     );
   }
 

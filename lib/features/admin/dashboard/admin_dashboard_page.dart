@@ -140,14 +140,14 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                   children: [
                                     Text(
                                       'Dashboard Admin',
-                                      style: AppTextStyles.displayTitle
-                                          .copyWith(
-                                            fontSize: context.fluidValue(
-                                              minValue: 24,
-                                              maxValue: 32,
-                                            ),
-                                            color: AppColors.textLight,
-                                          ),
+                                      style:
+                                          AppTextStyles.displayTitle.copyWith(
+                                        fontSize: context.fluidValue(
+                                          minValue: 24,
+                                          maxValue: 32,
+                                        ),
+                                        color: AppColors.textLight,
+                                      ),
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
@@ -460,20 +460,18 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         _buildQuickActionCard(
           icon: Icons.restaurant_menu_rounded,
           label: 'Gérer menus',
-          onTap:
-              () => widget.onNavigateToPage?.call(
-                3,
-                tabIndex: 2,
-              ), // Management > Menus
+          onTap: () => widget.onNavigateToPage?.call(
+            3,
+            tabIndex: 2,
+          ), // Management > Menus
         ),
         _buildQuickActionCard(
           icon: Icons.schedule_rounded,
           label: 'Horaires',
-          onTap:
-              () => widget.onNavigateToPage?.call(
-                3,
-                tabIndex: 4,
-              ), // Management > Horaires
+          onTap: () => widget.onNavigateToPage?.call(
+            3,
+            tabIndex: 4,
+          ), // Management > Horaires
         ),
       ],
     );

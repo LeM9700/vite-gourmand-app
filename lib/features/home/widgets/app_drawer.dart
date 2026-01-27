@@ -79,8 +79,8 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => const AuthPage(initialLoginTab: true),
+                        builder: (context) =>
+                            const AuthPage(initialLoginTab: true),
                       ),
                     );
                   },
@@ -136,7 +136,6 @@ class AppDrawer extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: padding),
-
                 _Item(
                   icon: Icons.home,
                   label: 'Accueil',
@@ -169,8 +168,8 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => const AuthPage(initialLoginTab: true),
+                        builder: (context) =>
+                            const AuthPage(initialLoginTab: true),
                       ),
                     );
                   },
@@ -190,7 +189,6 @@ class AppDrawer extends StatelessWidget {
                     );
                   },
                 ),
-
                 const Spacer(),
                 Text('© Vite & Gourmand', style: AppTextStyles.caption),
               ],
@@ -209,7 +207,6 @@ class _DesktopNavItem extends StatefulWidget {
   final bool isSelected;
   final double iconSize;
   final double labelSize;
-  final double padding; // Used in widget styling
 
   const _DesktopNavItem({
     required this.icon,
@@ -218,7 +215,6 @@ class _DesktopNavItem extends StatefulWidget {
     this.isSelected = false,
     this.iconSize = 22,
     this.labelSize = 14,
-    this.padding = 12,
   });
 
   @override
@@ -237,25 +233,23 @@ class _DesktopNavItemState extends State<_DesktopNavItem> {
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          margin: EdgeInsets.only(bottom: widget.padding * 0.5),
-          padding: EdgeInsets.symmetric(
-            horizontal: widget.padding * 1.2,
-            vertical: widget.padding,
+          margin: const EdgeInsets.only(bottom: 6.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 14.4,
+            vertical: 12.0,
           ),
           decoration: BoxDecoration(
-            color:
-                widget.isSelected
-                    ? AppColors.primary.withValues(alpha: 0.2)
-                    : _isHovered
+            color: widget.isSelected
+                ? AppColors.primary.withValues(alpha: 0.2)
+                : _isHovered
                     ? Colors.white.withValues(alpha: 0.1)
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
-            border:
-                widget.isSelected
-                    ? Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.5),
-                    )
-                    : null,
+            border: widget.isSelected
+                ? Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.5),
+                  )
+                : null,
           ),
           child: Row(
             children: [
@@ -264,7 +258,7 @@ class _DesktopNavItemState extends State<_DesktopNavItem> {
                 color: widget.isSelected ? AppColors.primary : Colors.white70,
                 size: widget.iconSize,
               ),
-              SizedBox(width: widget.padding),
+              const SizedBox(width: 12.0),
               Text(
                 widget.label,
                 style: AppTextStyles.body.copyWith(

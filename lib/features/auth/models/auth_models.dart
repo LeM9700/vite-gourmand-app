@@ -91,10 +91,9 @@ class UserData {
       address: json['address'] ?? '',
       role: json['role'] ?? 'USER',
       isActive: json['is_active'] ?? true,
-      createdAt:
-          json['created_at'] != null
-              ? DateTime.tryParse(json['created_at'])
-              : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
     );
   }
 

@@ -30,9 +30,7 @@ class HomeSectionTeam extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-
               SizedBox(height: spacing * 0.75),
-
               Text(
                 'Une équipe passionnée, des standards d\'exception et un savoir-faire reconnu depuis plus de 25 ans.',
                 style: AppTextStyles.body.copyWith(
@@ -60,9 +58,7 @@ class HomeSectionTeam extends StatelessWidget {
                 'Produits sélectionnés avec exigence',
                 AppColors.success,
               ),
-
               SizedBox(height: spacing),
-
               _buildSimpleProfessionalismPoint(
                 context,
                 Icons.handshake,
@@ -70,9 +66,7 @@ class HomeSectionTeam extends StatelessWidget {
                 'Une organisation maîtrisée',
                 AppColors.info,
               ),
-
               SizedBox(height: spacing),
-
               _buildSimpleProfessionalismPoint(
                 context,
                 Icons.star_rounded,
@@ -99,9 +93,7 @@ class HomeSectionTeam extends StatelessWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-
               SizedBox(height: spacing),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

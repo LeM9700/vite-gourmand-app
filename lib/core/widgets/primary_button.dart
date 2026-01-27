@@ -81,32 +81,29 @@ class _PrimaryButtonState extends State<PrimaryButton>
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                gradient:
-                    widget.isLoading
-                        ? LinearGradient(
-                          colors: [
-                            widget.backgroundColor ??
-                                AppColors.mediumGrey.withValues(alpha: 0.5),
-                            (widget.backgroundColor ?? AppColors.lightGrey)
-                                .withValues(alpha: 0.8),
-                          ],
-                        )
-                        : LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors:
-                              _isPressed
-                                  ? [
-                                    AppColors.primary.withValues(alpha: 0.8),
-                                    AppColors.saffron.withValues(alpha: 0.8),
-                                  ]
-                                  : [AppColors.primary, AppColors.saffron],
-                          stops: const [0.0, 1.0],
-                        ),
-                boxShadow:
-                    widget.isLoading
-                        ? AppShadows.subtle
-                        : (_isPressed ? AppShadows.subtle : AppShadows.elegant),
+                gradient: widget.isLoading
+                    ? LinearGradient(
+                        colors: [
+                          widget.backgroundColor ??
+                              AppColors.mediumGrey.withValues(alpha: 0.5),
+                          (widget.backgroundColor ?? AppColors.lightGrey)
+                              .withValues(alpha: 0.8),
+                        ],
+                      )
+                    : LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: _isPressed
+                            ? [
+                                AppColors.primary.withValues(alpha: 0.8),
+                                AppColors.saffron.withValues(alpha: 0.8),
+                              ]
+                            : [AppColors.primary, AppColors.saffron],
+                        stops: const [0.0, 1.0],
+                      ),
+                boxShadow: widget.isLoading
+                    ? AppShadows.subtle
+                    : (_isPressed ? AppShadows.subtle : AppShadows.elegant),
                 border: Border.all(
                   color: AppColors.champagne.withValues(alpha: 0.3),
                   width: 1,
@@ -142,10 +139,9 @@ class _PrimaryButtonState extends State<PrimaryButton>
                         Text(
                           widget.label,
                           style: AppTextStyles.buttonPrimary.copyWith(
-                            color:
-                                widget.isLoading
-                                    ? AppColors.textMuted
-                                    : AppColors.dark,
+                            color: widget.isLoading
+                                ? AppColors.textMuted
+                                : AppColors.dark,
                           ),
                         ),
                       ],

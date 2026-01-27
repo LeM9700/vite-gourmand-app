@@ -47,15 +47,14 @@ class _OrdersListPageState extends State<OrdersListPage> {
       final items = data['items'] as List<dynamic>;
 
       setState(() {
-        _orders =
-            items
-                .map(
-                  (json) => OrderModel.fromJson(json as Map<String, dynamic>),
-                )
-                .toList()
-              ..sort(
-                (a, b) => b.eventDate.compareTo(a.eventDate),
-              ); // Plus récent en premier
+        _orders = items
+            .map(
+              (json) => OrderModel.fromJson(json as Map<String, dynamic>),
+            )
+            .toList()
+          ..sort(
+            (a, b) => b.eventDate.compareTo(a.eventDate),
+          ); // Plus récent en premier
         _isLoading = false;
       });
     } catch (e) {
@@ -167,59 +166,54 @@ class _OrdersListPageState extends State<OrdersListPage> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children:
-            filters.map((filter) {
-              final isSelected = _filterStatus == filter.$1;
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: FilterChip(
-                  selected: isSelected,
-                  label: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        filter.$3,
-                        size: 16,
-                        color:
-                            isSelected
-                                ? AppColors.dark
-                                : AppColors.textSecondary,
-                      ),
-                      const SizedBox(width: 6),
-                      Text(filter.$2),
-                    ],
-                  ),
-                  onSelected: (_) {
-                    setState(() => _filterStatus = filter.$1);
-                  },
-                  selectedColor: AppColors.primary,
-                  backgroundColor: AppColors.surface,
-                  labelStyle: TextStyle(
+        children: filters.map((filter) {
+          final isSelected = _filterStatus == filter.$1;
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: FilterChip(
+              selected: isSelected,
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    filter.$3,
+                    size: 16,
                     color:
                         isSelected ? AppColors.dark : AppColors.textSecondary,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
-                ),
-              );
-            }).toList(),
+                  const SizedBox(width: 6),
+                  Text(filter.$2),
+                ],
+              ),
+              onSelected: (_) {
+                setState(() => _filterStatus = filter.$1);
+              },
+              selectedColor: AppColors.primary,
+              backgroundColor: AppColors.surface,
+              labelStyle: TextStyle(
+                color: isSelected ? AppColors.dark : AppColors.textSecondary,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }
 
   Widget _buildOrdersList(BuildContext context) {
     return Column(
-      children:
-          _filteredOrders.map((order) {
-            return Padding(
-              padding: EdgeInsets.only(
-                bottom: context.fluidValue(minValue: 12, maxValue: 16),
-              ),
-              child: _OrderCard(
-                order: order,
-                onTap: () => _navigateToDetail(order.id),
-              ),
-            );
-          }).toList(),
+      children: _filteredOrders.map((order) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: context.fluidValue(minValue: 12, maxValue: 16),
+          ),
+          child: _OrderCard(
+            order: order,
+            onTap: () => _navigateToDetail(order.id),
+          ),
+        );
+      }).toList(),
     );
   }
 

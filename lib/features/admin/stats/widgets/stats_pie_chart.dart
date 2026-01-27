@@ -39,10 +39,9 @@ class StatsPieChart extends StatefulWidget {
 
     return List.generate(values.length, (index) {
       final percentage = (values[index] / total * 100).toStringAsFixed(1);
-      final color =
-          colors != null && index < colors.length
-              ? colors[index]
-              : defaultColors[index % defaultColors.length];
+      final color = colors != null && index < colors.length
+          ? colors[index]
+          : defaultColors[index % defaultColors.length];
 
       return PieChartSectionData(
         color: color,
@@ -104,33 +103,32 @@ class _StatsPieChartState extends State<StatsPieChart> {
             padding: const EdgeInsets.all(24),
             child: PieChart(
               PieChartData(
-                sections:
-                    widget.sections.map((section) {
-                      final isTouched =
-                          widget.sections.indexOf(section) == _touchedIndex;
-                      final radius = isTouched ? 130.0 : 110.0;
-                      final fontSize = isTouched ? 18.0 : 14.0;
+                sections: widget.sections.map((section) {
+                  final isTouched =
+                      widget.sections.indexOf(section) == _touchedIndex;
+                  final radius = isTouched ? 130.0 : 110.0;
+                  final fontSize = isTouched ? 18.0 : 14.0;
 
-                      return PieChartSectionData(
-                        color: section.color,
-                        value: section.value,
-                        title: section.title,
-                        radius: radius,
-                        titleStyle: TextStyle(
-                          fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black.withValues(alpha: 0.5),
-                              blurRadius: 4,
-                            ),
-                          ],
+                  return PieChartSectionData(
+                    color: section.color,
+                    value: section.value,
+                    title: section.title,
+                    radius: radius,
+                    titleStyle: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          blurRadius: 4,
                         ),
-                        badgeWidget: isTouched ? section.badgeWidget : null,
-                        badgePositionPercentageOffset: 1.3,
-                      );
-                    }).toList(),
+                      ],
+                    ),
+                    badgeWidget: isTouched ? section.badgeWidget : null,
+                    badgePositionPercentageOffset: 1.3,
+                  );
+                }).toList(),
                 pieTouchData: PieTouchData(
                   touchCallback: (FlTouchEvent event, pieTouchResponse) {
                     setState(() {

@@ -25,7 +25,8 @@ class _NetworkTestScreenState extends State<NetworkTestScreen> {
 
     try {
       final connectivityResults = await Connectivity().checkConnectivity();
-      final connectivityResult = connectivityResults.firstOrNull ?? ConnectivityResult.none;
+      final connectivityResult =
+          connectivityResults.firstOrNull ?? ConnectivityResult.none;
 
       if (connectivityResult == ConnectivityResult.none) {
         setState(() {

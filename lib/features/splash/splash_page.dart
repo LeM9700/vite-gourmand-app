@@ -365,7 +365,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     final size = random.nextDouble() * 6 + 2;
     final startX = random.nextDouble();
     final startY = random.nextDouble();
-    final duration = random.nextInt(3000) + 2000;
 
     return AnimatedBuilder(
       animation: _particleController,

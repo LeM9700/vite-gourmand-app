@@ -94,11 +94,10 @@ class _MenusListPageState extends State<MenusListPage> {
         throw Exception('Format de réponse inattendu');
       }
 
-      final menus =
-          menusData.map((json) {
-            debugPrint('Menu data: $json'); // Debug temporaire
-            return MenuModel.fromJson(json as Map<String, dynamic>);
-          }).toList();
+      final menus = menusData.map((json) {
+        debugPrint('Menu data: $json'); // Debug temporaire
+        return MenuModel.fromJson(json as Map<String, dynamic>);
+      }).toList();
 
       // Extraire dynamiquement les thèmes et régimes uniques
       final themes = menus.map((m) => m.theme).toSet().toList()..sort();
@@ -145,10 +144,9 @@ class _MenusListPageState extends State<MenusListPage> {
         menusData = [];
       }
 
-      final searchResults =
-          menusData
-              .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
-              .toList();
+      final searchResults = menusData
+          .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
+          .toList();
 
       setState(() {
         _filteredMenus = searchResults;
@@ -157,14 +155,13 @@ class _MenusListPageState extends State<MenusListPage> {
       debugPrint('Erreur de recherche: $e');
       // En cas d'erreur, on fait une recherche locale
       setState(() {
-        _filteredMenus =
-            _menus.where((menu) {
-              final searchLower = query.toLowerCase();
-              return menu.title.toLowerCase().contains(searchLower) ||
-                  menu.theme.toLowerCase().contains(searchLower) ||
-                  menu.regime.toLowerCase().contains(searchLower) ||
-                  menu.description.toLowerCase().contains(searchLower);
-            }).toList();
+        _filteredMenus = _menus.where((menu) {
+          final searchLower = query.toLowerCase();
+          return menu.title.toLowerCase().contains(searchLower) ||
+              menu.theme.toLowerCase().contains(searchLower) ||
+              menu.regime.toLowerCase().contains(searchLower) ||
+              menu.description.toLowerCase().contains(searchLower);
+        }).toList();
       });
     }
   }
@@ -173,23 +170,22 @@ class _MenusListPageState extends State<MenusListPage> {
     showDialog(
       context: context,
       barrierColor: Colors.transparent,
-      builder:
-          (context) => MenuFiltersOverlay(
-            maxPrice: _activeFilters?.maxPrice,
-            theme: _activeFilters?.theme,
-            regime: _activeFilters?.regime,
-            minPeopleMax: _activeFilters?.minPeopleMax,
-            availableThemes: _availableThemes,
-            availableRegimes: _availableRegimes,
-            onApply: (filters) {
-              setState(() => _activeFilters = filters);
-              _applyFilters(filters);
-            },
-            onReset: () {
-              setState(() => _activeFilters = null);
-              _loadMenus();
-            },
-          ),
+      builder: (context) => MenuFiltersOverlay(
+        maxPrice: _activeFilters?.maxPrice,
+        theme: _activeFilters?.theme,
+        regime: _activeFilters?.regime,
+        minPeopleMax: _activeFilters?.minPeopleMax,
+        availableThemes: _availableThemes,
+        availableRegimes: _availableRegimes,
+        onApply: (filters) {
+          setState(() => _activeFilters = filters);
+          _applyFilters(filters);
+        },
+        onReset: () {
+          setState(() => _activeFilters = null);
+          _loadMenus();
+        },
+      ),
     );
   }
 
@@ -224,40 +220,38 @@ class _MenusListPageState extends State<MenusListPage> {
         menusData = [];
       }
 
-      final allMenus =
-          menusData
-              .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
-              .toList();
+      final allMenus = menusData
+          .map((json) => MenuModel.fromJson(json as Map<String, dynamic>))
+          .toList();
 
       // Filtrer les menus côté client selon les critères
-      final filteredMenus =
-          allMenus.where((menu) {
-            // Filtre prix maximum
-            if (menu.basePrice > filters.maxPrice) {
-              return false;
-            }
+      final filteredMenus = allMenus.where((menu) {
+        // Filtre prix maximum
+        if (menu.basePrice > filters.maxPrice) {
+          return false;
+        }
 
-            // Filtre thème
-            if (filters.theme != null &&
-                filters.theme!.isNotEmpty &&
-                menu.theme != filters.theme) {
-              return false;
-            }
+        // Filtre thème
+        if (filters.theme != null &&
+            filters.theme!.isNotEmpty &&
+            menu.theme != filters.theme) {
+          return false;
+        }
 
-            // Filtre régime
-            if (filters.regime != null &&
-                filters.regime!.isNotEmpty &&
-                menu.regime != filters.regime) {
-              return false;
-            }
+        // Filtre régime
+        if (filters.regime != null &&
+            filters.regime!.isNotEmpty &&
+            menu.regime != filters.regime) {
+          return false;
+        }
 
-            // Filtre nombre minimum de personnes
-            if (menu.minPeople > filters.minPeopleMax) {
-              return false;
-            }
+        // Filtre nombre minimum de personnes
+        if (menu.minPeople > filters.minPeopleMax) {
+          return false;
+        }
 
-            return true;
-          }).toList();
+        return true;
+      }).toList();
 
       setState(() {
         _menus = allMenus;
@@ -473,22 +467,22 @@ class _MenusListPageState extends State<MenusListPage> {
                                       Icons.search,
                                       color: AppColors.textSecondary,
                                     ),
-                                    suffixIcon:
-                                        _searchController.text.isNotEmpty
-                                            ? IconButton(
-                                              icon: Icon(
-                                                Icons.clear,
-                                                color: AppColors.textSecondary,
-                                              ),
-                                              onPressed: () {
-                                                _searchController.clear();
-                                                _filterMenus('');
-                                                setState(
-                                                  () {},
-                                                ); // Pour cacher le bouton clear
-                                              },
-                                            )
-                                            : null,
+                                    suffixIcon: _searchController
+                                            .text.isNotEmpty
+                                        ? IconButton(
+                                            icon: Icon(
+                                              Icons.clear,
+                                              color: AppColors.textSecondary,
+                                            ),
+                                            onPressed: () {
+                                              _searchController.clear();
+                                              _filterMenus('');
+                                              setState(
+                                                () {},
+                                              ); // Pour cacher le bouton clear
+                                            },
+                                          )
+                                        : null,
                                     border: InputBorder.none,
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 20,
@@ -524,11 +518,10 @@ class _MenusListPageState extends State<MenusListPage> {
                                   child: IconButton(
                                     icon: Icon(
                                       Icons.tune,
-                                      color:
-                                          _activeFilters?.hasActiveFilters ==
-                                                  true
-                                              ? Colors.white
-                                              : AppColors.textPrimary,
+                                      color: _activeFilters?.hasActiveFilters ==
+                                              true
+                                          ? Colors.white
+                                          : AppColors.textPrimary,
                                     ),
                                     onPressed: _showFiltersOverlay,
                                   ),

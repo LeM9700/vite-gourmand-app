@@ -85,11 +85,10 @@ void main() {
         'menu_id': selectedMenu.id,
         'event_address': '10 rue Test',
         'event_city': 'Bordeaux',
-        'event_date':
-            DateTime.now()
-                .add(const Duration(days: 30))
-                .toIso8601String()
-                .split('T')[0],
+        'event_date': DateTime.now()
+            .add(const Duration(days: 30))
+            .toIso8601String()
+            .split('T')[0],
         'event_time': '12:00:00',
         'delivery_km': 0,
         'people_count': 50,
@@ -145,14 +144,13 @@ void main() {
       expect(items, isNotEmpty);
 
       // Vérifier que notre commande créée est dans la liste
-      final orders =
-          items
-              .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
-              .toList();
+      final orders = items
+          .map((json) => OrderModel.fromJson(json as Map<String, dynamic>))
+          .toList();
       final ourOrder = orders.firstWhere(
         (o) => o.id == createdOrderId,
-        orElse:
-            () => throw Exception('Commande créée non trouvée dans la liste'),
+        orElse: () =>
+            throw Exception('Commande créée non trouvée dans la liste'),
       );
       expect(ourOrder.status, OrderStatus.placed);
     });
