@@ -62,9 +62,6 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calcul fluide des dimensions basé sur la largeur d'écran
-    final scale = context.scaleFactor;
-    final screenWidth = context.screenWidth;
-
     // Hauteur d'image proportionnelle
     final imageHeight = context.fluidValue(minValue: 120, maxValue: 180);
 

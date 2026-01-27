@@ -79,6 +79,9 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
     }
   }
 
+  // Méthode de suppression désactivée pour l'instant
+  // TODO: Implémenter la suppression d'horaires si nécessaire
+  /*
   Future<void> _deleteSchedule(int scheduleId) async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -121,6 +124,7 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
       );
     }
   }
+  */
 
   void _showScheduleForm({Map<String, dynamic>? schedule}) {
     showDialog(

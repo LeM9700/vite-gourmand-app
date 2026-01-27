@@ -24,7 +24,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<double> _logoScale;
   late Animation<double> _logoOpacity;
   late Animation<double> _subtitleOpacity;
-  late Animation<double> _particleRotation;
 
   @override
   void initState() {
@@ -59,11 +58,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _subtitleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _subtitleController, curve: Curves.easeInOut),
     );
-
-    _particleRotation = Tween<double>(
-      begin: 0.0,
-      end: 2 * math.pi,
-    ).animate(_particleController);
 
     _startAnimations();
     _navigateToHome();

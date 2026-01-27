@@ -6,11 +6,9 @@ import FlutterMacOS
 import Foundation
 
 import connectivity_plus
-import flutter_secure_storage_darwin
-import path_provider_foundation
+import flutter_secure_storage_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  ConnectivityPlugin.register(with: registry.registrar(forPlugin: "ConnectivityPlugin"))
-  FlutterSecureStorageDarwinPlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStorageDarwinPlugin"))
-  PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
+  ConnectivityPlusPlugin.register(with: registry.registrar(forPlugin: "ConnectivityPlusPlugin"))
+  FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
 }

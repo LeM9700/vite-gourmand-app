@@ -209,7 +209,7 @@ class _DesktopNavItem extends StatefulWidget {
   final bool isSelected;
   final double iconSize;
   final double labelSize;
-  final double padding;
+  final double padding; // Used in widget styling
 
   const _DesktopNavItem({
     required this.icon,
