@@ -14,12 +14,12 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  dio: ^5.7.0  # ✅ Compatible Dart 3.6.0
-  flutter_riverpod: ^2.6.1  # ✅ Compatible Dart 3.6.0
-  go_router: ^14.6.2  # ✅ Compatible Dart 3.6.0 (16.2.0+ nécessite Dart 3.7.0)
-  flutter_secure_storage: ^9.2.2  # ✅ Compatible Dart 3.6.0
+  dio: ^5.7.0
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.6.2
+  flutter_secure_storage: ^9.2.2
   json_annotation: ^4.9.0
-  connectivity_plus: ^6.1.1  # ✅ Compatible Dart 3.6.0
+  connectivity_plus: ^6.1.1
   intl: ^0.19.0
   fl_chart: ^0.69.0
   uni_links: ^0.5.1
@@ -29,8 +29,8 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-  build_runner: ^2.5.4
-  json_serializable: ^6.9.5
+  build_runner: ^2.4.13  # ✅ Compatible Dart 3.6.0
+  json_serializable: ^6.8.0  # ✅ Compatible Dart 3.6.0
   mocktail: ^1.0.4
   mockito: ^5.4.4
   integration_test:
