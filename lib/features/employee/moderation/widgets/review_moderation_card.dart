@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/typography.dart';
 import '../../../../core/widgets/glass_card.dart';
-import '../../../reviews/models/review_model.dart';
+import '../../../user/reviews/models/review_model.dart';
 
 class ReviewModerationCard extends StatelessWidget {
   final ReviewModel review;

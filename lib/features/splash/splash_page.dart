@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import '../../core/theme/typography.dart';
 import '../../core/theme/colors.dart';
 import '../../core/api/dio_client.dart';
-import '../navigation/main_navigation_page.dart';
+import '../user/navigation/main_navigation_page.dart';
 import '../home/home_page.dart';
 import '../auth/services/auth_service.dart';
 import '../admin/admin_navigation_page.dart';

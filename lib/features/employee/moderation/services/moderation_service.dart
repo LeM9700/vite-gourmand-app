@@ -1,5 +1,5 @@
 import '../../../../core/api/dio_client.dart';
-import '../../../reviews/models/review_model.dart';
+import '../../../user/reviews/models/review_model.dart';
 import '../models/contact_message_model.dart';
 
 class ModerationService {

@@ -6,7 +6,7 @@ import '../../../core/storage/secure_storage.dart';
 import '../services/auth_service.dart';
 import '../models/auth_models.dart';
 import '../forgot_password_page.dart';
-import '../../navigation/main_navigation_page.dart';
+import '../../user/navigation/main_navigation_page.dart';
 import '../../employee/employee_navigation_page.dart';
 
 class LoginForm extends StatefulWidget {

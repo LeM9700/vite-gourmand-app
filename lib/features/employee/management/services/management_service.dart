@@ -1,5 +1,5 @@
 import '../../../../core/api/dio_client.dart';
-import '../../../menus/models/menu_model.dart';
+import '../../../user/menus/models/menu_model.dart';
 
 class ManagementService {
   DioClient? _dio;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/typography.dart';
-import '../../../orders/models/order_model.dart';
+import '../../../user/orders/models/order_model.dart';
 
 class OrderStatusTimeline extends StatelessWidget {
   final List<OrderHistoryModel> history;

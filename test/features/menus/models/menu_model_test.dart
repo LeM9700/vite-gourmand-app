@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vite_gourmand_app/features/menus/models/menu_model.dart';
+import 'package:vite_gourmand_app/features/user/menus/models/menu_model.dart';
 
 void main() {
   group('MenuModel - Parsing JSON', () {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/colors.dart';
-import '../../core/theme/typography.dart';
-import '../../core/utils/responsive.dart';
-import '../../core/utils/price_formatter.dart';
-import '../../core/widgets/glass_card.dart';
+import '../../../core/theme/colors.dart';
+import '../../../core/theme/typography.dart';
+import '../../../core/utils/responsive.dart';
+import '../../../core/utils/price_formatter.dart';
+import '../../../core/widgets/glass_card.dart';
 import 'models/menu_model.dart';
-import '../auth/auth_page.dart';
+import '../../auth/auth_page.dart';
 import '../orders/order_page.dart';
-import '../../core/storage/secure_storage.dart';
+import '../../../core/storage/secure_storage.dart';
 
 class MenuDetailPage extends StatelessWidget {
   final MenuModel menu;

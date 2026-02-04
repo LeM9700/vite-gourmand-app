@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/colors.dart';
-import '../../core/theme/typography.dart';
-import '../../core/widgets/glass_card.dart';
-import '../../core/widgets/skeleton_box.dart';
-import '../../core/utils/responsive.dart';
-import '../../core/api/dio_client.dart';
+import '../../../core/theme/colors.dart';
+import '../../../core/theme/typography.dart';
+import '../../../core/widgets/glass_card.dart';
+import '../../../core/widgets/skeleton_box.dart';
+import '../../../core/utils/responsive.dart';
+import '../../../core/api/dio_client.dart';
 import '../orders/models/user_info_model.dart';
 import '../orders/edit_delivery_info_page.dart';
-import '../auth/login_page.dart';
-import '../home/home_page.dart';
+import '../../auth/login_page.dart';
+import '../../home/home_page.dart';
 
 /// Page des paramètres utilisateur
 class UserSettingsPage extends StatefulWidget {

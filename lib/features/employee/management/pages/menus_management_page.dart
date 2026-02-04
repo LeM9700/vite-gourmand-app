@@ -3,7 +3,7 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/typography.dart';
 import '../../../../core/utils/responsive.dart';
 import '../../../../core/widgets/glass_card.dart';
-import '../../../menus/models/menu_model.dart';
+import '../../../user/menus/models/menu_model.dart';
 import '../services/management_service.dart';
 import '../widgets/menu_form_dialog.dart';
 

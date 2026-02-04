@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vite_gourmand_app/features/reviews/models/review_model.dart';
+import 'package:vite_gourmand_app/features/user/reviews/models/review_model.dart';
 
 void main() {
   group('ReviewModel - Parsing JSON', () {

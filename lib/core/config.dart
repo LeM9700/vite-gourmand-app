@@ -32,7 +32,7 @@ class AppConfig {
   // URL pour les deep links
   static String getFrontendUrl() {
     if (kIsWeb) {
-      return 'https://your-netlify-url.netlify.app'; // URL web hébergée
+      return 'https://www.vitegourmand.netlify.app'; // URL web hébergée
     } else {
       return 'vitegourmand://'; // Deep link mobile
     }

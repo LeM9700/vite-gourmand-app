@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/typography.dart';
-import '../../../menus/models/menu_model.dart';
+import '../../../user/menus/models/menu_model.dart';
 import '../services/management_service.dart';
 
 class MenuFormDialog extends StatefulWidget {

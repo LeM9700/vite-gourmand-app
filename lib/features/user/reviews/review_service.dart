@@ -1,4 +1,4 @@
-import '../../core/api/dio_client.dart';
+import '../../../core/api/dio_client.dart';
 import 'models/review_model.dart';
 
 class ReviewService {

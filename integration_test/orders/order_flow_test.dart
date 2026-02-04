@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:vite_gourmand_app/features/auth/services/auth_service.dart';
 import 'package:vite_gourmand_app/features/auth/models/auth_models.dart';
-import 'package:vite_gourmand_app/features/menus/models/menu_model.dart';
-import 'package:vite_gourmand_app/features/orders/models/order_model.dart';
+import 'package:vite_gourmand_app/features/user/menus/models/menu_model.dart';
+import 'package:vite_gourmand_app/features/user/orders/models/order_model.dart';
 import 'package:vite_gourmand_app/core/api/dio_client.dart';
 import 'package:vite_gourmand_app/core/storage/secure_storage.dart';
 

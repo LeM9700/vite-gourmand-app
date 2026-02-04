@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/responsive.dart';
-import '../../reviews/models/review_model.dart';
+import '../../user/reviews/models/review_model.dart';
 import 'models/contact_message_model.dart';
 import 'services/moderation_service.dart';
 import 'widgets/review_moderation_card.dart';

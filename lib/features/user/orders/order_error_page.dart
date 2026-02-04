@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/colors.dart';
-import '../../core/theme/typography.dart';
-import '../../core/widgets/glass_card.dart';
-import '../../core/utils/responsive.dart';
+import '../../../core/theme/colors.dart';
+import '../../../core/theme/typography.dart';
+import '../../../core/widgets/glass_card.dart';
+import '../../../core/utils/responsive.dart';
 
 class OrderErrorPage extends StatefulWidget {
   final String errorMessage;

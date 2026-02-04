@@ -61,11 +61,19 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 ## 🔧 Configuration
 
-Créez un fichier `.env` à la racine :
+L’URL de l’API est configurée côté app dans `lib/core/config.dart` via `AppConfig.getApiUrl()`.
 
-```env
-API_BASE_URL=http://127.0.0.1:8000
-```
+- Mode debug : `http://127.0.0.1:8000`
+- Mode release : `https://vite-gourmand-api-production.up.railway.app`
+
+Pour pointer vers une autre API, modifiez `AppConfig.getApiUrl()`.
+
+## 🔗 Liens
+
+- API (Railway) : https://vite-gourmand-api-production.up.railway.app
+- App (Netlify) : https://www.vitegourmand.netlify.app
+- Backend repo : https://github.com/LeM9700/vite-gourmand-api
+- Front repo : https://github.com/LeM9700/vite-gourmand-app
 
 ## 📱 Plateformes supportées
 

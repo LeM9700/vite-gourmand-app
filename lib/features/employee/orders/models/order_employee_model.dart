@@ -1,6 +1,6 @@
-import '../../../orders/models/order_model.dart';
-import '../../../orders/models/user_info_model.dart';
-import '../../../menus/models/menu_model.dart';
+import '../../../user/orders/models/order_model.dart';
+import '../../../user/orders/models/user_info_model.dart';
+import '../../../user/menus/models/menu_model.dart';
 
 /// Modèle étendu de commande pour l'espace employé
 /// Inclut les informations du client et du menu

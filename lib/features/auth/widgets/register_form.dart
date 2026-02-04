@@ -4,7 +4,7 @@ import '../../../core/theme/typography.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../services/auth_service.dart';
 import '../models/auth_models.dart';
-import '../../navigation/main_navigation_page.dart';
+import '../../user/navigation/main_navigation_page.dart';
 
 enum RegisterStep { personal, credentials }
 

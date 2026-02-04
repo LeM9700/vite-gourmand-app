@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vite_gourmand_app/features/orders/models/order_model.dart';
+import 'package:vite_gourmand_app/features/user/orders/models/order_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
