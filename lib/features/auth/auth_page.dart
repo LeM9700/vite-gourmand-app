@@ -87,29 +87,34 @@ class _AuthPageState extends State<AuthPage>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Onglets Login/Inscription
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: TabBar(
-                              controller: _tabController,
-                              indicator: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(25),
+                          Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 550),
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: TabBar(
+                                  controller: _tabController,
+                                  indicator: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  labelColor: Colors.white,
+                                  unselectedLabelColor: Colors.white70,
+                                  labelStyle: AppTextStyles.body.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  unselectedLabelStyle: AppTextStyles.body,
+                                  tabs: const [
+                                    Tab(text: 'Login'),
+                                    Tab(text: 'Inscription'),
+                                  ],
+                                ),
                               ),
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              labelColor: Colors.white,
-                              unselectedLabelColor: Colors.white70,
-                              labelStyle: AppTextStyles.body.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                              unselectedLabelStyle: AppTextStyles.body,
-                              tabs: const [
-                                Tab(text: 'Login'),
-                                Tab(text: 'Inscription'),
-                              ],
                             ),
                           ),
 
@@ -144,13 +149,11 @@ class _AuthPageState extends State<AuthPage>
                       ),
                     ),
                     child: Center(
-                      child: Text(
-                        'V&G',
-                        style: AppTextStyles.sectionTitle.copyWith(
-                          color: AppColors.primary,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),

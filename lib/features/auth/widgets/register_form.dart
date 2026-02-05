@@ -216,40 +216,45 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
 
           // Boutons de navigation
-          Row(
-            children: [
-              if (_currentStep != RegisterStep.personal)
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: _previousStep,
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: AppColors.primary),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: Row(
+                children: [
+                  if (_currentStep != RegisterStep.personal)
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: _previousStep,
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: AppColors.primary),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          'Retour',
+                          style: AppTextStyles.body.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
-                    child: Text(
-                      'Retour',
-                      style: AppTextStyles.body.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  if (_currentStep != RegisterStep.personal)
+                    const SizedBox(width: 16),
+                  Expanded(
+                    child: PrimaryButton(
+                      label: _currentStep == RegisterStep.credentials
+                          ? 'Créer mon compte'
+                          : 'Suivant',
+                      onPressed: _isLoading ? null : _nextStep,
+                      isLoading: _isLoading,
                     ),
                   ),
-                ),
-              if (_currentStep != RegisterStep.personal)
-                const SizedBox(width: 16),
-              Expanded(
-                child: PrimaryButton(
-                  label: _currentStep == RegisterStep.credentials
-                      ? 'Créer mon compte'
-                      : 'Suivant',
-                  onPressed: _isLoading ? null : _nextStep,
-                  isLoading: _isLoading,
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),
