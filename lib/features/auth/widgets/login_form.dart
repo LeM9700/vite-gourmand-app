@@ -96,13 +96,16 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          // Champ email
-          _buildTextField(
-            controller: _emailController,
-            hintText: 'votre@email.com',
-            keyboardType: TextInputType.emailAddress,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Column(
+            children: [
+              // Champ email
+              _buildTextField(
+                controller: _emailController,
+                hintText: 'votre@email.com',
+                keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
                 return 'Veuillez saisir votre email';
@@ -169,16 +172,18 @@ class _LoginFormState extends State<LoginForm> {
 
           const SizedBox(height: 32),
 
-          // Bouton de connexion
-          SizedBox(
-            width: double.infinity,
-            child: PrimaryButton(
-              label: 'Se connecter',
-              onPressed: _isLoading ? null : _handleLogin,
-              isLoading: _isLoading,
-            ),
+              // Bouton de connexion
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryButton(
+                  label: 'Se connecter',
+                  onPressed: _isLoading ? null : _handleLogin,
+                  isLoading: _isLoading,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

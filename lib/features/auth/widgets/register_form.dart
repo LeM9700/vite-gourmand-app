@@ -298,11 +298,14 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   Widget _buildPersonalStep() {
-    return Column(
-      children: [
-        _buildTextField(controller: _nameController, hintText: 'Nom'),
-        const SizedBox(height: 16),
-        _buildTextField(controller: _surnameController, hintText: 'Prénom'),
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Column(
+          children: [
+            _buildTextField(controller: _nameController, hintText: 'Nom'),
+            const SizedBox(height: 16),
+            _buildTextField(controller: _surnameController, hintText: 'Prénom'),
         const SizedBox(height: 16),
         _buildTextField(
           controller: _phoneController,
@@ -311,22 +314,27 @@ class _RegisterFormState extends State<RegisterForm> {
           prefixText: '+33 ',
         ),
         const SizedBox(height: 16),
-        _buildTextField(
-          controller: _addressController,
-          hintText: 'Adresse complète',
+            _buildTextField(
+              controller: _addressController,
+              hintText: 'Adresse complète',
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
   Widget _buildCredentialsStep() {
-    return Column(
-      children: [
-        _buildTextField(
-          controller: _emailController,
-          hintText: 'votre@email.com',
-          keyboardType: TextInputType.emailAddress,
-        ),
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Column(
+          children: [
+            _buildTextField(
+              controller: _emailController,
+              hintText: 'votre@email.com',
+              keyboardType: TextInputType.emailAddress,
+            ),
         const SizedBox(height: 16),
         _buildTextField(
           controller: _passwordController,
@@ -345,15 +353,17 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
         ),
         const SizedBox(height: 16),
-        Text(
-          'Le mot de passe doit contenir au moins 6 caractères.',
-          style: AppTextStyles.caption.copyWith(
-            color: Colors.white70,
-            fontSize: 11,
-          ),
-          textAlign: TextAlign.center,
+            Text(
+              'Le mot de passe doit contenir au moins 6 caractères.',
+              style: AppTextStyles.caption.copyWith(
+                color: Colors.white70,
+                fontSize: 11,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
