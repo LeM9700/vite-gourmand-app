@@ -440,28 +440,99 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   }
 
   void _showCancelDialog(BuildContext context) {
+    bool isCancelling = false;
+    String? dialogError;
+
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Annuler la commande'),
-        content: const Text(
-          'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Retour'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Confirmer l\'annulation'),
-          ),
-        ],
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (dialogContext, setState) {
+          return AlertDialog(
+            title: const Text('Annuler la commande'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Êtes-vous sûr de vouloir annuler cette commande ? Cette action est irréversible.',
+                ),
+                if (dialogError != null) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    dialogError!,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ],
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: isCancelling
+                    ? null
+                    : () => Navigator.pop(dialogContext),
+                child: const Text('Retour'),
+              ),
+              TextButton(
+                onPressed: isCancelling
+                    ? null
+                    : () async {
+                        setState(() {
+                          isCancelling = true;
+                          dialogError = null;
+                        });
+
+                        try {
+                          final dioClient = await DioClient.create();
+                          await dioClient.dio.post(
+                            '/orders/${widget.orderId}/cancel-by-user',
+                          );
+
+                          if (!mounted) return;
+                          Navigator.pop(dialogContext);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Commande annulée avec succès.'),
+                              backgroundColor: AppColors.success,
+                              duration: Duration(seconds: 3),
+                            ),
+                          );
+
+                          _loadOrderDetail();
+                        } catch (e) {
+                          setState(() {
+                            isCancelling = false;
+                            dialogError = _parseCancelError(e);
+                          });
+                        }
+                      },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: isCancelling
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Confirmer l\'annulation'),
+              ),
+            ],
+          );
+        },
       ),
     );
+  }
+
+  String _parseCancelError(dynamic error) {
+    if (error.toString().contains('PLACED')) {
+      return 'Cette commande ne peut plus être annulée (statut déjà modifié).';
+    }
+    if (error.toString().contains('403')) {
+      return 'Vous n\'êtes pas autorisé à annuler cette commande.';
+    }
+    if (error.toString().contains('404')) {
+      return 'Commande introuvable.';
+    }
+    return 'Une erreur est survenue. Veuillez réessayer.';
   }
 
   Widget _buildLoadingSkeleton(BuildContext context, double padding) {
