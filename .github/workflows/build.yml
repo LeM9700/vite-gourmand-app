@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: 🏗️ Build Web (Profile)
-        run: flutter build web --profile --web-renderer html
+        run: flutter build web --profile
 
       - name: 📤 Upload Web Build
         uses: actions/upload-artifact@v4
