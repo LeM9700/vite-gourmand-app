@@ -113,71 +113,74 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _emailController,
                 hintText: 'votre@email.com',
                 keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Veuillez saisir votre email';
-              }
-              if (!RegExp(
-                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-              ).hasMatch(value.trim())) {
-                return 'Format d\'email invalide';
-              }
-              return null;
-            },
-          ),
-
-          const SizedBox(height: 16),
-
-          // Champ mot de passe
-          _buildTextField(
-            controller: _passwordController,
-            hintText: 'Mot de passe',
-            obscureText: !_isPasswordVisible,
-            suffixIcon: IconButton(
-              icon: Icon(
-                _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                color: Colors.white70,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Veuillez saisir votre email';
+                  }
+                  if (!RegExp(
+                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                  ).hasMatch(value.trim())) {
+                    return 'Format d\'email invalide';
+                  }
+                  return null;
+                },
               ),
-              onPressed: () {
-                setState(() {
-                  _isPasswordVisible = !_isPasswordVisible;
-                });
-              },
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Veuillez saisir votre mot de passe';
-              }
-              if (value.length < 6) {
-                return 'Le mot de passe doit contenir au moins 6 caractères';
-              }
-              return null;
-            },
-          ),
 
-          const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-          // Lien mot de passe oublié
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ForgotPasswordPage()),
-                );
-              },
-              child: Text(
-                'Mot de passe oublié ?',
-                style: AppTextStyles.caption.copyWith(
-                  color: Colors.white70,
-                  decoration: TextDecoration.underline,
+              // Champ mot de passe
+              _buildTextField(
+                controller: _passwordController,
+                hintText: 'Mot de passe',
+                obscureText: !_isPasswordVisible,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Colors.white70,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Veuillez saisir votre mot de passe';
+                  }
+                  if (value.length < 6) {
+                    return 'Le mot de passe doit contenir au moins 6 caractères';
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 16),
+
+              // Lien mot de passe oublié
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordPage()),
+                    );
+                  },
+                  child: Text(
+                    'Mot de passe oublié ?',
+                    style: AppTextStyles.caption.copyWith(
+                      color: Colors.white70,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          const SizedBox(height: 32),
+              const SizedBox(height: 32),
 
               // Bouton de connexion
               SizedBox(

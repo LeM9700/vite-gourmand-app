@@ -837,14 +837,16 @@ class _OrderPageState extends State<OrderPage> {
                       title: Text(
                         'Livraison à Bordeaux',
                         style: AppTextStyles.body.copyWith(
-                          fontSize: context.fluidValue(minValue: 13, maxValue: 15),
+                          fontSize:
+                              context.fluidValue(minValue: 13, maxValue: 15),
                         ),
                       ),
                       subtitle: Text(
                         'Livraison gratuite',
                         style: AppTextStyles.caption.copyWith(
                           color: Colors.green.shade600,
-                          fontSize: context.fluidValue(minValue: 11, maxValue: 13),
+                          fontSize:
+                              context.fluidValue(minValue: 11, maxValue: 13),
                         ),
                       ),
                       value: true,
@@ -855,13 +857,15 @@ class _OrderPageState extends State<OrderPage> {
                       title: Text(
                         'Livraison hors Bordeaux',
                         style: AppTextStyles.body.copyWith(
-                          fontSize: context.fluidValue(minValue: 13, maxValue: 15),
+                          fontSize:
+                              context.fluidValue(minValue: 13, maxValue: 15),
                         ),
                       ),
                       subtitle: Text(
                         '5,00€ + 0,59€/km',
                         style: AppTextStyles.caption.copyWith(
-                          fontSize: context.fluidValue(minValue: 11, maxValue: 13),
+                          fontSize:
+                              context.fluidValue(minValue: 11, maxValue: 13),
                         ),
                       ),
                       value: false,

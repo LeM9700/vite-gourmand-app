@@ -40,7 +40,8 @@ class MenuCard extends StatelessWidget {
       await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const AuthPage(initialLoginTab: true, popOnSuccess: true),
+          builder: (context) =>
+              const AuthPage(initialLoginTab: true, popOnSuccess: true),
         ),
       );
 

@@ -467,9 +467,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             ),
             actions: [
               TextButton(
-                onPressed: isCancelling
-                    ? null
-                    : () => Navigator.pop(dialogContext),
+                onPressed:
+                    isCancelling ? null : () => Navigator.pop(dialogContext),
                 child: const Text('Retour'),
               ),
               TextButton(

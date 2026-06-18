@@ -294,7 +294,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     );
   }
 
-  Widget _buildKpiGrid(BuildContext context, bool isSmallScreen, bool isMobile) {
+  Widget _buildKpiGrid(
+      BuildContext context, bool isSmallScreen, bool isMobile) {
     if (_isLoading) {
       return SizedBox(
         height: 300,

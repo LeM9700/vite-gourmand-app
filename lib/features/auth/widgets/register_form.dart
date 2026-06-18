@@ -316,14 +316,14 @@ class _RegisterFormState extends State<RegisterForm> {
             _buildTextField(controller: _nameController, hintText: 'Nom'),
             const SizedBox(height: 16),
             _buildTextField(controller: _surnameController, hintText: 'Prénom'),
-        const SizedBox(height: 16),
-        _buildTextField(
-          controller: _phoneController,
-          hintText: 'Téléphone',
-          keyboardType: TextInputType.phone,
-          prefixText: '+33 ',
-        ),
-        const SizedBox(height: 16),
+            const SizedBox(height: 16),
+            _buildTextField(
+              controller: _phoneController,
+              hintText: 'Téléphone',
+              keyboardType: TextInputType.phone,
+              prefixText: '+33 ',
+            ),
+            const SizedBox(height: 16),
             _buildTextField(
               controller: _addressController,
               hintText: 'Adresse complète',
@@ -345,24 +345,24 @@ class _RegisterFormState extends State<RegisterForm> {
               hintText: 'votre@email.com',
               keyboardType: TextInputType.emailAddress,
             ),
-        const SizedBox(height: 16),
-        _buildTextField(
-          controller: _passwordController,
-          hintText: 'Mot de passe',
-          obscureText: !_isPasswordVisible,
-          suffixIcon: IconButton(
-            icon: Icon(
-              _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-              color: Colors.white70,
+            const SizedBox(height: 16),
+            _buildTextField(
+              controller: _passwordController,
+              hintText: 'Mot de passe',
+              obscureText: !_isPasswordVisible,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.white70,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
             ),
-            onPressed: () {
-              setState(() {
-                _isPasswordVisible = !_isPasswordVisible;
-              });
-            },
-          ),
-        ),
-        const SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Le mot de passe doit contenir au moins 6 caractères.',
               style: AppTextStyles.caption.copyWith(

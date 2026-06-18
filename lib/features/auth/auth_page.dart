@@ -8,7 +8,8 @@ class AuthPage extends StatefulWidget {
   final bool initialLoginTab;
   final bool popOnSuccess;
 
-  const AuthPage({super.key, this.initialLoginTab = true, this.popOnSuccess = false});
+  const AuthPage(
+      {super.key, this.initialLoginTab = true, this.popOnSuccess = false});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
