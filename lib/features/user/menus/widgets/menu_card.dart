@@ -40,7 +40,7 @@ class MenuCard extends StatelessWidget {
       await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const AuthPage(initialLoginTab: true),
+          builder: (context) => const AuthPage(initialLoginTab: true, popOnSuccess: true),
         ),
       );
 
@@ -48,6 +48,7 @@ class MenuCard extends StatelessWidget {
       if (!context.mounted) return;
       token = await storage.readToken();
 
+      if (!context.mounted) return;
       if (token != null && token.isNotEmpty) {
         Navigator.push(
           context,

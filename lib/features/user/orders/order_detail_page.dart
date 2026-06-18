@@ -360,7 +360,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -487,8 +487,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             '/orders/${widget.orderId}/cancel-by-user',
                           );
 
-                          if (!mounted) return;
-                          Navigator.pop(dialogContext);
+                          if (!context.mounted) return;
+                          if (dialogContext.mounted) {
+                            Navigator.pop(dialogContext);
+                          }
 
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

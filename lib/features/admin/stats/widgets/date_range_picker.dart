@@ -46,7 +46,9 @@ class _DateRangePickerState extends State<DateRangePicker> {
               surface: AppColors.cardBackground,
               onSurface: Colors.white,
             ),
-            dialogBackgroundColor: AppColors.cardBackground,
+            dialogTheme: const DialogThemeData(
+              backgroundColor: AppColors.cardBackground,
+            ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(foregroundColor: AppColors.primary),
             ),

@@ -88,16 +88,16 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
   }
 
   void _showDishForm({Map<String, dynamic>? dish}) {
+    final messenger = ScaffoldMessenger.of(context);
     showDialog(
       context: context,
-      builder: (context) => DishFormDialog(
+      builder: (_) => DishFormDialog(
         dish: dish,
         onSave: (data) async {
           try {
             if (dish == null) {
               await _service.createDish(data);
-
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Plat créé'),
                   backgroundColor: Colors.green,
@@ -105,7 +105,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
               );
             } else {
               await _service.updateDish(dish['id'], data);
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Plat mis à jour'),
                   backgroundColor: Colors.green,
@@ -114,7 +114,7 @@ class _DishesManagementPageState extends State<DishesManagementPage> {
             }
             _loadDishes();
           } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
                 content: Text(e.toString().replaceAll('Exception: ', '')),
                 backgroundColor: Colors.red,

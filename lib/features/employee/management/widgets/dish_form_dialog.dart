@@ -73,14 +73,15 @@ class _DishFormDialogState extends State<DishFormDialog> {
                 maxLines: 3,
                 validator: (v) {
                   if (v?.isEmpty ?? true) return 'Requis';
-                  if (v!.length < 10)
+                  if (v!.length < 10) {
                     return 'La description doit contenir au moins 10 caractères';
+                  }
                   return null;
                 },
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                value: _dishType,
+                initialValue: _dishType,
                 decoration: const InputDecoration(
                   labelText: 'Type de plat *',
                   border: OutlineInputBorder(),
@@ -133,6 +134,7 @@ class _DishFormDialogState extends State<DishFormDialog> {
                 'allergens': allergensList,
               });
 
+              if (!context.mounted) return;
               Navigator.pop(context);
             }
           },

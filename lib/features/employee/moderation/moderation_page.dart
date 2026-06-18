@@ -86,17 +86,18 @@ class _ModerationPageState extends State<ModerationPage>
   }
 
   Future<void> _moderateReview(int reviewId, String status) async {
+    final messenger = ScaffoldMessenger.of(context);
     try {
       await _service.moderateReview(reviewId: reviewId, status: status);
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         SnackBar(
           content: Text('Avis ${status == "APPROVED" ? "approuvé" : "rejeté"}'),
           backgroundColor: Colors.green,
         ),
       );
-      _loadReviews();
+      if (mounted) _loadReviews();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         SnackBar(
           content: Text(e.toString().replaceAll('Exception: ', '')),
           backgroundColor: Colors.red,
@@ -106,17 +107,18 @@ class _ModerationPageState extends State<ModerationPage>
   }
 
   Future<void> _updateMessageStatus(int messageId, String status) async {
+    final messenger = ScaffoldMessenger.of(context);
     try {
       await _service.updateMessageStatus(messageId: messageId, status: status);
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         const SnackBar(
           content: Text('Statut mis à jour'),
           backgroundColor: Colors.green,
         ),
       );
-      _loadMessages();
+      if (mounted) _loadMessages();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         SnackBar(
           content: Text(e.toString().replaceAll('Exception: ', '')),
           backgroundColor: Colors.red,
@@ -230,7 +232,7 @@ class _ModerationPageState extends State<ModerationPage>
             children: [
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _reviewSortBy,
+                  initialValue: _reviewSortBy,
                   decoration: InputDecoration(
                     labelText: 'Trier par',
                     labelStyle: AppTextStyles.caption.copyWith(
@@ -267,7 +269,7 @@ class _ModerationPageState extends State<ModerationPage>
               const SizedBox(width: 12),
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _reviewOrder,
+                  initialValue: _reviewOrder,
                   decoration: InputDecoration(
                     labelText: 'Ordre',
                     labelStyle: AppTextStyles.caption.copyWith(

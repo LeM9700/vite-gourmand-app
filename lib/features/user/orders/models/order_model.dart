@@ -93,7 +93,8 @@ class OrderModel {
   bool get isEditable => status == OrderStatus.placed;
 
   /// Vérifie si la commande est annulable
-  bool get isCancellable => status == OrderStatus.placed;
+  bool get isCancellable =>
+      status == OrderStatus.placed || status == OrderStatus.accepted;
 
   /// Vérifie si c'est une commande en cours
   bool get isActive =>

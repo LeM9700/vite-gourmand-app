@@ -111,45 +111,43 @@ class _CancelOrderModalState extends State<CancelOrderModal> {
               ),
               const SizedBox(height: 12),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: RadioListTile<String>(
-                      value: 'EMAIL',
-                      groupValue: _contactMode,
-                      onChanged: (value) {
-                        setState(() => _contactMode = value!);
-                      },
-                      title: Row(
-                        children: [
-                          const Icon(Icons.email, size: 20),
-                          const SizedBox(width: 8),
-                          Text('Email', style: AppTextStyles.body),
-                        ],
+              RadioGroup<String>(
+                groupValue: _contactMode,
+                onChanged: (value) {
+                  setState(() => _contactMode = value!);
+                },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: RadioListTile<String>(
+                        value: 'EMAIL',
+                        title: Row(
+                          children: [
+                            const Icon(Icons.email, size: 20),
+                            const SizedBox(width: 8),
+                            Text('Email', style: AppTextStyles.body),
+                          ],
+                        ),
+                        activeColor: AppColors.primary,
+                        contentPadding: EdgeInsets.zero,
                       ),
-                      activeColor: AppColors.primary,
-                      contentPadding: EdgeInsets.zero,
                     ),
-                  ),
-                  Expanded(
-                    child: RadioListTile<String>(
-                      value: 'PHONE',
-                      groupValue: _contactMode,
-                      onChanged: (value) {
-                        setState(() => _contactMode = value!);
-                      },
-                      title: Row(
-                        children: [
-                          const Icon(Icons.phone, size: 20),
-                          const SizedBox(width: 8),
-                          Text('Téléphone', style: AppTextStyles.body),
-                        ],
+                    Expanded(
+                      child: RadioListTile<String>(
+                        value: 'PHONE',
+                        title: Row(
+                          children: [
+                            const Icon(Icons.phone, size: 20),
+                            const SizedBox(width: 8),
+                            Text('Téléphone', style: AppTextStyles.body),
+                          ],
+                        ),
+                        activeColor: AppColors.primary,
+                        contentPadding: EdgeInsets.zero,
                       ),
-                      activeColor: AppColors.primary,
-                      contentPadding: EdgeInsets.zero,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 
               const SizedBox(height: 24),

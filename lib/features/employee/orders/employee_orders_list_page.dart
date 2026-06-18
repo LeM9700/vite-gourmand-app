@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/typography.dart';
-import '../../../core/utils/responsive.dart';
 import 'models/order_employee_model.dart';
 import 'services/employee_order_service.dart';
 import 'widgets/order_filter_bar.dart';
@@ -84,66 +83,10 @@ class _EmployeeOrdersListPageState extends State<EmployeeOrdersListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Column(
+    return ColoredBox(
+      color: AppColors.background,
+      child: Column(
         children: [
-          // Header
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.white,
-                  AppColors.primary.withValues(alpha: 0.05),
-                ],
-              ),
-            ),
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 16,
-              left: context.horizontalPadding,
-              right: context.horizontalPadding,
-              bottom: 16,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.primary,
-                        AppColors.primary.withValues(alpha: 0.8),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.receipt_long,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Text(
-                  'Commandes',
-                  style: AppTextStyles.displayTitle.copyWith(
-                    fontSize: 28,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
           // Barre de filtres
           OrderFilterBar(
             selectedStatus: _selectedStatus,

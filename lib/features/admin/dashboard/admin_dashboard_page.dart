@@ -65,6 +65,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   Widget build(BuildContext context) {
     final horizontalPadding = context.horizontalPadding;
     final isSmallScreen = context.isSmallScreen;
+    final isMobile = context.isMobile;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -202,7 +203,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                     ),
                     const SizedBox(height: 16),
 
-                    _buildKpiGrid(context, isSmallScreen),
+                    _buildKpiGrid(context, isSmallScreen, isMobile),
 
                     const SizedBox(height: 32),
 
@@ -293,7 +294,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     );
   }
 
-  Widget _buildKpiGrid(BuildContext context, bool isSmallScreen) {
+  Widget _buildKpiGrid(BuildContext context, bool isSmallScreen, bool isMobile) {
     if (_isLoading) {
       return SizedBox(
         height: 300,
@@ -321,7 +322,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       crossAxisCount: isSmallScreen ? 2 : 3,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
-      childAspectRatio: isSmallScreen ? 1.2 : 1.4,
+      childAspectRatio: isMobile ? 1.0 : (isSmallScreen ? 1.2 : 1.4),
       children: [
         _buildKpiCard(
           icon: Icons.shopping_bag_rounded,

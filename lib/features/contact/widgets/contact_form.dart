@@ -127,7 +127,7 @@ class _ContactFormState extends State<ContactForm> {
                     return 'Email requis';
                   }
                   if (!RegExp(
-                    r'^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$',
+                    r'^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$',
                   ).hasMatch(value.trim())) {
                     return 'Format invalide';
                   }

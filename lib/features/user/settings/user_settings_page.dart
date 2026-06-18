@@ -590,7 +590,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
       final dioClient = await DioClient.create();
       await dioClient.clearToken();
 
-      if (mounted) {
+      if (context.mounted) {
         // Retour à la page de login
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomePage()),

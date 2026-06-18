@@ -10,7 +10,9 @@ import '../../user/navigation/main_navigation_page.dart';
 import '../../employee/employee_navigation_page.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  final bool popOnSuccess;
+
+  const LoginForm({super.key, this.popOnSuccess = false});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -58,22 +60,27 @@ class _LoginFormState extends State<LoginForm> {
         final storage = SecureStorage();
         final role = await storage.readRole();
 
-        // Rediriger selon le rôle
-        Widget destination;
-        if (role == 'ADMIN') {
-          destination = const AdminNavigationPage();
-        } else if (role == 'EMPLOYEE') {
-          destination = const EmployeeNavigationPage();
-        } else {
-          destination = const MainNavigationPage();
-        }
-
         if (!mounted) return;
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => destination),
-          (route) => false,
-        );
+
+        if (widget.popOnSuccess) {
+          Navigator.pop(context);
+        } else {
+          // Rediriger selon le rôle
+          Widget destination;
+          if (role == 'ADMIN') {
+            destination = const AdminNavigationPage();
+          } else if (role == 'EMPLOYEE') {
+            destination = const EmployeeNavigationPage();
+          } else {
+            destination = const MainNavigationPage();
+          }
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => destination),
+            (route) => false,
+          );
+        }
       }
     } catch (e) {
       if (mounted) {

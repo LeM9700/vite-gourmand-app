@@ -6,8 +6,9 @@ import 'widgets/register_form.dart';
 
 class AuthPage extends StatefulWidget {
   final bool initialLoginTab;
+  final bool popOnSuccess;
 
-  const AuthPage({super.key, this.initialLoginTab = true});
+  const AuthPage({super.key, this.initialLoginTab = true, this.popOnSuccess = false});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -125,7 +126,10 @@ class _AuthPageState extends State<AuthPage>
                             height: 500,
                             child: TabBarView(
                               controller: _tabController,
-                              children: const [LoginForm(), RegisterForm()],
+                              children: [
+                                LoginForm(popOnSuccess: widget.popOnSuccess),
+                                RegisterForm(popOnSuccess: widget.popOnSuccess),
+                              ],
                             ),
                           ),
                         ],

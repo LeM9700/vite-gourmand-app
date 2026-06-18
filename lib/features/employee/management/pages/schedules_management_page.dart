@@ -127,16 +127,16 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
   */
 
   void _showScheduleForm({Map<String, dynamic>? schedule}) {
+    final messenger = ScaffoldMessenger.of(context);
     showDialog(
       context: context,
-      builder: (context) => ScheduleFormDialog(
+      builder: (_) => ScheduleFormDialog(
         schedule: schedule,
         onSave: (data) async {
           try {
             if (schedule == null) {
               await _service.createSchedule(data);
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Horaire créé'),
                   backgroundColor: Colors.green,
@@ -144,18 +144,16 @@ class _SchedulesManagementPageState extends State<SchedulesManagementPage> {
               );
             } else {
               await _service.updateSchedule(schedule['id'], data);
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Horaire mis à jour'),
                   backgroundColor: Colors.green,
                 ),
               );
             }
-            _loadSchedules();
+            if (mounted) _loadSchedules();
           } catch (e) {
-            if (!mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
                 content: Text(e.toString().replaceAll('Exception: ', '')),
                 backgroundColor: Colors.red,

@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                   child: Stack(
                     children: [
                       // Background image
-                      Container(
+                      SizedBox(
                         height: heroHeight,
                         width: double.infinity,
                         child: Image.asset(

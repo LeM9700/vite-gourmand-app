@@ -9,7 +9,9 @@ import '../../user/navigation/main_navigation_page.dart';
 enum RegisterStep { personal, credentials }
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+  final bool popOnSuccess;
+
+  const RegisterForm({super.key, this.popOnSuccess = false});
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -140,12 +142,15 @@ class _RegisterFormState extends State<RegisterForm> {
 
       final response = await _authService.register(request);
 
-      if (mounted) {
-        _showSuccessMessage(
-          'Inscription réussie ! Bienvenue ${response.user.fullName}',
-        );
-        await Future.delayed(const Duration(seconds: 1));
-        // Rediriger vers la navigation principale
+      if (!mounted) return;
+      _showSuccessMessage(
+        'Inscription réussie ! Bienvenue ${response.user.fullName}',
+      );
+      await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return;
+      if (widget.popOnSuccess) {
+        Navigator.pop(context);
+      } else {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const MainNavigationPage()),

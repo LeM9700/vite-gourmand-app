@@ -49,7 +49,7 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             DropdownButtonFormField<int>(
-              value: _dayOfWeek,
+              initialValue: _dayOfWeek,
               decoration: const InputDecoration(
                 labelText: 'Jour',
                 border: OutlineInputBorder(),
@@ -77,8 +77,9 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
               ],
               validator: (v) {
                 if (v?.isEmpty ?? true) return 'Requis';
-                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!))
+                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!)) {
                   return 'Format invalide';
+                }
                 return null;
               },
             ),
@@ -94,8 +95,9 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
               ],
               validator: (v) {
                 if (v?.isEmpty ?? true) return 'Requis';
-                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!))
+                if (!RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(v!)) {
                   return 'Format invalide';
+                }
                 return null;
               },
             ),
@@ -116,6 +118,7 @@ class _ScheduleFormDialogState extends State<ScheduleFormDialog> {
                 'close_time': _endTimeController.text,
                 'is_closed': false,
               });
+              if (!context.mounted) return;
               Navigator.pop(context);
             }
           },

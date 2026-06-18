@@ -88,15 +88,16 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
   }
 
   void _showMenuForm({MenuModel? menu}) {
+    final messenger = ScaffoldMessenger.of(context);
     showDialog(
       context: context,
-      builder: (context) => MenuFormDialog(
+      builder: (_) => MenuFormDialog(
         menu: menu,
         onSave: (data) async {
           try {
             if (menu == null) {
               await _service.createMenu(data);
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Menu créé'),
                   backgroundColor: Colors.green,
@@ -104,7 +105,7 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
               );
             } else {
               await _service.updateMenu(menu.id, data);
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(
                   content: Text('Menu mis à jour'),
                   backgroundColor: Colors.green,
@@ -113,7 +114,7 @@ class _MenusManagementPageState extends State<MenusManagementPage> {
             }
             _loadMenus();
           } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
                 content: Text(e.toString().replaceAll('Exception: ', '')),
                 backgroundColor: Colors.red,

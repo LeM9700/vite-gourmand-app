@@ -227,7 +227,11 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                           prefixIcon: Icon(Icons.description),
                         ),
                         maxLines: 3,
-                        validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                        validator: (v) {
+                          if (v == null || v.isEmpty) return 'Requis';
+                          if (v.length < 10) return 'Minimum 10 caractères';
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       Row(
@@ -447,7 +451,11 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                           hintText: 'Ex: Réservation 48h à l\'avance',
                         ),
                         maxLines: 2,
-                        validator: (v) => v?.isEmpty ?? true ? 'Requis' : null,
+                        validator: (v) {
+                          if (v == null || v.isEmpty) return 'Requis';
+                          if (v.length < 5) return 'Minimum 5 caractères';
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 16),
                       SwitchListTile(
@@ -457,7 +465,7 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
                         ),
                         value: _isActive,
                         onChanged: (v) => setState(() => _isActive = v),
-                        activeColor: AppColors.primary,
+                        activeThumbColor: AppColors.primary,
                       ),
                     ],
                   ),
@@ -544,7 +552,7 @@ class _MenuFormDialogState extends State<MenuFormDialog> {
           ),
           const SizedBox(height: 12),
           DropdownButtonFormField<Dish>(
-            value: selectedDish,
+            initialValue: selectedDish,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

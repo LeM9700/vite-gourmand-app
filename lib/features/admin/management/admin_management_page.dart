@@ -82,12 +82,32 @@ class _AdminManagementPageState extends State<AdminManagementPage>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                EmployeeOrdersListPage(),
-                ModerationPage(),
-                MenusManagementPage(),
-                DishesManagementPage(),
-                SchedulesManagementPage(),
+              children: [
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: const EmployeeOrdersListPage(),
+                ),
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: const ModerationPage(),
+                ),
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: const MenusManagementPage(),
+                ),
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: const DishesManagementPage(),
+                ),
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: const SchedulesManagementPage(),
+                ),
               ],
             ),
           ),

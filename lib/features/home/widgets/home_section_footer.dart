@@ -339,12 +339,12 @@ class _HomeSectionFooterState extends State<HomeSectionFooter> {
         hoursText = 'Fermé';
       } else if (openTime != null && closeTime != null) {
         // Formater de HH:MM en HHh
-        final openFormatted = openTime.split(':')[0] +
-            'h' +
-            (openTime.split(':')[1] != '00' ? openTime.split(':')[1] : '');
-        final closeFormatted = closeTime.split(':')[0] +
-            'h' +
-            (closeTime.split(':')[1] != '00' ? closeTime.split(':')[1] : '');
+        final openParts = openTime.split(':');
+        final openFormatted =
+            '${openParts[0]}h${openParts[1] != '00' ? openParts[1] : ''}';
+        final closeParts = closeTime.split(':');
+        final closeFormatted =
+            '${closeParts[0]}h${closeParts[1] != '00' ? closeParts[1] : ''}';
         hoursText = '$openFormatted - $closeFormatted';
       } else {
         hoursText = 'Non défini';

@@ -97,14 +97,25 @@ class _GlassCardState extends State<GlassCard>
                   boxShadow:
                       _isHovered ? AppShadows.dramatic : AppShadows.premium,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(widget.radius),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: widget.blur,
-                      sigmaY: widget.blur,
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    // Couche de flou séparée du contenu (fix iOS BackdropFilter)
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(widget.radius),
+                        clipBehavior: Clip.antiAlias,
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: widget.blur,
+                            sigmaY: widget.blur,
+                          ),
+                          child: const SizedBox.expand(),
+                        ),
+                      ),
                     ),
-                    child: Container(
+                    // Contenu de la carte (gradient + bordure + texte)
+                    Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -121,7 +132,6 @@ class _GlassCardState extends State<GlassCard>
                         ),
                       ),
                       child: Container(
-                        // Effet de brillance interne
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             widget.radius - 1,
@@ -145,7 +155,7 @@ class _GlassCardState extends State<GlassCard>
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             );
